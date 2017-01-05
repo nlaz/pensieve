@@ -1,0 +1,19 @@
+{
+  "name": "boreas",
+  "version": "0.0.0",
+  "description": "memory tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nlaz/boreas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nlaz/boreas/issues"
+  },
+  "homepage": "https://github.com/nlaz/boreas#readme"
+}
