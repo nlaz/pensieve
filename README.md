@@ -1,2 +1,0 @@
-# boreas
-🔮 memory tool
