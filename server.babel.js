@@ -1,6 +1,7 @@
 import express from 'express';
-import { Item } from './db';
 import mongoose from 'mongoose';
+import { Item, User } from './db';
+import { sendEmail } from './emailer';
 
 const app = express();
 const port = 3000;
@@ -26,9 +27,16 @@ app.get('/api/items/:itemId', (req, res) => {
 app.listen(port, () => {
 	console.log(`Server listening on port ${port}`);
 
+	User.find({}, (err, res) => {
+		if (err) { console.log(err); }
+		console.log(`${res.length} Users`);
+		console.log(res);
+		res.map(user => sendEmail(user.email));
+	});
+
 	Item.find({}, (err, res) => {
 		if (err) { console.log(err); }
+		console.log(`${res.length} Items`);
 		console.log(res);
-		console.log(res.length);
 	});
 });

@@ -26,6 +26,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mongodb": "^2.2.19",
-    "mongoose": "4.3.3"
+    "mongoose": "4.3.3",
+    "sendgrid": "^4.7.1"
   }
 }
