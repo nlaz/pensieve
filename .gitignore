@@ -38,3 +38,8 @@ jspm_packages
 
 # Project Secrets
 config.env
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
