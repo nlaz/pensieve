@@ -7,7 +7,7 @@ const subject = 'Albus - Test Email';
 const content = new helper.Content('text/plain', 'This is a test email from Albus.\n\nCarry On,\nAlbus');
 
 export const sendEmail = (targetEmail) => {
-	console.log(`Attempting email to ${targetEmail}`);
+	console.log(`Attempting email to ${targetEmail}...`);
 	const mail = new helper.Mail(sourceEmail, subject, new helper.Email(targetEmail), content);
 	const request = sg.emptyRequest({
 		method: 'POST',

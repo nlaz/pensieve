@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { CronJob } from 'cron';
 import { Item, User } from './db';
 import { sendEmail } from './emailer';
 
@@ -24,6 +25,20 @@ app.get('/api/items/:itemId', (req, res) => {
 	});
 });
 
+const broadcastEmails = () => {
+	User.find({is_email_on: true}, (err, users) => {
+		users.map(user => sendEmail(user.email));
+	});
+};
+
+const broadcastJob = new CronJob({
+	cronTime: '00 * * * * *',
+	onTick: () => { broadcastEmails() },
+	start: false,
+	timeZone: 'America/New_York'
+});
+
+
 app.listen(port, () => {
 	console.log(`Server listening on port ${port}`);
 
@@ -31,7 +46,6 @@ app.listen(port, () => {
 		if (err) { console.log(err); }
 		console.log(`${res.length} Users`);
 		console.log(res);
-		res.map(user => sendEmail(user.email));
 	});
 
 	Item.find({}, (err, res) => {
@@ -39,4 +53,6 @@ app.listen(port, () => {
 		console.log(`${res.length} Items`);
 		console.log(res);
 	});
+
+	broadcastJob.start();
 });
