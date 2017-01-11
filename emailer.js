@@ -17,9 +17,7 @@ export const sendEmail = (targetEmail) => {
 
 	sg.API(request)
 		.then(response => {
-			console.log(response.statusCode);
-			console.log(response.body);
-			console.log(response.header);
+			console.log('Email Status', response.statusCode);
 		})
 		.catch(error => {
 			console.log('Emailer Error', error.response.statusCode, error.response);

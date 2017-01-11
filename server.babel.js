@@ -38,10 +38,7 @@ const broadcastJob = new CronJob({
 	timeZone: 'America/New_York'
 });
 
-
-app.listen(port, () => {
-	console.log(`Server listening on port ${port}`);
-
+const logModels = () => {
 	User.find({}, (err, res) => {
 		if (err) { console.log(err); }
 		console.log(`${res.length} Users`);
@@ -53,6 +50,14 @@ app.listen(port, () => {
 		console.log(`${res.length} Items`);
 		console.log(res);
 	});
+};
+
+app.listen(port, () => {
+	console.log(`Server listening on port ${port}`);
+
+	if (process.env.ENVIRONMENT === 'DEV') {
+		logModels();
+	}
 
 	broadcastJob.start();
 });
