@@ -32,7 +32,7 @@ const broadcastEmails = () => {
 };
 
 const broadcastJob = new CronJob({
-	cronTime: '00 * * * * *',
+	cronTime: '00 30 8 * * *',
 	onTick: () => { broadcastEmails() },
 	start: false,
 	timeZone: 'America/New_York'
