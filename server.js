@@ -44,12 +44,6 @@ const logModels = () => {
 		console.log(`${res.length} Users`);
 		console.log(res);
 	});
-
-	Item.find({}, (err, res) => {
-		if (err) { console.log(err); }
-		console.log(`${res.length} Items`);
-		console.log(res);
-	});
 };
 
 app.listen(port, () => {
@@ -57,8 +51,10 @@ app.listen(port, () => {
 
 	if (process.env.NODE_ENV === 'development') {
 		logModels();
+		broadcastEmails();
 	}
 
-	broadcastEmails();
-	//broadcastJob.start();
+	if (process.env.NODE_ENV === 'production') {
+		broadcastJob.start();
+	}
 });
