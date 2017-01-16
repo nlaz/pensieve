@@ -7,7 +7,7 @@ This app built on Node(link) and MongoDB(link). Install those if you haven't alr
 #### 0. Project Setup
 Pull project down from GitHub. Install the Node dependencies.
 ```
-$ git clone
+$ git clone https://github.com/nlaz/boreas.git
 $ cd boreas/
 ```
 
