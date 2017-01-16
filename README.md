@@ -11,10 +11,10 @@ $ git clone https://github.com/nlaz/boreas.git
 $ cd boreas/
 ```
 
-Setup the app's environment variables. It won't work without them. A sample config file is provided.
+Setup the app's environment variables. It won't work without them. There's a lot of ways to do this. A sample config file is provided.
 ```
-$ cp sample.config.env config.env
-$ vim config.env
+$ cp .sample.env .config.env
+$ vim .config.env
 ```
 
 Add your environment variables here.
@@ -27,7 +27,7 @@ export SENDGRID_API_KEY='{YOUR_SENDGRID_KEY_HERE}'
 
 You may need to run this file to actually export these variables into your environment or add it to your `~/.bashrc file`.
 ```
-$ source config.env
+$ source .config.env
 ```
 
 #### 1. DB Setup
