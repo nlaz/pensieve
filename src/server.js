@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { CronJob } from 'cron';
-import { Item, User } from './db';
+import { Item, User } from './db/schema';
 import { sendEmail } from './emailer';
 
 const app = express();

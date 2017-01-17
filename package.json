@@ -2,9 +2,11 @@
   "name": "boreas",
   "version": "0.0.0",
   "description": "memory tool",
-  "main": "start.js",
+  "main": "src/server.js",
   "scripts": {
-	"start": "node start.js",
+    "start": "babel-node src/server.js",
+	"db": "mongo boreas",
+	"db:seed": "babel-node src/db/seeder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,5 +31,8 @@
     "mongodb": "^2.2.19",
     "mongoose": "4.3.3",
     "sendgrid": "^4.7.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0"
   }
 }
