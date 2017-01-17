@@ -7,7 +7,7 @@ import { Item, User } from './schema';
 const seedAddress = process.env.TEST_EMAIL_ADDRESS || 'test@example.com';
 
 const testUser1 = new User({
-	name: 'Joe Smoe',
+	name: 'Jane Tester',
 	email: seedAddress,
 	is_email_on: true
 });
@@ -20,11 +20,12 @@ const testItem2 = new Item({
 	value: 'Test Title 2',
 });
 
-const testItem3 = new Item({
-	value: 'Test Title 3',
-});
+testUser1.save((err, res) => {
+	if (err) return console.error(err);
 
-testUser1.save();
-testItem1.save();
-testItem2.save();
-testItem3.save();
+	testItem1.user_id = res.id;
+	testItem2.user_id = res.id;
+
+	testItem1.save();
+	testItem2.save();
+});

@@ -14,6 +14,7 @@ const userSchema = new Schema({
 });
 
 const itemSchema = new Schema({
+	user_id: {type: String, required: true },
 	value: { type: String, required: true },
 });
 
