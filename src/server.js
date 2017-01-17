@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { CronJob } from 'cron';
 import { Item, User } from './db/schema';
-import { sendEmail } from './emailer';
+import { sendEmailToUser } from './emailer';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -27,7 +27,12 @@ app.get('/api/items/:itemId', (req, res) => {
 
 const broadcastEmails = () => {
 	User.find({is_email_on: true}, (err, users) => {
-		users.map(user => sendEmail(user.email));
+		users.map((user) => {
+			Item.find({user_id: user.id}, (err, items) => {
+				items = items.map(item => item.value);
+				sendEmailToUser(user.name, user.email, items);
+			});
+		});
 	});
 };
 

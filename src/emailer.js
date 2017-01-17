@@ -1,25 +1,30 @@
-import sendgrid, { mail as helper } from 'sendgrid';
+import sg, { mail as helper } from 'sendgrid';
 
-const sg = sendgrid(process.env.SENDGRID_API_KEY);
+const sendgrid = sg(process.env.SENDGRID_API_KEY);
 
-const sourceEmail = new helper.Email('test@example.com');
-const subject = 'Albus - Test Email';
-const content = new helper.Content('text/plain', 'This is a test email from Albus.\n\nCarry On,\nAlbus');
+const sourceEmail = new helper.Email('boreas@test.com');
+const subject = 'Your Daily Review - Boreas';
 
-export const sendEmail = (targetEmail) => {
-	console.log(`Attempting email to ${targetEmail}...`);
+const constructEmailRequest = (targetName, targetEmail, items) => {
+	const content = new helper.Content('text/plain', `These are the items for you to review today:\n\n${items}\n\nSee you tomorrow,\nBoreas`);
 	const mail = new helper.Mail(sourceEmail, subject, new helper.Email(targetEmail), content);
-	const request = sg.emptyRequest({
+	return sendgrid.emptyRequest({
 		method: 'POST',
 		path: '/v3/mail/send',
 		body: mail.toJSON(),
 	});
+};
 
-	sg.API(request)
+export const sendEmailToUser = (name, email, items) => {
+	console.log(`Attempting email to ${email}...`);
+	const request = constructEmailRequest(name, email, items);
+
+	sendgrid.API(request)
 		.then(response => {
-			console.log('Email Status', response.statusCode);
+			console.log('Email Success - Status Code:', response.statusCode);
 		})
 		.catch(error => {
 			console.log('Emailer Error', error.response.statusCode, error.response);
 		});
+
 };
