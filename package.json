@@ -4,9 +4,11 @@
   "description": "memory tool",
   "main": "src/server.js",
   "scripts": {
-    "start": "babel-node src/server.js",
-	"db": "mongo boreas",
-	"db:seed": "babel-node src/db/seeder.js",
+    "start": "nodemon src/server.js --exec babel-node",
+	"build": "babel src -d build",
+	"serve": "node build/server.js",
+    "db": "mongo boreas",
+    "db:seed": "babel-node src/db/seeder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,6 +35,7 @@
     "sendgrid": "^4.7.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0"
+    "babel-cli": "^6.18.0",
+    "nodemon": "^1.11.0"
   }
 }
