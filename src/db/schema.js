@@ -18,5 +18,20 @@ const itemSchema = new Schema({
 	value: { type: String, required: true },
 });
 
+const reviewItemSchema = new Schema({
+	email_id: { type: String, required: true },
+	item_id: { type: String, required: true },
+	reviewed_date: { type: Date, default: Date.now() },
+	reviewed: { type: Boolean, default: false },
+	skipped: { type: Boolean, default: false },
+});
+
+const emailSchema = new Schema({
+	type: { type: String, required: true },
+	user_id: { type: String, required: true },
+	items: { type: Array, required: true },
+	opened: { type: Boolean, default: false },
+});
+
 export const User = mongoose.model('User', userSchema);
 export const Item = mongoose.model('Item', itemSchema);
