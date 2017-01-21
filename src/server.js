@@ -33,7 +33,7 @@ const broadcastEmails = () => {
 	UserEntity.find({is_email_on: true}, (err, users) => {
 		users.map((user) => {
 			ItemEntity.find({user_id: user.id}, (err, items) => {
-				items = items.map(item => item.value);
+				items = items.map(item => item.title);
 				sendEmailToUser(user.name, user.email, items);
 			});
 		});

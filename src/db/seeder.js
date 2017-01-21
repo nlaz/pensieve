@@ -13,11 +13,13 @@ const testUser1 = new User({
 });
 
 const testItem1 = new Item({
-	value: 'Test Title 1',
+	title: 'Test Title 1',
+	description: 'Test Description 1',
 });
 
 const testItem2 = new Item({
-	value: 'Test Title 2',
+	title: 'Test Title 2',
+	description: 'Test Description 2',
 });
 
 testUser1.save((err, res) => {
