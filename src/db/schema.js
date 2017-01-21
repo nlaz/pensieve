@@ -18,7 +18,7 @@ const itemSchema = new Schema({
 	value: { type: String, required: true },
 });
 
-const reviewItemSchema = new Schema({
+const reviewSchema = new Schema({
 	email_id: { type: String, required: true },
 	item_id: { type: String, required: true },
 	reviewed_date: { type: Date, default: Date.now() },
@@ -33,5 +33,7 @@ const emailSchema = new Schema({
 	opened: { type: Boolean, default: false },
 });
 
-export const User = mongoose.model('User', userSchema);
-export const Item = mongoose.model('Item', itemSchema);
+export const UserEntity   = mongoose.model('User', userSchema);
+export const ItemEntity   = mongoose.model('Item', itemSchema);
+export const EmailEntity  = mongoose.model('Email', emailSchema);
+export const ReviewEntity = mongoose.model('Review', reviewSchema);

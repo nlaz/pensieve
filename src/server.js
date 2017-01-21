@@ -1,8 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { CronJob } from 'cron';
-import { Item, User } from './db/schema';
 import { sendEmailToUser } from './emailer';
+
+import {
+	UserEntity,
+	ItemEntity
+} from './db/schema';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,23 +16,23 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/items', (req, res) => {
-	Item.find({}, (err, items) => {
+	ItemEntity.find({}, (err, items) => {
 		if (err) { console.log(err); }
 		return res.send(items);
 	});
 });
 
 app.get('/api/items/:itemId', (req, res) => {
-	Item.findById(req.params.itemId, (err, item) => {
+	ItemEntity.findById(req.params.itemId, (err, item) => {
 		if (err) { console.log(err); }
 		return res.send(item);
 	});
 });
 
 const broadcastEmails = () => {
-	User.find({is_email_on: true}, (err, users) => {
+	UserEntity.find({is_email_on: true}, (err, users) => {
 		users.map((user) => {
-			Item.find({user_id: user.id}, (err, items) => {
+			ItemEntity.find({user_id: user.id}, (err, items) => {
 				items = items.map(item => item.value);
 				sendEmailToUser(user.name, user.email, items);
 			});
@@ -44,7 +48,7 @@ const broadcastJob = new CronJob({
 });
 
 const logModels = () => {
-	User.find({}, (err, res) => {
+	UserEntity.find({}, (err, res) => {
 		if (err) { console.log(err); }
 		console.log(`${res.length} Users`);
 		console.log(res);
