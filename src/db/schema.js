@@ -14,26 +14,33 @@ const userSchema = new Schema({
 });
 
 const itemSchema = new Schema({
-	user_id: {type: String, required: true },
-	value: { type: String, required: true },
-});
-
-const reviewSchema = new Schema({
-	email_id: { type: String, required: true },
-	item_id: { type: String, required: true },
-	reviewed_date: { type: Date, default: Date.now() },
-	reviewed: { type: Boolean, default: false },
-	skipped: { type: Boolean, default: false },
+	user_id: { type: String, required: true },
+	title: { type: String, required: true },
+	description: { type: String, required: true },
 });
 
 const emailSchema = new Schema({
-	type: { type: String, required: true },
 	user_id: { type: String, required: true },
-	items: { type: Array, required: true },
+	session_id: { type: String, required: true },
 	opened: { type: Boolean, default: false },
 });
 
-export const UserEntity   = mongoose.model('User', userSchema);
-export const ItemEntity   = mongoose.model('Item', itemSchema);
+const itemReviewSchema = new Schema({
+	item_id: { type: String, required: true },
+	session_id: { type: String, required: true },
+	is_reviewed: { type: Boolean, default: false },
+	is_skipped: { type: Boolean, default: false },
+	reviewed_date: { type: Date, default: Date.now() },
+});
+
+const reviewSessionSchema = new Schema({
+	type: { type: String, required: true, default: 'email' },
+	user_id: { type: String, required: true },
+	items: { type: Array, required: true },
+});
+
+export const UserEntity = mongoose.model('User', userSchema);
+export const ItemEntity = mongoose.model('Item', itemSchema);
 export const EmailEntity  = mongoose.model('Email', emailSchema);
-export const ReviewEntity = mongoose.model('Review', reviewSchema);
+export const ItemReviewEntity = mongoose.model('ItemReview', itemReviewSchema);
+export const ReviewSessionEntity = mongoose.model('ReviewSession', reviewSessionSchema);
