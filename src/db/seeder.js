@@ -4,7 +4,10 @@
  */
 import { ItemEntity, UserEntity } from './schema';
 
-const seedAddress = process.env.TEST_EMAIL_ADDRESS || 'test@example.com';
+if (process.env.TEST_EMAIL_ADDRESS === undefined) {
+	console.error('Please specify test email address');
+}
+const seedAddress = process.env.TEST_EMAIL_ADDRESS;
 
 const testUser1 = new UserEntity({
 	name: 'Jane Tester',
