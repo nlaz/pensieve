@@ -1,8 +1,4 @@
 import mongoose from 'mongoose';
-mongoose.connect(process.env.MONGODB_HOST);
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Mongo connection error'));
 
 const Schema = mongoose.Schema;
 
