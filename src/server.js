@@ -31,36 +31,26 @@ app.get('/api/items/:itemId', (req, res) => {
 	});
 });
 
-/*
- * Process for selecting reviews for a user
- * Using a random selection for now
- *
- * TODO: make smarter in the future
- */
-const generateItemsForUser = (user) => {
-	const itemQuery = ItemEntity.find({ user_id: user.id }).limit(6);
-	itemQuery.exec((err, items) => {
-		if (err) { return console.log(err); }
-
-		return items;
-	});
-};
-
 const broadcastEmails = () => {
 	UserEntity.find({is_email_on: true}, (err, users) => {
 		if (err) { return console.log(err); }
 
 		users.forEach((user) => {
-			const items = generateItemsForUser(user);
-			const session = new ReviewSessionEntity({
-				type: 'email',
-				user_id: user.id,
-				items: items,
-			});
+			const itemQuery = ItemEntity.find({ user_id: user.id }).limit(6);
+			itemQuery.exec((err, items) => {
+				if (err) { return console.log(err); }
 
-			if ( Emailer.sendEmail(session)) {
-				session.save();
-			}
+				console.log('Items:', items);
+				const session = new ReviewSessionEntity({
+					type: 'email',
+					user_id: user.id,
+					items: items,
+				});
+
+				if ( Emailer.sendEmail(session)) {
+					session.save();
+				}
+			});
 		});
 	});
 };
