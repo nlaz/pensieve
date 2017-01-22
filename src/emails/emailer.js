@@ -12,9 +12,9 @@ const sourceEmail = new helper.Email('boreas@test.com');
 const subject = 'Your Daily Review - Boreas';
 const domain = process.env.HOST_URL;
 
-const url = `${domain}/api/items`;
 
-const template = (name, items) => {
+const template = (name, items, sessionId) => {
+	const url = `${domain}/sessions/${sessionId}`;
 	return (
 	`<div>
 		<p>Hi ${name},</p>
@@ -32,9 +32,9 @@ const template = (name, items) => {
 	);
 };
 
-const constructEmailRequest = (targetName, targetEmail, items) => {
+const constructEmailRequest = (targetName, targetEmail, items, sessionId) => {
 	const titles = items.map(item => item.title);
-	const content = new helper.Content('text/html', template(targetName, titles));
+	const content = new helper.Content('text/html', template(targetName, titles, sessionId));
 	const mail = new helper.Mail(sourceEmail, subject, new helper.Email(targetEmail), content);
 	return sendgrid.emptyRequest({
 		method: 'POST',
@@ -85,7 +85,7 @@ const sendEmail = (user, items, session) => {
 	});
 
 	console.log(`Attempting email to ${user.email}...`);
-	const request = constructEmailRequest(user.name, user.email, items);
+	const request = constructEmailRequest(user.name, user.email, items, session.id);
 
 	return sendgrid.API(request)
 		.then(response => {
