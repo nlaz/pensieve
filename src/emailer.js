@@ -1,5 +1,10 @@
 import sg, { mail as helper } from 'sendgrid';
-import { UserEntity, EmailEntity } from './db/schema';
+import {
+  UserEntity,
+  ItemEntity,
+  EmailEntity,
+  ReviewSessionEntity,
+} from './db/schema';
 
 const sendgrid = sg(process.env.SENDGRID_API_KEY);
 
@@ -27,6 +32,36 @@ const constructEmailRequest = (targetName, targetEmail, items) => {
 		path: '/v3/mail/send',
 		body: mail.toJSON(),
 	});
+};
+
+const broadcastEmails = () => {
+  UserEntity.find({is_email_on: true}, (err, users) => {
+    if (err) { return console.log(err); }
+
+    users.forEach((user) => {
+      const itemQuery = ItemEntity.find({ user_id: user.id }).limit(6);
+      itemQuery.exec((err, items) => {
+        if (err) { return console.log(err); }
+
+        console.log('Items:', items);
+        const itemIds = items.map(item => item.id);
+        const session = new ReviewSessionEntity({
+          type: 'email',
+          user_id: user.id,
+          items: itemIds,
+        });
+
+        sendEmail(user, items, session)
+          .then(response => {
+            console.log('Success!');
+            session.save();
+          })
+          .catch(error => {
+            console.error('Uh oh!');
+          });
+      });
+    });
+  });
 };
 
 const sendEmail = (user, items, session) => {
@@ -58,4 +93,5 @@ const sendEmail = (user, items, session) => {
 
 export default {
 	sendEmail: sendEmail,
+  broadcastEmails: broadcastEmails,
 }
