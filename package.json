@@ -9,6 +9,7 @@
     "serve": "node build/server.js",
     "db": "mongo boreas",
     "db:seed": "babel-node src/db/seeder.js",
+    "email:test": "babel-node src/emails/test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

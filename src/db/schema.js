@@ -2,6 +2,12 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
+// Setup DB
+const mongoURI = process.env.MONGODB_HOST;
+const mongoDB = mongoose.connect(mongoURI).connection;
+mongoDB.on('error', (err) => { console.log(err.message); });
+mongoDB.once('open', () => { console.log('Mongo connection open'); });
+
 // TODO: Finish model after implementing oauth
 const userSchema = new Schema({
 	name: { type: String, required: true },

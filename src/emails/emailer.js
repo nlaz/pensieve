@@ -4,7 +4,7 @@ import {
   ItemEntity,
   EmailEntity,
   ReviewSessionEntity,
-} from './db/schema';
+} from '../db/schema';
 
 const sendgrid = sg(process.env.SENDGRID_API_KEY);
 
