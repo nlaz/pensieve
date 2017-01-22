@@ -5,8 +5,8 @@
   "main": "src/server.js",
   "scripts": {
     "start": "nodemon src/server.js --exec babel-node",
-	"build": "babel src -d build",
-	"serve": "node build/server.js",
+    "build": "babel src -d build",
+    "serve": "node build/server.js",
     "db": "mongo boreas",
     "db:seed": "babel-node src/db/seeder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,7 +27,7 @@
     "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-register": "^6.18.0",
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.16.0",
     "cron": "^1.2.1",
     "express": "^4.14.0",
     "mongodb": "^2.2.19",

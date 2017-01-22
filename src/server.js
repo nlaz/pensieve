@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 import { CronJob } from 'cron';
 import Emailer from './emailer';
 
@@ -12,21 +13,25 @@ import {
 
 const app = express();
 const port = process.env.PORT || 3000;
-mongoose.connect(process.env.MONGODB_HOST);
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Mongo connection error'));
+// Setup DB
+const mongoURI = process.env.MONGODB_HOST;
+const mongoDB = mongoose.connect(mongoURI).connection;
+mongoDB.on('error', (err) => { console.log(err.message); });
+mongoDB.once('open', () => { console.log('Mongo connection open'); });
+
+// Config express parsing capabilties
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 app.get('/', (req, res) => {
 	res.send('Hello World!');
 });
 
 app.get('/api/items', (req, res) => {
-	console.log('Items Endpoint');
 	ItemEntity.find({}, (err, items) => {
-		console.log(err);
 		if (err) { return console.log(err); }
-		console.log('Items');
 		res.send(items);
 	});
 });
