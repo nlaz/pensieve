@@ -10,22 +10,31 @@ const sendgrid = sg(process.env.SENDGRID_API_KEY);
 
 const sourceEmail = new helper.Email('boreas@test.com');
 const subject = 'Your Daily Review - Boreas';
+const domain = process.env.HOST_URL;
+
+const url = `${domain}/api/items`;
 
 const template = (name, items) => {
 	return (
-	`Hi ${name},
+	`<div>
+		<p>Hi ${name},</p>
 
-	These are the items for you to review today:
-	${items}
+		<p>These are the items for you to review today:</p>
+		<p>
+		${items}
+		</p>
 
-	Cheers!,
-	Boreas `
+		<a href='${url}' >See more</a>
+
+		<p>Cheers!,</p>
+		<p>Boreas</p>
+	</div>`
 	);
 };
 
 const constructEmailRequest = (targetName, targetEmail, items) => {
 	const titles = items.map(item => item.title);
-	const content = new helper.Content('text/plain', template(targetName, titles));
+	const content = new helper.Content('text/html', template(targetName, titles));
 	const mail = new helper.Mail(sourceEmail, subject, new helper.Email(targetEmail), content);
 	return sendgrid.emptyRequest({
 		method: 'POST',
