@@ -1,11 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { CronJob } from 'cron';
-import { sendEmailToUser } from './emailer';
+import Emailer from './emailer';
 
 import {
 	UserEntity,
-	ItemEntity
+	ItemEntity,
+	EmailEntity,
+	ReviewSessionEntity,
 } from './db/schema';
 
 const app = express();
@@ -29,13 +31,36 @@ app.get('/api/items/:itemId', (req, res) => {
 	});
 });
 
+/*
+ * Process for selecting reviews for a user
+ * Using a random selection for now
+ *
+ * TODO: make smarter in the future
+ */
+const generateItemsForUser = (user) => {
+	const itemQuery = ItemEntity.find({ user_id: user.id }).limit(6);
+	itemQuery.exec((err, items) => {
+		if (err) { return console.log(err); }
+
+		return items;
+	});
+};
+
 const broadcastEmails = () => {
 	UserEntity.find({is_email_on: true}, (err, users) => {
-		users.map((user) => {
-			ItemEntity.find({user_id: user.id}, (err, items) => {
-				items = items.map(item => item.title);
-				sendEmailToUser(user.name, user.email, items);
+		if (err) { return console.log(err); }
+
+		users.forEach((user) => {
+			const items = generateItemsForUser(user);
+			const session = new ReviewSessionEntity({
+				type: 'email',
+				user_id: user.id,
+				items: items,
 			});
+
+			if ( Emailer.sendEmail(session)) {
+				session.save();
+			}
 		});
 	});
 };

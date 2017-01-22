@@ -26,5 +26,14 @@ export const sendEmailToUser = (name, email, items) => {
 		.catch(error => {
 			console.log('Emailer Error', error.response.statusCode, error.response);
 		});
-
 };
+
+const sendEmail = (session) => {
+	console.log('Session', session);
+	//TODO create Email Item, save it, and send
+	return false;
+};
+
+export default {
+	sendEmail: sendEmail,
+}
