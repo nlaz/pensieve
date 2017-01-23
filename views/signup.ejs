@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+	<title>Boreas</title>
+</head>
+<body>
+<div>
+	<h1>Signup</h1>
+
+	<% if (message.length > 0) { %>
+		<div><%= message %></div>
+	<% } %>
+
+	<form action="/signup" method="post">
+		<div>
+			<label>Email</label>
+			<input type="text" name="email">
+		</div>
+		<div>
+			<label>Password</label>
+			<input type="password" name="password">
+		</div>
+
+		<button type="submit">Signup</button>
+	</form>
+
+	<hr>
+
+	<p>Already have an account? <a href="/login">Login</a></p>
+	<p>Or go <a href="/">home</a>.</p>
+</div>
+</body>
+</html>
