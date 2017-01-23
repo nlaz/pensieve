@@ -41,7 +41,7 @@ export default function(passport) {
 		});
 	}));
 
-	passport.use('local-local', new LocalStrategy({
+	passport.use('local-login', new LocalStrategy({
 		usernameField: 'email',
 		passwordField: 'password',
 		passReqToCallback: true,

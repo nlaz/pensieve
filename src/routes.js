@@ -19,7 +19,7 @@ export default function(app, passport) {
 	});
 
 	app.post('/login', passport.authenticate('local-login', {
-		successRedirect: '/',
+		successRedirect: '/profile',
 		failureRedirect: '/login',
 		failureFlash: true,
 	}));
@@ -31,10 +31,16 @@ export default function(app, passport) {
 	});
 
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/',
+		successRedirect: '/profile',
 		failureRedirect: '/signup',
 		failureFlash: true,
 	}));
+
+	app.get('/profile', isLoggedIn, (req, res) => {
+		res.render('profile.ejs', {
+			user: req.user,
+		});
+	});
 
 	app.get('/logout', (req, res) => {
 		req.logout();
