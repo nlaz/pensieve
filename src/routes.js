@@ -24,6 +24,12 @@ export default function(app, passport) {
 		});
 	});
 
+	app.post('/signup', passport.authenticate('local-signup', {
+		successRedirect: '/',
+		failureRedirect: '/signup',
+		failureFlash: true,
+	}));
+
 	app.get('/logout', (req, res) => {
 		req.logout();
 		res.redirect('/');

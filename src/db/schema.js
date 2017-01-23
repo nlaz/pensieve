@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt-nodejs';
 
 const Schema = mongoose.Schema;
 
@@ -12,8 +13,17 @@ mongoDB.once('open', () => { console.log('Mongo connection open'); });
 const userSchema = new Schema({
 	name: { type: String, required: true },
 	email: { type: String, required: true, index: { unique: true } },
+	password: { type: String, required: true },
 	is_email_on: { type: Boolean, default: true },
 });
+
+userSchema.methods.generateHash = (password) => {
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+userSchema.methods.validPassword = (password) => {
+	return bcrypt.compareSync(password, this.password);
+};
 
 const itemSchema = new Schema({
 	user_id: { type: String, required: true },

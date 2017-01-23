@@ -10,6 +10,7 @@ import session from 'express-session';
 import { CronJob } from 'cron';
 import Emailer from './emails/emailer';
 import setupRoutes from './routes';
+import configPassport from '../config/passport';
 
 import {
 	UserEntity,
@@ -38,6 +39,9 @@ app.use(flash());
 
 // Pulling routes for ./routes.js
 setupRoutes(app, passport);
+
+// Config passport
+configPassport(passport);
 
 // Cron job that sends out early morning emails
 const broadcastJob = new CronJob({
