@@ -26,7 +26,7 @@ const port = process.env.PORT || 3000;
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 app.set('view engine', 'ejs');
