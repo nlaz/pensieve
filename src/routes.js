@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import passport from 'passport';
 import {
 	UserEntity,
 	ItemEntity,
@@ -6,9 +7,26 @@ import {
 	ReviewSessionEntity,
 } from './db/schema';
 
-export default function(app) {
+export default function(app, passport) {
 	app.get('/', (req, res) => {
-		res.send('Hello World!');
+		res.render('index.ejs');
+	});
+
+	app.get('/login', (req, res) => {
+		res.render('login.ejs', {
+			message: req.flash('loginMessage'),
+		});
+	});
+
+	app.get('/signup', (req, res) => {
+		res.render('signup.ejs', {
+			message: req.flash('signupMessage'),
+		});
+	});
+
+	app.get('/logout', (req, res) => {
+		req.logout();
+		res.redirect('/');
 	});
 
 	app.get('/sessions/:sessionId', (req, res) => {
@@ -38,4 +56,12 @@ export default function(app) {
 			return res.send(item);
 		});
 	});
+
+	function isLoggedIn(req, res, next) {
+		if (req.isAuthenticated()) {
+			return next();
+		}
+
+		res.redirect('/');
+	}
 }
