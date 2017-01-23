@@ -32,7 +32,12 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.set('view engine', 'ejs');
 
 // Setup passport
-app.use(session({ secret: 'temporarypassword' }));
+app.use(session({
+	secret: 'temporarypassword',
+	resave: false,
+	saveUninitialized: true,
+	cookie: { secure: true },
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
