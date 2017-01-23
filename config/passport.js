@@ -41,4 +41,25 @@ export default function(passport) {
 		});
 	}));
 
+	passport.use('local-local', new LocalStrategy({
+		usernameField: 'email',
+		passwordField: 'password',
+		passReqToCallback: true,
+	}, (req, email, password, done) => {
+		process.nextTick(() => {
+			UserEntity.findOne({ email: email }, (err, user) => {
+				if (err) { return done(err); }
+
+				if (!user) {
+					return done(null, false, req.flash('localMessage', 'No user found.'));
+				}
+				
+				if (!user.validPassword(password)) {
+					return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+				}
+
+				return done(null, user);
+			});
+		});
+	}));
 }

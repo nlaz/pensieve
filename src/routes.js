@@ -18,6 +18,12 @@ export default function(app, passport) {
 		});
 	});
 
+	app.post('/login', passport.authenticate('local-login', {
+		successRedirect: '/',
+		failureRedirect: '/login',
+		failureFlash: true,
+	}));
+
 	app.get('/signup', (req, res) => {
 		res.render('signup.ejs', {
 			message: req.flash('signupMessage'),
