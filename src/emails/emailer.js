@@ -12,6 +12,7 @@ const sourceEmail = new helper.Email('boreas@test.com');
 const subject = 'Your Daily Review - Boreas';
 const domain = process.env.HOST_URL;
 
+console.log('Domain', domain);
 
 const template = (name, items, sessionId) => {
 	const url = `${domain}/sessions/${sessionId}`;
@@ -51,6 +52,9 @@ const broadcastEmails = () => {
       const itemQuery = ItemEntity.find({ user_id: user.id }).limit(6);
       itemQuery.exec((err, items) => {
         if (err) { return console.log(err); }
+		if (!items.length) {
+			return console.log(`User ${user.id} is missing items. Skipping.`);
+		}
 
         console.log('Items:', items);
         const itemIds = items.map(item => item.id);
