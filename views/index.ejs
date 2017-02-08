@@ -2,13 +2,18 @@
 <html>
 <head>
 	<title>Boreas</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
 </head>
 <body>
 <div>
-	<p>Login or Register with:</p>
+	<% if (user) { %>
+		<p>Welcome <%= user.name %>!</p>
+	<% } else { %>
+		<p>Login or Register with:</p>
 
-	<a href="/login">Login</a>
-	<a href="/signup">Signup</a>
+		<a href="/login">Login</a>
+		<a href="/signup">Signup</a>
+	<% } %>
 </div>
 </body>
 </html>

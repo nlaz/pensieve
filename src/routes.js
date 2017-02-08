@@ -9,7 +9,9 @@ import {
 
 export default function(app, passport) {
 	app.get('/', (req, res) => {
-		res.render('index.ejs');
+		res.render('index.ejs', {
+			user: req.user
+		});
 	});
 
 	app.get('/login', (req, res) => {
@@ -56,7 +58,9 @@ export default function(app, passport) {
 				if (err) { return console.log(err); }
 
 				console.log(items);
-				res.send(items);
+				res.render('sessions.ejs', {
+					items: items,
+				});
 			});
 		});
 	});

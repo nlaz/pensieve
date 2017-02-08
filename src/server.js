@@ -22,21 +22,29 @@ import {
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Config DB
+const mongoURI = process.env.MONGODB_HOST;
+const mongoDB = mongoose.connect(mongoURI).connection;
+mongoDB.on('error', (err) => { console.log(err.message); });
+mongoDB.once('open', () => { console.log('Mongo connection open'); });
+
+// Config passport
+configPassport(passport);
+
 // Config express parsing capabilties
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 app.set('view engine', 'ejs');
 
 // Setup passport
 app.use(session({
-	secret: 'temporarypassword',
-	resave: false,
+	secret: 'battlewagon',
+	resave: true,
 	saveUninitialized: true,
-	cookie: { secure: true },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -44,9 +52,6 @@ app.use(flash());
 
 // Pulling routes for ./routes.js
 setupRoutes(app, passport);
-
-// Config passport
-configPassport(passport);
 
 // Cron job that sends out early morning emails
 const broadcastJob = new CronJob({

@@ -8,7 +8,7 @@
 	<h1>Login</h1>
 
 	<% if (message.length > 0) { %>
-		<div><%= message %></div>
+		<div class='alert alert-danger'><%= message %></div>
 	<% } %>
 
 	<form action="/login" method="post">
