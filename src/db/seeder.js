@@ -3,17 +3,23 @@
  * for testing.
  */
 import { ItemEntity, UserEntity } from './schema';
+import mongoose from 'mongoose';
+
+// Config DB
+const mongoURI = process.env.MONGODB_HOST;
+const mongoDB = mongoose.connect(mongoURI).connection;
+mongoDB.on('error', (err) => { console.log(err.message); });
+mongoDB.once('open', () => { console.log('Mongo connection open'); });
 
 if (process.env.TEST_EMAIL_ADDRESS === undefined) {
 	console.error('Please specify test email address');
 }
 const seedAddress = process.env.TEST_EMAIL_ADDRESS;
 
-const testUser1 = new UserEntity({
-	name: 'Jane Tester',
-	email: seedAddress,
-	is_email_on: true
-});
+const testUser = new UserEntity();
+testUser.name = 'Jane Tester';
+testUser.email = seedAddress;
+testUser.password = testUser.generateHash('password');
 
 const testItem1 = new ItemEntity({
 	title: 'Test Title 1',
@@ -25,7 +31,7 @@ const testItem2 = new ItemEntity({
 	description: 'Test Description 2',
 });
 
-testUser1.save((err, res) => {
+testUser.save((err, res) => {
 	if (err) return console.error(err);
 
 	testItem1.user_id = res.id;
