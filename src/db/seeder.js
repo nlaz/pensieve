@@ -4,12 +4,10 @@
  */
 import { ItemEntity, UserEntity } from './schema';
 import mongoose from 'mongoose';
+import configDB from '../../config/db';
 
 // Config DB
-const mongoURI = process.env.MONGODB_HOST;
-const mongoDB = mongoose.connect(mongoURI).connection;
-mongoDB.on('error', (err) => { console.log(err.message); });
-mongoDB.once('open', () => { console.log('Mongo connection open'); });
+configDB();
 
 if (process.env.TEST_EMAIL_ADDRESS === undefined) {
 	console.error('Please specify test email address');

@@ -10,6 +10,7 @@ import session from 'express-session';
 import { CronJob } from 'cron';
 import Emailer from './emails/emailer';
 import setupRoutes from './routes';
+import configDB from '../config/db';
 import configPassport from '../config/passport';
 
 import {
@@ -23,10 +24,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Config DB
-const mongoURI = process.env.MONGODB_HOST;
-const mongoDB = mongoose.connect(mongoURI).connection;
-mongoDB.on('error', (err) => { console.log(err.message); });
-mongoDB.once('open', () => { console.log('Mongo connection open'); });
+configDB();
 
 // Config passport
 configPassport(passport);
