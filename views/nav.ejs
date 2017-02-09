@@ -1,8 +1,14 @@
 <nav class="navbar navbar-inverse">
 	<div class="container">
 		<a class="navbar-brand" href="/">Boreas</a>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="/login">Login</a></li>
-		</ul>
+		<% if ( typeof user === 'undefined' ) { %>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/login">Login</a></li>
+			</ul>
+		<% } else { %>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/logout">Logout</a></li>
+			</ul>
+		<% } %>
 	</div>
 </nav>

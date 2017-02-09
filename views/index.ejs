@@ -1,9 +1,9 @@
 <%- include('header') -%>
 <div class='container'>
-	<% if (user) { %>
-		<%- include('home') -%>
-	<% } else { %>
+	<% if ( typeof user === 'undefined') { %>
 		<%- include('landing') -%>
+	<% } else { %>
+		<%- include('home') -%>
 	<% } %>
 </div>
 <%- include('footer') -%>
