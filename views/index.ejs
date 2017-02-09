@@ -1,13 +1,9 @@
 <%- include('header') -%>
 <div class='container'>
 	<% if (user) { %>
-		<p>Welcome <%= user.name %>!</p>
+		<%- include('home') -%>
 	<% } else { %>
-		<div class="jumbotron">
-			<h1>Learn Better</h1>
-			<p>Boreas makes use of the spacing effect to help you learn material just in time</p>
-			<p><a class="btn btn-primary btn-lg" href="/signup" role="button">Sign Up</a></p>
-		</div>
+		<%- include('landing') -%>
 	<% } %>
 </div>
 <%- include('footer') -%>

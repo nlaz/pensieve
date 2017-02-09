@@ -1,0 +1,9 @@
+<div class='container'>
+	<h1>Welcome <%= user.name %>!</h1>
+	<h3>Your Items</h3>
+	<ul>
+		<% items.forEach(function(item) { %>
+			<li><%- item.title -%></li>
+		<% }); %>
+	</ul>
+</div>

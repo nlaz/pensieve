@@ -9,8 +9,14 @@ import {
 
 export default function(app, passport) {
 	app.get('/', (req, res) => {
-		res.render('index.ejs', {
-			user: req.user
+		const userId = (req.user || {}).id;
+		ItemEntity.find( { user_id: userId }, (err, items) => {
+			if (err) { return console.log(err); }
+
+			res.render('index.ejs', {
+				user: req.user,
+				items: items,
+			});
 		});
 	});
 
@@ -21,7 +27,7 @@ export default function(app, passport) {
 	});
 
 	app.post('/login', passport.authenticate('local-login', {
-		successRedirect: '/profile',
+		successRedirect: '/',
 		failureRedirect: '/login',
 		failureFlash: true,
 	}));
@@ -33,7 +39,7 @@ export default function(app, passport) {
 	});
 
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/profile',
+		successRedirect: '/',
 		failureRedirect: '/signup',
 		failureFlash: true,
 	}));
