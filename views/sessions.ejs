@@ -1,21 +1,10 @@
-<!doctype html>
-<html>
-<head>
-	<title>Boreas</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-</head>
-<body>
-<div>
-	<h1>Items to review today</h1>
-
+<%- include('header') -%>
+<div class='container'>
+	<h1>Your Daily Review</h1>
 	<ul>
 		<% items.forEach(function(item) { %>
 			<li><%- item.title -%></li>
 		<% }); %>
 	</ul>
-
-	<hr>
-	<a href="/logout" class="btn btn-default btn-sm">Logout</a>
 </div>
-</body>
-</html>
+<%- include('footer') -%>
