@@ -49,15 +49,14 @@ export default function(app, passport) {
 		res.redirect('/');
 	});
 
-	app.get('/sessions/:sessionId', (req, res) => {
+	app.get('/sessions/:sessionId', isLoggedIn, (req, res) => {
 		const sessionId = req.params.sessionId;
 		ReviewSessionEntity.findById(sessionId, (err, session) => {
 			if (err) { return console.log(err); }
 
-			ItemEntity.find( { _id: { $in: session.items }}, (err, items) => {
+			ItemEntity.find( { _id: { $in: session.items }, user_id: req.user.id }, (err, items) => {
 				if (err) { return console.log(err); }
 
-				console.log(items);
 				res.render('sessions.ejs', {
 					items: items,
 				});
