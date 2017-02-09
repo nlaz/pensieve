@@ -44,6 +44,24 @@ export default function(app, passport) {
 		failureFlash: true,
 	}));
 
+	app.get('/items/new', isLoggedIn, (req, res) => {
+		res.render('new_item.ejs');
+	});
+
+	app.post('/items', isLoggedIn, (req, res) => {
+		const item = new ItemEntity({
+			user_id: req.user.id,
+			title: req.body.title,
+			description: req.body.description,
+		});
+
+		item.save((err) => {
+			if (err) { res.send(err); }
+
+			res.redirect('/');
+		});
+	});
+
 	app.get('/profile', isLoggedIn, (req, res) => {
 		res.render('profile.ejs', {
 			user: req.user,
