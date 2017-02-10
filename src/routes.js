@@ -45,7 +45,9 @@ export default function(app, passport) {
 	}));
 
 	app.get('/items/new', isLoggedIn, (req, res) => {
-		res.render('new_item.ejs');
+		res.render('new_item.ejs', {
+			user: req.user
+		});
 	});
 
 	app.post('/items', isLoggedIn, (req, res) => {
