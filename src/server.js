@@ -48,6 +48,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+app.use('/', express.static('public'));
+
 // Pulling routes for ./routes.js
 setupRoutes(app, passport);
 
