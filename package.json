@@ -4,8 +4,9 @@
   "description": "memory tool",
   "main": "src/server.js",
   "scripts": {
-    "webpack": "webpack -d",
-    "start": "nodemon src/server.js --exec babel-node",
+    "webpack": "webpack -w",
+    "start": "nodemon server/index.js --exec babel-node",
+	"start:dev": "babel-node server/index.js",
     "build": "babel src -d build",
     "serve": "node build/server.js",
     "db": "mongo boreas",
@@ -46,6 +47,7 @@
     "passport-local": "^1.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-router": "^3.0.2",
     "sendgrid": "^4.7.1",
     "webpack": "^2.2.1"
   },
