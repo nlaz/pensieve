@@ -4,14 +4,12 @@ import session from 'express-session';
 import path from 'path';
 
 //import passport from 'passport';
-//import setupRoutes from './routes';
-//import configDB from '../config/db';
+import configApi from './api';
+import configDB from './config/db';
 //import configPassport from '../config/passport';
 
 const app = express();
 
-// Config DB
-//configDB();
 
 // Config passport
 //configPassport(passport);
@@ -25,11 +23,15 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true,
 }));
+
+// Config DB
+configDB();
+
+// Setup Api routes
+configApi(app);
+
 // app.use(passport.initialize());
 // app.use(passport.session());
-
-// Pulling routes for ./routes.js
-//setupRoutes(app, passport);
 
 app.use(express.static(path.resolve(__dirname, '..')));
 

@@ -1,21 +1,35 @@
 import mongoose from 'mongoose';
-import passport from 'passport';
-import {
-	UserEntity,
-	ItemEntity,
-	EmailEntity,
-	ReviewSessionEntity,
-} from './db/schema';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import { ItemEntity } from '../src/db/schema';
 
-export default function(app, passport) {
-	app.get('/*', (req, res) => {
-		res.sendFile(__dirname + '/../public/index.html');
-	});
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/');
+}
 
+export default function(app) {
 	app.use(cookieParser());
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+
+	app.get('/api/items', (req, res) => {
+		console.log('Here');
+		ItemEntity.find({}, (err, items) => {
+			if (err) { return console.log(err); }
+			res.send(items);
+		});
+	});
+
+	app.get('/api/items/:itemId', (req, res) => {
+		ItemEntity.findById(req.params.itemId, (err, item) => {
+			if (err) { console.log(err); }
+			return res.send(item);
+		});
+	});
 
 	//	app.get('/login', (req, res) => {
 	//	res.render('login.ejs', {
@@ -23,6 +37,7 @@ export default function(app, passport) {
 	//	});
 	//	});
 
+	/*
 	app.post('/login', passport.authenticate('local-login', {
 		successRedirect: '/',
 		failureRedirect: '/login',
@@ -86,26 +101,5 @@ export default function(app, passport) {
 			});
 		});
 	});
-
-	app.get('/api/items', (req, res) => {
-		ItemEntity.find({}, (err, items) => {
-			if (err) { return console.log(err); }
-			res.send(items);
-		});
-	});
-
-	app.get('/api/items/:itemId', (req, res) => {
-		ItemEntity.findById(req.params.itemId, (err, item) => {
-			if (err) { console.log(err); }
-			return res.send(item);
-		});
-	});
-
-	function isLoggedIn(req, res, next) {
-		if (req.isAuthenticated()) {
-			return next();
-		}
-
-		res.redirect('/');
-	}
+	*/
 }
