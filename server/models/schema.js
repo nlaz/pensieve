@@ -16,8 +16,20 @@ userSchema.methods.generateHash = (password) => {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
+userSchema.methods.getCleanUser = (user) => ({
+	id: user._id,
+	name: user.name,
+	email: user.email,
+	is_email_on: user.is_email_on,
+});
+
 userSchema.methods.generateToken = (user) => {
-	return jwt.sign({ user.name, user.email }, process.env.JWT_SECRET, {
+	const data = {
+		_id: user._id.toString(),
+		name: user.name,
+		email: user.email
+	};
+	return jwt.sign(data, process.env.JWT_SECRET, {
 		expiresIn: 60 * 60 * 24 // expires in 24 hours
 	});
 };

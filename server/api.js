@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { ItemEntity } from './models/schema';
+import jwt from 'jsonwebtoken';
+import { UserEntity, ItemEntity } from './models/schema';
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
@@ -10,55 +11,122 @@ function isLoggedIn(req, res, next) {
 	res.redirect('/');
 }
 
+function authenticateUser(req, res, next) {
+	let token = req.headers['authorization'];
+	if (!token) {
+		return res.status(404).json({
+			error: true,
+			message: 'Invalid authentication. Please include a JWT token',
+		});
+	}
+
+	token = token.replace('Bearer ', '');
+
+	jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+		if (err) {
+			return res.status(401).json({
+				error: true,
+				message: 'Invalid authentication. Please log in to make requests'
+			});
+		}
+		req.user = user;
+		next();
+	});
+}
+
 export default function(app) {
 	app.use(cookieParser());
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
-	app.get('/api/items', (req, res) => {
-		console.log('Here');
-		ItemEntity.find({}, (err, items) => {
+	app.post('/users/signup', function (req, res, next) {
+		const body = req.body;
+		const newUser = new UserEntity();
+		const name = req.body.name.trim(),
+			email = req.body.email.trim();
+			
+		UserEntity.findOne({ email: email }, (err, user) => {
+			if (err) { return res.send(err); }
+
+			if (user) {
+				return res.status(404).json({
+					error: true,
+					message: 'That email is already taken'
+				});
+			}
+
+			const newUser = new UserEntity();
+			newUser.name = name;
+			newUser.email = email;
+			newUser.password = newUser.generateHash(req.body.password.trim());
+
+			newUser.save((err, user) => {
+				if (err) { return res.send(err); }
+
+				res.json({
+					user: user.getCleanUser(user),
+					token: user.generateToken(user),
+				});
+			});
+		});
+	});
+
+	app.post('/users/login', function(req, res) {
+		const email = req.body.email.trim();
+		UserEntity.findOne({ email: email }, (err, user) => {
+			if (err) { return res.send(err); }
+
+			if (!user) {
+				return res.status(404).json({
+					error: true,
+					message: 'No user found with that email and password'
+				});
+			}
+
+			if (!user.validPassword(req.body.password.trim())) {
+				return res.status(404).json({
+					error: true,
+					message: 'No user found with that email and password'
+				});
+			}
+
+			res.json({
+				user: user.getCleanUser(user),
+				token: user.generateToken(user),
+			});
+		});
+	});
+
+	app.get('/self', function(req, res, next) {
+		const token = req.body.token || req.query.token;
+
+		if (!token) {
+			return res.status(401).json({
+				error: true,
+				message: 'Must include token',
+			});
+		}
+
+		jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+			if (err) { throw err; }
+
+			UserEntity.findById(user._id, (err, user) => {
+				if (err) throw err;
+
+				res.json({
+					user: user.getCleanUser(user),
+					token: token // could renew token here
+				});
+			});
+		});
+	});
+
+	app.get('/api/items', authenticateUser, (req, res) => {
+		const user = req.user;
+		ItemEntity.find({ user_id: user._id }, (err, items) => {
 			if (err) { return console.log(err); }
 			res.send(items);
-		});
-	});
-
-	app.get('/api/items/:itemId', (req, res) => {
-		ItemEntity.findById(req.params.itemId, (err, item) => {
-			if (err) { console.log(err); }
-			return res.send(item);
-		});
-	});
-
-	//	app.get('/login', (req, res) => {
-	//	res.render('login.ejs', {
-	//		message: req.flash('loginMessage'),
-	//	});
-	//	});
-
-	/*
-	app.post('/login', passport.authenticate('local-login', {
-		successRedirect: '/',
-		failureRedirect: '/login',
-		failureFlash: true,
-	}));
-
-	app.get('/signup', (req, res) => {
-		res.render('signup.ejs', {
-			message: req.flash('signupMessage'),
-		});
-	});
-
-	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/',
-		failureRedirect: '/signup',
-		failureFlash: true,
-	}));
-
-	app.get('/items/new', isLoggedIn, (req, res) => {
-		res.render('new_item.ejs', {
-			user: req.user
 		});
 	});
 
@@ -76,6 +144,7 @@ export default function(app) {
 		});
 	});
 
+	/*
 	app.get('/profile', isLoggedIn, (req, res) => {
 		res.render('profile.ejs', {
 			user: req.user,
