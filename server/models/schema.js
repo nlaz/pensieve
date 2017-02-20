@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
+import jwt from 'jsonwebtoken';
 
 const Schema = mongoose.Schema;
 
@@ -13,6 +14,12 @@ const userSchema = new Schema({
 
 userSchema.methods.generateHash = (password) => {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+userSchema.methods.generateToken = (user) => {
+	return jwt.sign({ user.name, user.email }, process.env.JWT_SECRET, {
+		expiresIn: 60 * 60 * 24 // expires in 24 hours
+	});
 };
 
 userSchema.methods.validPassword = function(password) {

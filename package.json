@@ -6,7 +6,7 @@
   "scripts": {
     "webpack": "webpack -w",
     "start": "nodemon server/index.js --exec babel-node",
-	"start:dev": "babel-node server/index.js",
+    "start:dev": "babel-node server/index.js",
     "build": "babel src -d build",
     "serve": "node build/server.js",
     "db": "mongo boreas",
@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "jsonwebtoken": "^7.3.0",
     "nodemon": "^1.11.0"
   }
 }

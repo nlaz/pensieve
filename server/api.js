@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { ItemEntity } from '../src/db/schema';
+import { ItemEntity } from './models/schema';
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
