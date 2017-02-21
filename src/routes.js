@@ -1,12 +1,12 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
 
-import PageWrap from './app/PageWrap';
-import Home from './app/Home';
-import Login from './app/Login';
-import Landing from './app/Landing';
-import Sessions from './app/Sessions';
-import Signup from './app/Signup';
+import PageWrap from './components/PageWrap';
+import Home from './components/Home';
+import Login from './components/Login';
+import Landing from './components/Landing';
+import Sessions from './components/Sessions';
+import Signup from './components/Signup';
 
 const Routes = (props) => (
 	<Router {...props}>
