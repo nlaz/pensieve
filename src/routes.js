@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
 
-import PageWrap from './components/PageWrap';
+import AppContainer from './components/AppContainer';
 import Home from './components/Home';
 import Login from './components/Login';
 import Landing from './components/Landing';
@@ -10,7 +10,7 @@ import Signup from './components/Signup';
 
 const Routes = (props) => (
 	<Router {...props}>
-		<Route component={PageWrap}>
+		<Route component={AppContainer}>
 			<Route path='/' component={Landing} />
 			<Route path='/home' component={Home} />
 			<Route path='/login' component={Login} />

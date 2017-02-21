@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-export default class PageWrap extends React.Component {
+class AppContainer extends React.Component {
 	render() {
 		return (
 			<div className='body'>
@@ -21,3 +22,9 @@ export default class PageWrap extends React.Component {
 		);
 	}
 }
+
+const mapStateToProps = (state, ownProps) => {
+	return state;
+}
+
+export default connect(mapStateToProps)(AppContainer);
