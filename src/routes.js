@@ -3,7 +3,7 @@ import { Router, Route } from 'react-router';
 
 import AppContainer from './components/AppContainer';
 import Home from './components/Home';
-import Login from './components/Login';
+import LoginContainer from './components/LoginContainer';
 import Landing from './components/Landing';
 import Sessions from './components/Sessions';
 import Signup from './components/Signup';
@@ -13,7 +13,7 @@ const Routes = (props) => (
 		<Route component={AppContainer}>
 			<Route path='/' component={Landing} />
 			<Route path='/home' component={Home} />
-			<Route path='/login' component={Login} />
+			<Route path='/login' component={LoginContainer} />
 			<Route path='/signup' component={Signup} />
 			<Route path='/sessions' component={Sessions} />
 		</Route>
