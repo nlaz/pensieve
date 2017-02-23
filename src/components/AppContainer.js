@@ -5,13 +5,19 @@ import { Link } from 'react-router';
 
 class AppContainer extends React.Component {
 	render() {
+		const { self, actions } = this.props;
+
 		return (
 			<div className='body'>
 				<nav className='navbar navbar-inverse'>
 					<div className='container'>
 						<Link className='navbar-brand' to='/'>Boreas</Link>
 						<ul className='nav navbar-nav navbar-right'>
-							<li><Link to='/login'>Login</Link></li>
+							{self ? (
+								<li><Link to='/logout'>Logout</Link></li>
+							): (
+								<li><Link to='/login'>Login</Link></li>
+							)}
 						</ul>
 					</div>
 				</nav>
@@ -24,7 +30,7 @@ class AppContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	return state;
+	return { self: state.app.self };
 }
 
 export default connect(mapStateToProps)(AppContainer);

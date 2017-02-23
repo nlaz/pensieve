@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, FETCH_SELF } from './types';
+import { AUTH_USER, UNAUTH_USER } from './types';
 
 const CLIENT_ROOT_URL = 'http://localhost:3000';
 const LOGIN_URL = `${CLIENT_ROOT_URL}/users/login`;
@@ -22,6 +22,15 @@ export function loginUser(email, password) {
 		.catch((error) => {
 			throw(error);
 		});
+	};
+}
+
+export function logoutUser(error) {
+	return function (dispatch) {
+		dispatch({ type: UNAUTH_USER, payload: error || '' });
+		cookie.remove('token', { path: '/' });
+		cookie.remove('user', { path: '/' });
+		window.location.href = CLIENT_ROOT_URL;
 	};
 }
 
