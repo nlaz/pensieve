@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route } from 'react-router';
 
 import AppContainer from './components/AppContainer';
-import Home from './components/Home';
+import HomeContainer from './components/HomeContainer';
 import LoginContainer from './components/LoginContainer';
 import Landing from './components/Landing';
 import Sessions from './components/Sessions';
@@ -12,7 +12,7 @@ const Routes = (props) => (
 	<Router {...props}>
 		<Route component={AppContainer}>
 			<Route path='/' component={Landing} />
-			<Route path='/home' component={Home} />
+			<Route path='/home' component={HomeContainer} />
 			<Route path='/login' component={LoginContainer} />
 			<Route path='/signup' component={Signup} />
 			<Route path='/sessions' component={Sessions} />

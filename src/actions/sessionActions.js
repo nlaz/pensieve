@@ -1,14 +1,11 @@
-import sessionApi from '../api/SessionApi';
 import axios from 'axios';
 import cookie from 'react-cookie';
+import { browserHistory } from 'react-router';
+import { AUTH_USER, FETCH_SELF } from './types';
 
-import { LOGIN_SUCCESS } from './types';
-const LOGIN_URL = 'http://localhost:3000/users/login';
 const CLIENT_ROOT_URL = 'http://localhost:3000';
-
-export function loginSuccess() {
-	return { type: LOGIN_SUCCESS };
-}
+const LOGIN_URL = `${CLIENT_ROOT_URL}/users/login`;
+const SELF_URL = `${CLIENT_ROOT_URL}/self`;
 
 export function loginUser(email, password) {
 	return function (dispatch) {
@@ -16,8 +13,26 @@ export function loginUser(email, password) {
 		.then((response) => {
 			cookie.save('token', response.data.token, { path: '/' });
 			cookie.save('user', response.data.user, { path: '/' });
-			dispatch(loginSuccess());
-			window.location.href = CLIENT_ROOT_URL;
+			dispatch({
+				type: AUTH_USER,
+				payload: response.data,
+			});
+			browserHistory.push('/home');
+		})
+		.catch((error) => {
+			throw(error);
+		});
+	};
+}
+
+export function fetchSelf(token) {
+	return function (dispatch) {
+		axios.get(SELF_URL, { token })
+		.then((response) => {
+			dispatch({
+				type: FETCH_SELF,
+				payload: response.data,
+			});
 		})
 		.catch((error) => {
 			throw(error);

@@ -2,4 +2,5 @@
  * Authentication Actions
  */
 
-export const LOGIN_SUCCESS = 'loginSuccess';
+export const AUTH_USER = 'authUser';
+export const FETCH_SELF = 'fetchSelf';
