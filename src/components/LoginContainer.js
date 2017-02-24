@@ -52,10 +52,8 @@ class Login extends React.Component {
 	}
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		actions: bindActionCreators(sessionActions, dispatch)
-	};
-}
+const mapDispatchToProps = (dispatch) => ({
+	actions: bindActionCreators(sessionActions, dispatch)
+});
 
 export default connect(null, mapDispatchToProps)(Login);
