@@ -1,6 +1,7 @@
 import morgan from 'morgan';
 import express from 'express';
 import session from 'express-session';
+import bodyParser from 'body-parser';
 import path from 'path';
 
 //import passport from 'passport';
@@ -10,11 +11,11 @@ import configDB from './config/db';
 
 const app = express();
 
-// Config passport
-//configPassport(passport);
+// Config DB
+configDB();
 
 // Setup logger
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
+app.use(morgan('dev'));
 
 // Setup passport
 app.use(session({
@@ -23,8 +24,9 @@ app.use(session({
 	saveUninitialized: true,
 }));
 
-// Config DB
-configDB();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 // Setup Api routes
 configRoutes(app);

@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
 import { UserEntity, ItemEntity } from './models/schema';
@@ -12,7 +11,7 @@ function isLoggedIn(req, res, next) {
 }
 
 function authenticateUser(req, res, next) {
-	let token = req.headers['authorization'];
+	let token = req.headers.authorization;
 	if (!token) {
 		return res.status(404).json({
 			error: true,
@@ -35,11 +34,6 @@ function authenticateUser(req, res, next) {
 }
 
 export default function(app) {
-	app.use(cookieParser());
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: true }));
-	app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-
 	app.post('/users/signup', function (req, res, next) {
 		const body = req.body;
 		const newUser = new UserEntity();
