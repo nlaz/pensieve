@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as itemActions from '../actions/itemActions';
 
-class HomeContainer extends React.Component {
+class ItemsContainer extends React.Component {
 	componentWillMount() {
 		if (!this.props.items) {
 			this.props.actions.fetchItems();
@@ -27,7 +28,6 @@ class HomeContainer extends React.Component {
 	
 		return (
 			<div>
-				<h1>Welcome, {self.name}!</h1>
 				{items &&
 					<div className='col-md-8 col-md-offset-2'>
 						<h4>Your Items</h4>
@@ -50,4 +50,4 @@ const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(itemActions, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemsContainer);

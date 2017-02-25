@@ -17,7 +17,7 @@ export function loginUser(email, password) {
 				type: AUTH_USER,
 				payload: response.data,
 			});
-			browserHistory.push('/home');
+			browserHistory.push('/items');
 		})
 		.catch((error) => {
 			throw(error);

@@ -12,13 +12,16 @@ class AppContainer extends React.Component {
 				<nav className='navbar navbar-inverse'>
 					<div className='container'>
 						<Link className='navbar-brand' to='/'>Boreas</Link>
-						<ul className='nav navbar-nav navbar-right'>
-							{self ? (
+						{self ? (
+							<ul className='nav navbar-nav navbar-right'>
+								<li><Link>Welcome, {self.name}</Link></li>
 								<li><Link to='/logout'>Logout</Link></li>
-							): (
+							</ul>
+						): (
+							<ul className='nav navbar-nav navbar-right'>
 								<li><Link to='/login'>Login</Link></li>
-							)}
-						</ul>
+							</ul>
+						)}
 					</div>
 				</nav>
 				<div className='container'>
