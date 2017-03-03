@@ -6,6 +6,7 @@ import LandingPage from './components/pages/LandingPage';
 import App from './components/AppContainer';
 import ItemsContainer from './components/ItemsContainer';
 import ItemContainer from './components/ItemContainer';
+import NewItemContainer from './components/NewItemContainer';
 import LoginContainer from './components/LoginContainer';
 import LogoutContainer from './components/LogoutContainer';
 import Sessions from './components/Sessions';
@@ -15,7 +16,7 @@ const routes = (
 	<Route path='/' component={App}>
 		<IndexRoute component={LandingPage} />
 		<Route path='items' component={ItemsContainer} />
-		<Route path='item/new' component={ItemContainer} />
+		<Route path='item/new' component={NewItemContainer} />
 		<Route path='item/view/:itemId' component={ItemContainer} />
 		<Route path='login' component={LoginContainer} />
 		<Route path='logout' component={LogoutContainer} />
