@@ -23,7 +23,9 @@ class ItemsContainer extends React.Component {
 		}
 
 		const renderItem = (item, key) => (
-			<li key={key} className='list-group-item'>{item.title}</li>
+			<li key={key} className='list-group-item'>
+				<Link to={`/item/view/${item._id}`}>{item.title}</Link>
+			</li>
 		);
 	
 		return (

@@ -6,15 +6,20 @@ import { createStore, applyMiddleware } from 'redux';
 import cookie from 'react-cookie';
 import reduxThunk from 'redux-thunk';
 
-import Routes from './routes';
+import routes from './routes';
+import { Router } from 'react-router';
 import appReducer from './reducers/appReducer';
 import { AUTH_USER } from './actions/types';
 import * as sessionActions from './actions/sessionActions';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
+const preloadedState = window.INITIAL_STATE;
+delete window.INITIAL_STATE;
+
 const store = createStoreWithMiddleware(
 	appReducer,
+	preloadedState,
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
@@ -29,7 +34,7 @@ if (token) {
 
 ReactDOM.render(
 	<Provider store={store}>
-		<Routes history={browserHistory} />
+		<Router routes={routes} history={browserHistory} />
 	</Provider>,
 	document.getElementById('root')
 );
