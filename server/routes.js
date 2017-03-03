@@ -133,7 +133,7 @@ export default function(app) {
 		});
 	});
 
-	app.post('/items', isLoggedIn, (req, res) => {
+	app.post('/api/items', isLoggedIn, (req, res) => {
 		const item = new ItemEntity({
 			user_id: req.user.id,
 			title: req.body.title,
