@@ -126,8 +126,8 @@ export default function(app) {
 
 	app.get('/api/items/:item_id', authenticateUser, (req, res) => {
 		const itemId = req.params.item_id;
-		const user = req.user;
-		ItemEntity.findOne({ user_id: user._id, _id: itemId }, (err, item) => {
+		const userId = req.user._id;
+		ItemEntity.findOne({ _id: itemId, user_id: userId }, (err, item) => {
 			if (err) { return console.log(err); }
 			res.send(item);
 		});

@@ -8,23 +8,20 @@ import * as itemActions from '../actions/itemActions';
 class ItemContainer extends React.Component {
 	componentWillMount() {
 		if (!this.props.item) {
-			this.props.actions.fetchItem();
+			this.props.actions.fetchItem(this.props.params.itemId);
 		}
 	}
 
 	render() {
-		const { item } = this.props;
-
-		if (!self) {
-			return <h1>Home Page</h1>;
-		}
-
+		const item = this.props.item;
 		return (
-			<div>
-				<div className='col-md-8 col-md-offset-2'>
-					<h2>Your Item</h2>
-					<h1>{item}</h1>
-				</div>
+			<div className='col-md-8 col-md-offset-2'>
+				{item &&
+					<div>
+						<h3>{item.title}</h3>
+						<p>{item.description}</p>
+					</div>
+				}
 			</div>
 		);
 	}

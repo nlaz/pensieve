@@ -18,14 +18,13 @@ export function fetchItems() {
 			});
 		})
 		.catch((error) => {
-			console.log('Error', error.config);
+			console.error('Error', error);
 		});
 	};
 }
 
 
 export function fetchItem(itemId) {
-	console.log('here');
 	return function (dispatch) {
 		axios.get(`${ITEMS_API_URL}/${itemId}`, {
 			headers: { Authorization: cookie.load('token') }
@@ -37,7 +36,7 @@ export function fetchItem(itemId) {
 			});
 		})
 		.catch((error) => {
-			console.log('Error', error.config);
+			console.error('Error', error);
 		});
 	};
 }

@@ -56,7 +56,7 @@ const renderFullPage = (appHtml, preloadedState) => (
 	<body>
 		<div id='root'>${appHtml}</div>
 		<script>window.INITIAL_STATE=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}</script>
-		<script src='assets/bundle.js' type='text/javascript'></script>
+		<script src='http://localhost:3000/assets/bundle.js' type='text/javascript'></script>
 	</body>
 	</html>
 	`
