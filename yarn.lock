@@ -78,9 +78,21 @@ arr-flatten@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arr-flatten/-/arr-flatten-1.0.1.tgz#e5ffe54d45e19f32f216e91eb99c8ce892bb604b"
 
+array-filter@~0.0.0:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/array-filter/-/array-filter-0.0.1.tgz#7da8cf2e26628ed732803581fd21f67cacd2eeec"
+
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
+
+array-map@~0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/array-map/-/array-map-0.0.0.tgz#88a2bab73d1cf7bcd5c1b118a003f66f665fa662"
+
+array-reduce@~0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/array-reduce/-/array-reduce-0.0.0.tgz#173899d3ffd1c7d9383e4479525dbe278cab5f2b"
 
 array-unique@^0.2.1:
   version "0.2.1"
@@ -740,7 +752,7 @@ babel-plugin-transform-strict-mode@^6.22.0:
     babel-runtime "^6.22.0"
     babel-types "^6.22.0"
 
-babel-polyfill@^6.20.0, babel-polyfill@^6.23.0:
+babel-polyfill@^6.2.0, babel-polyfill@^6.20.0, babel-polyfill@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.23.0.tgz#8364ca62df8eafb830499f699177466c3b03499d"
   dependencies:
@@ -1848,6 +1860,12 @@ ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
+if-env@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/if-env/-/if-env-1.0.0.tgz#6e09082cdd3f2ccfb75baf022a4a971565f6007c"
+  dependencies:
+    npm-run-all "1.4.0"
+
 ignore-by-default@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ignore-by-default/-/ignore-by-default-1.0.1.tgz#48ca6d72f6c6a3af00a9ad4ae6876be3889e2b09"
@@ -2015,6 +2033,10 @@ isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
 isemail@1.x.x:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/isemail/-/isemail-1.2.0.tgz#be03df8cc3e29de4d2c5df6501263f1fa4595e9a"
+
+isexe@^1.1.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/isexe/-/isexe-1.1.2.tgz#36f3e22e60750920f5e7241a476a8c6a42275ad0"
 
 isobject@^2.0.0:
   version "2.1.0"
@@ -2557,6 +2579,16 @@ normalize-package-data@^2.3.2:
 normalize-path@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-2.0.1.tgz#47886ac1662760d4261b7d979d241709d3ce3f7a"
+
+npm-run-all@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/npm-run-all/-/npm-run-all-1.4.0.tgz#a469bb9feabe5bf3aa9916833baf6776582e8948"
+  dependencies:
+    babel-polyfill "^6.2.0"
+    minimatch "^3.0.0"
+    ps-tree "^1.0.1"
+    shell-quote "^1.4.3"
+    which "^1.2.0"
 
 npmlog@^4.0.1:
   version "4.0.2"
@@ -3219,6 +3251,15 @@ sha.js@^2.3.6:
   dependencies:
     inherits "^2.0.1"
 
+shell-quote@^1.4.3:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.6.1.tgz#f4781949cce402697127430ea3b3c5476f481767"
+  dependencies:
+    array-filter "~0.0.0"
+    array-map "~0.0.0"
+    array-reduce "~0.0.0"
+    jsonify "~0.0.0"
+
 signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -3628,6 +3669,12 @@ whatwg-fetch@>=0.10.0:
 which-module@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/which-module/-/which-module-1.0.0.tgz#bba63ca861948994ff307736089e3b96026c2a4f"
+
+which@^1.2.0:
+  version "1.2.12"
+  resolved "https://registry.yarnpkg.com/which/-/which-1.2.12.tgz#de67b5e450269f194909ef23ece4ebe416fa1192"
+  dependencies:
+    isexe "^1.1.1"
 
 wide-align@^1.1.0:
   version "1.1.0"
