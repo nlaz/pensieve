@@ -124,6 +124,15 @@ export default function(app) {
 		});
 	});
 
+	app.get('/api/items/:item_id', authenticateUser, (req, res) => {
+		const itemId = req.params.item_id;
+		const user = req.user;
+		ItemEntity.findOne({ user_id: user._id, _id: itemId }, (err, item) => {
+			if (err) { return console.log(err); }
+			res.send(item);
+		});
+	});
+
 	app.post('/items', isLoggedIn, (req, res) => {
 		const item = new ItemEntity({
 			user_id: req.user.id,
