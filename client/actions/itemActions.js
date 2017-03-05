@@ -41,19 +41,17 @@ export function fetchItem(itemId) {
 	};
 }
 
-export function createItem({ title, description }) {
+export function createItem(params) {
+	const config = { headers: { Authorization: cookie.load('token') }};
+
 	return function (dispatch) {
-		axios.post(ITEMS_API_URL, {
-			headers: { Authorization: cookie.load('token') },
-			title: title,
-			descrption: description,
-		})
+		axios.post(ITEMS_API_URL, params, config)
 		.then((response) => {
 			dispatch({
 				type: CREATE_ITEM,
 				payload: response.data,
 			});
-			browserHistory.push(`/item/view/${response.data.id}`);
+			browserHistory.push(`/item/view/${response.data.item._id}`);
 		})
 		.catch((error) => {
 			console.error('Error', error);

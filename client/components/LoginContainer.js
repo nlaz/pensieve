@@ -14,7 +14,7 @@ class Login extends React.Component {
 
 	onChange(event) {
 		const field = event.target.name;
-		this.setState({ [field]: event.target.value});
+		this.setState({ [field]: event.target.value });
 	}
 
 	onSave(event) {

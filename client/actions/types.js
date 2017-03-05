@@ -8,3 +8,4 @@ export const FETCH_SELF = 'fetchSelf';
 
 export const FETCH_ITEMS = 'fetchItems';
 export const FETCH_ITEM = 'fetchItem';
+export const CREATE_ITEM = 'createItem';

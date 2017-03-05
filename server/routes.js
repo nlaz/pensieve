@@ -12,6 +12,7 @@ function isLoggedIn(req, res, next) {
 
 function authenticateUser(req, res, next) {
 	let token = req.headers.authorization;
+	console.log('here', 'authenticateUser', token);
 	if (!token) {
 		return res.status(404).json({
 			error: true,
@@ -133,17 +134,20 @@ export default function(app) {
 		});
 	});
 
-	app.post('/api/items', isLoggedIn, (req, res) => {
+	app.post('/api/items', authenticateUser, (req, res, next) => {
 		const item = new ItemEntity({
-			user_id: req.user.id,
+			user_id: req.user._id,
 			title: req.body.title,
 			description: req.body.description,
 		});
 
 		item.save((err) => {
-			if (err) { res.send(err); }
+			if (err) {
+				res.send({ error: err });
+				return next(err);
+			}
 
-			res.redirect('/');
+			return res.status(200).json({ message: 'Item successfully saved!', item: item });
 		});
 	});
 
