@@ -9,6 +9,7 @@ import ItemsContainer from './components/ItemsContainer';
 import ItemContainer from './components/ItemContainer';
 import NewItemContainer from './components/NewItemContainer';
 import Sessions from './components/Sessions';
+import Dashboard from './components/Dashboard';
 
 import Login from './components/Login';
 import Logout from './components/Logout';
@@ -25,6 +26,7 @@ const routes = (
 		<Route path='item/new' component={NewItemContainer} />
 		<Route path='item/view/:itemId' component={ItemContainer} />
 		<Route path='sessions' component={Sessions} />
+		<Route path='dashboard' component={Dashboard} />
 		<Route path='login' component={ReqAuth(Login)} />
 		<Route path='signup' component={ReqAuth(Signup)} />
 		<Route path='logout' component={Logout} />
