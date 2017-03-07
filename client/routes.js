@@ -5,9 +5,9 @@ import LandingPage from './components/pages/LandingPage';
 
 import App from './components/AppContainer';
 import ReqAuth from './components/ReqAuth';
-import ItemsContainer from './components/ItemsContainer';
-import ItemContainer from './components/ItemContainer';
-import NewItemContainer from './components/NewItemContainer';
+import Items from './components/ItemsContainer';
+import Item from './components/ItemContainer';
+import NewItem from './components/NewItemContainer';
 import Sessions from './components/Sessions';
 import Dashboard from './components/Dashboard';
 
@@ -22,13 +22,13 @@ const NotFoundPage = (props) => (
 const routes = (
 	<Route path='/' component={App}>
 		<IndexRoute component={LandingPage} />
-		<Route path='items' component={ItemsContainer} />
-		<Route path='item/new' component={NewItemContainer} />
-		<Route path='item/view/:itemId' component={ItemContainer} />
-		<Route path='sessions' component={Sessions} />
-		<Route path='dashboard' component={Dashboard} />
-		<Route path='login' component={ReqAuth(Login)} />
-		<Route path='signup' component={ReqAuth(Signup)} />
+		<Route path='items' component={ReqAuth(Items)} />
+		<Route path='item/new' component={ReqAuth(NewItem)} />
+		<Route path='item/view/:itemId' component={ReqAuth(Item)} />
+		<Route path='sessions' component={ReqAuth(Sessions)} />
+		<Route path='dashboard' component={ReqAuth(Dashboard)} />
+		<Route path='login' component={Login} />
+		<Route path='signup' component={Signup} />
 		<Route path='logout' component={Logout} />
 
 		<Route path='*' component={NotFoundPage} />

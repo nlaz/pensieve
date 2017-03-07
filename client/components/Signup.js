@@ -12,6 +12,18 @@ class Signup extends React.Component {
 		this.onSave = this.onSave.bind(this);
 	}
 
+	componentWillMount() {
+		if (this.props.authenticated) {
+			this.props.router.push('/');
+		}
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		if (nextProps.authenticated) {
+			this.props.router.push('/');
+		}
+	}
+
 	onChange(event) {
 		const field = event.target.name;
 		this.setState({ [field]: event.target.value });
@@ -61,4 +73,8 @@ const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(sessionActions, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(Signup);
+const mapStateToProps = (state, ownProps) => ({
+	authenticated: state.app.authenticated
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

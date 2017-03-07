@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 const ReqAuth = ComposedComponent => {
 	class Authentication extends React.Component {
 		componentWillMount() {
-			if (this.props.authenticated) {
+			if (!this.props.authenticated) {
 				this.props.router.push('/');
 			}
 		}
 
 		componentWillUpdate(nextProps, nextState) {
-			if (nextProps.authenticated) {
+			if (!nextProps.authenticated) {
 				nextProps.router.push('/');
 			}
 		}
