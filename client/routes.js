@@ -14,6 +14,10 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Signup from './components/Signup';
 
+const NotFoundPage = (props) => (
+	<h1>Page Not Found :(</h1>
+);
+
 const routes = (
 	<Route path='/' component={App}>
 		<IndexRoute component={LandingPage} />
@@ -24,6 +28,8 @@ const routes = (
 		<Route path='login' component={ReqAuth(Login)} />
 		<Route path='signup' component={ReqAuth(Signup)} />
 		<Route path='logout' component={Logout} />
+
+		<Route path='*' component={NotFoundPage} />
 	</Route>
 );
 
