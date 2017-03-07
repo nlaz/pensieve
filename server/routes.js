@@ -12,7 +12,6 @@ function isLoggedIn(req, res, next) {
 
 function authenticateUser(req, res, next) {
 	let token = req.headers.authorization;
-	console.log('here', 'authenticateUser', token);
 	if (!token) {
 		return res.status(404).json({
 			error: true,
@@ -36,10 +35,10 @@ function authenticateUser(req, res, next) {
 
 export default function(app) {
 	app.post('/users/signup', function (req, res, next) {
-		const body = req.body;
 		const newUser = new UserEntity();
-		const name = req.body.name.trim(),
-			email = req.body.email.trim();
+		const name = req.body.name.trim();
+		const email = req.body.email.trim();
+		const password = req.body.password.trim();
 			
 		UserEntity.findOne({ email: email }, (err, user) => {
 			if (err) { return res.send(err); }
@@ -54,7 +53,7 @@ export default function(app) {
 			const newUser = new UserEntity();
 			newUser.name = name;
 			newUser.email = email;
-			newUser.password = newUser.generateHash(req.body.password.trim());
+			newUser.password = newUser.generateHash(password);
 
 			newUser.save((err, user) => {
 				if (err) { return res.send(err); }

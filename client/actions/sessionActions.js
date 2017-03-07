@@ -5,11 +5,12 @@ import { AUTH_USER, UNAUTH_USER } from './types';
 
 const CLIENT_ROOT_URL = 'http://localhost:3000';
 const LOGIN_URL = `${CLIENT_ROOT_URL}/users/login`;
+const SIGNUP_URL = `${CLIENT_ROOT_URL}/users/signup`;
 const SELF_URL = `${CLIENT_ROOT_URL}/self`;
 
-export function loginUser(email, password) {
+export function loginUser(params) {
 	return function (dispatch) {
-		axios.post(LOGIN_URL, { email, password })
+		axios.post(LOGIN_URL, params)
 		.then((response) => {
 			cookie.save('token', response.data.token, { path: '/' });
 			cookie.save('user', response.data.user, { path: '/' });
@@ -17,7 +18,23 @@ export function loginUser(email, password) {
 				type: AUTH_USER,
 				payload: response.data,
 			});
-			browserHistory.push('/items');
+		})
+		.catch((error) => {
+			throw(error);
+		});
+	};
+}
+
+export function signupUser(params) {
+	return function (dispatch) {
+		axios.post(SIGNUP_URL, params)
+		.then((response) => {
+			cookie.save('token', response.data.token, { path: '/' });
+			cookie.save('user', response.data.user, { path: '/' });
+			dispatch({
+				type: AUTH_USER,
+				payload: response.data,
+			});
 		})
 		.catch((error) => {
 			throw(error);

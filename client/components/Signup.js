@@ -1,8 +1,40 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as sessionActions from '../actions/sessionActions';
 
-export default class Signup extends React.Component {
+class Signup extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { email: '', password: '', name: '' };
+		this.onChange = this.onChange.bind(this);
+		this.onSave = this.onSave.bind(this);
+	}
+
+	componentWillMount() {
+		if (this.props.authenticated) {
+			this.props.router.push('/');
+		}
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		if (nextProps.authenticated) {
+			nextProps.router.push('/');
+		}
+	}
+
+	onChange(event) {
+		const field = event.target.name;
+		this.setState({ [field]: event.target.value });
+	}
+
+	onSave(event) {
+		event.preventDefault();
+		const { name, email, password } = this.state;
+		this.props.actions.signupUser({ name, email, password });
+	}
+
 	render() {
 		return (
 			<div className='row'>
@@ -11,18 +43,18 @@ export default class Signup extends React.Component {
 					<form action='/signup' method='post'>
 						<div className='form-group'>
 							<label htmlFor='nameInput'>Name</label>
-							<input name='name' id='nameInput' className='form-control' type="text" placeholder='What should we call you?'/>
+							<input onChange={this.onChange} name='name' id='nameInput' className='form-control' type="text" placeholder='What should we call you?'/>
 						</div>
 						<div className='form-group'>
 							<label htmlFor='emailInput'>Email</label>
-							<input name='email' id='emailInput' className='form-control' type="email" placeholder='you@your-domain.com'/>
+							<input onChange={this.onChange} name='email' id='emailInput' className='form-control' type="email" placeholder='you@your-domain.com'/>
 						</div>
 						<div className='form-group'>
 							<label htmlFor='passwordInput'>Password</label>
-							<input name='password' id='passwordInput' className='form-control' type="password" placeholder='Shhh! Keep this secret.'/>
+							<input onChange={this.onChange} name='password' id='passwordInput' className='form-control' type="password" placeholder='Shhh! Keep this secret.'/>
 						</div>
 
-						<button type="submit" className='btn btn-primary btn-block'>Join</button>
+						<button onClick={this.onSave} type="submit" className='btn btn-primary btn-block'>Join</button>
 					</form>
 
 					<hr/>
@@ -36,3 +68,13 @@ export default class Signup extends React.Component {
 		);
 	}
 }
+
+const mapDispatchToProps = (dispatch) => ({
+	actions: bindActionCreators(sessionActions, dispatch)
+});
+
+const mapStateToProps = (state, ownProps) => ({
+	authenticated: state.app.authenticated
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

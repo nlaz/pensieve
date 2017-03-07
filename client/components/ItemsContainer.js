@@ -13,10 +13,7 @@ class ItemsContainer extends React.Component {
 	}
 
 	render() {
-		const {
-			self,
-			items,
-		} = this.props;
+		const { self, items } = this.props;
 
 		if (!self) {
 			return <h1>Home Page</h1>;
@@ -32,7 +29,12 @@ class ItemsContainer extends React.Component {
 			<div>
 				{items &&
 					<div className='col-md-8 col-md-offset-2'>
-						<h4>Your Items</h4>
+						<div className='row'>
+							<h4 className='col-xs-6'>Your Items</h4>
+							<div className='col-xs-6'>
+								<Link to='/item/new' className='btn btn-success pull-right'>Create New</Link>
+							</div>
+						</div>
 						<ul className='list-group'>
 							{items.map(renderItem)}
 						</ul>

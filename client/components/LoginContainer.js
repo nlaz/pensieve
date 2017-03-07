@@ -12,6 +12,18 @@ class Login extends React.Component {
 		this.onSave = this.onSave.bind(this);
 	}
 
+	componentWillMount() {
+		if (this.props.authenticated) {
+			this.props.router.push('/');
+		}
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		if (nextProps.authenticated) {
+			nextProps.router.push('/');
+		}
+	}
+
 	onChange(event) {
 		const field = event.target.name;
 		this.setState({ [field]: event.target.value });
@@ -19,7 +31,8 @@ class Login extends React.Component {
 
 	onSave(event) {
 		event.preventDefault();
-		this.props.actions.loginUser(this.state.email, this.state.password);
+		const { email, password } = this.state;
+		this.props.actions.loginUser({ email, password });
 	}
 
 	render() {
@@ -56,4 +69,8 @@ const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(sessionActions, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapStateToProps = (state, ownProps) => ({
+	authenticated: state.app.authenticated
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
