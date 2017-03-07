@@ -8,9 +8,10 @@ import ReqAuth from './components/ReqAuth';
 import ItemsContainer from './components/ItemsContainer';
 import ItemContainer from './components/ItemContainer';
 import NewItemContainer from './components/NewItemContainer';
-import LoginContainer from './components/LoginContainer';
-import LogoutContainer from './components/LogoutContainer';
 import Sessions from './components/Sessions';
+
+import Login from './components/Login';
+import Logout from './components/Logout';
 import Signup from './components/Signup';
 
 const routes = (
@@ -19,10 +20,10 @@ const routes = (
 		<Route path='items' component={ItemsContainer} />
 		<Route path='item/new' component={NewItemContainer} />
 		<Route path='item/view/:itemId' component={ItemContainer} />
-		<Route path='login' component={ReqAuth(LoginContainer)} />
-		<Route path='signup' component={ReqAuth(Signup)} />
-		<Route path='logout' component={LogoutContainer} />
 		<Route path='sessions' component={Sessions} />
+		<Route path='login' component={ReqAuth(Login)} />
+		<Route path='signup' component={ReqAuth(Signup)} />
+		<Route path='logout' component={Logout} />
 	</Route>
 );
 
