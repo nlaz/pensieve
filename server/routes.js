@@ -1,7 +1,11 @@
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
-import { UserEntity, ItemEntity } from './models/schema';
+import {
+	UserEntity,
+	ItemEntity,
+	ReviewSessionEntity,
+} from './models/schema';
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
@@ -150,18 +154,50 @@ export default function(app) {
 		});
 	});
 
-	/*
-	app.get('/profile', isLoggedIn, (req, res) => {
-		res.render('profile.ejs', {
-			user: req.user,
+	app.get('/api/sessions', authenticateUser, (req, res) => {
+		const user = req.user;
+		ReviewSessionEntity.find({ user_id: user._id }, (err, sessions) => {
+			if (err) { return console.log(err); }
+			res.send(sessions);
 		});
 	});
 
-	app.get('/logout', (req, res) => {
-		req.logout();
-		res.redirect('/');
+	app.get('/api/sessions/:session_id', authenticateUser, (req, res) => {
+		const sessionId = req.params.session_id;
+		const userId = req.user._id;
+		ReviewSessionEntity.findOne({ _id: sessionId, user_id: userId }, (err, session) => {
+			if (err) { return console.log(err); }
+			res.send(session);
+		});
 	});
 
+	app.post('/api/sessions', authenticateUser, (req, res, next) => {
+		const userId = req.user._id;
+		const itemQuery = ItemEntity.find({ user_id: userId }).limit(6);
+		itemQuery.exec((err, items) => {
+			if (err) { return console.log(err); }
+			if (!items.length) {
+				return console.log(`User ${userId} is missing items. Skipping.`);
+			}
+
+			const itemIds = items.map(item => item.id);
+			const session = new ReviewSessionEntity({
+				user_id: userId,
+				items: itemIds,
+			});
+
+			session.save((err) => {
+				if (err) {
+					res.send({ error: err });
+					return next(err);
+				}
+
+				return res.status(200).json({ message: 'Session successfully created!', session: session });
+			});
+		});
+	});
+
+	/*
 	app.get('/sessions/:sessionId', isLoggedIn, (req, res) => {
 		const sessionId = req.params.sessionId;
 		ReviewSessionEntity.findById(sessionId, (err, session) => {

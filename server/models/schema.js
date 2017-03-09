@@ -59,10 +59,9 @@ const itemReviewSchema = new Schema({
 });
 
 const reviewSessionSchema = new Schema({
-	type: { type: String, required: true, default: 'email' },
 	user_id: { type: String, required: true },
 	items: { type: Array, required: true },
-});
+}, { timestamps: true });
 
 export const UserEntity = mongoose.model('User', userSchema);
 export const ItemEntity = mongoose.model('Item', itemSchema);
