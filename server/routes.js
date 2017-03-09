@@ -167,7 +167,17 @@ export default function(app) {
 		const userId = req.user._id;
 		ReviewSessionEntity.findOne({ _id: sessionId, user_id: userId }, (err, session) => {
 			if (err) { return console.log(err); }
-			res.send(session);
+
+			ItemEntity.find()
+				.where('_id')
+				.in(session.items)
+				.exec((err, items) => {
+					if (err) { return console.log(err); }
+
+					session.items = items;
+					res.send(session);
+
+				});
 		});
 	});
 
