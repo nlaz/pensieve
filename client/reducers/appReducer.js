@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
-import itemReducer from './itemReducer';
+import reviewReducer from './reviewReducer';
 
 const appReducer = combineReducers({
 	app: authReducer,
-	data: itemReducer,
+	data: reviewReducer,
 });
 
 export default appReducer;

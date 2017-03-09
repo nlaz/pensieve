@@ -23,10 +23,10 @@ const routes = (
 	<Route path='/' component={App}>
 		<IndexRoute component={LandingPage} />
 		<Route path='items' component={ReqAuth(Items)} />
-		<Route path='item/new' component={ReqAuth(NewItem)} />
-		<Route path='item/view/:itemId' component={ReqAuth(Item)} />
-		<Route path='sessions' component={ReqAuth(Sessions)} />
+		<Route path='items/new' component={ReqAuth(NewItem)} />
+		<Route path='items/:itemId' component={ReqAuth(Item)} />
 		<Route path='dashboard' component={ReqAuth(Dashboard)} />
+		<Route path='sessions/:sessionId' component={ReqAuth(Sessions)} />
 		<Route path='login' component={Login} />
 		<Route path='signup' component={Signup} />
 		<Route path='logout' component={Logout} />

@@ -1,19 +1,19 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM } from './types';
+import { CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION } from './types';
 import cookie from 'react-cookie';
 
 const CLIENT_ROOT_URL = 'http://localhost:3000';
-const ITEMS_API_URL = `${CLIENT_ROOT_URL}/api/items`;
+const SESSIONS_API_URL = `${CLIENT_ROOT_URL}/api/sessions`;
 
-export function fetchItems() {
+export function fetchSessions() {
 	return function (dispatch) {
-		axios.get(ITEMS_API_URL, {
+		axios.get(SESSIONS_API_URL, {
 			headers: { Authorization: cookie.load('token') }
 		})
 		.then((response) => {
 			dispatch({
-				type: FETCH_ITEMS,
+				type: FETCH_SESSIONS,
 				payload: response.data,
 			});
 		})
@@ -24,14 +24,14 @@ export function fetchItems() {
 }
 
 
-export function fetchItem(itemId) {
+export function fetchSession(sessionId) {
 	return function (dispatch) {
-		axios.get(`${ITEMS_API_URL}/${itemId}`, {
+		axios.get(`${SESSIONS_API_URL}/${sessionId}`, {
 			headers: { Authorization: cookie.load('token') }
 		})
 		.then((response) => {
 			dispatch({
-				type: FETCH_ITEM,
+				type: FETCH_SESSION,
 				payload: response.data,
 			});
 		})
@@ -41,17 +41,17 @@ export function fetchItem(itemId) {
 	};
 }
 
-export function createItem(params) {
+export function createSession() {
 	const config = { headers: { Authorization: cookie.load('token') }};
 
 	return function (dispatch) {
-		axios.post(ITEMS_API_URL, params, config)
+		axios.post(SESSIONS_API_URL, {}, config)
 		.then((response) => {
 			dispatch({
-				type: CREATE_ITEM,
+				type: CREATE_SESSION,
 				payload: response.data,
 			});
-			browserHistory.push(`/items/${response.data.item._id}`);
+			browserHistory.push(`/sessions/${response.data.session._id}`);
 		})
 		.catch((error) => {
 			console.error('Error', error);

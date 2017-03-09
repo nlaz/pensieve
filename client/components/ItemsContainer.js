@@ -13,11 +13,7 @@ class ItemsContainer extends React.Component {
 	}
 
 	render() {
-		const { self, items } = this.props;
-
-		if (!self) {
-			return <h1>Home Page</h1>;
-		}
+		const { items } = this.props;
 
 		const renderItem = (item, key) => (
 			<li key={key} className='list-group-item'>
@@ -32,7 +28,7 @@ class ItemsContainer extends React.Component {
 						<div className='row'>
 							<h4 className='col-xs-6'>Your Items</h4>
 							<div className='col-xs-6'>
-								<Link to='/item/new' className='btn btn-success pull-right'>Create New</Link>
+								<Link to='/items/new' className='btn btn-success pull-right'>Create New</Link>
 							</div>
 						</div>
 						<ul className='list-group'>
@@ -46,7 +42,6 @@ class ItemsContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	self: state.app.self,
 	items: state.data.items,
 });
 

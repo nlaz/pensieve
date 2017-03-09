@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import cookie from 'react-cookie';
 
 const ReqAuth = ComposedComponent => {
 	class Authentication extends React.Component {

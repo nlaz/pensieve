@@ -9,3 +9,7 @@ export const FETCH_SELF = 'fetchSelf';
 export const FETCH_ITEMS = 'fetchItems';
 export const FETCH_ITEM = 'fetchItem';
 export const CREATE_ITEM = 'createItem';
+
+export const FETCH_SESSIONS = 'fetchSessions';
+export const FETCH_SESSION = 'fetchSession';
+export const CREATE_SESSION = 'createSession';
