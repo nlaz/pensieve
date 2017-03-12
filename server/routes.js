@@ -1,6 +1,6 @@
+import authenticateUser, * as AuthenticationController from './controllers/authentication';
 import * as ItemController from './controllers/items';
 import * as SessionController from './controllers/sessions';
-import authenticateUser, * as AuthenticationController from './controllers/authentication';
 
 export default function(app) {
 	/* Authentication Routes */

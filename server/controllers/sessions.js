@@ -1,4 +1,5 @@
-import { ReviewSessionEntity as Session, ItemEntity as Item } from '../models/schema';
+import Item from '../models/item';
+import Session from '../models/session';
 
 export const getSessions = (req, res) => {
 	const userId = req.user._id;

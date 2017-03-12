@@ -1,4 +1,4 @@
-import { ItemEntity as Item } from '../models/schema';
+import Item from '../models/item';
 
 export const getItems = (req, res) => {
 	const user = req.user;
