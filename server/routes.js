@@ -17,6 +17,8 @@ export default function(app) {
 
 	app.post('/api/items', authenticateUser, ItemController.createItem);
 
+	app.post('/api/items/:item_id/review', authenticateUser, ItemController.reviewItem);
+
 	/* Session Routes */
 	app.get('/api/sessions', authenticateUser, SessionController.getSessions);
 

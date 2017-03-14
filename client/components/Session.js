@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as reviewActions from '../actions/reviewActions';
+import * as itemActions from '../actions/itemActions';
 
 const styles = {
 	height: '300px',
@@ -19,7 +20,8 @@ class Session extends React.Component {
 		this.onItemClick = this.onItemClick.bind(this);
 		this.onDecrement = this.onDecrement.bind(this);
 		this.onIncrement = this.onIncrement.bind(this);
-		this.onItemClick = this.onItemClick.bind(this);
+		this.onReviewAction = this.onReviewAction.bind(this);
+		this.onSkipAction = this.onSkipAction.bind(this);
 		this.state = { selected: 0, showFront: true };
 	}
 
@@ -27,11 +29,6 @@ class Session extends React.Component {
 		if (!this.props.session) {
 			this.props.actions.fetchSession(this.props.params.sessionId);
 		}
-	}
-
-	onItemClick(e) {
-		const index = e.target.dataset.key;
-		this.setState({ selected: parseInt(index) });
 	}
 
 	onDecrement() {
@@ -42,9 +39,19 @@ class Session extends React.Component {
 
 	onIncrement() {
 		const index = this.state.selected;
-		const items = this.props.session.items;
+		const { items } = this.props.session;
 		this.setState({ selected: Math.min(items.length - 1, index + 1) });
 	};
+
+	onSkipAction(event) {
+		// TODO
+	}
+
+	onReviewAction(event) {
+		const { items } = this.props.session;
+		const index = this.state.selected;
+		this.props.actions.reviewItem({ itemId: items[index]._id });
+	}
 
 	onItemClick() {
 		this.setState({ showFront: !this.state.showFront });
@@ -77,8 +84,8 @@ class Session extends React.Component {
 					</div>
 					{items.length > 0 &&
 						<div className='text-right'>
-							<button onClick={this.onDecrement} type="button" className="btn btn-danger">Skip</button>
-							<button onClick={this.onIncrement} type="button" className="btn btn-primary">Good</button>
+							<button onClick={this.onSkipAction} type="button" className="btn btn-primary">Skip</button>
+							<button onClick={this.onReviewAction} type="button" className="btn btn-primary">Next</button>
 						</div>
 					}
 				</div>
@@ -92,7 +99,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	actions: bindActionCreators(reviewActions, dispatch)
+	actions: bindActionCreators({...reviewActions, ...itemActions}, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Session);

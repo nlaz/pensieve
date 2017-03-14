@@ -1,4 +1,5 @@
 import Item from '../models/item';
+import Review from '../models/review';
 
 export const getItems = (req, res) => {
 	const user = req.user;
@@ -34,6 +35,24 @@ export const createItem = (req, res, next) => {
 		return res.status(200).json({
 			message: 'Item successfully saved!',
 			item: item,
+		});
+	});
+};
+
+export const reviewItem = (req, res, next) => {
+	const review = new Review({
+		item_id: req.params.item_id,
+		user_id: req.user._id,
+	});
+
+	review.save((err) => {
+		if (err) {
+			res.send({ error: err });
+			return next(err);
+		}
+
+		return res.status(200).json({
+			message: 'Review successfully saved!',
 		});
 	});
 };
