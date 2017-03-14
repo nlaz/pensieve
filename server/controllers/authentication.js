@@ -47,7 +47,6 @@ export const loginUser = (req, res) => {
 		}
 
 		if (!user.validPassword(req.body.password.trim())) {
-			console.log('loginUser');
 			return res.status(404).json({
 				error: true,
 				message: 'No user found with that email and password',

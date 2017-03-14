@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as reviewActions from '../actions/reviewActions';
 
-class Dashboard extends React.Component {
+class Sessions extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onClick = this.onClick.bind(this);
@@ -41,7 +41,7 @@ class Dashboard extends React.Component {
 			<div>
 				<div className='col-md-8 col-md-offset-2'>
 					<div className='row'>
-						<h1 className='col-xs-6'>Dashboard</h1>
+						<h1 className='col-xs-6'>Sessions</h1>
 						<div className='col-xs-6'>
 							<button onClick={this.onClick} className='btn btn-success pull-right'>Start Review</button>
 						</div>
@@ -61,4 +61,4 @@ const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(reviewActions, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Sessions);
