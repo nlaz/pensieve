@@ -19,7 +19,8 @@ class Session extends React.Component {
 		this.onItemClick = this.onItemClick.bind(this);
 		this.onDecrement = this.onDecrement.bind(this);
 		this.onIncrement = this.onIncrement.bind(this);
-		this.state = { selected: 0 };
+		this.onItemClick = this.onItemClick.bind(this);
+		this.state = { selected: 0, showFront: true };
 	}
 
 	componentWillMount() {
@@ -45,47 +46,39 @@ class Session extends React.Component {
 		this.setState({ selected: Math.min(items.length - 1, index + 1) });
 	};
 
+	onItemClick() {
+		this.setState({ showFront: !this.state.showFront });
+	}
+
 	render() {
-		const { selected } = this.state;
+		const { selected, showFront } = this.state;
 		const { session = {} } = this.props;
-		const items = session.items;
+		const { items } = session;
 
 		if (!items) {
 			return <h1>No items available</h1>;
 		}
 
-		const renderItem = (item, key) => {
-			const isActive = (key === selected);
-			const classNames = cx('list-group-item', { 'active': isActive });
-			return (
-				<button onClick={this.onItemClick} type='button' className={classNames} key={key} data-key={key}>
-					{item.title}
-				</button>
-			);
-		};
+		const selectedItem = items[selected];
+		const itemContent = showFront ? selectedItem.title : selectedItem.description;
 
 		return (
 			<div className='row'>
 				<div className='col-md-8 col-md-offset-2'>
 					<div className='page-header'>
-						<h1>Session Page</h1>
+						<h1>Session Page <span className='label label-default'>{items.length}</span></h1>
 					</div>
 					<div className='panel panel-default'>
-						<div className='panel-body' style={styles}>
-							<h3 className='text-center' style={{ margin: '0'}}>{items[selected].title}</h3>
+						<div className='panel-body' style={styles} onClick={this.onItemClick}>
+							<h3 className='text-center' style={{ margin: '0'}}>
+								{itemContent}
+							</h3>
 						</div>
 					</div>
 					{items.length > 0 &&
 						<div className='text-right'>
-							<button onClick={this.onDecrement} type="button" className="btn btn-primary">Back</button>
-							<button onClick={this.onIncrement} type="button" className="btn btn-primary">Next</button>
-						</div>
-					}
-					<hr/>
-					<h4>Session Items</h4>
-					{items &&
-						<div className='list-group'>
-							{items.map(renderItem)}
+							<button onClick={this.onDecrement} type="button" className="btn btn-danger">Skip</button>
+							<button onClick={this.onIncrement} type="button" className="btn btn-primary">Good</button>
 						</div>
 					}
 				</div>
