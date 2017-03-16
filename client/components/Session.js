@@ -20,9 +20,8 @@ class Session extends React.Component {
 		this.onItemClick = this.onItemClick.bind(this);
 		this.onDecrement = this.onDecrement.bind(this);
 		this.onIncrement = this.onIncrement.bind(this);
-		this.onReviewAction = this.onReviewAction.bind(this);
-		this.onSkipAction = this.onSkipAction.bind(this);
-		this.state = { selected: 0, showFront: true };
+		this.onNextAction = this.onNextAction.bind(this);
+		this.state = { selected: 0, showAnswer: false, showNextOptions: false };
 	}
 
 	componentWillMount() {
@@ -43,51 +42,66 @@ class Session extends React.Component {
 		this.setState({ selected: Math.min(items.length - 1, index + 1) });
 	};
 
-	onSkipAction(event) {
-		// TODO
-	}
-
-	onReviewAction(event) {
+	onNextAction(event) {
 		const { items } = this.props.session;
 		const index = this.state.selected;
 		this.props.actions.reviewItem({ itemId: items[index]._id });
+		if ( index < items.length - 1 ) {
+			// Go to next item
+			const nextIndex = Math.min(items.length - 1, index + 1);
+			this.setState({ showNextOptions: false, showAnswer: false, selected: nextIndex });
+		} else {
+			// Finish review
+			this.setState({ finished: true });
+		}
 	}
 
 	onItemClick() {
-		this.setState({ showFront: !this.state.showFront });
+		this.setState({ showAnswer: !this.state.showAnswer, showNextOptions: true });
 	}
 
 	render() {
-		const { selected, showFront } = this.state;
-		const { session = {} } = this.props;
-		const { items } = session;
+		const { selected, showAnswer, showNextOptions } = this.state;
+		const { session: { items } = {} } = this.props;
 
 		if (!items) {
 			return <h1>No items available</h1>;
 		}
 
 		const selectedItem = items[selected];
-		const itemContent = showFront ? selectedItem.title : selectedItem.description;
+		const itemContent = showAnswer ? selectedItem.description : selectedItem.title;
+		const renderContent = this.state.finished ? (
+			<div>Finished</div>
+		) : (
+			<div>
+				<div className='panel panel-default'>
+					<div className='panel-body' style={styles} onClick={this.onItemClick}>
+						<h3 className='text-center' style={{ margin: '0'}}>
+							{itemContent}
+						</h3>
+					</div>
+				</div>
+				{showNextOptions ? (
+					<div className='row'>
+						<button onClick={this.onNextAction} type="button" className="btn btn-primary col-xs-4">Hard</button>
+						<button onClick={this.onNextAction} type="button" className="btn btn-primary col-xs-4">Good</button>
+						<button onClick={this.onNextAction} type="button" className="btn btn-primary col-xs-4">Easy</button>
+					</div>
+				) : (
+					<div className='row'>
+						<button onClick={this.onItemClick} type='button' className='btn btn-primary col-xs-12'>Show Answer</button>
+					</div>
+				)}
+			</div>
+		);
 
 		return (
 			<div className='row'>
 				<div className='col-md-8 col-md-offset-2'>
 					<div className='page-header'>
-						<h1>Session Page <span className='label label-default'>{items.length}</span></h1>
+						<h2>Session Page <span className='label label-default'>{items.length - selected}</span></h2>
+						{renderContent}
 					</div>
-					<div className='panel panel-default'>
-						<div className='panel-body' style={styles} onClick={this.onItemClick}>
-							<h3 className='text-center' style={{ margin: '0'}}>
-								{itemContent}
-							</h3>
-						</div>
-					</div>
-					{items.length > 0 &&
-						<div className='text-right'>
-							<button onClick={this.onSkipAction} type="button" className="btn btn-primary">Skip</button>
-							<button onClick={this.onReviewAction} type="button" className="btn btn-primary">Next</button>
-						</div>
-					}
 				</div>
 			</div>
 		);
