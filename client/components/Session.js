@@ -14,6 +14,40 @@ const styles = {
 	alignItems: 'center',
 };
 
+
+const SessionsPage = ({ children, title }) => (
+	<div className='row'>
+		<div className='col-md-8 col-md-offset-2'>
+			<div className='page-header'>
+				<h2>{title}</h2>
+				{children}
+			</div>
+		</div>
+	</div>
+);
+
+const SessionResults = ({ items }) => {
+	const renderItem = (item) => (
+		<li key={`${item._id}`} className='list-group-item'>
+			{item.title}
+			<span className='badge alert-success'>
+				<span className='glyphicon glyphicon-ok' aria-hidden='true'></span>
+			</span>
+		</li>
+	);
+
+	return (
+		<div>
+			<ul className='list-group'>
+				{items.map(renderItem)}
+			</ul>
+			<div className='text-right'>
+				<Link to='/sessions' className='btn btn-primary'>Back</Link>
+			</div>
+		</div>
+	);
+};
+
 class Session extends React.Component {
 	constructor(props) {
 		super(props);
@@ -46,14 +80,7 @@ class Session extends React.Component {
 		const { items } = this.props.session;
 		const index = this.state.selected;
 		this.props.actions.reviewItem({ itemId: items[index]._id });
-		if ( index < items.length - 1 ) {
-			// Go to next item
-			const nextIndex = Math.min(items.length - 1, index + 1);
-			this.setState({ showNextOptions: false, showAnswer: false, selected: nextIndex });
-		} else {
-			// Finish review
-			this.setState({ finished: true });
-		}
+		this.setState({ showNextOptions: false, showAnswer: false, selected: index + 1 });
 	}
 
 	onItemClick() {
@@ -70,10 +97,17 @@ class Session extends React.Component {
 
 		const selectedItem = items[selected];
 		const itemContent = showAnswer ? selectedItem.description : selectedItem.title;
-		const renderContent = this.state.finished ? (
-			<div>Finished</div>
-		) : (
-			<div>
+
+		if (this.state.selected >= items.length - 1 ) {
+			return (
+				<SessionsPage title='Results'>
+					<SessionResults items={items} />
+				</SessionsPage>
+			);
+		}
+
+		return (
+			<SessionsPage title='Review'>
 				<div className='panel panel-default'>
 					<div className='panel-body' style={styles} onClick={this.onItemClick}>
 						<h3 className='text-center' style={{ margin: '0'}}>
@@ -92,18 +126,7 @@ class Session extends React.Component {
 						<button onClick={this.onItemClick} type='button' className='btn btn-primary col-xs-12'>Show Answer</button>
 					</div>
 				)}
-			</div>
-		);
-
-		return (
-			<div className='row'>
-				<div className='col-md-8 col-md-offset-2'>
-					<div className='page-header'>
-						<h2>Session Page <span className='label label-default'>{items.length - selected}</span></h2>
-						{renderContent}
-					</div>
-				</div>
-			</div>
+			</SessionsPage>
 		);
 	}
 }
