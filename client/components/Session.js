@@ -26,15 +26,37 @@ const SessionsPage = ({ children, title }) => (
 	</div>
 );
 
+const ProgressBar = ({ progress }) => (
+	<div className='progress'>
+		<div className='progress-bar'
+			role='progressbar'
+			aria-valuenow={progress}
+			aria-valuemin='0'
+			aria-valuemax='100'
+			style={{ width: `${progress}%` }}
+		>
+			<span className="sr-only">{progress}% Complete</span>
+		</div>
+	</div>
+);
+
+const valueToClass = {
+	hard: 'alert-danger',
+	good: 'alert-info',
+	easy: 'alert-success',
+};
+
 const SessionResults = ({ items }) => {
-	const renderItem = (item) => (
+	const renderItem = (item) => {
+		console.log('item', item, 'value', item.value);
+		return (
 		<li key={`${item._id}`} className='list-group-item'>
 			{item.title}
-			<span className='badge alert-success'>
+			<span className={`badge ${valueToClass[item.value]}`}>
 				<span className='glyphicon glyphicon-ok' aria-hidden='true'></span>
 			</span>
 		</li>
-	);
+	)};
 
 	return (
 		<div>
@@ -52,10 +74,8 @@ class Session extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onItemClick = this.onItemClick.bind(this);
-		this.onDecrement = this.onDecrement.bind(this);
-		this.onIncrement = this.onIncrement.bind(this);
 		this.onNextAction = this.onNextAction.bind(this);
-		this.state = { selected: 0, showAnswer: false, showNextOptions: false };
+		this.state = { index: 0, showAnswer: false, showNextOptions: false };
 	}
 
 	componentWillMount() {
@@ -64,41 +84,43 @@ class Session extends React.Component {
 		}
 	}
 
-	onDecrement() {
-		const index = this.state.selected;
-		const items = this.props.session.items;
-		this.setState({ selected: Math.max(0, index - 1) });
-	};
-
-	onIncrement() {
-		const index = this.state.selected;
-		const { items } = this.props.session;
-		this.setState({ selected: Math.min(items.length - 1, index + 1) });
-	};
-
 	onNextAction(event) {
+		const value = event.target.dataset.value;
 		const { items } = this.props.session;
-		const index = this.state.selected;
-		this.props.actions.reviewItem({ itemId: items[index]._id });
-		this.setState({ showNextOptions: false, showAnswer: false, selected: index + 1 });
+		const { index } = this.state;
+
+		// Set the response value of the item
+		const selectedItem = items[index];
+		selectedItem.value = value;
+
+		// Send the review request
+		this.props.actions.reviewItem({ value, itemId: items[index]._id });
+
+		// Update state
+		this.setState({
+			index: index + 1,
+			showNextOptions: false,
+			showAnswer: false,
+		});
 	}
 
 	onItemClick() {
-		this.setState({ showAnswer: !this.state.showAnswer, showNextOptions: true });
+		this.setState({
+			showNextOptions: true,
+			showAnswer: !this.state.showAnswer,
+		});
 	}
 
 	render() {
-		const { selected, showAnswer, showNextOptions } = this.state;
+		const { index, showAnswer, showNextOptions } = this.state;
 		const { session: { items } = {} } = this.props;
 
 		if (!items) {
 			return <h1>No items available</h1>;
 		}
 
-		const selectedItem = items[selected];
-		const itemContent = showAnswer ? selectedItem.description : selectedItem.title;
-
-		if (this.state.selected >= items.length - 1 ) {
+		console.log('items', items);
+		if (index > items.length - 1) {
 			return (
 				<SessionsPage title='Results'>
 					<SessionResults items={items} />
@@ -106,8 +128,12 @@ class Session extends React.Component {
 			);
 		}
 
+		const selectedItem = items[index];
+		const itemContent = showAnswer ? selectedItem.description : selectedItem.title;
+
 		return (
 			<SessionsPage title='Review'>
+				<ProgressBar progress={index / (items.length -1) * 100} />
 				<div className='panel panel-default'>
 					<div className='panel-body' style={styles} onClick={this.onItemClick}>
 						<h3 className='text-center' style={{ margin: '0'}}>
@@ -117,13 +143,21 @@ class Session extends React.Component {
 				</div>
 				{showNextOptions ? (
 					<div className='row'>
-						<button onClick={this.onNextAction} type="button" className="btn btn-primary col-xs-4">Hard</button>
-						<button onClick={this.onNextAction} type="button" className="btn btn-primary col-xs-4">Good</button>
-						<button onClick={this.onNextAction} type="button" className="btn btn-primary col-xs-4">Easy</button>
+						<div className='col-xs-4 text-center'>
+							<button onClick={this.onNextAction} type='button' data-value='hard' className='btn btn-primary'>Hard</button>
+						</div>
+						<div className='col-xs-4 text-center'>
+							<button onClick={this.onNextAction} type='button' data-value='good' className='btn btn-primary'>Good</button>
+						</div>
+						<div className='col-xs-4 text-center'>
+							<button onClick={this.onNextAction} type='button' data-value='easy' className='btn btn-primary'>Easy</button>
+						</div>
 					</div>
 				) : (
 					<div className='row'>
-						<button onClick={this.onItemClick} type='button' className='btn btn-primary col-xs-12'>Show Answer</button>
+						<div className='col-xs-12 text-center'>
+							<button onClick={this.onItemClick} type='button' className='btn btn-primary'>Show Answer</button>
+						</div>
 					</div>
 				)}
 			</SessionsPage>
