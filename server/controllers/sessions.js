@@ -46,6 +46,7 @@ export const createSession = (req, res, next) => {
 				return next(err);
 			}
 
+			session.items = items;
 			return res.status(200).json({
 				message: 'Session successfully created!',
 				session: session,
