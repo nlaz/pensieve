@@ -8,9 +8,9 @@ import * as reviewActions from '../actions/reviewActions';
 const PageHead = ({ children, onStartClick }) => (
 	<div className='col-md-8 col-md-offset-2'>
 		<div className='row'>
-			<h1 className='col-xs-6'>Sessions</h1>
+			<h1 className='col-xs-6'>Recent Activity</h1>
 			<div className='col-xs-6'>
-				<button onClick={onStartClick} className='btn btn-success pull-right'>Start Review</button>
+				<button onClick={onStartClick} className='btn btn-success pull-right'>Review Now</button>
 			</div>
 		</div>
 		{children}
@@ -20,10 +20,18 @@ const PageHead = ({ children, onStartClick }) => (
 const SessionsList = ({ sessions }) => {
 	sessions.sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)));
 	const renderSession = (session) => {
-		const dateLabel = moment(session.createdAt).fromNow();
+		const dateLabel = moment(session.createdAt).format('ddd, MMM Do ha');
+		const itemCount = session.items.length;
 		return (
 			<li key={session._id} className='list-group-item'>
-				<Link to={`/sessions/${session._id}`}>{dateLabel}</Link>
+				<div className='row'>
+					<div className='col-xs-8'>
+						<p style={{ margin: 0 }}>
+							<Link to={`/sessions/${session._id}`} className='h5'>{dateLabel}</Link> <small>&bull; {itemCount} items</small>
+						</p>
+					</div>
+					<p className='col-xs-4 text-right' style={{ margin: 0 }}>Completed</p>
+				</div>
 			</li>
 		);
 	}

@@ -25,7 +25,7 @@ const routes = (
 		<Route path='items' component={ReqAuth(Items)} />
 		<Route path='items/new' component={ReqAuth(NewItem)} />
 		<Route path='items/:itemId' component={ReqAuth(Item)} />
-		<Route path='sessions' component={ReqAuth(Sessions)} />
+		<Route path='activity' component={ReqAuth(Sessions)} />
 		<Route path='sessions/:sessionId' component={ReqAuth(Session)} />
 		<Route path='login' component={Login} />
 		<Route path='signup' component={Signup} />

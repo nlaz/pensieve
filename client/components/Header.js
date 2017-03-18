@@ -12,7 +12,7 @@ export default class Header extends React.Component {
 					{self ? (
 						<ul className='nav navbar-nav navbar-right'>
 							<li><Link>Welcome, {self.name}</Link></li>
-							<li><Link to='/sessions'>Sessions</Link></li>
+							<li><Link to='/activity'>Activity</Link></li>
 							<li><Link to='/items'>Items</Link></li>
 							<li><Link to='/logout'>Logout</Link></li>
 						</ul>
