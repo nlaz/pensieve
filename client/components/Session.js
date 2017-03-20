@@ -47,16 +47,14 @@ const valueToClass = {
 };
 
 const SessionResults = ({ items }) => {
-	const renderItem = (item) => {
-		console.log('item', item, 'value', item.value);
-		return (
+	const renderItem = (item) => (
 		<li key={`${item._id}`} className='list-group-item'>
 			{item.title}
 			<span className={`badge ${valueToClass[item.value]}`}>
 				<span className='glyphicon glyphicon-ok' aria-hidden='true'></span>
 			</span>
 		</li>
-	)};
+	);
 
 	return (
 		<div>
@@ -119,7 +117,6 @@ class Session extends React.Component {
 			return <h1>No items available</h1>;
 		}
 
-		console.log('items', items);
 		if (index > items.length - 1) {
 			return (
 				<SessionsPage title='Results'>

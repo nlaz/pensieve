@@ -24,14 +24,16 @@ const SessionsList = ({ sessions }) => {
 		const itemCount = session.items.length;
 		return (
 			<li key={session._id} className='list-group-item'>
-				<div className='row'>
-					<div className='col-xs-8'>
-						<p style={{ margin: 0 }}>
-							<Link to={`/sessions/${session._id}`} className='h5'>{dateLabel}</Link> <small>&bull; {itemCount} items</small>
-						</p>
+				<Link to={`/sessions/${session._id}`}>
+					<div className='row'>
+						<div className='col-xs-8'>
+							<p style={{ margin: 0 }}>
+								<span className='h5'>{dateLabel}</span> <small>&bull; {itemCount} items</small>
+							</p>
+						</div>
+						<p className='col-xs-4 text-right' style={{ margin: 0 }}>Completed</p>
 					</div>
-					<p className='col-xs-4 text-right' style={{ margin: 0 }}>Completed</p>
-				</div>
+				</Link>
 			</li>
 		);
 	}
