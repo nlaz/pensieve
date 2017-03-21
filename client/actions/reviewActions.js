@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION } from './types';
+import { CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, FINISH_SESSION } from './types';
 import cookie from 'react-cookie';
 
 const CLIENT_ROOT_URL = 'http://localhost:3000';
@@ -52,6 +52,24 @@ export function createSession() {
 				payload: response.data,
 			});
 			browserHistory.push(`/sessions/${response.data.session._id}`);
+		})
+		.catch((error) => {
+			console.error('Error', error);
+		});
+	};
+}
+
+export function finishSession(sessionId) {
+	const config = { headers: { Authorization: cookie.load('token') }};
+	const sessionUrl = `${SESSIONS_API_URL}/${sessionId}/finish`;
+
+	return function (dispatch) {
+		axios.post(sessionUrl, {}, config)
+		.then((response) => {
+			dispatch({
+				type: FINISH_SESSION,
+				payload: response.data,
+			});
 		})
 		.catch((error) => {
 			console.error('Error', error);

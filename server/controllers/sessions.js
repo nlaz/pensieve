@@ -54,3 +54,29 @@ export const createSession = (req, res, next) => {
 		});
 	});
 };
+
+export const finishSession = (req, res) => {
+	const sessionId = req.params.session_id;
+	const userId = req.user._id;
+
+	Session.findOne({ _id: sessionId, user_id: userId }, (err, session) => {
+		if (err) { return console.log(err); }
+
+		Item.find().where('_id').in(session.items).exec((err, items) => {
+			if (err) { return console.log(err); }
+			session.items = items;
+			session.finishedAt = new Date();
+
+			session.save((err) => {
+				if (err) {
+					return res.send({ error: err });
+				}
+
+				return res.status(200).json({
+					message: 'Session successfully finished!',
+					session: session,
+				});
+			});
+		});
+	});
+};

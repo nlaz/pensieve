@@ -1,5 +1,5 @@
 import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM } from '../actions/types';
-import { CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION } from '../actions/types';
+import { CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, FINISH_SESSION } from '../actions/types';
 
 const INITIAL_STATE = {};
 
@@ -10,6 +10,8 @@ export default function (state = INITIAL_STATE, action) {
 		case FETCH_SESSION:
 			return { ...state, session: action.payload };
 		case CREATE_SESSION:
+			return {...state, session: action.payload.session, message: action.payload.message };
+		case FINISH_SESSION:
 			return {...state, session: action.payload.session, message: action.payload.message };
 
 		case FETCH_ITEMS:

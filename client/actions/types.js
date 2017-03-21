@@ -14,3 +14,4 @@ export const REVIEW_ITEM = 'reviewItem';
 export const FETCH_SESSIONS = 'fetchSessions';
 export const FETCH_SESSION = 'fetchSession';
 export const CREATE_SESSION = 'createSession';
+export const FINISH_SESSION = 'finishSession';

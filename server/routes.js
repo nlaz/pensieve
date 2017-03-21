@@ -25,4 +25,6 @@ export default function(app) {
 	app.get('/api/sessions/:session_id', authenticateUser, SessionController.getSession);
 
 	app.post('/api/sessions', authenticateUser, SessionController.createSession);
+
+	app.post('/api/sessions/:session_id/finish', authenticateUser, SessionController.finishSession);
 }

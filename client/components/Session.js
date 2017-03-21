@@ -62,7 +62,7 @@ const SessionResults = ({ items }) => {
 				{items.map(renderItem)}
 			</ul>
 			<div className='text-right'>
-				<Link to='/sessions' className='btn btn-primary'>Back</Link>
+				<Link to='/activity' className='btn btn-primary'>Back</Link>
 			</div>
 		</div>
 	);
@@ -84,8 +84,9 @@ class Session extends React.Component {
 
 	onNextAction(event) {
 		const value = event.target.dataset.value;
-		const { items } = this.props.session;
 		const { index } = this.state;
+		const { session } = this.props;
+		const { items } = session;
 
 		// Set the response value of the item
 		const selectedItem = items[index];
@@ -93,6 +94,10 @@ class Session extends React.Component {
 
 		// Send the review request
 		this.props.actions.reviewItem({ value, itemId: items[index]._id });
+
+		if (index === items.length - 1) {
+			this.props.actions.finishSession(session._id);
+		}
 
 		// Update state
 		this.setState({
@@ -117,7 +122,7 @@ class Session extends React.Component {
 			return <h1>No items available</h1>;
 		}
 
-		if (index > items.length - 1) {
+		if (this.props.session.finishedAt || index > items.length - 1) {
 			return (
 				<SessionsPage title='Results'>
 					<SessionResults items={items} />

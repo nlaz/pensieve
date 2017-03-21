@@ -31,7 +31,9 @@ const SessionsList = ({ sessions }) => {
 								<span className='h5'>{dateLabel}</span> <small>&bull; {itemCount} items</small>
 							</p>
 						</div>
-						<p className='col-xs-4 text-right' style={{ margin: 0 }}>Completed</p>
+						{session.finishedAt &&
+							<p className='col-xs-4 text-right' style={{ margin: 0 }}>Completed</p>
+						}
 					</div>
 				</Link>
 			</li>
