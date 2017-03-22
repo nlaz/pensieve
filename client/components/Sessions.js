@@ -7,7 +7,7 @@ import * as reviewActions from '../actions/reviewActions';
 
 const PageHead = ({ children, onStartClick }) => (
 	<div className='col-md-8 col-md-offset-2'>
-		<div className='row'>
+		<div className='page-header row'>
 			<h1 className='col-xs-6'>Recent Activity</h1>
 			<div className='col-xs-6'>
 				<button onClick={onStartClick} className='btn btn-success pull-right'>Review Now</button>

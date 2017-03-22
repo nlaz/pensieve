@@ -14,14 +14,11 @@ const styles = {
 	alignItems: 'center',
 };
 
-
 const SessionsPage = ({ children, title }) => (
 	<div className='row'>
 		<div className='col-md-8 col-md-offset-2'>
-			<div className='page-header'>
-				<h2>{title}</h2>
-				{children}
-			</div>
+			<h2 className='page-header'>{title}</h2>
+			{children}
 		</div>
 	</div>
 );
@@ -119,7 +116,7 @@ class Session extends React.Component {
 		const { session: { items } = {} } = this.props;
 
 		if (!items) {
-			return <h1>No items available</h1>;
+			return <h3>No items available</h3>;
 		}
 
 		if (this.props.session.finishedAt || index > items.length - 1) {
