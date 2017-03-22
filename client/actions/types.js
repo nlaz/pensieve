@@ -10,6 +10,7 @@ export const FETCH_ITEMS = 'fetchItems';
 export const FETCH_ITEM = 'fetchItem';
 export const CREATE_ITEM = 'createItem';
 export const REVIEW_ITEM = 'reviewItem';
+export const EDIT_ITEM = 'editItem';
 
 export const FETCH_SESSIONS = 'fetchSessions';
 export const FETCH_SESSION = 'fetchSession';

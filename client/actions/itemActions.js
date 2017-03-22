@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, REVIEW_ITEM } from './types';
+import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, REVIEW_ITEM, EDIT_ITEM } from './types';
 import cookie from 'react-cookie';
 
 const CLIENT_ROOT_URL = 'http://localhost:3000';
@@ -68,6 +68,24 @@ export function reviewItem(params) {
 		.then((response) => {
 			dispatch({
 				type: REVIEW_ITEM,
+				payload: response.data,
+			});
+		})
+		.catch((error) => {
+			console.error('Error', error);
+		});
+	};
+}
+
+export function editItem(params) {
+	const config = { headers: { Authorization: cookie.load('token') } };
+	const route = `${ITEMS_API_URL}/${params.itemId}`;
+
+	return function (dispatch) {
+		axios.put(route, params, config)
+		.then((response) => {
+			dispatch({
+				type: EDIT_ITEM,
 				payload: response.data,
 			});
 		})

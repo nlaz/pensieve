@@ -8,6 +8,7 @@ import ReqAuth from './components/ReqAuth';
 import Items from './components/ItemsContainer';
 import Item from './components/ItemContainer';
 import NewItem from './components/NewItemContainer';
+import EditItem from './components/EditItemContainer';
 import Sessions from './components/Sessions';
 import Session from './components/Session';
 
@@ -25,6 +26,7 @@ const routes = (
 		<Route path='items' component={ReqAuth(Items)} />
 		<Route path='items/new' component={ReqAuth(NewItem)} />
 		<Route path='items/:itemId' component={ReqAuth(Item)} />
+		<Route path='items/:itemId/edit' component={ReqAuth(EditItem)} />
 		<Route path='activity' component={ReqAuth(Sessions)} />
 		<Route path='sessions/:sessionId' component={ReqAuth(Session)} />
 		<Route path='login' component={Login} />

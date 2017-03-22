@@ -23,7 +23,7 @@ class ItemContainer extends React.Component {
 	componentWillMount() {
 		const { item, params } = this.props;
 		if (!item || item._id !== params.itemId) {
-			this.props.actions.fetchItem(this.props.params.itemId);
+			this.props.actions.fetchItem(params.itemId);
 		}
 	}
 
@@ -32,7 +32,8 @@ class ItemContainer extends React.Component {
 	}
 
 	onEditClick() {
-		this.props.router.push('/edit');
+		const itemId = this.props.item._id;
+		this.props.router.push(`/items/${itemId}/edit`);
 	}
 
 	render() {

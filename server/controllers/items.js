@@ -39,6 +39,23 @@ export const createItem = (req, res, next) => {
 	});
 };
 
+export const editItem = (req, res) => {
+	const query = { _id: req.params.item_id };
+	const update = {
+		title: req.body.title,
+		description: req.body.description,
+	};
+
+	Item.findOneAndUpdate(query, update, { new: true }, (err, item) => {
+		if (err) { return res.send({ error: err }); }
+
+		return res.status(200).json({
+			message: 'Item successfully saved!',
+			item: item,
+		});
+	});
+};
+
 export const reviewItem = (req, res, next) => {
 	const review = new Review({
 		item_id: req.params.item_id,
