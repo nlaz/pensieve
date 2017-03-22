@@ -24,8 +24,10 @@ export const getSession = (req, res) => {
 };
 
 export const createSession = (req, res, next) => {
+	const MIN = 8, MAX = 14;
 	const userId = req.user._id;
-	Item.find({ user_id: userId}).limit(6).exec((err, items) => {
+	const queryLimit = Math.floor(Math.random() * (MAX - MIN)) + MIN;
+	Item.find({ user_id: userId}).limit(queryLimit).exec((err, items) => {
 		if (err) { return console.log(err); }
 		if (!items.length) {
 			return res.status(404).json({
