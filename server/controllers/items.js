@@ -2,11 +2,10 @@ import Item from '../models/item';
 import Review from '../models/review';
 
 export const getItems = (req, res) => {
-	const user = req.user;
-
-	Item.find({ user_id: user._id }, (err, items) => {
+	Item.find({ user_id: req.user._id }, (err, items) => {
 		if (err) { return console.log(err); }
-		res.send(items);
+
+		res.status(200).json({ items: items });
 	});
 };
 
@@ -15,7 +14,8 @@ export const getItem = (req, res) => {
 	const userId = req.user._id;
 	Item.findOne({ _id: itemId, user_id: userId }, (err, item) => {
 		if (err) { return console.log(err); }
-		res.send(item);
+
+		res.status(200).json({ item: item });
 	});
 };
 
@@ -52,6 +52,21 @@ export const editItem = (req, res) => {
 		return res.status(200).json({
 			message: 'Item successfully saved!',
 			item: item,
+		});
+	});
+};
+
+export const deleteItem = (req, res) => {
+	Item.remove({ _id: req.params.item_id }, (err) => {
+		if (err) { return res.send({ error: err }); }
+
+		Item.find({ user_id: req.user._id }, (err, items) => {
+			if (err) { return console.log(err); }
+
+			res.status(200).json({
+				message: 'Item successfully removed',
+				items: items,
+			});
 		});
 	});
 };

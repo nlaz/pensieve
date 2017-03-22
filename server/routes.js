@@ -17,6 +17,8 @@ export default function(app) {
 
 	app.put('/api/items/:item_id', authenticateUser, ItemController.editItem);
 
+	app.delete('/api/items/:item_id', authenticateUser, ItemController.deleteItem);
+
 	app.post('/api/items', authenticateUser, ItemController.createItem);
 
 	app.post('/api/items/:item_id/review', authenticateUser, ItemController.reviewItem);

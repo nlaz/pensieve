@@ -5,11 +5,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as itemActions from '../actions/itemActions';
 
-class NewItemContainer extends React.Component {
+class EditItemContainer extends React.Component {
 	constructor(props) {
 		super(props);
-		this.onChange = this.onChange.bind(this);
 		this.onSave = this.onSave.bind(this);
+		this.onChange = this.onChange.bind(this);
+		this.onDeleteClick = this.onDeleteClick.bind(this);
 
 		// Set initial form values
 		const { item = {} } = props;
@@ -30,11 +31,6 @@ class NewItemContainer extends React.Component {
 		}
 	}
 
-	onChange(event) {
-		const field = event.target.name;
-		this.setState({ [field]: event.target.value });
-	}
-
 	onSave(event) {
 		event.preventDefault();
 		const { item } = this.props;
@@ -43,10 +39,25 @@ class NewItemContainer extends React.Component {
 		this.props.actions.editItem({ itemId, title, description });
 	}
 
+	onChange(event) {
+		const field = event.target.name;
+		this.setState({ [field]: event.target.value });
+	}
+
+	onDeleteClick() {
+		const itemId = this.props.item._id;
+		this.props.actions.deleteItem(itemId);
+	}
+
 	render() {
 		const { item } = this.props;
+		const deleteButton = <button onClick={this.onDeleteClick} className='btn btn-success pull-right'>Delete</button>;
+
 		return (
 			<div className='col-md-8 col-md-offset-2'>
+				<div className='page-header'>
+					<h2>Edit Item {deleteButton}</h2>
+				</div>
 				<form>
 					<div className='form-group'>
 						<label htmlFor='titleInput'>Title</label>
@@ -72,4 +83,4 @@ const mapStateToProps = (state, ownProps) => ({
 	item: state.data.item,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewItemContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(EditItemContainer);

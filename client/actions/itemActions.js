@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, REVIEW_ITEM, EDIT_ITEM } from './types';
+import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, REVIEW_ITEM, EDIT_ITEM, DELETE_ITEM } from './types';
 import cookie from 'react-cookie';
 
 const CLIENT_ROOT_URL = 'http://localhost:3000';
@@ -95,4 +95,22 @@ export function editItem(params) {
 	};
 }
 
+export function deleteItem(itemId) {
+	const config = { headers: { Authorization: cookie.load('token') } };
+	const route = `${ITEMS_API_URL}/${itemId}`;
+
+	return function (dispatch) {
+		axios.delete(route, config)
+		.then((response) => {
+			browserHistory.push('/items');
+			dispatch({
+				type: DELETE_ITEM,
+				payload: response.data,
+			});
+		})
+		.catch((error) => {
+			console.error('Error', error);
+		});
+	};
+}
 
