@@ -3,8 +3,7 @@ import { browserHistory } from 'react-router';
 import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, REVIEW_ITEM, EDIT_ITEM, DELETE_ITEM } from './types';
 import cookie from 'react-cookie';
 
-const CLIENT_ROOT_URL = 'http://localhost:3000';
-const ITEMS_API_URL = `${CLIENT_ROOT_URL}/api/items`;
+const ITEMS_API_URL = `/api/items`;
 
 export function fetchItems() {
 	return function (dispatch) {

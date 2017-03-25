@@ -3,8 +3,7 @@ import { browserHistory } from 'react-router';
 import { CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, FINISH_SESSION } from './types';
 import cookie from 'react-cookie';
 
-const CLIENT_ROOT_URL = 'http://localhost:3000';
-const SESSIONS_API_URL = `${CLIENT_ROOT_URL}/api/sessions`;
+const SESSIONS_API_URL = `/api/sessions`;
 
 export function fetchSessions() {
 	return function (dispatch) {

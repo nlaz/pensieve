@@ -6,7 +6,9 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && yarn run start:prod || yarn run start:dev",
     "start:dev": "webpack-dev-server --inline --content-base public/ --history-api-fallback",
+    "start:app": "forever start -c 'yarn run start:prod' ./",
     "start:prod": "yarn run build && node server.bundle.js",
+    "stop": "forever stopall",
     "build:client": "webpack",
     "build:server": "webpack --config webpack.server.config.js",
     "build": "yarn run build:client && yarn run build:server",
@@ -65,6 +67,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "forever": "^0.15.3",
     "jsonwebtoken": "^7.3.0",
     "nodemon": "^1.11.0",
     "react-redux": "^5.0.2",

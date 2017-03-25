@@ -21,6 +21,7 @@ import configDB from './config/db';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const BUNDLE_URL = `${process.env.HOST_URL}/assets/bundle.js`;
 
 // Config DB
 configDB();
@@ -56,7 +57,7 @@ const renderFullPage = (appHtml, preloadedState) => (
 	<body>
 		<div id='root'>${appHtml}</div>
 		<script>window.INITIAL_STATE=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}</script>
-		<script src='http://localhost:3000/assets/bundle.js' type='text/javascript'></script>
+		<script src=${BUNDLE_URL} type='text/javascript'></script>
 	</body>
 	</html>
 	`

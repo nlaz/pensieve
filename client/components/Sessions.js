@@ -18,6 +18,7 @@ const PageHead = ({ children, onStartClick }) => (
 );
 
 const SessionsList = ({ sessions }) => {
+	if (!sessions.length) { return false; }
 	sessions.sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)));
 	const renderSession = (session) => {
 		const dateLabel = moment(session.createdAt).format('ddd, MMM Do ha');

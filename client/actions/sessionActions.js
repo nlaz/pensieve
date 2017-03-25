@@ -3,10 +3,9 @@ import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
 import { AUTH_USER, UNAUTH_USER } from './types';
 
-const CLIENT_ROOT_URL = 'http://localhost:3000';
-const LOGIN_URL = `${CLIENT_ROOT_URL}/users/login`;
-const SIGNUP_URL = `${CLIENT_ROOT_URL}/users/signup`;
-const SELF_URL = `${CLIENT_ROOT_URL}/self`;
+const LOGIN_URL = '/users/login';
+const SIGNUP_URL = '/users/signup';
+const SELF_URL = '/self';
 
 export function loginUser(params) {
 	return function (dispatch) {
@@ -47,7 +46,7 @@ export function logoutUser(error) {
 		dispatch({ type: UNAUTH_USER, payload: error || '' });
 		cookie.remove('token', { path: '/' });
 		cookie.remove('user', { path: '/' });
-		window.location.href = CLIENT_ROOT_URL;
+		browserHistory.push('/');
 	};
 }
 
