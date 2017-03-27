@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, FINISH_SESSION } from './types';
 import cookie from 'react-cookie';
+import {
+	CREATE_SESSION,
+	FETCH_SESSIONS,
+	FETCH_SESSION,
+	FINISH_SESSION,
+	SESSION_ERROR,
+} from './types';
 
 const SESSIONS_API_URL = `/api/sessions`;
 
@@ -17,7 +23,10 @@ export function fetchSessions() {
 			});
 		})
 		.catch((error) => {
-			console.error('Error', error);
+			dispatch({
+				type: SESSION_ERROR,
+				payload: error.response.data,
+			});
 		});
 	};
 }
@@ -35,7 +44,10 @@ export function fetchSession(sessionId) {
 			});
 		})
 		.catch((error) => {
-			console.error('Error', error);
+			dispatch({
+				type: SESSION_ERROR,
+				payload: error.response.data,
+			});
 		});
 	};
 }
@@ -53,7 +65,10 @@ export function createSession() {
 			browserHistory.push(`/sessions/${response.data.session._id}`);
 		})
 		.catch((error) => {
-			console.error('Error', error);
+			dispatch({
+				type: SESSION_ERROR,
+				payload: error.response.data,
+			});
 		});
 	};
 }
@@ -71,7 +86,10 @@ export function finishSession(sessionId) {
 			});
 		})
 		.catch((error) => {
-			console.error('Error', error);
+			dispatch({
+				type: SESSION_ERROR,
+				payload: error.response.data,
+			});
 		});
 	};
 }
