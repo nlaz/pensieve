@@ -2,11 +2,9 @@ import Item from '../models/item';
 import Session from '../models/session';
 
 export const getSessions = (req, res) => {
-	const userId = req.user._id;
-
-	Session.find({ user_id: userId })
+	Session.find({ user_id: req.user._id })
 		.then((sessions) => res.status(200).json({ sessions }))
-		.catch(err => res.status(404).json({ err }));
+		.catch(error => res.status(404).json({ error }));
 };
 
 export const getSession = (req, res) => {
@@ -23,7 +21,7 @@ export const getSession = (req, res) => {
 			session.items = items;
 			res.status(200).json({ session });
 		})
-		.catch(err => res.status(404).json({ err }));
+		.catch(error => res.status(404).json({ error }));
 };
 
 export const createSession = (req, res, next) => {
@@ -50,7 +48,7 @@ export const createSession = (req, res, next) => {
 			session.items = items;
 			res.status(200).json({ session });
 		})
-		.catch(err => res.status(404).json({ err }));
+		.catch(error => res.status(404).json({ error }));
 };
 
 export const finishSession = (req, res) => {
@@ -72,5 +70,5 @@ export const finishSession = (req, res) => {
 			session.items = items;
 			res.status(200).json({ session });
 		})
-		.catch(err => res.status(404).json({ err }));
+		.catch(error => res.status(404).json({ error }));
 };

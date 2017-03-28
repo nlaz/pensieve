@@ -2,21 +2,18 @@ import Item from '../models/item';
 import Review from '../models/review';
 
 export const getItems = (req, res) => {
-	Item.find({ user_id: req.user._id }, (err, items) => {
-		if (err) { return console.log(err); }
-
-		res.status(200).json({ items: items });
-	});
+	Item.find({ user_id: req.user._id })
+		.then( items => res.status(200).json({ items }))
+		.catch( error => res.status(404).json({ error }));
 };
 
 export const getItem = (req, res) => {
 	const itemId = req.params.item_id;
 	const userId = req.user._id;
-	Item.findOne({ _id: itemId, user_id: userId }, (err, item) => {
-		if (err) { return console.log(err); }
 
-		res.status(200).json({ item: item });
-	});
+	Item.findOne({ _id: itemId, user_id: userId })
+		.then( item => res.status(200).json({ item }))
+		.catch( error => res.status(404).json({ error }));
 };
 
 export const createItem = (req, res, next) => {
@@ -26,49 +23,25 @@ export const createItem = (req, res, next) => {
 		description: req.body.description,
 	});
 
-	item.save((err) => {
-		if (err) {
-			res.send({ error: err });
-			return next(err);
-		}
-
-		return res.status(200).json({
-			message: 'Item successfully saved!',
-			item: item,
-		});
-	});
+	item.save()
+		.then( item => res.status(200).json({ item }))
+		.catch( error => res.status(404).json({ error }));
 };
 
 export const editItem = (req, res) => {
+	const { title, description } = req.body;
 	const query = { _id: req.params.item_id };
-	const update = {
-		title: req.body.title,
-		description: req.body.description,
-	};
+	const update = { title, description };
 
-	Item.findOneAndUpdate(query, update, { new: true }, (err, item) => {
-		if (err) { return res.send({ error: err }); }
-
-		return res.status(200).json({
-			message: 'Item successfully saved!',
-			item: item,
-		});
-	});
+	Item.findOneAndUpdate(query, update, { new: true })
+		.then( item => res.status(200).json({ item }))
+		.catch( error => res.status(404).json({ error }));
 };
 
 export const deleteItem = (req, res) => {
-	Item.remove({ _id: req.params.item_id }, (err) => {
-		if (err) { return res.send({ error: err }); }
-
-		Item.find({ user_id: req.user._id }, (err, items) => {
-			if (err) { return console.log(err); }
-
-			res.status(200).json({
-				message: 'Item successfully removed',
-				items: items,
-			});
-		});
-	});
+	Item.remove({ _id: req.params.item_id })
+		.then( () => res.status(200))
+		.catch( error => res.status(404).json({ error }));
 };
 
 export const reviewItem = (req, res, next) => {
@@ -77,14 +50,7 @@ export const reviewItem = (req, res, next) => {
 		user_id: req.user._id,
 	});
 
-	review.save((err) => {
-		if (err) {
-			res.send({ error: err });
-			return next(err);
-		}
-
-		return res.status(200).json({
-			message: 'Review successfully saved!',
-		});
-	});
+	review.save()
+		.then( review => res.status(200))
+		.catch( error => res.status(404).json({ error }));
 };
