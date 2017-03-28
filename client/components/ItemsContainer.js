@@ -31,7 +31,7 @@ class ItemsContainer extends React.Component {
 						{items.map(renderItem)}
 					</ul>
 				) : (
-					<h4>You don't have any items yet. Bummer.</h4>
+					<h4>You don't have any items yet. <em>Bummer...</em></h4>
 				)}
 			</div>
 		);
