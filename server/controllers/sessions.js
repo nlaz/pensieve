@@ -3,82 +3,74 @@ import Session from '../models/session';
 
 export const getSessions = (req, res) => {
 	const userId = req.user._id;
-	Session.find({ user_id: userId }, (err, sessions) => {
-		if (err) { return console.log(err); }
-		res.send(sessions);
-	});
+
+	Session.find({ user_id: userId })
+		.then((sessions) => res.status(200).json({ sessions }))
+		.catch(err => res.status(404).json({ err }));
 };
 
 export const getSession = (req, res) => {
-	const sessionId = req.params.session_id;
+	let session;
 	const userId = req.user._id;
-	Session.findOne({ _id: sessionId, user_id: userId }, (err, session) => {
-		if (err) { return console.log(err); }
+	const sessionId = req.params.session_id;
 
-		Item.find().where('_id').in(session.items).exec((err, items) => {
-			if (err) { return console.log(err); }
+	Session.findOne({ _id: sessionId, user_id: userId })
+		.then(_session => {
+			session = _session;
+			return Item.find().where('_id').in(session.items);
+		})
+		.then((items) => {
 			session.items = items;
-			res.send(session);
-		});
-	});
+			res.status(200).json({ session });
+		})
+		.catch(err => res.status(404).json({ err }));
 };
 
 export const createSession = (req, res, next) => {
+	let session, items, itemIds;
 	const MIN = 8, MAX = 14;
 	const userId = req.user._id;
 	const queryLimit = Math.floor(Math.random() * (MAX - MIN)) + MIN;
-	Item.find({ user_id: userId}).limit(queryLimit).exec((err, items) => {
-		if (err) { return console.log(err); }
-		if (!items.length) {
-			return res.status(404).json({
-				error: true,
-				message: 'No available items to create session.'
-			});
-		}
 
-		const itemIds = items.map(item => item.id);
-		const session = new Session({
-			user_id: userId,
-			items: itemIds,
-		});
-
-		session.save((err) => {
-			if (err) {
-				res.send({ error: err });
-				return next(err);
+	Item.find({ user_id: userId}).limit(queryLimit)
+		.then(_items => {
+			items = _items;
+			if (!items.length) {
+				res.status(404).json({
+					error: true,
+					message: 'No available items to create session.',
+				});
 			}
 
+			itemIds = items.map(item => item.id);
+			session = new Session({ user_id: userId, items: itemIds });
+			return session.save();
+		})
+		.then(session => {
 			session.items = items;
-			return res.status(200).json({
-				message: 'Session successfully created!',
-				session: session,
-			});
-		});
-	});
+			res.status(200).json({ session });
+		})
+		.catch(err => res.status(404).json({ err }));
 };
 
 export const finishSession = (req, res) => {
+	let session;
 	const sessionId = req.params.session_id;
 	const userId = req.user._id;
 
-	Session.findOne({ _id: sessionId, user_id: userId }, (err, session) => {
-		if (err) { return console.log(err); }
-
-		Item.find().where('_id').in(session.items).exec((err, items) => {
-			if (err) { return console.log(err); }
-			session.items = items;
+	Session.findOne({ _id: sessionId, user_id: userId })
+		.then(_session => {
+			session = _session;
 			session.finishedAt = new Date();
-
-			session.save((err) => {
-				if (err) {
-					return res.send({ error: err });
-				}
-
-				return res.status(200).json({
-					message: 'Session successfully finished!',
-					session: session,
-				});
-			});
-		});
-	});
+			return session.save();
+		})
+		.then(_session => {
+			session = _session;
+			return Item.find().where('_id').in(session.items);
+		})
+		.then(items => {
+			session.items = items;
+			res.status(200).json({ session });
+		})
+		.catch(err => res.status(404).json({ err }));
 };

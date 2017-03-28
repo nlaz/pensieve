@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+mongoose.Promise = Promise;
 
 export default function() {
 	const mongoURI = process.env.MONGODB_HOST;

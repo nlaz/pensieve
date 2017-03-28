@@ -1,14 +1,16 @@
-import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, EDIT_ITEM, DELETE_ITEM } from '../actions/types';
-import { CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, FINISH_SESSION, SESSION_ERROR } from '../actions/types';
+import {
+	CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, EDIT_ITEM, DELETE_ITEM
+	CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, FINISH_SESSION, SESSION_ERROR
+} from '../actions/types';
 
 const INITIAL_STATE = {};
 
 export default function (state = INITIAL_STATE, action) {
 	switch (action.type) {
 		case FETCH_SESSIONS:
-			return { ...state, sessions: action.payload };
+			return { ...state, sessions: action.payload.sessions };
 		case FETCH_SESSION:
-			return { ...state, session: action.payload };
+			return { ...state, session: action.payload.session };
 		case CREATE_SESSION:
 			return {...state, session: action.payload.session, message: action.payload.message };
 		case FINISH_SESSION:
