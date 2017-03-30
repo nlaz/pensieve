@@ -24,20 +24,16 @@ export const getSession = (req, res) => {
 		.catch(error => res.status(404).json({ error }));
 };
 
-export const createSession = (req, res, next) => {
+export const generateReviewSession = userId => {
 	let session, items, itemIds;
 	const MIN = 8, MAX = 14;
-	const userId = req.user._id;
 	const queryLimit = Math.floor(Math.random() * (MAX - MIN)) + MIN;
 
-	Item.find({ user_id: userId}).limit(queryLimit)
+	return Item.find({ user_id: userId}).limit(queryLimit)
 		.then(_items => {
 			items = _items;
 			if (!items.length) {
-				res.status(404).json({
-					error: true,
-					message: 'No available items to create session.',
-				});
+				throw new Error('No available items to create session.');
 			}
 
 			itemIds = items.map(item => item.id);
@@ -46,9 +42,19 @@ export const createSession = (req, res, next) => {
 		})
 		.then(session => {
 			session.items = items;
-			res.status(200).json({ session });
+			return session;
 		})
-		.catch(error => res.status(404).json({ error }));
+		.catch( error => {
+			throw(error);
+		});
+};
+
+export const createSession = (req, res, next) => {
+	generateReviewSession(req.user._id)
+		.then( session => res.status(200).json({ session }))
+		.catch( error => {
+			res.status(404).json({ error });
+		});
 };
 
 export const finishSession = (req, res) => {
