@@ -59,6 +59,6 @@ export const reviewItem = (req, res, next) => {
 			const update = { $inc: { reviewCount: 1 } };
 			return Item.findOneAndUpdate(query, update, { new: true });
 		})
-		.then( item => res.status(200));
+		.then( item => res.status(200))
 		.catch( error => res.status(404).json({ error }));
 };

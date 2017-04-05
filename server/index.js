@@ -13,6 +13,7 @@ import appReducer from '../client/reducers/appReducer';
 import reduxThunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import routes from '../client/routes';
+import { broadcastEmailsCronJob } from './cron';
 
 //import passport from 'passport';
 import configRoutes from './routes';
@@ -92,4 +93,5 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}...`);
+	broadcastEmailsCronJob.start();
 });

@@ -1,9 +1,9 @@
 import { CronJob } from 'cron';
-import Emailer from './emails/emailer';
+import * as Emailer from './controllers/emails';
 
-export default const broadcastJob = new CronJob({
+export const broadcastEmailsCronJob = new CronJob({
 	cronTime: '00 30 8 * * *',
-	onTick: () => { Emailer.broadcastEmails() },
+	onTick: () => Emailer.broadcastEmailsToAll(),
 	start: false,
 	timeZone: 'America/New_York'
 });

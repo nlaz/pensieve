@@ -19,11 +19,9 @@ const template = (name, items, sessionId) => {
 		<p>Hi ${name},</p>
 
 		<p>These are the items for you to review today:</p>
-		<p>
-		${items}
-		</p>
+		<ul>${items}</ul>
 
-		<a href='${url}' >See more</a>
+		<a href='${url}' >Review Now</a>
 
 		<p>Cheers!,</p>
 		<p>Boreas</p>
@@ -32,7 +30,7 @@ const template = (name, items, sessionId) => {
 };
 
 const constructEmailRequest = (targetName, targetEmail, items, sessionId) => {
-	const titles = items.map(item => item.title);
+	const titles = items.map(item => `<li>${item.title}</li>`).join('');
 	const content = new helper.Content('text/html', template(targetName, titles, sessionId));
 	const mail = new helper.Mail(sourceEmail, subject, new helper.Email(targetEmail), content);
 	return sendgrid.emptyRequest({
@@ -56,7 +54,7 @@ export const broadcastEmailsToAll = () => {
 	User.find({ is_email_on: true })
 		.then( users => {
 			users.forEach( user => {
-				broadcastEmailsToUser(user);
+				broadcastEmailToUser(user);
 			});
 		})
 		.catch( error => {
@@ -65,10 +63,12 @@ export const broadcastEmailsToAll = () => {
 };
 
 export const sendEmail = (user, session) => {
+	/*
 	console.log('***SendEmail***');
 	console.log('User', user);
 	console.log('Items', session.items);
 	console.log('Session', session);
+	*/
 
 	const email = new Email({
 		user_id: user.id,
@@ -84,7 +84,7 @@ export const sendEmail = (user, session) => {
 			return email.save();
 		})
 		.then((res) => {
-			console.log(res);
+			//console.log(res);
 		})
 		.catch(error => {
 			console.log('Emailer Error', error.response.statusCode, error.response);

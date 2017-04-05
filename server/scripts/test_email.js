@@ -5,10 +5,19 @@ import User from '../models/user';
 configDB();
 
 const testUserId = '589a773dc7e9d4905c32ce3c';
-User.findById(testUserId)
-	.then( user => {
-		Emailer.broadcastEmailToUser(user);
-	})
-	.catch( error => {
-		console.error(error);
-	});
+const emailOne = () => {
+	User.findById(testUserId)
+		.then( user => {
+			Emailer.broadcastEmailToUser(user);
+		})
+		.catch( error => {
+			console.error(error);
+		});
+};
+
+const emailAll = () => {
+	Emailer.broadcastEmailsToAll();
+};
+
+emailOne();
+//emailAll();
