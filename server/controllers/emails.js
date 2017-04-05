@@ -45,7 +45,6 @@ const constructEmailRequest = (targetName, targetEmail, items, sessionId) => {
 export const broadcastEmailToUser = user => {
 	SessionController.generateReviewSession(user.id)
 		.then(session => {
-			console.log('Broadcasting...', session);
 			sendEmail(user, session)
 		})
 		.catch( error => {

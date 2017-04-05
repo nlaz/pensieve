@@ -1,5 +1,6 @@
 import Item from '../models/item';
 import Session from '../models/session';
+import Review from '../models/review';
 
 export const getSessions = (req, res) => {
 	Session.find({ user_id: req.user._id })
@@ -29,7 +30,11 @@ export const generateReviewSession = userId => {
 	const MIN = 8, MAX = 14;
 	const queryLimit = Math.floor(Math.random() * (MAX - MIN)) + MIN;
 
-	return Item.find({ user_id: userId}).limit(queryLimit)
+	return Item.aggregate([
+			{ $match: { user_id: userId } },
+			{ $sort: { reviewCount: 1 } },
+			{ $limit: queryLimit }
+		]).exec()
 		.then(_items => {
 			items = _items;
 			if (!items.length) {

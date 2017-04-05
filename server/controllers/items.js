@@ -45,12 +45,20 @@ export const deleteItem = (req, res) => {
 };
 
 export const reviewItem = (req, res, next) => {
+	const itemId = req.params.item_id;
+	const userId = req.user._id;
+
 	const review = new Review({
-		item_id: req.params.item_id,
-		user_id: req.user._id,
+		item_id: itemId,
+		user_id: userId,
 	});
 
 	review.save()
-		.then( review => res.status(200))
+		.then( review => {
+			const query = { _id: itemId, user_id: userId };
+			const update = { $inc: { reviewCount: 1 } };
+			return Item.findOneAndUpdate(query, update, { new: true });
+		})
+		.then( item => res.status(200));
 		.catch( error => res.status(404).json({ error }));
 };
