@@ -8,12 +8,21 @@ export const signupUser = (req, res, next) => {
 	const email = req.body.email.trim();
 	const password = req.body.password.trim();
 
+	if (email.test(/\S+@\S+\.\S+/)) {
+		return res.status(404).json({
+			error: true,
+			type: 'invalid_email',
+			message: 'Invalid email',
+		});
+	}
+
 	User.findOne({ email: email }, (err, user) => {
 		if (err) { return res.send(err); }
 
 		if (user) {
 			return res.status(404).json({
 				error: true,
+				type: 'email_taken',
 				message: 'Email is already taken',
 			});
 		}
@@ -42,6 +51,7 @@ export const loginUser = (req, res) => {
 		if (!user) {
 			return res.status(404).json({
 				error: true,
+				type: 'user_not_found',
 				message: 'No user found with that email and password',
 			});
 		}
@@ -49,6 +59,7 @@ export const loginUser = (req, res) => {
 		if (!user.validPassword(req.body.password.trim())) {
 			return res.status(404).json({
 				error: true,
+				type: 'invalid_password',
 				message: 'No user found with that email and password',
 			});
 		}
@@ -66,6 +77,7 @@ export const getSelf = (req, res, next) => {
 	if (!token) {
 		return res.status(401).json({
 			error: true,
+			type: 'invalid_token',
 			message: 'Must include token',
 		});
 	}
@@ -85,7 +97,8 @@ export default function authenticateUser(req, res, next) {
 	if (!token) {
 		return res.status(404).json({
 			error: true,
-			message: 'Invalid authenticaition. Please include a JWT token',
+			type: 'invalid_token',
+			message: 'Invalid authentication. Please include a JWT token',
 		});
 	}
 
@@ -95,6 +108,7 @@ export default function authenticateUser(req, res, next) {
 		if (err) {
 			return res.status(401).json({
 				error: true,
+				type: 'invalid_token',
 				message: 'Invalid authentication. Please log in to make requests',
 			});
 		}

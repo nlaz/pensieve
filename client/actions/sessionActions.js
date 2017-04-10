@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, UNAUTH_USER } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from './types';
 
 const LOGIN_URL = '/users/login';
 const SIGNUP_URL = '/users/signup';
@@ -19,7 +19,13 @@ export function loginUser(params) {
 			});
 		})
 		.catch((error) => {
-			throw(error);
+			dispatch({
+				type: AUTH_ERROR,
+				payload: {
+					error: error.response.data.error,
+					message: 'Unable to log in. Are you even using the right email?',
+				}
+			});
 		});
 	};
 }
@@ -36,7 +42,13 @@ export function signupUser(params) {
 				});
 			})
 			.catch((error) => {
-				throw(error);
+				dispatch({
+					type: AUTH_ERROR,
+					payload: {
+						error: error.response.data.error,
+						message: 'Uh oh! Unable to sign up. What did you do to make this happen?',
+					}
+				});
 			});
 	};
 }

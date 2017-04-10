@@ -1,15 +1,21 @@
 import React from 'react';
+import cx from 'classnames';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as sessionActions from '../actions/sessionActions';
+import * as appActions from '../actions/appActions';
 
-const FlashMessage = ({ message, onDismiss }) => {
+const FlashMessage = ({ message, error, onDismiss }) => {
 	if (!message) { return false; }
+	const classNames = cx(
+		'alert alert-dismissable',
+		{ 'alert-info': !Boolean(error) },
+		{ 'alert-danger': Boolean(error) },
+	);
 
 	return (
 		<div className='container'>
-			<div className='alert alert-info alert-dismissable' role='alert'>
+			<div className={classNames} role='alert'>
 				<button onClick={onDismiss} type='button' className='close' data-dismiss='alert' aria-label='Close'>
 					<span aria-hidden='true'>&times;</span>
 				</button>
@@ -43,23 +49,22 @@ class AppContainer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onClose = this.onClose.bind(this);
-		this.state = { showMessage: true };
 	}
 
 	onClose(event) {
 		event.preventDefault();
-		this.setState({ showMessage: false });
+		this.props.appActions.dismissError();
 	}
 
 	render() {
-		const { authenticated, children, message, self } = this.props;
-		const { showMessage } = this.state;
+		const { authenticated, children, error, message, self } = this.props;
+		const showMessage = Boolean(message);
 
 		return (
 			<div className='body'>
 				<NavBar self={self} authenticated={authenticated} />
 				{ showMessage &&
-					<FlashMessage message={message} onDismiss={this.onClose} />
+					<FlashMessage error={error} message={message} onDismiss={this.onClose} />
 				}
 				<div className='container'>
 					{children}
@@ -69,10 +74,15 @@ class AppContainer extends React.Component {
 	}
 }
 
+const mapDispatchToProps = dispatch => ({
+	appActions: bindActionCreators(appActions, dispatch),
+});
+
 const mapStateToProps = (state, ownProps) => ({
 	self: state.app.self,
 	authenticated: state.app.authenticated,
 	message: state.app.message,
+	error: state.app.error,
 });
 
-export default connect(mapStateToProps)(AppContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

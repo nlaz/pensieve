@@ -43,21 +43,21 @@ class Login extends React.Component {
 					<form>
 						<div className='form-group'>
 							<label htmlFor='emailInput'>Email</label>
-							<input onChange={this.onChange} name='email' id='emailInput' className='form-control' type="email" placeholder='you@your-domain.com'/>
+							<input onChange={this.onChange} name='email' id='emailInput' className='form-control' type='email' placeholder='you@your-domain.com'/>
 						</div>
 						<div className='form-group'>
 							<label htmlFor='passwordInput'>Password</label>
-							<input onChange={this.onChange} name='password' id='passwordInput' className='form-control' type="password" placeholder='Shhh! Keep this secret.'/>
+							<input onChange={this.onChange} name='password' id='passwordInput' className='form-control' type='password' placeholder='Shhh! Keep this secret.'/>
 						</div>
 
-						<button onClick={this.onSave} type="submit" className='btn btn-primary btn-block'>Login</button>
+						<button onClick={this.onSave} type='submit' className='btn btn-primary btn-block'>Login</button>
 					</form>
 
 					<hr/>
 
 					<div className='row'>
-						<p className='text-center'>Need an account? <Link to="/signup">Signup</Link></p>
-						<p className='text-center'>Or go <Link to="/">home</Link>.</p>
+						<p className='text-center'>Need an account? <Link to='/signup'>Signup</Link></p>
+						<p className='text-center'>Or go <Link to='/'>home</Link>.</p>
 					</div>
 				</div>
 			</div>
