@@ -10,28 +10,45 @@ const sendgrid = sg(process.env.SENDGRID_API_KEY);
 
 const domain = process.env.HOST_URL;
 const sourceEmail = new helper.Email('boreas@test.com');
-const subject = 'Your Daily Review - Boreas';
+const subjects = [
+	'Start your morning with some knowledge - Boreas',
+	'Well, Check This Out - Boreas',
+	'Some fresh baked notes for you to review - Boreas',
+	'Hey Good Looking - Boreas',
+	'>>>>CLICK HERE<<<<< (Or Don\'t) - Boreas'
+];
 
 const template = (name, items, sessionId) => {
 	const url = `${domain}/sessions/${sessionId}`;
+	const cardStyle = 'border:1px solid #dddddd;border-radius:4px;font-size:18px;font-weight:bold;line-height:150px;text-align:center;text-decoration:none;width:250px;height:150px;';
+	const buttonStyle = 'background-color:#2e78ba;border-radius:3px;color:#ffffff;line-height:30px;height:30px;text-align:center;text-decoration:none;width:100px;';
+
 	return (
-	`<div>
-		<p>Hi ${name},</p>
+	`<div style='color:#000000;'>
+		<p>Oh hey ${name},</p>
 
-		<p>These are the items for you to review today:</p>
-		<ul>${items}</ul>
+		<p>We got some fresh baked notes for you to review today. Here's a taste.</p>
+		<br/>
+		<div style='${cardStyle}'>
+			<a href='${url}' style='color:#000000;text-decoration:none;'>${items[0].title}</a>
+		</div>
+		<br/>
 
-		<a href='${url}' >Review Now</a>
+		<div style='${buttonStyle}'>
+			<a href='${url}' style='color:#ffffff;text-decoration:none;'>Review Now</a>
+		</div>
 
-		<p>Cheers!,</p>
+		<p>Anyways that was fun. See you later!</p>
+
+		<p>Your friend,</p>
 		<p>Boreas</p>
 	</div>`
 	);
 };
 
 const constructEmailRequest = (targetName, targetEmail, items, sessionId) => {
-	const titles = items.map(item => `<li>${item.title}</li>`).join('');
-	const content = new helper.Content('text/html', template(targetName, titles, sessionId));
+	const subject = subjects[Math.floor(Math.random() * subjects.length)];
+	const content = new helper.Content('text/html', template(targetName, items, sessionId));
 	const mail = new helper.Mail(sourceEmail, subject, new helper.Email(targetEmail), content);
 	return sendgrid.emptyRequest({
 		method: 'POST',
