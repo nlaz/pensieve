@@ -16,33 +16,49 @@ const PageHead = ({ children, onStartClick }) => {
 	);
 };
 
+const dotStyle = {
+	backgroundColor: '#dff0d8',
+	borderColor: '#dff0d8',
+	borderRadius: '100%',
+	height: 12,
+	marginTop: 5,
+	width: 12,
+	display: 'inline-block',
+	listStyle: 'none',
+};
+
+const SessionItem = ({ session }) => {
+	const dateLabel = moment(session.createdAt).fromNow();
+	const itemCount = session.items.length;
+
+	return (
+		<li key={session._id} className='list-group-item'>
+			<Link to='/sessions/1/'>
+				<strong>Reviewed {itemCount} items</strong> <small>&bull; {dateLabel}</small>
+				{session.items &&
+					<ul className='pull-right'>
+						{session.items.map((item, key) => (
+							<li key={key} style={dotStyle}></li>
+						))}
+					</ul>
+				}
+			</Link>
+		</li>
+	);
+};
+
 const SessionsList = ({ sessions }) => {
 	if (!sessions.length) { return false; }
-	sessions.sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)));
-	const renderSession = (session) => {
-		const dateLabel = moment(session.createdAt).format('ddd, MMM Do ha');
-		const itemCount = session.items.length;
-		return (
-			<li key={session._id} className='list-group-item'>
-				<Link to={`/sessions/${session._id}`}>
-					<div className='row'>
-						<div className='col-xs-8'>
-							<p style={{ margin: 0 }}>
-								<span className='h5'>{dateLabel}</span> <small>&bull; {itemCount} items</small>
-							</p>
-						</div>
-						{session.finishedAt &&
-							<p className='col-xs-4 text-right' style={{ margin: 0 }}>Completed</p>
-						}
-					</div>
-				</Link>
-			</li>
-		);
-	}
+	const reviewedSessions = sessions.filter(session => Boolean(session.finishedAt));
+	if (!reviewedSessions.length) { return false; }
+
+	reviewedSessions.sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)));
 
 	return (
 		<ul className='list-group'>
-			{sessions.map(renderSession)}
+			{reviewedSessions.map((session, key) => (
+				<SessionItem session={session} key={key} />
+			))}
 		</ul>
 	);
 };
