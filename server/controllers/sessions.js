@@ -13,12 +13,22 @@ export const getSession = (req, res) => {
 	const userId = req.user._id;
 	const sessionId = req.params.session_id;
 
-	Session.findOne({ _id: sessionId, user_id: userId })
+	Session.findOne({ _id: sessionId })
 		.then(_session => {
+
+			if (_session.user_id !== userId) {
+				return res.status(404).json({
+					error: true,
+					type: 'invalid_user',
+					message: 'Session not available. Are you signed in correctly?'
+				});
+			}
+
 			session = _session;
 			return Item.find().where('_id').in(session.items);
 		})
 		.then((items) => {
+			console.log('ITEMS', items);
 			session.items = items;
 			res.status(200).json({ session });
 		})
@@ -41,7 +51,7 @@ export const generateReviewSession = userId => {
 				throw new Error('No available items to create session.');
 			}
 
-			itemIds = items.map(item => item.id);
+			itemIds = items.map(item => item._id);
 			session = new Session({ user_id: userId, items: itemIds });
 			return session.save();
 		})

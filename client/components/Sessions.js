@@ -48,15 +48,11 @@ const SessionItem = ({ session }) => {
 };
 
 const SessionsList = ({ sessions }) => {
-	if (!sessions.length) { return false; }
-	const reviewedSessions = sessions.filter(session => Boolean(session.finishedAt));
-	if (!reviewedSessions.length) { return false; }
-
-	reviewedSessions.sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)));
+	sessions.sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)));
 
 	return (
 		<ul className='list-group'>
-			{reviewedSessions.map((session, key) => (
+			{sessions.map((session, key) => (
 				<SessionItem session={session} key={key} />
 			))}
 		</ul>
@@ -80,9 +76,10 @@ class Sessions extends React.Component {
 	}
 
 	render() {
-		const { sessions } = this.props;
+		const { sessions = [] } = this.props;
+		const reviewedSessions = sessions.filter(session => Boolean(session.finishedAt));
 
-		if (!sessions || !sessions.length) {
+		if (!reviewedSessions.length) {
 			return (
 				<PageHead onStartClick={this.onStartClick}>
 					<h4>No review sessions available</h4>
@@ -92,7 +89,7 @@ class Sessions extends React.Component {
 
 		return (
 			<PageHead onStartClick={this.onStartClick}>
-				<SessionsList sessions={sessions} />
+				<SessionsList sessions={reviewedSessions} />
 			</PageHead>
 		);
 	}

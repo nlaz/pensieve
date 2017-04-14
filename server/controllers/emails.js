@@ -20,7 +20,7 @@ const subjects = [
 
 const template = (name, items, sessionId) => {
 	const url = `${domain}/sessions/${sessionId}`;
-	const cardStyle = 'border:1px solid #dddddd;border-radius:4px;font-size:18px;font-weight:bold;line-height:150px;text-align:center;text-decoration:none;width:250px;height:150px;';
+	const cardStyle = 'border:1px solid #dddddd;border-radius:4px;font-size:18px;font-weight:bold;line-height:150px;overflow:hidden;text-align:center;text-decoration:none;width:250px;height:150px;';
 	const buttonStyle = 'background-color:#2e78ba;border-radius:3px;color:#ffffff;line-height:30px;height:30px;text-align:center;text-decoration:none;width:100px;';
 
 	return (
