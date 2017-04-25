@@ -40,7 +40,7 @@ class Login extends React.Component {
 			<div className='row'>
 				<div className='col-md-6 col-md-offset-3'>
 					<h2>Login</h2>
-					<form>
+					<form onSubmit={(e) => e.preventDefault()}>
 						<div className='form-group'>
 							<label htmlFor='emailInput'>Email</label>
 							<input onChange={this.onChange} name='email' id='emailInput' className='form-control' type='email' placeholder='you@your-domain.com'/>

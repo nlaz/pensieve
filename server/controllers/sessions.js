@@ -37,7 +37,7 @@ export const getSession = (req, res) => {
 
 export const generateReviewSession = userId => {
 	let session, items, itemIds;
-	const MIN = 8, MAX = 14;
+	const MIN = 15, MAX = 25;
 	const queryLimit = Math.floor(Math.random() * (MAX - MIN)) + MIN;
 
 	return Item.aggregate([
