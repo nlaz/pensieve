@@ -6,11 +6,14 @@ import { connect } from 'react-redux';
 import * as itemActions from '../actions/itemActions';
 
 const styles = {
-	height: '300px',
+	minHeight: '300px',
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
+	whiteSpace: 'pre-wrap',
 };
+
+// const formatText = (text) => text.split('\n').join('<br/>').trim();
 
 class ItemContainer extends React.Component {
 	constructor(props) {
@@ -40,7 +43,7 @@ class ItemContainer extends React.Component {
 		const { item } = this.props;
 		const { showAnswer } = this.state;
 
-		if (!item) { return <h3>Item doesn't exist</h3>; }
+		if (!item) { return <h3><em>Hmm.</em> Item does not exist</h3>; }
 
 		const itemContent = showAnswer ? item.description : item.title;
 		const editButton = <button onClick={this.onEditClick} className='btn btn-success pull-right'>Edit</button>;
