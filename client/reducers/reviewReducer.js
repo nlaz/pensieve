@@ -20,8 +20,11 @@ export default function (state = INITIAL_STATE, action) {
 			return { ...state, items: action.payload.items };
 		case FETCH_ITEM:
 			return { ...state, item: action.payload.item };
-		case CREATE_ITEM:
-			return {...state, item: action.payload.item, message: action.payload.message };
+
+		case CREATE_ITEM: {
+			const newItem = action.payload.item;
+			return {...state, item: newItem, items: [ ...state.items, newItem ], message: action.payload.message };
+		}
 		case EDIT_ITEM:
 			return {...state, item: action.payload.item };
 		case DELETE_ITEM:
