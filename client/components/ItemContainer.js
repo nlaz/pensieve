@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as itemActions from '../actions/itemActions';
 
-const styles = {
+const panelStyles = {
 	minHeight: '300px',
 	display: 'flex',
 	justifyContent: 'center',
@@ -54,7 +54,7 @@ class ItemContainer extends React.Component {
 						<h2>Item {editButton}</h2>
 					</div>
 					<div className='panel panel-default'>
-						<div className='panel-body' style={styles} onClick={this.onItemClick}>
+						<div className='panel-body' style={panelStyles} onClick={this.onItemClick}>
 							<h3 className='text-center' style={{ margin: '0' }}>
 								{itemContent}
 							</h3>
