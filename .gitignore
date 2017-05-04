@@ -40,6 +40,9 @@ jspm_packages
 .config.env
 .env
 
+# Build directory
+build
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

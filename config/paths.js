@@ -20,5 +20,7 @@ module.exports = {
   appPublic: resolveApp('public'),
   appClient: resolveApp('client'),
   appIndexJs: resolveApp('client/index.js'),
+  serverIndexJs: resolveApp('server/index.js'),
+  serverBuild: resolveApp('build'),
   nodePaths: nodePaths,
 };

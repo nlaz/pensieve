@@ -1,18 +1,20 @@
 'use strict';
 
-var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
 var paths = require('./paths');
 
 var publicPath = '/';
 var config = {
 	entry: [
+		'webpack-hot-middleware/client',
 		paths.appIndexJs
 	],
+	devtool: 'eval',
 	output: {
-		path: paths.appBuild,
+		path: paths.appPublic,
 		filename: 'bundle.js',
-		publicPath: publicPath,
+		publicPath: '/',
 	},
 	module: {
 		loaders: [
@@ -31,6 +33,16 @@ var config = {
 			}
 		]
 	},
+	plugins: [
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoEmitOnErrorsPlugin(),
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: JSON.stringify('development'),
+				BUILD: true
+			}
+		})
+	],
 	node: {
 		fs: 'empty',
 	}

@@ -8,10 +8,10 @@ var detect = require('detect-port');
 var chalk = require('chalk');
 var formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 var openBrowser = require('react-dev-utils/openBrowser');
-var config = require('../config/webpack.config.client.dev');
+var config = require('../config/webpack.client.config');
 var paths = require('../config/paths');
 
-var DEFAULT_PORT = process.env.PORT || 3000;
+var DEFAULT_PORT = 8080;
 var compiler;
 
 function setupCompiler(host, port, protocol) {
@@ -81,13 +81,18 @@ function setupCompiler(host, port, protocol) {
   });
 }
 
-function runDevServer(host, port, protocol) {
+function runDevServer() {
+  var host = process.env.HOST || 'localhost';
+  var port = DEFAULT_PORT;
+  var protocol = process.env.HTTPS === 'true' ? "https" : "http";
+  setupCompiler(host, port, protocol);
+
   var devServer = new WebpackDevServer(compiler, {
     compress: true,
     clientLogLevel: 'none',
     contentBase: paths.appPublic,
     hot: true,
-    publicPath: config.output.publicPath,
+    publicPath: '/build/',
     quiet: true,
     watchOptions: {
       ignored: /node_modules/
@@ -108,18 +113,4 @@ function runDevServer(host, port, protocol) {
   });
 }
 
-detect(DEFAULT_PORT)
-  .then(port => {
-    if (port == DEFAULT_PORT) {
-      var protocol = process.env.HTTPS === 'true' ? "https" : "http";
-      var host = process.env.HOST || 'localhost';
-      setupCompiler(host, port, protocol);
-      runDevServer(host, port, protocol);
-      return;
-    } else {
-      console.log(chalk.red('Something is already running on port ' + DEFAULT_PORT + '.'));
-    }
-  })
-  .catch(err => {
-    console.log(err)
-  });
+runDevServer();
