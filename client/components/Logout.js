@@ -6,7 +6,10 @@ class Logout extends React.Component {
 	componentWillMount() {
 		this.props.logoutUser();
 	}
-	render() { return false; }
+
+	render() {
+		return false;
+	}
 }
 
 export default connect(null, sessionActions)(Logout);

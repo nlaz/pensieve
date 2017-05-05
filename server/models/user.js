@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 
 const Schema = mongoose.Schema;
-const jwtSecret = process.env.JWT_SECRET;
 
 const UserSchema = new Schema({
 	name: { type: String, required: true },

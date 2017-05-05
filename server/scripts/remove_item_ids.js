@@ -3,9 +3,7 @@
  * sessions to hold only ids and not objects.
  */
 
-import Item from '../models/item';
 import Session from '../models/session';
-import mongoose from 'mongoose';
 import configDB from '../config/db';
 
 // Config DB

@@ -15,7 +15,6 @@
         "semi": [1, "always"],
         "no-unused-vars": [1, { "vars": "all", "args": "after-used" }],
         "no-redeclare": [1, { "builtinGlobals": true }],
-        "brace-style": [1, "1tbs"],
         "no-alert": 1,
         "babel/object-shorthand": 1,
         "babel/arrow-parens": 1,

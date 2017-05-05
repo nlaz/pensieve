@@ -6,7 +6,8 @@ import { bindActionCreators } from 'redux';
 import * as appActions from '../actions/appActions';
 
 const FlashMessage = ({ message, error, onDismiss }) => {
-	if (!message) { return false; }
+	if (!message) return false;
+
 	const classNames = cx(
 		'alert alert-dismissable',
 		{ 'alert-info': !Boolean(error) },
@@ -78,7 +79,7 @@ const mapDispatchToProps = dispatch => ({
 	appActions: bindActionCreators(appActions, dispatch),
 });
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
 	self: state.app.self,
 	authenticated: state.app.authenticated,
 	message: state.app.message,

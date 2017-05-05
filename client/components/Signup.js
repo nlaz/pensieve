@@ -18,7 +18,7 @@ class Signup extends React.Component {
 		}
 	}
 
-	componentWillUpdate(nextProps, nextState) {
+	componentWillUpdate(nextProps) {
 		if (nextProps.authenticated) {
 			this.props.router.push('/');
 		}
@@ -73,7 +73,7 @@ const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(sessionActions, dispatch)
 });
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
 	authenticated: state.app.authenticated
 });
 

@@ -16,7 +16,7 @@ export const getItem = (req, res) => {
 		.catch( error => res.status(404).json({ error }));
 };
 
-export const createItem = (req, res, next) => {
+export const createItem = (req, res) => {
 	const item = new Item({
 		user_id: req.user._id,
 		title: req.body.title,
@@ -44,7 +44,7 @@ export const deleteItem = (req, res) => {
 		.catch( error => res.status(404).json({ error }));
 };
 
-export const reviewItem = (req, res, next) => {
+export const reviewItem = (req, res) => {
 	const itemId = req.params.item_id;
 	const userId = req.user._id;
 
@@ -54,11 +54,11 @@ export const reviewItem = (req, res, next) => {
 	});
 
 	review.save()
-		.then( review => {
+		.then( () => {
 			const query = { _id: itemId, user_id: userId };
 			const update = { $inc: { reviewCount: 1 } };
 			return Item.findOneAndUpdate(query, update, { new: true });
 		})
-		.then( item => res.status(200))
+		.then( () => res.status(200))
 		.catch( error => res.status(404).json({ error }));
 };

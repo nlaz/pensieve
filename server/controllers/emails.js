@@ -1,7 +1,5 @@
 import sg, { mail as helper } from 'sendgrid';
 import Email from '../models/email';
-import Item from '../models/item';
-import Session from '../models/session';
 import User from '../models/user';
 
 import * as SessionController from './sessions';
@@ -60,7 +58,7 @@ const constructEmailRequest = (targetName, targetEmail, items, sessionId) => {
 export const broadcastEmailToUser = user => {
 	SessionController.generateReviewSession(user.id)
 		.then(session => {
-			sendEmail(user, session)
+			sendEmail(user, session);
 		})
 		.catch( error => {
 			console.log(error);
@@ -80,13 +78,6 @@ export const broadcastEmailsToAll = () => {
 };
 
 export const sendEmail = (user, session) => {
-	/*
-	console.log('***SendEmail***');
-	console.log('User', user);
-	console.log('Items', session.items);
-	console.log('Session', session);
-	*/
-
 	const email = new Email({
 		user_id: user.id,
 		session_id: session.id,
@@ -99,9 +90,6 @@ export const sendEmail = (user, session) => {
 		.then(response => {
 			console.log('Email Success - Status Code:', response.statusCode);
 			return email.save();
-		})
-		.then((res) => {
-			//console.log(res);
 		})
 		.catch(error => {
 			console.log('Emailer Error', error.response.statusCode, error.response);

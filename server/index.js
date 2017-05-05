@@ -17,7 +17,6 @@ const app = express();
 
 const isProduction = process.env.NODE_ENV === 'production';
 const PORT = isProduction ? process.env.PORT : 3000;
-const publicPath = path.resolve(__dirname, 'public');
 
 // Config DB
 configDB();

@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as itemActions from '../actions/itemActions';
@@ -43,7 +41,9 @@ class ItemContainer extends React.Component {
 		const { item } = this.props;
 		const { showAnswer } = this.state;
 
-		if (!item) { return <h3><em>Hmm.</em> Item does not exist</h3>; }
+		if (!item) {
+			 return <h3><em>Hmm.</em> Item does not exist</h3>;
+		 }
 
 		const itemContent = showAnswer ? item.description : item.title;
 		const editButton = <button onClick={this.onEditClick} className='btn btn-success pull-right'>Edit</button>;
@@ -66,7 +66,7 @@ class ItemContainer extends React.Component {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
 	item: state.data.item,
 });
 

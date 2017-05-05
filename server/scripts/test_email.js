@@ -15,9 +15,10 @@ const emailOne = () => {
 		});
 };
 
-const emailAll = () => {
-	Emailer.broadcastEmailsToAll();
-};
-
 emailOne();
+
+// const emailAll = () => {
+// 	Emailer.broadcastEmailsToAll();
+// };
+
 //emailAll();

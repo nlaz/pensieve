@@ -1,7 +1,6 @@
 'use strict';
 
 var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
 var paths = require('./paths');
 
 var publicPath = '/';
@@ -14,7 +13,7 @@ var config = {
 	output: {
 		path: paths.appPublic,
 		filename: 'bundle.js',
-		publicPath: '/',
+		publicPath: publicPath,
 	},
 	module: {
 		loaders: [

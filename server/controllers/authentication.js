@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 const jwtSecret = process.env.JWT_SECRET;
 
-export const signupUser = (req, res, next) => {
+export const signupUser = (req, res) => {
 	const name = req.body.name.trim();
 	const email = req.body.email.trim();
 	const password = req.body.password.trim();
@@ -71,7 +71,7 @@ export const loginUser = (req, res) => {
 	});
 };
 
-export const getSelf = (req, res, next) => {
+export const getSelf = (req, res) => {
 	const token = req.body.token || req.query.token;
 
 	if (!token) {
@@ -117,4 +117,3 @@ export default function authenticateUser(req, res, next) {
 		next();
 	});
 };
-

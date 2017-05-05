@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as itemActions from '../actions/itemActions';
@@ -24,7 +23,6 @@ class NewItemContainer extends React.Component {
 	}
 
 	render() {
-		const item = this.props.item;
 		return (
 			<div className='col-md-8 col-md-offset-2'>
 				<form>

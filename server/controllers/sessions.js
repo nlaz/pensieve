@@ -1,6 +1,5 @@
 import Item from '../models/item';
 import Session from '../models/session';
-import Review from '../models/review';
 
 export const getSessions = (req, res) => {
 	Session.find({ user_id: req.user._id })
@@ -64,7 +63,7 @@ export const generateReviewSession = userId => {
 		});
 };
 
-export const createSession = (req, res, next) => {
+export const createSession = (req, res) => {
 	generateReviewSession(req.user._id)
 		.then( session => res.status(200).json({ session }))
 		.catch( error => {

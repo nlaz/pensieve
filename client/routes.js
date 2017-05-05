@@ -16,7 +16,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Signup from './components/Signup';
 
-const NotFoundPage = (props) => (
+const NotFoundPage = () => (
 	<h1>Page Not Found :(</h1>
 );
 

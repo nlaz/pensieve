@@ -3,7 +3,6 @@
  * for testing.
  */
 import { ItemEntity, UserEntity } from './schema';
-import mongoose from 'mongoose';
 import configDB from '../../config/db';
 
 // Config DB

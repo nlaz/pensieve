@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -10,7 +9,6 @@ import routes from './routes';
 import { Router } from 'react-router';
 import appReducer from './reducers/appReducer';
 import { AUTH_USER } from './actions/types';
-import * as sessionActions from './actions/sessionActions';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 

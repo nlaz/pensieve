@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as itemActions from '../actions/itemActions';
@@ -50,7 +48,6 @@ class EditItemContainer extends React.Component {
 	}
 
 	render() {
-		const { item } = this.props;
 		const deleteButton = <button onClick={this.onDeleteClick} className='btn btn-success pull-right'>Delete</button>;
 
 		return (
@@ -79,7 +76,7 @@ const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(itemActions, dispatch)
 });
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
 	item: state.data.item,
 });
 
