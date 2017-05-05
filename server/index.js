@@ -1,16 +1,21 @@
+import chalk from 'chalk';
 import morgan from 'morgan';
 import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import path from 'path';
+import openBrowser from 'react-dev-utils/openBrowser';
 
-import webpack from 'webpack';
 import middleware from './middleware';
 import { broadcastEmailsCronJob } from './cron';
 
+var host = process.env.HOST || 'localhost';
+var port = process.env.PORT || 3000;
+var protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
+
 //import passport from 'passport';
 import configRoutes from './routes';
-import configDB from './config/db';
+import configDB from '../config/db';
 //import configPassport from '../config/passport';
 
 const app = express();
@@ -42,7 +47,8 @@ configRoutes(app);
 
 if (process.env.NODE_ENV === 'development') {
 	const config = require('../config/webpack.config.dev');
-	const compiler = webpack(config);
+	const compiler = require('../config/compiler');
+	// const compiler = webpack(config);
 	app.use(require('webpack-dev-middleware')(compiler, {
 		noInfo: true,
 		publicPath: config.output.publicPath,
@@ -57,7 +63,6 @@ if (process.env.NODE_ENV === 'development') {
 		}
 	}));
 	app.use(require('webpack-hot-middleware')(compiler));
-	console.log(config.output.publicPath);
 	app.use('/', express.static(path.resolve(__dirname, '..', 'public')));
 
 } else if (process.env.NODE_ENV === 'production') {
@@ -73,7 +78,12 @@ app.listen(PORT, (err) => {
 	if (err) {
 		console.error(err);
 	} else {
-		console.log(`Server listening on port ${PORT}...`);
+		if (process.env.NODE_ENV === 'development') {
+	    console.log(chalk.cyan('✨  Starting the server...'));
+
+	    openBrowser(protocol + '://' + host + ':' + port + '/');
+		}
+
 		broadcastEmailsCronJob.start();
 	}
 });
