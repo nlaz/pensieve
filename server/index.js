@@ -48,7 +48,6 @@ configRoutes(app);
 if (process.env.NODE_ENV === 'development') {
 	const config = require('../config/webpack.config.dev');
 	const compiler = require('../config/compiler');
-	// const compiler = webpack(config);
 	app.use(require('webpack-dev-middleware')(compiler, {
 		noInfo: true,
 		publicPath: config.output.publicPath,
@@ -62,10 +61,11 @@ if (process.env.NODE_ENV === 'development') {
 			chunkModules: false
 		}
 	}));
+	console.log('DEVELOPMENT');
 	app.use(require('webpack-hot-middleware')(compiler));
 	app.use('/', express.static(path.resolve(__dirname, '..', 'public')));
-
 } else if (process.env.NODE_ENV === 'production') {
+	console.log('PRODUCTION');
 	app.use('/', express.static(path.resolve(__dirname, '..', 'build')));
 }
 

@@ -1,16 +1,13 @@
 'use strict';
 
-var autoprefixer = require('autoprefixer');
+var webpack = require('webpack');
 var paths = require('./paths');
 
 var publicPath = '/';
 var config = {
 	entry: [
-		'webpack/hot/dev-server',
-		'webpack-dev-server/client?http:localhost:8080',
 		paths.appIndexJs
 	],
-	devtool: 'eval',
 	output: {
 		path: paths.appBuild,
 		filename: 'bundle.js',
@@ -34,7 +31,17 @@ var config = {
 		]
 	},
 	plugins: [
-		new Webpack.HotModuleReplacePlugin()
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: JSON.stringify('production'),
+				BUILD: true,
+			}
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			compressor: {
+				warnings: false
+			}
+		})
 	],
 	node: {
 		fs: 'empty',
