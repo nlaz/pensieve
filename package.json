@@ -8,7 +8,11 @@
     "build": "yarn run build:client && yarn run build:server",
     "serve": "cross-env NODE_ENV=production node ./build/bundle.server.js",
     "build:client": "webpack --config config/webpack.config.prod.js",
-    "build:server": "webpack --config config/webpack.server.config.js"
+    "build:server": "webpack --config config/webpack.server.config.js",
+	"prod": "yarn build && yarn serve",
+	"forever": "yarn forever:start",
+	"forever:start": "forever start -c 'yarn prod' ./",
+	"forever:stop": "forever stopall"
   },
   "repository": {
     "type": "git",
