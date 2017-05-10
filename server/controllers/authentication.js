@@ -3,12 +3,17 @@ import jwt from 'jsonwebtoken';
 
 const jwtSecret = process.env.JWT_SECRET;
 
+const isValidEmail = email => {
+	const re = /\S+@\S+\.\S+/;
+	return re.test(email);
+}
+
 export const signupUser = (req, res) => {
 	const name = req.body.name.trim();
 	const email = req.body.email.trim();
 	const password = req.body.password.trim();
 
-	if (email.test(/\S+@\S+\.\S+/)) {
+	if (!isValidEmail(email)) {
 		return res.status(404).json({
 			error: true,
 			type: 'invalid_email',

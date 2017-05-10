@@ -41,7 +41,7 @@ jspm_packages
 .env
 
 # Build directory
-build
+build/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
