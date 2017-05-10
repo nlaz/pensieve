@@ -45,13 +45,16 @@ class ItemContainer extends React.Component {
 
 		if (!item) { return <h3><em>Hmm.</em> Item does not exist</h3>; }
 
+
 		const itemContent = showAnswer ? item.description : item.title;
-		const editButton = <button onClick={this.onEditClick} className='btn btn-success pull-right'>Edit</button>;
+		const editButton = <button onClick={this.onEditClick} className='btn btn-success pull-right' style={{ marginLeft: '5px' }}>Edit</button>;
+		const newItemButton = <Link to='/items/new' className='btn btn-success pull-right'>New Item</Link>;
+
 		return (
 			<div className='row'>
 				<div className='col-md-8 col-md-offset-2'>
 					<div className='page-header'>
-						<h2>Item {editButton}</h2>
+						<h2>Item {editButton}{newItemButton}</h2>
 					</div>
 					<div className='panel panel-default'>
 						<div className='panel-body' style={panelStyles} onClick={this.onItemClick}>
