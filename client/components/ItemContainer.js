@@ -12,8 +12,6 @@ const panelStyles = {
 	whiteSpace: 'pre-wrap',
 };
 
-// const formatText = (text) => text.split('\n').join('<br/>').trim();
-
 class ItemContainer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -45,7 +43,6 @@ class ItemContainer extends React.Component {
 		if (!item) {
 			 return <h3><em>Hmm.</em> Item does not exist</h3>;
 		 }
-
 
 		const itemContent = showAnswer ? item.description : item.title;
 		const editButton = <button onClick={this.onEditClick} className='btn btn-success pull-right' style={{ marginLeft: '5px' }}>Edit</button>;

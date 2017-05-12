@@ -6,11 +6,14 @@ import * as reviewActions from '../actions/reviewActions';
 import * as itemActions from '../actions/itemActions';
 
 const styles = {
-	height: '300px',
+	minHeight: '300px',
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
+	whiteSpace: 'pre-wrap',
 };
+
+const formatText = text => text.split('\n').join('<br/>').trim();
 
 const SessionsPage = ({ children, title }) => (
 	<div className='row'>
