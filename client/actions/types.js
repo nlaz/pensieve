@@ -13,6 +13,7 @@ export const CREATE_ITEM = 'createItem';
 export const REVIEW_ITEM = 'reviewItem';
 export const EDIT_ITEM = 'editItem';
 export const DELETE_ITEM = 'deleteItem';
+export const ITEM_ERROR = 'itemError';
 
 export const FETCH_SESSIONS = 'fetchSessions';
 export const FETCH_SESSION = 'fetchSession';
@@ -21,3 +22,4 @@ export const FINISH_SESSION = 'finishSession';
 export const SESSION_ERROR = 'sessionError';
 
 export const DISMISS_ERROR = 'dismissError';
+export const UPDATE_MESSAGE = 'updateMessage';

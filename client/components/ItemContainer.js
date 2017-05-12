@@ -41,7 +41,11 @@ class ItemContainer extends React.Component {
 		const { showAnswer } = this.state;
 
 		if (!item) {
-			 return <h3><em>Hmm.</em> Item does not exist</h3>;
+			 return (
+				 <h3>
+					 <strong>Hmm.</strong> Item does not exist
+				 </h3>
+			 );
 		 }
 
 		const itemContent = showAnswer ? item.description : item.title;

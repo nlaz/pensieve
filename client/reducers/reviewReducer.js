@@ -23,12 +23,14 @@ export default function (state = INITIAL_STATE, action) {
 
 		case CREATE_ITEM: {
 			const newItem = action.payload.item;
-			return {...state, item: newItem, items: [ ...state.items, newItem ], message: action.payload.message };
+			return { ...state, item: newItem, items: [ ...state.items, newItem ], message: action.payload.message };
 		}
 		case EDIT_ITEM:
-			return {...state, item: action.payload.item };
-		case DELETE_ITEM:
-			return {...state, item: {}, items: action.payload.items };
+			return { ...state, item: action.payload.item, message: action.payload.message };
+		case DELETE_ITEM: {
+			const items = (state.items || []).filter(item => item._id != action.payload.itemId );
+			return { ...state, item: {}, items: items };
+		}
 	}
 
 	return state;

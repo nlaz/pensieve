@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, REVIEW_ITEM, EDIT_ITEM, DELETE_ITEM } from './types';
+import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, REVIEW_ITEM, EDIT_ITEM, DELETE_ITEM, ITEM_ERROR, UPDATE_MESSAGE } from './types';
 import cookie from 'react-cookie';
 
 const ITEMS_API_URL = `/api/items`;
@@ -17,7 +17,13 @@ export function fetchItems() {
 			});
 		})
 		.catch((error) => {
-			console.error('Error', error);
+			dispatch({
+				type: ITEM_ERROR,
+				payload: {
+					error: error.response.data.error,
+					message: 'Issue retrieving your items. Doublecheck your network connection and try again.',
+				}
+			});
 		});
 	};
 }
@@ -35,7 +41,13 @@ export function fetchItem(itemId) {
 			});
 		})
 		.catch((error) => {
-			console.error('Error', error);
+			dispatch({
+				type: ITEM_ERROR,
+				payload: {
+					error: error.response.data.error,
+					message: 'Issue retrieving item. Doublecheck your network connection and try again.',
+				}
+			});
 		});
 	};
 }
@@ -53,7 +65,13 @@ export function createItem(params) {
 			browserHistory.push(`/items/${response.data.item._id}`);
 		})
 		.catch((error) => {
-			console.error('Error', error);
+			dispatch({
+				type: ITEM_ERROR,
+				payload: {
+					error: error.response.data.error,
+					message: 'There was a problem creating your item. Doublecheck your network connection and try again.',
+				}
+			});
 		});
 	};
 }
@@ -85,11 +103,23 @@ export function editItem(params) {
 		.then((response) => {
 			dispatch({
 				type: EDIT_ITEM,
-				payload: response.data,
+				payload: { item: response.data.item }
+			});
+
+			dispatch({
+				type: UPDATE_MESSAGE,
+				payload: { message: 'Your well thought out changes were successfully saved!' }
 			});
 		})
 		.catch((error) => {
 			console.error('Error', error);
+			dispatch({
+				type: ITEM_ERROR,
+				payload: {
+					error: error.response.data.error,
+					message: 'There was a problem editting your item. Doublecheck your network connection and try again.',
+				}
+			});
 		});
 	};
 }
@@ -104,12 +134,22 @@ export function deleteItem(itemId) {
 			browserHistory.push('/items');
 			dispatch({
 				type: DELETE_ITEM,
-				payload: response.data,
+				payload: { itemId: itemId },
+			});
+
+			dispatch({
+				type: UPDATE_MESSAGE,
+				payload: { message: 'That item was wiped from memory.' }
 			});
 		})
 		.catch((error) => {
-			console.error('Error', error);
+			dispatch({
+				type: ITEM_ERROR,
+				payload: {
+					error: error.response.data.error,
+					message: 'There was a problem removing your item. Doublecheck your network connection and try again.',
+				}
+			});
 		});
 	};
 }
-

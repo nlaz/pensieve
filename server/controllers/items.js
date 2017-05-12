@@ -40,7 +40,7 @@ export const editItem = (req, res) => {
 
 export const deleteItem = (req, res) => {
 	Item.remove({ _id: req.params.item_id })
-		.then( () => res.status(200))
+		.then( item => res.status(200).json({ item }))
 		.catch( error => res.status(404).json({ error }));
 };
 
