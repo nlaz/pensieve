@@ -33,7 +33,7 @@ UserSchema.methods.generateToken = (user) => {
 		email: user.email,
 	};
 	return jwt.sign(data, process.env.JWT_SECRET, {
-		expiresIn: 60 * 60 * 24 // expires in 24 hours
+		expiresIn: 60 * 60 * 48 // expires in 48 hours
 	});
 };
 
