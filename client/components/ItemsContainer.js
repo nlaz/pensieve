@@ -33,7 +33,8 @@ class ItemsContainer extends React.Component {
 		this.onIncrementPage = this.onIncrementPage.bind(this);
 		this.onDecrementPage = this.onDecrementPage.bind(this);
 		this.onChangePage = this.onChangePage.bind(this);
-		this.state = { activePage: 0 };
+		this.onSearchChange = this.onSearchChange.bind(this);
+		this.state = { activePage: 0, filter: '' };
 	}
 
 	componentWillMount() {
@@ -58,11 +59,26 @@ class ItemsContainer extends React.Component {
 		this.setState({ activePage: index });
 	}
 
+	onSearchChange(e) {
+		const value = e.target.value;
+		this.setState({ filter: value });
+	}
+
 	render() {
 		const { items } = this.props;
-		const { activePage } = this.state;
+		const { activePage, filter } = this.state;
 
-		const newItemButton = <Link to='/items/new' className='btn btn-success pull-right'>New Item</Link>;
+		// const newItemButton = <Link to='/items/new' className='btn btn-success pull-right'>New Item</Link>;
+  	const newItemButton = (
+			<Link to='/items/new' className='btn btn-success btn-md pull-right'>
+				<span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</Link>
+		);
+		const searchBar = (
+			<div className='form-group pull-right' style={{ marginRight: '10px' }}>
+				<input onChange={this.onSearchChange} type='text' className='form-control' placeholder='Search' />
+			</div>
+		);
 
 		if (!items) {
 			return (
@@ -73,14 +89,15 @@ class ItemsContainer extends React.Component {
 			);
 		}
 
-		const numPages = Math.ceil(items.length / PAGE_SIZE);
+		const filteredItems = filter.length > 0 ? items.filter(item => item.title.indexOf(filter) !== -1) : items;
+		const numPages = Math.ceil(filteredItems.length / PAGE_SIZE);
 		const pageStart = activePage * PAGE_SIZE;
-		const pageEnd = Math.min((activePage + 1) * PAGE_SIZE, items.length);
-		const pageItems = items.slice(pageStart, pageEnd);
+		const pageEnd = Math.min((activePage + 1) * PAGE_SIZE, filteredItems.length);
+		const pageItems = filteredItems.slice(pageStart, pageEnd);
 
 		return (
 			<div className='col-md-8 col-md-offset-2'>
-				<h2 className='page-header'>Your Items {newItemButton}</h2>
+				<h2 className='page-header'>Your Items {newItemButton} {searchBar}</h2>
 				<ul className='list-group'>
 					{pageItems.map((item, key) => (
 						<li key={key} className='list-group-item'>
