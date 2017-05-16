@@ -28,7 +28,7 @@ const dotStyle = {
 };
 
 const SessionItem = ({ session }) => {
-	const dateLabel = moment(session.createdAt).fromNow();
+	const dateLabel = moment(session.finishedAt).fromNow();
 	const itemCount = session.items.length;
 
 	return (
@@ -48,7 +48,7 @@ const SessionItem = ({ session }) => {
 };
 
 const SessionsList = ({ sessions }) => {
-	sessions.sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)));
+	sessions.sort((a, b) => (new Date(b.finishedAt) - new Date(a.finishedAt)));
 
 	return (
 		<ul className='list-group'>
