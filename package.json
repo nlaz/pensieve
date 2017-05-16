@@ -59,6 +59,9 @@
     "react-dev-utils": "^0.5.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "redux-devtools": "^3.3.2",
     "redux-thunk": "^2.2.0",
     "sendgrid": "^4.7.1",
     "webpack": "^2.2.1",
@@ -69,9 +72,6 @@
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "forever": "^0.15.3",
-    "jsonwebtoken": "^7.3.0",
-    "react-redux": "^5.0.2",
-    "redux": "^3.6.0",
-    "redux-devtools": "^3.3.2"
+    "jsonwebtoken": "^7.3.0"
   }
 }
