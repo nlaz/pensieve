@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import morgan from 'morgan';
 import express from 'express';
-import session from 'express-session';
 import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
 import path from 'path';
 import openBrowser from 'react-dev-utils/openBrowser';
 
@@ -30,10 +30,10 @@ configDB();
 app.use(morgan('dev'));
 
 // Setup passport
-app.use(session({
-	secret: 'battlewagon',
-	resave: true,
-	saveUninitialized: true,
+app.use(cookieSession({
+	name: 'session',
+	secret: process.env.COOKIE_SESSION,
+	maxAge: 48 * 60 * 60 * 1000 // 48 hours
 }));
 
 app.use(bodyParser.json());
