@@ -1,8 +1,6 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 
-import LandingPage from './components/pages/LandingPage';
-
 import HomeContainer from './components/HomeContainer';
 import ReqAuth from './components/ReqAuth';
 import Items from './components/ItemsContainer';

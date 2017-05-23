@@ -25,8 +25,31 @@ var config = {
 				}
 			},
 			{
-        test: /\.css$/,
-        loader: 'style!css?importLoaders=1!postcss'
+        test: /\.(css|scss)$/,
+				include: paths.appClient,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'style-loader',
+					},
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 1,
+						}
+					},
+					{
+						loader: 'postcss-loader',
+						options: {
+							config: {
+								path: './config/postcss-loader.config.js'
+							}
+						}
+					},
+					{
+						loader: 'sass-loader'
+					}
+				]
 			}
 		]
 	},
