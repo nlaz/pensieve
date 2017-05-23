@@ -19,6 +19,7 @@ module.exports = {
   appAssets: resolveApp('public/assets'),
   appPublic: resolveApp('public'),
   appClient: resolveApp('client'),
+  postCssConfig: resolveApp('config'),
   appIndexJs: resolveApp('client/index.js'),
   serverIndexJs: resolveApp('server/index.js'),
   serverBuild: resolveApp('build'),

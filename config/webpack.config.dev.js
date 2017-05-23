@@ -44,7 +44,7 @@ var config = {
 						loader: 'postcss-loader',
 						options: {
 							config: {
-								path: './config/postcss-loader.config.js'
+								path: paths.postCssConfig
 							}
 						}
 					},
