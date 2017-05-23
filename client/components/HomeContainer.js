@@ -29,7 +29,7 @@ const FlashMessage = ({ message, error, onDismiss }) => {
 };
 
 
-class AppContainer extends React.Component {
+class HomeContainer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onClose = this.onClose.bind(this);
@@ -77,4 +77,4 @@ const mapStateToProps = (state) => ({
 	error: state.app.error,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
