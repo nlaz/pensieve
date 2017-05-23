@@ -79,7 +79,7 @@ app.listen(PORT, (err) => {
 		if (process.env.NODE_ENV === 'development') {
 	    console.log(chalk.cyan('✨  Starting the server...'));
 
-	    openBrowser(protocol + '://' + host + ':' + port + '/');
+	    // openBrowser(protocol + '://' + host + ':' + port + '/');
 		}
 
 		broadcastEmailsCronJob.start();

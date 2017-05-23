@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import cookie from 'react-cookie';
 
 const ReqAuth = ComposedComponent => {
 	class Authentication extends React.Component {
@@ -10,7 +9,7 @@ const ReqAuth = ComposedComponent => {
 			}
 		}
 
-		componentWillUpdate(nextProps, nextState) {
+		componentWillUpdate(nextProps) {
 			if (!nextProps.authenticated) {
 				nextProps.router.push('/');
 			}
@@ -21,7 +20,7 @@ const ReqAuth = ComposedComponent => {
 		}
 	}
 
-	const mapStateToProps = (state, ownProps) => ({
+	const mapStateToProps = (state) => ({
 		authenticated: state.app.authenticated
 	});
 

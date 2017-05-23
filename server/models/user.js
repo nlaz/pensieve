@@ -9,7 +9,7 @@ const UserSchema = new Schema({
 	email: { type: String, required: true, index: { unique: true }},
 	password: { type: String, required: true },
 	is_email_on: { type: Boolean, default: false },
-});
+}, { timestamps: true });
 
 UserSchema.methods.generateHash = function(password) {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

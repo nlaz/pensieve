@@ -68,12 +68,12 @@ class ItemsContainer extends React.Component {
 		const { items } = this.props;
 		const { activePage, filter } = this.state;
 
-		// const newItemButton = <Link to='/items/new' className='btn btn-success pull-right'>New Item</Link>;
   	const newItemButton = (
-			<Link to='/items/new' className='btn btn-success btn-md pull-right'>
-				<span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			<Link to='/items/new' className='btn btn-success btn-md pull-right' style={{ height: '34px' }}>
+				<span className="glyphicon glyphicon-plus" aria-hidden="true" style={{ lineHeight: '18px' }} ></span>
 			</Link>
 		);
+
 		const searchBar = (
 			<div className='form-group pull-right' style={{ marginRight: '10px' }}>
 				<input onChange={this.onSearchChange} type='text' className='form-control' placeholder='Search' />

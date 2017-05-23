@@ -7,6 +7,6 @@ const ItemSchema = new Schema({
 	title: { type: String, required: true },
 	description: { type: String },
 	reviewCount: { type: Number, default: 0 },
-});
+}, { timestamps: true });
 
 export default mongoose.model('Item', ItemSchema);

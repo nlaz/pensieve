@@ -1,13 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default class LandingPage extends React.Component {
 	render() {
 		return (
-			<div className='jumbotron'>
-				<h1>Learn Better</h1>
-				<p>Boreas makes use of the spacing effect to help you learn material just in time</p>
-				<p><a className="btn btn-primary btn-lg" href="/signup" role="button">Sign Up</a></p>
-			</div>
+			<section className='landing text-center'>
+				<div className='container'>
+					<h1 className='title'>Remember Anything</h1>
+					<h4 className='subtitle'>A new tool to learn more efficiently</h4>
+					<div>
+						<Link className='btn btn-primary btn-lg' to='/signup' role='button'>Get Started</Link>
+					</div>
+				</div>
+			</section>
 		);
 	}
 }

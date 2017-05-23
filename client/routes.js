@@ -3,7 +3,7 @@ import { IndexRoute, Route } from 'react-router';
 
 import LandingPage from './components/pages/LandingPage';
 
-import App from './components/AppContainer';
+import AppContainer from './components/AppContainer';
 import ReqAuth from './components/ReqAuth';
 import Items from './components/ItemsContainer';
 import Item from './components/ItemContainer';
@@ -21,7 +21,7 @@ const NotFoundPage = () => (
 );
 
 const routes = (
-	<Route path='/' component={App}>
+	<Route path='/' component={AppContainer}>
 		<IndexRoute component={LandingPage} />
 		<Route path='items' component={ReqAuth(Items)} />
 		<Route path='items/new' component={ReqAuth(NewItem)} />

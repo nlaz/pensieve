@@ -9,6 +9,7 @@ import routes from './routes';
 import { Router } from 'react-router';
 import appReducer from './reducers/appReducer';
 import { AUTH_USER } from './actions/types';
+import './app.scss';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
