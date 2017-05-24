@@ -9,9 +9,11 @@ const PageHead = ({ children, onStartClick }) => {
 	const button = <button onClick={onStartClick} className='btn btn-success pull-right'>Review Now</button>;
 
 	return (
-		<div className='col-md-8 col-md-offset-2'>
-			<h2 className='page-header'>Recent Activity {button}</h2>
-			{children}
+		<div className='container'>
+			<div className='col-md-8 col-md-offset-2'>
+				<h2 className='page-header'>Recent Activity {button}</h2>
+				{children}
+			</div>
 		</div>
 	);
 };

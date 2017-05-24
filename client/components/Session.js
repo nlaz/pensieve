@@ -16,10 +16,12 @@ const styles = {
 const formatText = text => text.split('\n').join('<br/>').trim();
 
 const SessionsPage = ({ children, title }) => (
-	<div className='row'>
-		<div className='col-md-8 col-md-offset-2'>
-			<h2 className='page-header'>{title}</h2>
-			{children}
+	<div className='container'>
+		<div className='row'>
+			<div className='col-md-8 col-md-offset-2'>
+				<h2 className='page-header'>{title}</h2>
+				{children}
+			</div>
 		</div>
 	</div>
 );
