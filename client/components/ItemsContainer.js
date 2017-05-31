@@ -83,7 +83,7 @@ class ItemsContainer extends React.Component {
 		if (!items) {
 			return (
 				<div className='col-md-8 col-md-offset-2'>
-					<h2 className='page-header'>Your Items {newItemButton}</h2>
+					<h4 className='page-header'>Your Items {newItemButton}</h4>
 					<h4>You don't have any items yet. <em>Ahem. Bummer...</em></h4>
 				</div>
 			);
@@ -97,7 +97,7 @@ class ItemsContainer extends React.Component {
 
 		return (
 			<div className='col-md-8 col-md-offset-2'>
-				<h2 className='page-header'>Your Items {newItemButton} {searchBar}</h2>
+				<h4 className='page-header'>Your Items {newItemButton} {searchBar}</h4>
 				<ul className='list-group'>
 					{pageItems.map((item, key) => (
 						<li key={key} className='list-group-item'>

@@ -11,7 +11,7 @@ const PageHead = ({ children, onStartClick }) => {
 	return (
 		<div className='container'>
 			<div className='col-md-8 col-md-offset-2'>
-				<h2 className='page-header'>Recent Activity {button}</h2>
+				<h4 className='page-header'>Recent Activity {button}</h4>
 				{children}
 			</div>
 		</div>
