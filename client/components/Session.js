@@ -13,7 +13,11 @@ const styles = {
 	whiteSpace: 'pre-wrap',
 };
 
-const formatText = text => text.split('\n').join('<br/>').trim();
+const REVIEW_TYPE = {
+	EASY: 'easy',
+	GOOD: 'good',
+	HARD: 'hard',
+};
 
 const SessionsPage = ({ children, title }) => (
 	<div className='container'>
@@ -46,34 +50,40 @@ const valueToClass = {
 	easy: 'alert-success',
 };
 
-const SessionResults = ({ items }) => {
-	const renderItem = (item) => (
-		<li key={`${item._id}`} className='list-group-item'>
-			{item.title}
-			<span className={`badge ${valueToClass[item.value]}`}>
-				<span className='glyphicon glyphicon-ok' aria-hidden='true'></span>
-			</span>
-		</li>
-	);
+const SessionResultItem = ({ item }) => (
+	<li className='list-group-item'>
+		{item.title}
+		<span className={`badge ${valueToClass[item.value]}`}>
+			<span className='glyphicon glyphicon-ok' aria-hidden='true'></span>
+		</span>
+	</li>
+);
 
-	return (
-		<div>
-			<ul className='list-group'>
-				{items.map(renderItem)}
-			</ul>
-			<div className='text-right'>
-				<Link to='/activity' className='btn btn-primary'>Back</Link>
-			</div>
+const SessionResults = ({ items }) => (
+	<div>
+		<ul className='list-group'>
+			{items.map((item, key) =>
+				<SessionResultItem key={key} item={item} />
+			)}
+		</ul>
+		<div className='text-right'>
+			<Link to='/activity' className='btn btn-primary'>Back</Link>
 		</div>
-	);
-};
+	</div>
+);
 
 class Session extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onItemClick = this.onItemClick.bind(this);
 		this.onNextAction = this.onNextAction.bind(this);
-		this.state = { index: 0, showAnswer: false, showNextOptions: false };
+		this.state = { index: 0, showAnswer: false, showNextOptions: false, items: props.items };
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.items !== this.props.items) {
+	    this.setState({ items: nextProps.items });
+	  }
 	}
 
 	componentWillMount() {
@@ -82,20 +92,22 @@ class Session extends React.Component {
 		}
 	}
 
-	onNextAction(event) {
-		const value = event.target.dataset.value;
-		const { index } = this.state;
+	onNextAction(value) {
+		const { index, items } = this.state;
 		const { session } = this.props;
-		const { items } = session;
 
 		// Set the response value of the item
-		const selectedItem = items[index];
-		selectedItem.value = value;
+		items[index].value = value;
+
+		const selectedItem = { ...items[index]};
+		const updatedItems = value === REVIEW_TYPE.HARD
+			? [...items, selectedItem]
+			: items;
 
 		// Send the review request
 		this.props.actions.reviewItem({ value, itemId: items[index]._id });
 
-		if (index === items.length - 1) {
+		if (index === updatedItems.length - 1) {
 			this.props.actions.finishSession(session._id);
 		}
 
@@ -104,6 +116,7 @@ class Session extends React.Component {
 			index: index + 1,
 			showNextOptions: false,
 			showAnswer: false,
+			items: updatedItems,
 		});
 	}
 
@@ -115,10 +128,9 @@ class Session extends React.Component {
 	}
 
 	render() {
-		const { index, showAnswer, showNextOptions } = this.state;
-		const { session: { items } = {} } = this.props;
+		const { index, showAnswer, showNextOptions, items = {} } = this.state;
 
-		if (!items) {
+		if (!Boolean(items)) {
 			return <h3>No items available</h3>;
 		}
 
@@ -132,6 +144,7 @@ class Session extends React.Component {
 
 		const selectedItem = items[index];
 		const itemContent = showAnswer ? selectedItem.description : selectedItem.title;
+		console.log(this.state.items);
 
 		return (
 			<SessionsPage title='Review'>
@@ -146,13 +159,13 @@ class Session extends React.Component {
 				{showNextOptions ? (
 					<div className='row'>
 						<div className='col-xs-4 text-center'>
-							<button onClick={this.onNextAction} type='button' data-value='hard' className='btn btn-primary'>Hard</button>
+							<button onClick={() => this.onNextAction(REVIEW_TYPE.HARD)} type='button' className='btn btn-primary'>Hard</button>
 						</div>
 						<div className='col-xs-4 text-center'>
-							<button onClick={this.onNextAction} type='button' data-value='good' className='btn btn-primary'>Good</button>
+							<button onClick={() => this.onNextAction(REVIEW_TYPE.GOOD)} type='button' className='btn btn-primary'>Good</button>
 						</div>
 						<div className='col-xs-4 text-center'>
-							<button onClick={this.onNextAction} type='button' data-value='easy' className='btn btn-primary'>Easy</button>
+							<button onClick={() => this.onNextAction(REVIEW_TYPE.EASY)} type='button' className='btn btn-primary'>Easy</button>
 						</div>
 					</div>
 				) : (
@@ -169,6 +182,7 @@ class Session extends React.Component {
 
 const mapStateToProps = (state) => ({
 	session: state.data.session,
+	items: (state.data.session || {}).items,
 });
 
 const mapDispatchToProps = (dispatch) => ({
