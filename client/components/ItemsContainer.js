@@ -96,23 +96,25 @@ class ItemsContainer extends React.Component {
 		const pageItems = filteredItems.slice(pageStart, pageEnd);
 
 		return (
-			<div className='col-md-8 col-md-offset-2'>
-				<h4 className='page-header'>Your Items {newItemButton} {searchBar}</h4>
-				<ul className='list-group'>
-					{pageItems.map((item, key) => (
-						<li key={key} className='list-group-item'>
-							<Link to={`/items/${item._id}`}>{item.title}</Link>
-						</li>
-					))}
-				</ul>
-				{numPages > 1 &&
-					<PageNavigation
-						numPages={numPages}
-						onIncrementPage={this.onIncrementPage}
-						onDecrementPage={this.onDecrementPage}
-						onChangePage={this.onChangePage}
-					/>
-				}
+			<div className='container'>
+				<div className='col-sm-8 col-sm-offset-2'>
+					<h4 className='page-header'>Your Items {newItemButton} {searchBar}</h4>
+					<ul className='list-group'>
+						{pageItems.map((item, key) => (
+							<li key={key} className='list-group-item'>
+								<Link to={`/items/${item._id}`}>{item.title}</Link>
+							</li>
+						))}
+					</ul>
+					{numPages > 1 &&
+						<PageNavigation
+							numPages={numPages}
+							onIncrementPage={this.onIncrementPage}
+							onDecrementPage={this.onDecrementPage}
+							onChangePage={this.onChangePage}
+						/>
+					}
+				</div>
 			</div>
 		);
 	}

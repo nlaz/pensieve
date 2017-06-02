@@ -128,13 +128,18 @@ class Session extends React.Component {
 	}
 
 	render() {
+		const { session } = this.props;
 		const { index, showAnswer, showNextOptions, items = {} } = this.state;
 
 		if (!Boolean(items)) {
 			return <h3>No items available</h3>;
 		}
 
-		if (this.props.session.finishedAt || index > items.length - 1) {
+		if (!Boolean(session)) {
+			return <h3>Loading session</h3>;
+		}
+
+		if (session.finishedAt || index > items.length - 1) {
 			return (
 				<SessionsPage title='Results'>
 					<SessionResults items={items} />
@@ -144,7 +149,6 @@ class Session extends React.Component {
 
 		const selectedItem = items[index];
 		const itemContent = showAnswer ? selectedItem.description : selectedItem.title;
-		console.log(this.state.items);
 
 		return (
 			<SessionsPage title='Review'>

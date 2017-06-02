@@ -35,7 +35,7 @@ const SessionItem = ({ session }) => {
 
 	return (
 		<li key={session._id} className='list-group-item'>
-			<Link to='/sessions/1/'>
+			<Link to={`/sessions/${session._id}/`}>
 				<strong>Reviewed {itemCount} items</strong> <small>&bull; {dateLabel}</small>
 				{session.items &&
 					<ul className='pull-right'>
