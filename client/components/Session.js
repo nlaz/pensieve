@@ -13,7 +13,7 @@ const styles = {
 	whiteSpace: 'pre-wrap',
 };
 
-const REVIEW_TYPE = {
+export const REVIEW_TYPE = {
 	EASY: 'easy',
 	GOOD: 'good',
 	HARD: 'hard',

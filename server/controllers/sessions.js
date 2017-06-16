@@ -27,7 +27,6 @@ export const getSession = (req, res) => {
 			return Item.find().where('_id').in(session.items);
 		})
 		.then((items) => {
-			console.log('ITEMS', items);
 			session.items = items;
 			res.status(200).json({ session });
 		})

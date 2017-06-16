@@ -6,7 +6,7 @@ const jwtSecret = process.env.JWT_SECRET;
 const isValidEmail = email => {
 	const re = /\S+@\S+\.\S+/;
 	return re.test(email);
-}
+};
 
 export const signupUser = (req, res) => {
 	const name = req.body.name.trim();
@@ -87,8 +87,9 @@ export const getSelf = (req, res) => {
 		});
 	}
 
-	jwt.verfiy(token, jwtSecret, (err, user) => {
+	jwt.verify(token, jwtSecret, (err, user) => {
 		if (err) { throw err; }
+		console.log('user getself', user);
 
 		res.json({
 			user: user.getCleanUser(user),
