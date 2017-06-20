@@ -111,10 +111,17 @@ export const newReviewAction = (req, res) => {
 		.catch( error => res.status(404).json({ error }));
 };
 
-export const getDueItems = (req, res) => {
+// Helper method for email generation
+export const getDueItemsHelper = userId => {
 	const currentTime = Date.now();
-	Item.find({ user_id: req.user._id })
+	Item.find({ user_id: userId })
 		.where('nextReviewDate').lt(currentTime)
-		.then( items => res.status(200).json({ items }))
+		.then(items => { return items; })
+		.catch( error => { throw(error); });
+};
+
+export const getDueItems = (req, res) => {
+	getDueItemsHelper(req.user._id)
+		.then( items => res.status(200).json({ due_items: items }))
 		.catch( error => res.status(404).json({ error }));
 };

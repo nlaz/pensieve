@@ -1,6 +1,8 @@
 import Item from '../models/item';
 import Session from '../models/session';
 
+export const REVIEW_SESSION_SIZE = 20;
+
 export const getSessions = (req, res) => {
 	Session.find({ user_id: req.user._id })
 		.then((sessions) => res.status(200).json({ sessions }))

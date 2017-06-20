@@ -2,7 +2,8 @@ import sg, { mail as helper } from 'sendgrid';
 import Email from '../models/email';
 import User from '../models/user';
 
-import * as SessionController from './sessions';
+import * as ItemController from './items';
+import { REVIEW_SESSION_SIZE } from './sessions';
 
 const sendgrid = sg(process.env.SENDGRID_API_KEY);
 
@@ -16,20 +17,13 @@ const subjects = [
 	'>>>>CLICK HERE<<<<< (Or Don\'t) - Boreas'
 ];
 
-const template = (name, items, sessionId) => {
-	const url = `${domain}/sessions/${sessionId}`;
-	const cardStyle = 'border:1px solid #dddddd;border-radius:4px;font-size:18px;font-weight:bold;line-height:150px;overflow:hidden;text-align:center;text-decoration:none;width:250px;height:150px;';
+const template = (name, items) => {
+	const url = `${domain}/sessions/new`;
 	const buttonStyle = 'background-color:#2e78ba;border-radius:3px;color:#ffffff;line-height:30px;height:30px;text-align:center;text-decoration:none;width:100px;';
 
 	return (
 	`<div style='color:#000000;'>
-		<p>Oh hey ${name},</p>
-
-		<p>We got some fresh baked notes for you to review today. Here's a taste.</p>
-		<br/>
-		<div style='${cardStyle}'>
-			<a href='${url}' style='color:#000000;text-decoration:none;'>${items[0].title}</a>
-		</div>
+		<p>You have ${items.length} items that need review. Review them now before you forget.</p>
 		<br/>
 
 		<div style='${buttonStyle}'>
@@ -44,7 +38,7 @@ const template = (name, items, sessionId) => {
 	);
 };
 
-const constructEmailRequest = (targetName, targetEmail, items, sessionId) => {
+const constructEmailRequest = (targetName, targetEmail, items	) => {
 	const subject = subjects[Math.floor(Math.random() * subjects.length)];
 	const content = new helper.Content('text/html', template(targetName, items, sessionId));
 	const mail = new helper.Mail(sourceEmail, subject, new helper.Email(targetEmail), content);
@@ -56,9 +50,12 @@ const constructEmailRequest = (targetName, targetEmail, items, sessionId) => {
 };
 
 export const broadcastEmailToUser = user => {
-	SessionController.generateReviewSession(user.id)
-		.then(session => {
-			sendEmail(user, session);
+	ItemController.getDueItemsHelper(user.id)
+		.then(items => {
+			if (items.length >= REVIEW_SESSION_SIZE ) {
+				// Only send email if items less than review size.
+				sendEmail(user, items);
+			}
 		})
 		.catch( error => {
 			console.log(error);
@@ -77,19 +74,13 @@ export const broadcastEmailsToAll = () => {
 		});
 };
 
-export const sendEmail = (user, session) => {
-	const email = new Email({
-		user_id: user.id,
-		session_id: session.id,
-	});
-
+export const sendEmail = (user, items) => {
 	console.log(`Attempting email to ${user.email}...`);
-	const request = constructEmailRequest(user.name, user.email, session.items, session.id);
+	const request = constructEmailRequest(user.name, user.email, items);
 
 	return sendgrid.API(request)
 		.then(response => {
 			console.log('Email Success - Status Code:', response.statusCode);
-			return email.save();
 		})
 		.catch(error => {
 			console.log('Emailer Error', error.response.statusCode, error.response);

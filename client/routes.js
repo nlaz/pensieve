@@ -28,6 +28,7 @@ const routes = (
 		<Route path='items/:itemId/edit' component={ReqAuth(EditItem)} />
 		<Route path='activity' component={ReqAuth(Sessions)} />
 		<Route path='sessions/:sessionId' component={ReqAuth(Session)} />
+		<Route path='sessions/new' component={ReqAuth(Sessions)} />
 		<Route path='login' component={Login} />
 		<Route path='signup' component={Signup} />
 		<Route path='logout' component={Logout} />

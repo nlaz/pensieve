@@ -24,8 +24,8 @@ export default function(app) {
 	app.post('/api/items/:item_id/review', authenticateUser, ItemController.reviewItem);
 
 	app.get('/api/due_items', authenticateUser, ItemController.getDueItems);
-	
-	app.get('/api/items/:item_id/newAction', authenticateUser, ItemController.newReviewAction);
+
+	app.get('/api/v2/items/:item_id/review', authenticateUser, ItemController.newReviewAction);
 
 	/* Session Routes */
 	app.get('/api/sessions', authenticateUser, SessionController.getSessions);
