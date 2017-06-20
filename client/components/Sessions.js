@@ -4,9 +4,11 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as reviewActions from '../actions/reviewActions';
+import * as itemActions from '../actions/itemActions';
 
-const PageHead = ({ children, onStartClick }) => {
-	const button = <button onClick={onStartClick} className='btn btn-success pull-right'>Review Now</button>;
+const PageHead = ({ children, onStartClick, dueItems }) => {
+	const buttonLabel = dueItems ? `Review Now (${dueItems.length})` : 'Review Now';
+	const button = <button onClick={onStartClick} className='btn btn-success pull-right'>{buttonLabel}</button>;
 
 	return (
 		<div className='container'>
@@ -69,16 +71,17 @@ class Sessions extends React.Component {
 
 	componentWillMount() {
 		if (!this.props.sessions) {
-			this.props.actions.fetchSessions();
+			this.props.reviewActions.fetchSessions();
+			this.props.itemActions.getDueItems();
 		}
 	}
 
 	onStartClick() {
-		this.props.actions.createSession();
+		this.props.reviewActions.createSession();
 	}
 
 	render() {
-		const { sessions = [] } = this.props;
+		const { sessions = [], dueItems } = this.props;
 		const reviewedSessions = sessions.filter(session => Boolean(session.finishedAt));
 
 		if (!reviewedSessions.length) {
@@ -90,7 +93,7 @@ class Sessions extends React.Component {
 		}
 
 		return (
-			<PageHead onStartClick={this.onStartClick}>
+			<PageHead onStartClick={this.onStartClick} dueItems={dueItems}>
 				<SessionsList sessions={reviewedSessions} />
 			</PageHead>
 		);
@@ -99,10 +102,12 @@ class Sessions extends React.Component {
 
 const mapStateToProps = (state) => ({
 	sessions: state.data.sessions,
+	dueItems: state.data.due_items,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	actions: bindActionCreators(reviewActions, dispatch)
+	reviewActions: bindActionCreators(reviewActions, dispatch),
+	itemActions: bindActionCreators(itemActions, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sessions);

@@ -1,5 +1,5 @@
 import {
-	CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, EDIT_ITEM, DELETE_ITEM,
+	CREATE_ITEM, FETCH_DUE_ITEMS, FETCH_ITEMS, FETCH_ITEM, EDIT_ITEM, DELETE_ITEM,
 	CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, FINISH_SESSION
 } from '../actions/types';
 
@@ -18,6 +18,8 @@ export default function (state = INITIAL_STATE, action) {
 
 		case FETCH_ITEMS:
 			return { ...state, items: action.payload.items };
+		case FETCH_DUE_ITEMS:
+			return { ...state, due_items: action.payload.due_items };
 		case FETCH_ITEM:
 			return { ...state, item: action.payload.item };
 

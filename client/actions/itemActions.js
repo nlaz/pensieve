@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { CREATE_ITEM, FETCH_ITEMS, FETCH_ITEM, REVIEW_ITEM, EDIT_ITEM, DELETE_ITEM, ITEM_ERROR, UPDATE_MESSAGE } from './types';
+import { CREATE_ITEM, FETCH_ITEMS, FETCH_DUE_ITEMS, FETCH_ITEM, REVIEW_ITEM, EDIT_ITEM, DELETE_ITEM, ITEM_ERROR, UPDATE_MESSAGE } from './types';
 import cookie from 'react-cookie';
 
 const ITEMS_API_URL = `/api/items`;
@@ -28,6 +28,28 @@ export function fetchItems() {
 	};
 }
 
+export function getDueItems() {
+	return function (dispatch) {
+		axios.get('/api/due_items', {
+			headers: { Authorization: cookie.load('token') }
+		})
+		.then((response) => {
+			dispatch({
+				type: FETCH_DUE_ITEMS,
+				payload: response.data,
+			});
+		})
+		.catch((error) => {
+			dispatch({
+				type: ITEM_ERROR,
+				payload: {
+					error: error.response.data.error,
+					message: 'Issue retrieving your items. Doublecheck your network connection and try again.',
+				}
+			});
+		});
+	};
+}
 
 export function fetchItem(itemId) {
 	return function (dispatch) {
