@@ -1,5 +1,4 @@
 import sg, { mail as helper } from 'sendgrid';
-import Email from '../models/email';
 import User from '../models/user';
 
 import * as ItemController from './items';
@@ -8,7 +7,7 @@ import { REVIEW_SESSION_SIZE } from './sessions';
 const sendgrid = sg(process.env.SENDGRID_API_KEY);
 
 const domain = process.env.HOST_URL;
-const sourceEmail = new helper.Email('boreas@test.com');
+const sourceEmail = new helper.Email('hi@boreas.space');
 const subjects = [
 	'Start your morning with some knowledge - Boreas',
 	'Well, Check This Out - Boreas',
@@ -23,8 +22,7 @@ const template = (name, items) => {
 
 	return (
 	`<div style='color:#000000;'>
-		<p>You have ${items.length} items that need review. Review them now before you forget.</p>
-		<br/>
+		<p>You have <span style='font-weight:bold;'>${items.length} items</span> that need review. Review them now before you forget.</p>
 
 		<div style='${buttonStyle}'>
 			<a href='${url}' style='color:#ffffff;text-decoration:none;'>Review Now</a>
@@ -40,7 +38,7 @@ const template = (name, items) => {
 
 const constructEmailRequest = (targetName, targetEmail, items	) => {
 	const subject = subjects[Math.floor(Math.random() * subjects.length)];
-	const content = new helper.Content('text/html', template(targetName, items, sessionId));
+	const content = new helper.Content('text/html', template(targetName, items));
 	const mail = new helper.Mail(sourceEmail, subject, new helper.Email(targetEmail), content);
 	return sendgrid.emptyRequest({
 		method: 'POST',
@@ -52,8 +50,10 @@ const constructEmailRequest = (targetName, targetEmail, items	) => {
 export const broadcastEmailToUser = user => {
 	ItemController.getDueItemsHelper(user.id)
 		.then(items => {
+			console.log('hello');
 			if (items.length >= REVIEW_SESSION_SIZE ) {
 				// Only send email if items less than review size.
+				console.log('yeah');
 				sendEmail(user, items);
 			}
 		})

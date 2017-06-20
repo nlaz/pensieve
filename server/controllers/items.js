@@ -114,7 +114,7 @@ export const newReviewAction = (req, res) => {
 // Helper method for email generation
 export const getDueItemsHelper = userId => {
 	const currentTime = Date.now();
-	Item.find({ user_id: userId })
+	return Item.find({ user_id: userId })
 		.where('nextReviewDate').lt(currentTime)
 		.then(items => { return items; })
 		.catch( error => { throw(error); });

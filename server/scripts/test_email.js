@@ -1,14 +1,14 @@
-import configDB from '../config/db';
+import configDB from '../../config/db';
 import * as Emailer from '../controllers/emails';
 import User from '../models/user';
 
 configDB();
 
-const testUserId = '589a773dc7e9d4905c32ce3c';
+const testUserId = '589a72ad50b48b715550680f';
 const emailOne = () => {
 	User.findById(testUserId)
 		.then( user => {
-			Emailer.broadcastEmailToUser(user);
+			return Emailer.broadcastEmailToUser(user);
 		})
 		.catch( error => {
 			console.error(error);
