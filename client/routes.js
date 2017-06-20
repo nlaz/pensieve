@@ -9,6 +9,7 @@ import NewItem from './components/NewItemContainer';
 import EditItem from './components/EditItemContainer';
 import Sessions from './components/Sessions';
 import Session from './components/Session';
+import SessionNew from './components/SessionNew';
 import SwitchContainer from './components/SwitchContainer';
 
 import Login from './components/Login';
@@ -27,8 +28,8 @@ const routes = (
 		<Route path='items/:itemId' component={ReqAuth(Item)} />
 		<Route path='items/:itemId/edit' component={ReqAuth(EditItem)} />
 		<Route path='activity' component={ReqAuth(Sessions)} />
+		<Route path='sessions/new' component={ReqAuth(SessionNew)} />
 		<Route path='sessions/:sessionId' component={ReqAuth(Session)} />
-		<Route path='sessions/new' component={ReqAuth(Sessions)} />
 		<Route path='login' component={Login} />
 		<Route path='signup' component={Signup} />
 		<Route path='logout' component={Logout} />

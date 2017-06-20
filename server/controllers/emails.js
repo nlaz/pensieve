@@ -50,10 +50,8 @@ const constructEmailRequest = (targetName, targetEmail, items	) => {
 export const broadcastEmailToUser = user => {
 	ItemController.getDueItemsHelper(user.id)
 		.then(items => {
-			console.log('hello');
 			if (items.length >= REVIEW_SESSION_SIZE ) {
 				// Only send email if items less than review size.
-				console.log('yeah');
 				sendEmail(user, items);
 			}
 		})
