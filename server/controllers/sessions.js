@@ -1,5 +1,6 @@
 import Item from '../models/item';
 import Session from '../models/session';
+import * as ItemController from './items';
 
 export const REVIEW_SESSION_SIZE = 5;
 
@@ -72,10 +73,32 @@ export const createSession = (req, res) => {
 		});
 };
 
+export const newCreateSession = (req, res) => {
+	let session, items, itemIds;
+	const userId = req.user._id;
+	ItemController.getDueItemsHelper(userId)
+		.then( _items => {
+			items = _items;
+			if (!items.length) {
+				throw new Error('No available items to create session.');
+			}
+
+			itemIds = items.map(item => item._id);
+			session = new Session({ user_id: userId, items: itemIds });
+			return session.save();
+		})
+		.then(session => {
+			session.items = items;
+			res.status(200).json({ session });
+		})
+		.catch( error => res.status(404).json({ error }));
+};
+
 export const finishSession = (req, res) => {
 	let session;
 	const sessionId = req.params.session_id;
 	const userId = req.user._id;
+
 
 	Session.findOne({ _id: sessionId, user_id: userId })
 		.then(_session => {

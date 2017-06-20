@@ -100,7 +100,7 @@ export function createItem(params) {
 
 export function reviewItem(params) {
 	const config = { headers: { Authorization: cookie.load('token') } };
-	const route = `${ITEMS_API_URL}/${params.itemId}/review`;
+	const route = `/api/v2/items/${params.itemId}/review`;
 
 	return function (dispatch) {
 		axios.post(route, params, config)

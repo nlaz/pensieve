@@ -22,10 +22,9 @@ export default function(app) {
 	app.post('/api/items', authenticateUser, ItemController.createItem);
 
 	app.post('/api/items/:item_id/review', authenticateUser, ItemController.reviewItem);
+	app.post('/api/v2/items/:item_id/review', authenticateUser, ItemController.newReviewAction);
 
 	app.get('/api/due_items', authenticateUser, ItemController.getDueItems);
-
-	app.get('/api/v2/items/:item_id/review', authenticateUser, ItemController.newReviewAction);
 
 	/* Session Routes */
 	app.get('/api/sessions', authenticateUser, SessionController.getSessions);
@@ -33,6 +32,7 @@ export default function(app) {
 	app.get('/api/sessions/:session_id', authenticateUser, SessionController.getSession);
 
 	app.post('/api/sessions', authenticateUser, SessionController.createSession);
+	app.post('/api/v2/sessions', authenticateUser, SessionController.newCreateSession);
 
 	app.post('/api/sessions/:session_id/finish', authenticateUser, SessionController.finishSession);
 }

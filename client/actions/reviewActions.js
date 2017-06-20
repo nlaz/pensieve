@@ -55,15 +55,13 @@ export function fetchSession(sessionId) {
 export function createSession() {
 	const config = { headers: { Authorization: cookie.load('token') }};
 
-	console.log('yoo');
 	return function (dispatch) {
-		axios.post(SESSIONS_API_URL, {}, config)
+		axios.post('/api/v2/sessions', {}, config)
 		.then((response) => {
 			dispatch({
 				type: CREATE_SESSION,
 				payload: response.data,
 			});
-			console.log('hello');
 			browserHistory.push(`/sessions/${response.data.session._id}`);
 		})
 		.catch((error) => {
