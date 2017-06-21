@@ -7,8 +7,9 @@ import * as reviewActions from '../actions/reviewActions';
 import * as itemActions from '../actions/itemActions';
 
 const PageHead = ({ children, onStartClick, dueItems }) => {
-	const buttonLabel = dueItems ? `Review Now (${dueItems.length})` : 'Review Now';
-	const button = <button onClick={onStartClick} className='btn btn-success pull-right'>{buttonLabel}</button>;
+	const canReview = dueItems && dueItems.length > 0;
+	const buttonLabel = canReview ? `Review Now (${dueItems.length})` : 'Review Now';
+	const button = <button onClick={onStartClick} disabled={!canReview} className='btn btn-success pull-right'>{buttonLabel}</button>;
 
 	return (
 		<div className='container'>
