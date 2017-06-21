@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -95,6 +96,18 @@ class ItemsContainer extends React.Component {
 		const pageEnd = Math.min((activePage + 1) * PAGE_SIZE, filteredItems.length);
 		const pageItems = filteredItems.slice(pageStart, pageEnd);
 
+		const reviewCountStyle = {
+			color: '#ffffff',
+			background: '#66c067',
+			borderRadius: '100%',
+			width: '20px',
+			height: '20px',
+			display: 'inline-block',
+			textAlign: 'center'
+		};
+		const reviewCountEl = item => <div style={reviewCountStyle}>{item.counter}</div>;
+		const nextReviewEl = item => <span>{moment(item.nextReviewDate).toNow(true)}</span>;
+		const itemTag = item => <span style={{ color: '#d5d5d5' }}>{nextReviewEl(item)} &middot; {reviewCountEl(item)}</span>;
 		return (
 			<div className='container'>
 				<div className='col-sm-8 col-sm-offset-2'>
@@ -102,7 +115,10 @@ class ItemsContainer extends React.Component {
 					<ul className='list-group'>
 						{pageItems.map((item, key) => (
 							<li key={key} className='list-group-item'>
-								<Link to={`/items/${item._id}`}>{item.title}</Link>
+								<Link to={`/items/${item._id}`} className='row'>
+								<span className='col-xs-8'>{item.title}</span>
+									<span className='col-xs-4 text-right'>{itemTag(item)}</span>
+								</Link>
 							</li>
 						))}
 					</ul>
