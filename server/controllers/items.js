@@ -22,6 +22,8 @@ export const createItem = (req, res) => {
 		user_id: req.user._id,
 		title: req.body.title,
 		description: req.body.description,
+		nextReviewDate: new Date(),
+		counter: 0,
 	});
 
 	item.save()
