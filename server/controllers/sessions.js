@@ -2,7 +2,8 @@ import Item from '../models/item';
 import Session from '../models/session';
 import * as ItemController from './items';
 
-export const REVIEW_SESSION_SIZE = 5;
+export const REVIEW_SESSION_SIZE = 15;
+export const REVIEW_SESSION_MAX = 35;
 
 export const getSessions = (req, res) => {
 	Session.find({ user_id: req.user._id })
@@ -78,10 +79,11 @@ export const newCreateSession = (req, res) => {
 	const userId = req.user._id;
 	ItemController.getDueItemsHelper(userId)
 		.then( _items => {
-			items = _items;
-			if (!items.length) {
+			if (!_items.length) {
 				throw new Error('No available items to create session.');
 			}
+
+			items = _items.slice(0, REVIEW_SESSION_MAX);
 
 			itemIds = items.map(item => item._id);
 			session = new Session({ user_id: userId, items: itemIds });
