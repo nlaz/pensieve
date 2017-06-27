@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import { browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -12,6 +13,7 @@ import { AUTH_USER } from './actions/types';
 import './app.scss';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+ReactGA.initialize('UA-101760335-1');
 
 const preloadedState = window.INITIAL_STATE;
 delete window.INITIAL_STATE;
@@ -21,6 +23,11 @@ const store = createStoreWithMiddleware(
 	preloadedState,
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+const logPageView = () => {
+	ReactGA.set({ page: window.location.pathname + window.location.search });
+	ReactGA.pageview(window.location.pathname + window.location.search);
+};
 
 const token = cookie.load('token');
 
@@ -41,7 +48,7 @@ export default class App extends Component {
   render() {
     return (
     	<Provider store={store}>
-    		<Router routes={routes} history={browserHistory} />
+    		<Router routes={routes} history={browserHistory} onUpdate={logPageView} />
     	</Provider>
     );
   }
