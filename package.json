@@ -10,9 +10,9 @@
     "build:client": "webpack --config config/webpack.config.prod.js",
     "build:server": "webpack --config config/webpack.server.config.js",
     "prod": "yarn build && yarn serve",
-    "forever": "yarn forever:start",
-    "forever:start": "forever start -c 'yarn prod' ./",
-    "forever:stop": "forever stopall"
+    "forever": "yarn start:prod",
+    "start:prod": "forever start -c 'yarn prod' ./",
+    "stop": "forever stopall"
   },
   "repository": {
     "type": "git",
