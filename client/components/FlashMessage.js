@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 
 export const FlashMessage = ({ message, error, onDismiss }) => {
 	if (!message) return false;

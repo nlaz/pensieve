@@ -5,7 +5,9 @@ import Sessions from './Sessions';
 
 class SwitchContainer extends React.Component {
 	render() {
-		return this.props.authenticated ? <Sessions /> : <LandingPage />;
+		return this.props.authenticated
+		? <Sessions />
+		: <LandingPage />;
 	}
 }
 

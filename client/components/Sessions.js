@@ -3,6 +3,8 @@ import moment from 'moment';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import Header from './Header';
 import * as reviewActions from '../actions/reviewActions';
 import * as itemActions from '../actions/itemActions';
 
@@ -12,12 +14,14 @@ const PageHead = ({ children, onStartClick, dueItems }) => {
 	const button = <button onClick={onStartClick} disabled={!canReview} className='btn btn-success pull-right'>{buttonLabel}</button>;
 
 	return (
-		<div className='container'>
-			<div className='col-md-8 col-md-offset-2'>
-				<h4 className='page-header'>Recent Activity {button}</h4>
-				{children}
+		<Header className='sessions-page'>
+			<div className='container'>
+				<div className='col-md-8 col-md-offset-2'>
+					<h4 className='page-header'>Recent Activity {button}</h4>
+					{children}
+				</div>
 			</div>
-		</div>
+		</Header>
 	);
 };
 

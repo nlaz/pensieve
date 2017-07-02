@@ -18,5 +18,9 @@ body {
   background: $C_lightGray;
 }
 
+.margin-top {
+  margin-top: 40px;
+}
+
 @import './landing';
 @import './navbar';

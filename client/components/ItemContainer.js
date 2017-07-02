@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import Header from './Header';
 import * as itemActions from '../actions/itemActions';
 
 const panelStyles = {
@@ -53,20 +55,24 @@ class ItemContainer extends React.Component {
 		const newItemButton = <Link to='/items/new' className='btn btn-success pull-right'>New Item</Link>;
 
 		return (
-			<div className='row'>
-				<div className='col-md-8 col-md-offset-2'>
-					<div className='page-header'>
-						<h2>Item {editButton}{newItemButton}</h2>
-					</div>
-					<div className='panel panel-default'>
-						<div className='panel-body' style={panelStyles} onClick={this.onItemClick}>
-							<h3 className='text-center' style={{ margin: '0' }}>
-								{itemContent}
-							</h3>
+			<Header className='item-page'>
+				<div className='container'>
+					<div className='row'>
+						<div className='col-md-8 col-md-offset-2'>
+							<div className='page-header'>
+								<h2>Item {editButton}{newItemButton}</h2>
+							</div>
+							<div className='panel panel-default'>
+								<div className='panel-body' style={panelStyles} onClick={this.onItemClick}>
+									<h3 className='text-center' style={{ margin: '0' }}>
+										{itemContent}
+									</h3>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</Header>
 		);
 	}
 }

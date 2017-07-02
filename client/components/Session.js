@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import Header from './Header';
 import * as reviewActions from '../actions/reviewActions';
 import * as itemActions from '../actions/itemActions';
 
@@ -19,15 +21,17 @@ export const REVIEW_TYPE = {
 	HARD: 'hard',
 };
 
-const SessionsPage = ({ children, title }) => (
-	<div className='container'>
-		<div className='row'>
-			<div className='col-md-8 col-md-offset-2'>
-				<h2 className='page-header'>{title}</h2>
-				{children}
+const SessionPage = ({ children, title }) => (
+	<Header className='session-page'>
+		<div className='container'>
+			<div className='row'>
+				<div className='col-md-8 col-md-offset-2'>
+					<h2 className='page-header'>{title}</h2>
+					{children}
+				</div>
 			</div>
 		</div>
-	</div>
+	</Header>
 );
 
 const ProgressBar = ({ progress }) => (
@@ -141,9 +145,9 @@ class Session extends React.Component {
 
 		if (session.finishedAt || index > items.length - 1) {
 			return (
-				<SessionsPage title='Results'>
+				<SessionPage title='Results'>
 					<SessionResults items={items} />
-				</SessionsPage>
+				</SessionPage>
 			);
 		}
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import Header from './Header';
 import * as itemActions from '../actions/itemActions';
 
 class EditItemContainer extends React.Component {
@@ -51,23 +53,27 @@ class EditItemContainer extends React.Component {
 		const deleteButton = <button onClick={this.onDeleteClick} className='btn btn-success pull-right'>Delete</button>;
 
 		return (
-			<div className='col-md-8 col-md-offset-2'>
-				<div className='page-header'>
-					<h2>Edit Item {deleteButton}</h2>
-				</div>
-				<form>
-					<div className='form-group'>
-						<label htmlFor='titleInput'>Title</label>
-						<input onChange={this.onChange} value={this.state.title} name='title' id='titleInput' className='form-control' type='text' placeholder='Title' />
-					</div>
-					<div className='form-group'>
-						<label htmlFor='descriptionInput'>Description</label>
-						<textarea onChange={this.onChange} value={this.state.description} name='description' id='descriptionInput' className='form-control' rows='5'></textarea>
-					</div>
+			<Header className='editItem-page'>
+				<div className='container'>
+					<div className='col-md-8 col-md-offset-2'>
+						<div className='page-header'>
+							<h2>Edit Item {deleteButton}</h2>
+						</div>
+						<form>
+							<div className='form-group'>
+								<label htmlFor='titleInput'>Title</label>
+								<input onChange={this.onChange} value={this.state.title} name='title' id='titleInput' className='form-control' type='text' placeholder='Title' />
+							</div>
+							<div className='form-group'>
+								<label htmlFor='descriptionInput'>Description</label>
+								<textarea onChange={this.onChange} value={this.state.description} name='description' id='descriptionInput' className='form-control' rows='5'></textarea>
+							</div>
 
-					<button onClick={this.onSave} type='submit' className='btn btn-primary btn-block'>Update</button>
-				</form>
-			</div>
+							<button onClick={this.onSave} type='submit' className='btn btn-primary btn-block'>Update</button>
+						</form>
+					</div>
+				</div>
+			</Header>
 		);
 	}
 }
