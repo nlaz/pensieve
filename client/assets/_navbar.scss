@@ -1,0 +1,22 @@
+/**
+ * Navbar styles
+ * http://bit.ly/1ywfhq7
+ */
+
+.navbar {
+  background: $C_black;
+  border-radius: 0;
+  color: $C_white;
+  margin-bottom: 0;
+
+  .navbar-brand {
+    height: 60px;
+    line-height: 26px;
+    color: $C_white;
+  }
+
+  .navbar-nav > li > a {
+    line-height: 28px;
+    color: $C_white;
+  }
+}

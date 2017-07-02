@@ -1,7 +1,6 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 
-import HomeContainer from './components/HomeContainer';
 import ReqAuth from './components/ReqAuth';
 import Items from './components/ItemsContainer';
 import Item from './components/ItemContainer';
@@ -21,7 +20,7 @@ const NotFoundPage = () => (
 );
 
 const routes = (
-	<Route path='/' component={HomeContainer}>
+	<Route path='/'>
 		<IndexRoute component={SwitchContainer} />
 		<Route path='items' component={ReqAuth(Items)} />
 		<Route path='items/new' component={ReqAuth(NewItem)} />

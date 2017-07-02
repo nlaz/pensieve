@@ -1,0 +1,87 @@
+/**
+ * Landing styles
+ * http://bit.ly/1ywfhq7
+ */
+
+.landing-page {
+  background: $C_lightGray;
+  min-height: 100vh;
+  position: relative;
+}
+
+.landing-page .navbar.navbar-inverse {
+  background: transparent;
+  border: 0;
+  color: $C_black;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+
+  .navbar-brand {
+    height: 60px;
+    line-height: 26px;
+    color: $C_black;
+  }
+
+  .navbar-nav > li > a {
+    border: 1px solid $C_black;
+    border-radius: 6px;
+    color: $C_black;
+    line-height: 28px;
+    margin: 10px 0;
+    padding: 6px 35px;
+    transition: all .2s ease;
+
+    &:hover {
+      color: $C_white;
+      background: $C_black;
+    }
+  }
+}
+.landing-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+
+  .title {
+    color: $C_black;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  .subtitle {
+    color: #A9A9A9;
+    margin-top: 0;
+    font-weight: 300;
+  }
+}
+
+.landing-input {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  input {
+    background: transparent;
+    border: 1px solid $C_black;
+    border-radius: 3px;
+    padding: 10px 15px;
+    width: 300px;
+  }
+
+  .btn {
+    background: #41D0A5;
+    border: 0;
+    border-radius: 3px;
+    box-shadow: 0 3px 0 #2C8B6E;
+    font-weight: 400;
+    padding: 10px 30px;
+    margin-left: 10px;
+
+    &:active {
+      background: #2C8B6E;
+    }
+  }
+}
