@@ -83,9 +83,12 @@ export const newCreateSession = (req, res) => {
 				throw new Error('No available items to create session.');
 			}
 
-			items = _items.slice(0, REVIEW_SESSION_MAX);
+			items = _items.sort(() => (0.5 - Math.random())); // "randomize" the items
 
-			itemIds = items.map(item => item._id);
+			itemIds = items
+				.slice(0, REVIEW_SESSION_MAX) // truncate the returned items
+				.map(item => item._id);
+
 			session = new Session({ user_id: userId, items: itemIds });
 			return session.save();
 		})
@@ -93,7 +96,7 @@ export const newCreateSession = (req, res) => {
 			session.items = items;
 			res.status(200).json({ session });
 		})
-		.catch( error => res.status(404).json({ error }));
+		.catch( error => res.status(404).json({ error: error }));
 };
 
 export const finishSession = (req, res) => {
