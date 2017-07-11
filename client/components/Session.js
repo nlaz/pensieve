@@ -155,7 +155,7 @@ class Session extends React.Component {
 		const itemContent = showAnswer ? selectedItem.description : selectedItem.title;
 
 		return (
-			<SessionsPage title='Review'>
+			<SessionPage title='Review'>
 				<ProgressBar progress={index / (items.length -1) * 100} />
 				<div className='panel panel-default'>
 					<div className='panel-body' style={styles} onClick={this.onItemClick}>
@@ -183,7 +183,7 @@ class Session extends React.Component {
 						</div>
 					</div>
 				)}
-			</SessionsPage>
+			</SessionPage>
 		);
 	}
 }
