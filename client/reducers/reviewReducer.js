@@ -27,8 +27,13 @@ export default function (state = INITIAL_STATE, action) {
 			const newItem = action.payload.item;
 			return { ...state, item: newItem, items: [ ...state.items, newItem ], message: action.payload.message };
 		}
-		case EDIT_ITEM:
-			return { ...state, item: action.payload.item, message: action.payload.message };
+		case EDIT_ITEM: {
+			const updatedItem = action.payload.item;
+			const updatedItems = (state.items || []).map(item =>
+				item._id === updatedItem._id ? updatedItem : item
+			);
+			return { ...state, item: updatedItem, items: updatedItems, message: action.payload.message };
+		}
 		case DELETE_ITEM: {
 			const items = (state.items || []).filter(item => item._id != action.payload.itemId );
 			return { ...state, item: {}, items: items };
