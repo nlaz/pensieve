@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
 	user_id: { type: String, required: true },
+	deck_id: { type: String },
 	title: { type: String, required: true },
 	description: { type: String },
 	reviewCount: { type: Number, default: 0 },

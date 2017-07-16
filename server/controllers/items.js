@@ -43,7 +43,10 @@ export const editItem = (req, res) => {
 
 export const deleteItem = (req, res) => {
 	Item.remove({ _id: req.params.item_id })
-		.then( item => res.status(200).json({ item }))
+		.then( item => {
+			console.log('😵 deleting item', item);
+			return res.status(200).json({ item });
+		})
 		.catch( error => res.status(404).json({ error }));
 };
 
@@ -62,7 +65,7 @@ export const reviewItem = (req, res) => {
 			const update = { $inc: { reviewCount: 1 } };
 			return Item.findOneAndUpdate(query, update, { new: true });
 		})
-		.then( () => res.status(200))
+		.then( () => res.status(200).json({ message: 'Success!'}))
 		.catch( error => res.status(404).json({ error }));
 };
 

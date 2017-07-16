@@ -1,6 +1,7 @@
 import authenticateUser, * as AuthenticationController from './controllers/authentication';
 import * as ItemController from './controllers/items';
 import * as SessionController from './controllers/sessions';
+import * as DeckController from './controllers/decks';
 
 export default function(app) {
 	/* Authentication Routes */
