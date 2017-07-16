@@ -1,0 +1,26 @@
+/**
+ * Deck styles
+ * http://bit.ly/1ywfhq7
+ */
+
+ .itemCard,
+ .deckCard {
+   background-color: $C_white;
+   display: block;
+   height: 200px;
+   margin-bottom: 20px;
+   padding: 10px;
+   & > p {
+     text-decoration: none;
+     color: $C_black;
+   }
+   &:hover > p {
+     text-decoration: none;
+   }
+ }
+
+.deckInfo {
+   background-color: $C_white;
+   height: 400px;
+   padding: 10px;
+}

@@ -23,6 +23,7 @@ export const FINISH_SESSION = 'finishSession';
 export const SESSION_ERROR = 'sessionError';
 
 export const FETCH_DECKS = 'fetchDecks';
+export const FETCH_DECK = 'fetchDeck';
 export const DECK_ERROR = 'deckError';
 
 export const DISMISS_ERROR = 'dismissError';

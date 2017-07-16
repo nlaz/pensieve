@@ -8,11 +8,20 @@ export const getDecks = (req, res) => {
 };
 
 export const getDeck = (req, res) => {
+  let deck;
   const deckId = req.params.deck_id;
   const userId = req.user._id;
 
   Deck.findOne({ _id: deckId, user_id: userId })
-    .then( deck => res.status(200).json({ deck }))
+    .then( _deck => {
+      deck = _deck;
+
+      return Item.find().where('_id').in(deck.items);
+    })
+    .then( items => {
+      deck.items = items;
+      res.status(200).json({ deck: deck });
+    })
     .catch( error => res.status(404).json({ error }));
 };
 

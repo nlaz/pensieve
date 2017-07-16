@@ -1,19 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Header from '../Header';
 import * as deckActions from '../../actions/deckActions';
 
-const DeckCard = ({ deck }) => {
-  return (
-    <div className='col-xs-3 deckCard--wrapper'>
-      <div className='deckCard' style={{ margin: '5px', backgroundColor: '#fff', padding: '10px', height: '200px' }}>
-        <p>{deck.title}</p>
-      </div>
-    </div>
-  );
-};
+const DeckCard = ({ deck }) => (
+  <div className='col-xs-3 deckCard--wrapper'>
+    <Link to={`/decks/${deck._id}`} className='deckCard'>
+      <p>{deck.title}</p>
+    </Link>
+  </div>
+);
 
 class DecksContainer extends React.Component {
   componentWillMount() {
@@ -28,7 +27,6 @@ class DecksContainer extends React.Component {
       <Header className='decks-page'>
         <div className='container'>
           <div className='row'>
-
            <h1>Decks page</h1>
            {decks && decks.length > 0 && decks.map((deck, key) => (
              <DeckCard deck={deck} key={key} />
