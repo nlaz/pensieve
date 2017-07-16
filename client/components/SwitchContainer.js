@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import LandingPage from './pages/LandingPage';
-import Sessions from './Sessions';
+import Sessions from './sessions/SessionsContainer';
 
 class SwitchContainer extends React.Component {
 	render() {

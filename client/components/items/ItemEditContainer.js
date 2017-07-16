@@ -2,8 +2,8 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from './Header';
-import * as itemActions from '../actions/itemActions';
+import Header from '../Header';
+import * as itemActions from '../../actions/itemActions';
 
 class EditItemContainer extends React.Component {
 	constructor(props) {

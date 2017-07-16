@@ -3,8 +3,8 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from './Header';
-import * as itemActions from '../actions/itemActions';
+import Header from '../Header';
+import * as itemActions from '../../actions/itemActions';
 
 const panelStyles = {
 	minHeight: '300px',

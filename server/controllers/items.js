@@ -1,6 +1,6 @@
 import Item from '../models/item';
 import Review from '../models/review';
-import REVIEW_TYPE from '../../client/components/Session';
+import REVIEW_TYPE from '../../client/components/sessions/SessionContainer';
 
 export const getItems = (req, res) => {
 	Item.find({ user_id: req.user._id })

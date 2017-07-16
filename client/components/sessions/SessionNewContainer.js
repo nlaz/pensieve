@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as reviewActions from '../actions/reviewActions';
+import * as reviewActions from '../../actions/reviewActions';
 
 class SessionNew extends React.Component {
 	componentDidMount() {

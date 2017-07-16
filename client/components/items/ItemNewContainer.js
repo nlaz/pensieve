@@ -2,10 +2,10 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from './Header';
-import * as itemActions from '../actions/itemActions';
+import Header from '../Header';
+import * as itemActions from '../../actions/itemActions';
 
-class NewItemContainer extends React.Component {
+class ItemNewContainer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { title: '', description: '' };
@@ -52,4 +52,4 @@ const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(itemActions, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(NewItemContainer);
+export default connect(null, mapDispatchToProps)(ItemNewContainer);

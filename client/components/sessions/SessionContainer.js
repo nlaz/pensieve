@@ -3,9 +3,9 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from './Header';
-import * as reviewActions from '../actions/reviewActions';
-import * as itemActions from '../actions/itemActions';
+import Header from '../Header';
+import * as reviewActions from '../../actions/reviewActions';
+import * as itemActions from '../../actions/itemActions';
 
 const styles = {
 	minHeight: '300px',
