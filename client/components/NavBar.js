@@ -19,6 +19,7 @@ export const NavBar = ({ self, authenticated, showNavMenu, onshowNavMenu }) => (
 					<ul className='nav navbar-nav navbar-right'>
 						<li><Link onClick={() => onshowNavMenu(false)}>Welcome, {self.name}</Link></li>
 						<li><Link to='/activity' onClick={() => onshowNavMenu(false)}>Activity</Link></li>
+						<li><Link to='/decks' onClick={() => onshowNavMenu(false)}>Decks</Link></li>
 						<li><Link to='/items' onClick={() => onshowNavMenu(false)}>Items</Link></li>
 						<li><Link to='/logout' onClick={() => onshowNavMenu(false)}>Logout</Link></li>
 					</ul>

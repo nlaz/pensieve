@@ -7,7 +7,11 @@ class DeckContainer extends React.Component {
   render() {
     return (
       <Header className='deck-page'>
-        <h1>Deck Page</h1>
+        <div className='container'>
+          <div className='row'>
+           <h1>Deck page</h1>
+          </div>
+        </div>
       </Header>
     );
   }

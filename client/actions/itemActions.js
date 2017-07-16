@@ -152,7 +152,7 @@ export function deleteItem(itemId) {
 
 	return function (dispatch) {
 		axios.delete(route, config)
-		.then((response) => {
+		.then(() => {
 			browserHistory.push('/items');
 			dispatch({
 				type: DELETE_ITEM,

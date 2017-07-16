@@ -1,5 +1,5 @@
 import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_SELF, DISMISS_ERROR, ITEM_ERROR, UPDATE_MESSAGE } from '../actions/types';
-import { SESSION_ERROR } from '../actions/types';
+import { DECK_ERROR, SESSION_ERROR } from '../actions/types';
 
 const INITIAL_STATE = { error: '', message: '', authenticated: false, self: '' };
 
@@ -17,6 +17,8 @@ export default function (state = INITIAL_STATE, action) {
 		case SESSION_ERROR:
 			return { ...state, error: action.payload.error, message: action.payload.message };
 		case ITEM_ERROR:
+			return { ...state, error: action.payload.error, message: action.payload.message };
+		case DECK_ERROR:
 			return { ...state, error: action.payload.error, message: action.payload.message };
 		case DISMISS_ERROR:
 			return { ...state, error: '', message: '' };
