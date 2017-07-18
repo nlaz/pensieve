@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_DECKS, FETCH_DECK, DECK_ERROR } from './types';
+import { CREATE_DECK, FETCH_DECKS, FETCH_DECK, DECK_ERROR } from './types';
 import cookie from 'react-cookie';
 
 export function fetchDecks() {
@@ -42,6 +42,29 @@ export function fetchDeck(deckId) {
         payload: {
           error: error.response.data.error,
           message: 'Error retrieving your deck.'
+        }
+      });
+    });
+  };
+}
+
+export function createDeck(params) {
+  const config = { headers: { Authorization: cookie.load('token') }};
+
+  return function (dispatch) {
+    axios.post('/api/decks', params, config)
+    .then((response) => {
+      dispatch({
+        type: CREATE_DECK,
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: DECK_ERROR,
+        payload: {
+          error: error.response.data.error,
+          message: 'Error creating your deck.'
         }
       });
     });

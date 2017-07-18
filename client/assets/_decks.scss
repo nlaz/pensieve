@@ -2,25 +2,59 @@
  * Deck styles
  * http://bit.ly/1ywfhq7
  */
-
- .itemCard,
- .deckCard {
-   background-color: $C_white;
-   display: block;
-   height: 200px;
-   margin-bottom: 20px;
-   padding: 10px;
-   & > p {
-     text-decoration: none;
-     color: $C_black;
-   }
-   &:hover > p {
-     text-decoration: none;
-   }
- }
-
+.editDeckInfo,
 .deckInfo {
-   background-color: $C_white;
-   height: 400px;
-   padding: 10px;
+  background-color: $C_white;
+  height: 400px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.itemCard,
+.deckCard {
+  background-color: $C_white;
+  display: block;
+  height: 200px;
+  margin-bottom: 20px;
+  padding: 10px;
+  & > p {
+    text-decoration: none;
+    color: $C_black;
+  }
+  &:hover > p {
+    text-decoration: none;
+  }
+}
+
+.itemCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.newItem--btn {
+  margin-bottom: 10px;
+}
+.itemCard {
+  position: relative;
+}
+.itemCard--close {
+  position: absolute;
+  right: -7px;
+  top: -7px;
+  border-radius: 999px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  padding: 0;
+
+  & .glyphicon {
+    line-height: 15px;
+    width: 13px;
+    text-align: center;
+  }
+}
+.items--wrapper {
+  padding: 0;
 }
