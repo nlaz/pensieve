@@ -32,9 +32,10 @@ export const createItem = (req, res) => {
 };
 
 export const editItem = (req, res) => {
-	const { title, description } = req.body;
+	const { title, description, hidden } = req.body;
 	const query = { _id: req.params.item_id };
-	const update = { title, description };
+	const update = { title, description, hidden };
+	Object.keys(update).forEach(key => update[key] === undefined && delete update[key]);
 
 	Item.findOneAndUpdate(query, update, { new: true })
 		.then( item => res.status(200).json({ item }))
@@ -44,7 +45,6 @@ export const editItem = (req, res) => {
 export const deleteItem = (req, res) => {
 	Item.remove({ _id: req.params.item_id })
 		.then( item => {
-			console.log('😵 deleting item', item);
 			return res.status(200).json({ item });
 		})
 		.catch( error => res.status(404).json({ error }));

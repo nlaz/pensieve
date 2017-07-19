@@ -9,7 +9,8 @@ const ItemSchema = new Schema({
 	description: { type: String },
 	reviewCount: { type: Number, default: 0 },
 	counter: { type: Number, default: 0 },
-	nextReviewDate: { type: Date, default: new Date() }
+	nextReviewDate: { type: Date, default: new Date() },
+	hidden: { type: Boolean, default: false }
 }, { timestamps: true });
 
 export default mongoose.model('Item', ItemSchema);
