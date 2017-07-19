@@ -119,6 +119,7 @@ export function reviewItem(params) {
 export function editItem(params) {
 	const config = { headers: { Authorization: cookie.load('token') } };
 	const route = `${ITEMS_API_URL}/${params.itemId}`;
+	console.log(params.hidden);
 
 	return function (dispatch) {
 		axios.put(route, params, config)

@@ -40,7 +40,10 @@ export default function (state = INITIAL_STATE, action) {
 			const updatedItems = (state.items || []).map(item =>
 				item._id === updatedItem._id ? updatedItem : item
 			);
-			return { ...state, item: updatedItem, items: updatedItems, message: action.payload.message };
+			const updatedSessionItems = ((state.session || {}).items || []).map(item =>
+				item._id === updatedItem._id ? updatedItem : item
+			);
+			return { ...state, item: updatedItem, items: updatedItems, message: action.payload.message, session: { ...state.session, items: updatedSessionItems } };
 		}
 		case DELETE_ITEM: {
 			const items = (state.items || []).filter(item => item._id != action.payload.itemId );

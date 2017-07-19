@@ -7,14 +7,6 @@ import Header from '../Header';
 import * as reviewActions from '../../actions/reviewActions';
 import * as itemActions from '../../actions/itemActions';
 
-const styles = {
-	minHeight: '300px',
-	display: 'flex',
-	justifyContent: 'center',
-	alignItems: 'center',
-	whiteSpace: 'pre-wrap',
-};
-
 export const REVIEW_TYPE = {
 	EASY: 'easy',
 	GOOD: 'good',
@@ -79,6 +71,7 @@ const SessionResults = ({ items }) => (
 class Session extends React.Component {
 	constructor(props) {
 		super(props);
+		this.onToggleHideItem = this.onToggleHideItem.bind(this);
 		this.onItemClick = this.onItemClick.bind(this);
 		this.onNextAction = this.onNextAction.bind(this);
 		this.state = { index: 0, showAnswer: false, showNextOptions: false, items: props.items };
@@ -131,6 +124,10 @@ class Session extends React.Component {
 		});
 	}
 
+	onToggleHideItem(item) {
+		this.props.actions.editItem({ itemId: item._id, hidden: !item.hidden });
+	}
+
 	render() {
 		const { session } = this.props;
 		const { index, showAnswer, showNextOptions, items = {} } = this.state;
@@ -158,10 +155,17 @@ class Session extends React.Component {
 			<SessionPage title='Review'>
 				<ProgressBar progress={index / (items.length -1) * 100} />
 				<div className='panel panel-default'>
-					<div className='panel-body' style={styles} onClick={this.onItemClick}>
+					<div className='panel-body' onClick={this.onItemClick}>
 						<h3 className='text-center' style={{ margin: '0'}}>
 							{itemContent}
 						</h3>
+
+						<button onClick={() => this.onToggleHideItem(selectedItem)} className='reviewCard--hide btn btn-reset'>
+							{selectedItem.hidden
+								? <span className='glyphicon glyphicon-eye-close' aria-hidden='true' ></span>
+								: <span className='glyphicon glyphicon-eye-open' aria-hidden='true' ></span>
+							}
+						</button>
 					</div>
 				</div>
 				{showNextOptions ? (
