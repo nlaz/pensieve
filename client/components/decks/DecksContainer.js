@@ -28,6 +28,9 @@ class DecksContainer extends React.Component {
         <div className='container'>
           <div className='row'>
            <h1>Decks page</h1>
+            <div className='text-right col-xs-12'>
+              <Link to='decks/new' className='newDeck--btn btn btn-primary'>New Deck +</Link>
+            </div>
            {decks && decks.length > 0 && decks.map((deck, key) => (
              <DeckCard deck={deck} key={key} />
            ))}
