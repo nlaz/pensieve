@@ -113,7 +113,7 @@ class ItemsContainer extends React.Component {
 		return (
 			<Header className='items-page'>
 				<div className='container'>
-					<div className='col-sm-8 col-sm-offset-2'>
+					<div className='col-md-8 col-md-offset-2'>
 						<h4 className='page-header'>Your Items {newItemButton} {searchBar}</h4>
 						<ul className='list-group'>
 							{pageItems.map((item, key) => (
