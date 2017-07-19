@@ -124,8 +124,10 @@ class Session extends React.Component {
 		});
 	}
 
-	onToggleHideItem(item) {
-		this.props.actions.editItem({ itemId: item._id, hidden: !item.hidden });
+	onToggleHideItem(e, item) {
+		e.preventDefault();
+		e.stopPropagation();
+		this.props.actions.toggleHideItem(item);
 	}
 
 	render() {
@@ -159,8 +161,7 @@ class Session extends React.Component {
 						<h3 className='text-center' style={{ margin: '0'}}>
 							{itemContent}
 						</h3>
-
-						<button onClick={() => this.onToggleHideItem(selectedItem)} className='reviewCard--hide btn btn-reset'>
+						<button onClick={(e) => this.onToggleHideItem(e, selectedItem)} className='reviewCard--hide btn btn-reset'>
 							{selectedItem.hidden
 								? <span className='glyphicon glyphicon-eye-close' aria-hidden='true' ></span>
 								: <span className='glyphicon glyphicon-eye-open' aria-hidden='true' ></span>

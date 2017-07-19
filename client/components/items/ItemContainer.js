@@ -19,6 +19,7 @@ class ItemContainer extends React.Component {
 		super(props);
 		this.onItemClick = this.onItemClick.bind(this);
 		this.onEditClick = this.onEditClick.bind(this);
+		this.onToggleHideItem = this.onToggleHideItem.bind(this);
 		this.state = { showAnswer: false };
 	}
 
@@ -36,6 +37,12 @@ class ItemContainer extends React.Component {
 	onEditClick() {
 		const itemId = this.props.item._id;
 		this.props.router.push(`/items/${itemId}/edit`);
+	}
+
+	onToggleHideItem(e, item) {
+		e.preventDefault();
+		e.stopPropagation();
+		this.props.actions.toggleHideItem(item);
 	}
 
 	render() {
@@ -67,6 +74,12 @@ class ItemContainer extends React.Component {
 									<h3 className='text-center' style={{ margin: '0' }}>
 										{itemContent}
 									</h3>
+									<button onClick={(e) => this.onToggleHideItem(e, item)} className='reviewCard--hide btn btn-reset'>
+										{item.hidden
+											? <span className='glyphicon glyphicon-eye-close' aria-hidden='true' ></span>
+											: <span className='glyphicon glyphicon-eye-open' aria-hidden='true' ></span>
+										}
+									</button>
 								</div>
 							</div>
 						</div>

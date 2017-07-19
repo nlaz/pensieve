@@ -116,10 +116,35 @@ export function reviewItem(params) {
 	};
 }
 
+export function toggleHideItem(item) {
+	const config = { headers: { Authorization: cookie.load('token') } };
+	const route = `${ITEMS_API_URL}/${item._id}`;
+	const params = { hidden: !item.hidden };
+
+	return function (dispatch) {
+		axios.put(route, params, config)
+		.then((response) => {
+			dispatch({
+				type: EDIT_ITEM,
+				payload: { item: response.data.item }
+			});
+		})
+		.catch((error) => {
+			console.error('Error', error);
+			dispatch({
+				type: ITEM_ERROR,
+				payload: {
+					error: error.response.data.error,
+					message: 'There was a problem editting your item. Doublecheck your network connection and try again.',
+				}
+			});
+		});
+	};
+}
+
 export function editItem(params) {
 	const config = { headers: { Authorization: cookie.load('token') } };
 	const route = `${ITEMS_API_URL}/${params.itemId}`;
-	console.log(params.hidden);
 
 	return function (dispatch) {
 		axios.put(route, params, config)
