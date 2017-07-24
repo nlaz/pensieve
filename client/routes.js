@@ -11,7 +11,7 @@ import Decks from './components/decks/DecksContainer';
 import DeckNew from './components/decks/DeckNewContainer';
 import DeckEdit from './components/decks/DeckEditContainer';
 import Session from './components/sessions/SessionContainer';
-import Sessions from './components/sessions/SessionsContainer';
+import HomeContainer from './components/home/HomeContainer';
 import SessionNew from './components/sessions/SessionNewContainer';
 import SwitchContainer from './components/SwitchContainer';
 
@@ -30,7 +30,7 @@ const routes = (
 		<Route path='items/new' component={ReqAuth(ItemNew)} />
 		<Route path='items/:itemId' component={ReqAuth(Item)} />
 		<Route path='items/:itemId/edit' component={ReqAuth(ItemEdit)} />
-		<Route path='activity' component={ReqAuth(Sessions)} />
+		<Route path='activity' component={ReqAuth(HomeContainer)} />
 		<Route path='decks' component={ReqAuth(Decks)} />
 		<Route path='decks/new' component={ReqAuth(DeckNew)} />
 		<Route path='decks/:deckId' component={ReqAuth(Deck)} />

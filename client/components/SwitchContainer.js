@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LandingPage from './pages/LandingPage';
-import Sessions from './sessions/SessionsContainer';
+import HomeContainer from './home/HomeContainer';
 
 class SwitchContainer extends React.Component {
 	render() {
 		return this.props.authenticated
-		? <Sessions />
+		? <HomeContainer />
 		: <LandingPage />;
 	}
 }

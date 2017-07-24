@@ -1,0 +1,94 @@
+/**
+ * Activity styles
+ * http://bit.ly/1ywfhq7
+ */
+
+$C_borderColor: #E9E9E9;
+
+
+$C_extraSmallDotBlue: #C7DCF3;
+$C_extraSmallDotSize: 2px;
+$C_smallDotBlue: #BDD0E6;
+$C_smallDotSize: 4px;
+$C_mediumDotBlue: #88AED9;
+$C_mediumDotSize: 5px;
+$C_largeDotBlue: #547FB1;
+$C_largeDotSize: 7px;
+$C_extraLargeDotBlue: #37567A;
+$C_extraLargeDotSize: 8px;
+
+.activity {
+  background: $C_white;
+  border: 1px solid $C_borderColor;
+  border-radius: 6px;
+  padding: 25px 20px;
+  position: relative;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  margin-left: 20px;
+  margin-bottom: 3px;
+}
+
+.activity--reviewTotal {
+  color: #B2B2B2;
+  font-size: 12px;
+  margin-bottom: 3px;
+  position: absolute;
+  top: 10px;
+  right: 22px;
+  text-align: right;
+}
+
+.graph {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.graph .col {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 100%;
+}
+
+.graph .row {
+  height: 100%;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.graph .dot {
+  border-radius: 100%;
+
+  &.dot-xs {
+    background: $C_extraSmallDotBlue;
+    height: $C_extraSmallDotSize;
+    width: $C_extraSmallDotSize;
+  }
+  &.dot-sm {
+    background: $C_smallDotBlue;
+    height: $C_smallDotSize;
+    width: $C_smallDotSize;
+  }
+  &.dot-md {
+    background: $C_mediumDotBlue;
+    height: $C_mediumDotSize;
+    width: $C_mediumDotSize;
+  }
+  &.dot-lg {
+    background: $C_largeDotBlue;
+    height: $C_largeDotSize;
+    width: $C_largeDotSize;
+  }
+  &.dot-xl {
+    background: $C_extraLargeDotBlue;
+    height: $C_extraLargeDotSize;
+    width: $C_extraLargeDotSize;
+  }
+}

@@ -1,7 +1,7 @@
 import {
 	CREATE_ITEM, FETCH_DUE_ITEMS, FETCH_ITEMS, FETCH_ITEM, EDIT_ITEM, DELETE_ITEM,
 	CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, FINISH_SESSION,
-	CREATE_DECK, FETCH_DECKS, FETCH_DECK,
+	CREATE_DECK, FETCH_DECKS, FETCH_DECK, FETCH_ACTIVITY,
 } from '../actions/types';
 
 const INITIAL_STATE = {};
@@ -30,6 +30,9 @@ export default function (state = INITIAL_STATE, action) {
      return { ...state, deck: action.payload.deck };
 		case CREATE_DECK:
 			return { ...state, deck: action.payload.deck };
+
+		case FETCH_ACTIVITY:
+			return { ...state, reviewItems: action.payload.reviewItems };
 
 		case CREATE_ITEM: {
 			const newItem = action.payload.item;

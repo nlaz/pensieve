@@ -1,4 +1,5 @@
 import authenticateUser, * as AuthenticationController from './controllers/authentication';
+import * as ActivityController from './controllers/activity';
 import * as ItemController from './controllers/items';
 import * as SessionController from './controllers/sessions';
 import * as DeckController from './controllers/decks';
@@ -27,6 +28,10 @@ export default function(app) {
 	app.post('/api/v2/items/:item_id/review', authenticateUser, ItemController.newReviewAction);
 
 	app.get('/api/due_items', authenticateUser, ItemController.getDueItems);
+
+	/* Activity Routes */
+	app.get('/api/raw_activity', authenticateUser, ActivityController.getActivity);
+	app.get('/api/activity', authenticateUser, ActivityController.getReviewItems);
 
 	/* Deck Routes */
 	app.get('/api/decks', authenticateUser, DeckController.getDecks);

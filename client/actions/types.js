@@ -27,5 +27,8 @@ export const FETCH_DECK = 'fetchDeck';
 export const CREATE_DECK = 'createDeck';
 export const DECK_ERROR = 'deckError';
 
+export const FETCH_ACTIVITY = 'fetchActivity';
+export const ACTIVITY_ERROR = 'activityError';
+
 export const DISMISS_ERROR = 'dismissError';
 export const UPDATE_MESSAGE = 'updateMessage';
