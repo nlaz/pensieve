@@ -1,0 +1,50 @@
+/**
+ * Items styles
+ * http://bit.ly/1ywfhq7
+ */
+
+$C_borderColor: #DDDDDD;
+$C_buttonGreen: #41D0A5;
+$C_buttonDarkGreen: #339777;
+
+.items-search {
+  align-items: flex-end;
+  background: $C_white;
+  border: 1px solid $C_borderColor;
+  border-radius: 4px;
+  padding: 10px 20px 17px 20px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.items-search label {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.items-search input {
+  height: 36px;
+}
+
+.items-search .searchInput {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.item-newItemLink {
+  background: $C_buttonGreen;
+  border: 1px solid #3CC199;
+  color: $C_white;
+  font-size: 14px;
+  padding: 7px 17px;
+  transition: all .1s ease;
+  text-shadow: 0 .5px 0 #3CC199;
+
+  &:hover {
+    background: $C_buttonDarkGreen;
+    border: 1px solid $C_buttonDarkGreen;
+    color: $C_white;
+    text-shadow: none;
+  }
+}

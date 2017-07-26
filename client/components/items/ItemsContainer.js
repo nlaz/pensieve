@@ -30,6 +30,20 @@ const PageNavigation = ({ numPages, onDecrementPage, onIncrementPage, onChangePa
 	</nav>
 );
 
+const SearchBar = ({ onSearchChange }) => (
+	<div className='items-search'>
+		<div className='searchInput'>
+			<label htmlFor='search'>Title includes</label>
+			<input onChange={onSearchChange} type='text' id='search' className='form-control' placeholder='Search for items...' />
+		</div>
+		<div>
+			<Link to='/items/new' className='item-newItemLink btn pull-right'>
+				New Item
+			</Link>
+		</div>
+	</div>
+);
+
 class ItemsContainer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -71,22 +85,10 @@ class ItemsContainer extends React.Component {
 		const { items } = this.props;
 		const { activePage, filter } = this.state;
 
-  	const newItemButton = (
-			<Link to='/items/new' className='btn btn-success btn-md pull-right' style={{ height: '34px' }}>
-				<span className="glyphicon glyphicon-plus" aria-hidden="true" style={{ lineHeight: '18px' }} ></span>
-			</Link>
-		);
-
-		const searchBar = (
-			<div className='form-group pull-right' style={{ marginRight: '10px' }}>
-				<input onChange={this.onSearchChange} type='text' className='form-control' placeholder='Search' />
-			</div>
-		);
-
 		if (!items) {
 			return (
 				<div className='col-md-8 col-md-offset-2'>
-					<h4 className='page-header'>Your Items {newItemButton}</h4>
+					<h4 className='page-header'>Your Items</h4>
 					<h4>You don't have any items yet. <em>Ahem. Bummer...</em></h4>
 				</div>
 			);
@@ -114,7 +116,8 @@ class ItemsContainer extends React.Component {
 			<Header className='items-page'>
 				<div className='container'>
 					<div className='col-md-8 col-md-offset-2'>
-						<h4 className='page-header'>Your Items {newItemButton} {searchBar}</h4>
+						<h4 className='page-header'>Your Items</h4>
+						<SearchBar onSearchChange={this.onSearchChange} />
 						<ul className='list-group'>
 							{pageItems.map((item, key) => (
 								<li key={key} className='list-group-item'>
