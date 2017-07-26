@@ -4,6 +4,7 @@
  */
 
 $C_borderColor: #DDDDDD;
+$C_borderRadius: 4px;
 $C_buttonGreen: #41D0A5;
 $C_buttonDarkGreen: #339777;
 
@@ -11,11 +12,11 @@ $C_buttonDarkGreen: #339777;
   align-items: flex-end;
   background: $C_white;
   border: 1px solid $C_borderColor;
-  border-radius: 4px;
+  border-radius: $C_borderRadius;
   padding: 10px 20px 17px 20px;
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .items-search label {
@@ -47,4 +48,35 @@ $C_buttonDarkGreen: #339777;
     color: $C_white;
     text-shadow: none;
   }
+}
+
+.itemCard {
+  align-items: center;
+  color: $C_black;
+  border: 1px solid $C_borderColor;
+  border-radius: $C_borderRadius;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+  position: relative;
+
+  &:hover {
+    text-decoration: none;
+    color: $C_black;
+  }
+}
+
+.itemCard .hideIcon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #aaa;
+}
+
+.itemCard .progress {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  left: 15px;
 }

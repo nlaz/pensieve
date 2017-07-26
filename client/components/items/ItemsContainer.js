@@ -44,6 +44,38 @@ const SearchBar = ({ onSearchChange }) => (
 	</div>
 );
 
+const ProgressBar = ({ progress }) => (
+	<div className='progress'>
+		<div className='progress-bar progress-bar-info'
+			role='progressbar'
+			aria-valuenow={progress}
+			aria-valuemin='0'
+			aria-valuemax='100'
+			style={{ width: `${progress}%` }}
+		>
+			<span className="sr-only">{progress}% Complete</span>
+		</div>
+	</div>
+);
+
+const ItemCard = ({ item }) => {
+	const maxTime = Math.max(moment(item.nextReviewDate).diff(item.updatedAt, 'hours'), 0);
+	const progressTime = Math.max(moment(item.nextReviewDate).diff(moment(), 'hours'), 0);
+	const progress = (( progressTime / maxTime) * 100) || 0;
+	return (
+		<div className='itemCard-wrapper col-xs-3'>
+			<Link to={`/items/${item._id}`} className='itemCard'>
+				<ProgressBar progress={progress} />
+				<h4 style={{ margin: '0' }}>{item.title}</h4>
+				{item.hidden &&
+					<div className='hideIcon'>
+						<span className='glyphicon glyphicon-eye-close' aria-hidden='true' ></span>
+					</div>}
+			</Link>
+		</div>
+	);
+};
+
 class ItemsContainer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -100,34 +132,17 @@ class ItemsContainer extends React.Component {
 		const pageEnd = Math.min((activePage + 1) * PAGE_SIZE, filteredItems.length);
 		const pageItems = filteredItems.slice(pageStart, pageEnd);
 
-		const reviewCountStyle = {
-			color: '#ffffff',
-			background: '#66c067',
-			borderRadius: '100%',
-			width: '20px',
-			height: '20px',
-			display: 'inline-block',
-			textAlign: 'center'
-		};
-		const reviewCountEl = item => <div style={reviewCountStyle}>{item.counter}</div>;
-		const nextReviewEl = item => <span>{moment(item.nextReviewDate).toNow(true)}</span>;
-		const itemTag = item => <span style={{ color: '#d5d5d5' }}>{nextReviewEl(item)} &middot; {reviewCountEl(item)}</span>;
 		return (
 			<Header className='items-page'>
 				<div className='container'>
 					<div className='col-md-8 col-md-offset-2'>
 						<h4 className='page-header'>Your Items</h4>
 						<SearchBar onSearchChange={this.onSearchChange} />
-						<ul className='list-group'>
+						<div className='row'>
 							{pageItems.map((item, key) => (
-								<li key={key} className='list-group-item'>
-									<Link to={`/items/${item._id}`} className='row'>
-									<span className='col-xs-8'>{item.title}</span>
-										<span className='col-xs-4 text-right'>{itemTag(item)}</span>
-									</Link>
-								</li>
+								<ItemCard item={item} key={key} />
 							))}
-						</ul>
+						</div>
 						{numPages > 1 &&
 							<PageNavigation
 								numPages={numPages}
