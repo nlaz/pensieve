@@ -9,7 +9,11 @@ import * as deckActions from '../../actions/deckActions';
 const DeckCard = ({ deck }) => (
   <div className='col-xs-3 deckCard--wrapper'>
     <Link to={`/decks/${deck._id}`} className='deckCard'>
-      <p>{deck.title}</p>
+      <span className='deckCard--itemCount'>
+        {deck.items.length}
+				<span className='glyphicon glyphicon-file' aria-hidden='true' ></span>
+      </span>
+      <h4>{deck.title}</h4>
     </Link>
   </div>
 );
@@ -29,7 +33,9 @@ class DecksContainer extends React.Component {
           <div className='row'>
            <h1>Decks page</h1>
             <div className='text-right col-xs-12'>
-              <Link to='decks/new' className='newDeck--btn btn btn-primary'>New Deck +</Link>
+              <Link to='decks/new' className='newDeck--btn btn btn-primary'>
+                New Deck +
+              </Link>
             </div>
            {decks && decks.length > 0 && decks.map((deck, key) => (
              <DeckCard deck={deck} key={key} />

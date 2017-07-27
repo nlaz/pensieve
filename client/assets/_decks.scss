@@ -2,8 +2,14 @@
  * Deck styles
  * http://bit.ly/1ywfhq7
  */
+$C_borderColor: #DDDDDD;
+$C_buttonGreen: #41D0A5;
+$C_buttonDarkGreen: #339777;
+
 .editDeckInfo,
 .deckInfo {
+  border: 1px solid $C_borderColor;
+  border-radius: 3px;
   background-color: $C_white;
   height: 400px;
   margin-bottom: 10px;
@@ -13,10 +19,14 @@
 .itemCard,
 .deckCard {
   background-color: $C_white;
-  display: block;
   height: 200px;
   margin-bottom: 20px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   & > p {
     text-decoration: none;
     color: $C_black;
@@ -25,6 +35,48 @@
     text-decoration: none;
   }
 }
+
+.deckCard {
+  border: 1px solid $C_borderColor;
+  border-radius: 3px;
+  color: $C_black;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+  position: relative;
+
+  &:hover {
+    text-decoration: none;
+    color: $C_black;
+  }
+}
+
+.deckCard--itemCount {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  .glyphicon {
+    margin-left: 5px;
+  }
+}
+
+.newDeck--btn {
+  background: $C_buttonGreen;
+  border: 1px solid #3CC199;
+  color: $C_white;
+  font-size: 14px;
+  padding: 7px 17px;
+  transition: all .1s ease;
+  text-shadow: 0 .5px 0 #3CC199;
+
+  &:hover {
+    background: $C_buttonDarkGreen;
+    border: 1px solid $C_buttonDarkGreen;
+    color: $C_white;
+    text-shadow: none;
+  }
+}
+
 
 .itemCard {
   display: flex;

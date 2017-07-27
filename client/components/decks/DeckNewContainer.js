@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import Header from '../Header';
 import * as deckActions from '../../actions/deckActions';
 
-const ItemCard = ({ item, onInputChange, onRemove }) => (
+const EditItemCard = ({ item, onInputChange, onRemove }) => (
   <div className='col-xs-4 itemCard--wrapper'>
     <div className='itemCard' >
       <button onClick={onRemove} className='itemCard--close btn btn-default btn-xs'>
@@ -53,7 +53,6 @@ class DeckNewContainer extends React.Component {
     this.setState(() => ({ [name]: value }));
   }
   onCreateDeck() {
-    console.log('yoo');
     const { title, description, items } = this.state;
     this.props.actions.createDeck({
       title: title,
@@ -89,7 +88,7 @@ class DeckNewContainer extends React.Component {
             </form>
             <div className='col-xs-9 items--wrapper'>
               {items && items.length > 0 && items.map((item, key) => (
-                <ItemCard item={item} onInputChange={(e) => this.onItemInputChange(e, key)} onRemove={() => this.onRemoveCard(key)} key={key} />
+                <EditItemCard item={item} onInputChange={(e) => this.onItemInputChange(e, key)} onRemove={() => this.onRemoveCard(key)} key={key} />
               ))}
             </div>
           </div>
@@ -100,7 +99,7 @@ class DeckNewContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  decks: state.data.decks,
+  deck: state.data.deck,
 });
 
 const mapDispatchToProps = (dispatch) => ({

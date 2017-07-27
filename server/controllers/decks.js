@@ -28,9 +28,6 @@ export const getDeck = (req, res) => {
 /**
  * Creates a deck object from API request data.
  * Constructs item objects after building a deck.
- * Holds an array of item ids.
- * items structure:
-  ]
  */
 export const createDeck = (req, res) => {
   let savedId;
@@ -59,6 +56,36 @@ export const createDeck = (req, res) => {
       return Deck.findOneAndUpdate({ _id: savedId}, { items: itemIds }, { new: true });
     })
     .then( deck => res.status(200).json({ deck }))
+    .catch( error => res.status(404).json({ error }));
+};
+
+/**
+ * Edits a deck object from API request data.
+ * Constructs item objects after building a deck.
+ */
+export const editDeck = (req, res) => {
+  let newDeck;
+  const deckId = req.params.deck_id;
+  const userId = req.user._id;
+
+  Deck.findOne({ _id: deckId, user_id: userId })
+    .then(oldDeck => {
+      oldDeck.title = req.body.title;
+      oldDeck.description = req.body.description;
+
+      // TODO: Update items for deck.
+
+      oldDeck.save();
+    })
+    .then( _deck => {
+      newDeck = _deck;
+
+      return Item.find().where('_id').in(deck.items);
+    })
+    .then( items => {
+      newDeck.items = items;
+      res.status(200).json({ deck: deck });
+    })
     .catch( error => res.status(404).json({ error }));
 };
 

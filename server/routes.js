@@ -40,6 +40,8 @@ export default function(app) {
 
 	app.get('/api/decks/:deck_id', authenticateUser, DeckController.getDeck);
 
+	app.put('/api/decks/:deck_id', authenticateUser, DeckController.editDeck);
+
 	app.delete('/api/decks/:deck_id', authenticateUser, DeckController.deleteDeck);
 
 	/* Session Routes */

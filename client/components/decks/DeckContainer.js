@@ -3,17 +3,9 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as deckActions from '../../actions/deckActions';
+import { ItemCard } from '../items/ItemsContainer';
 
 import Header from '../Header';
-
-const ItemCard = ({ item }) => (
-  <div className='col-xs-4 itemCard--wrapper'>
-    <Link to={`/items/${item._id}`} className='itemCard'>
-      <h4>{item.title}</h4>
-      <p>{item.description}</p>
-    </Link>
-  </div>
-);
 
 class DeckContainer extends React.Component {
   componentWillMount() {
@@ -30,7 +22,11 @@ class DeckContainer extends React.Component {
       <Header className='deck-page'>
         <div className='container'>
           <div className='row'>
-           <h1>Deck page</h1>
+            <h1>Deck page</h1>
+            <div className='col-xs-12 text-right'>
+              <Link to={`/decks/${deck._id}/edit`} className='newDeck--btn btn btn--default'>Edit</Link>
+            </div>
+
             <div className='col-xs-3 deckInfo--wrapper'>
               <div className='deckInfo'>
                 <h4>{deck.title}</h4>
@@ -39,7 +35,7 @@ class DeckContainer extends React.Component {
             </div>
             <div className='row col-xs-9'>
               {items && items.length > 0 && items.map((item, key) => (
-                <ItemCard item={item} key={key} />
+                <ItemCard className='col-xs-4' item={item} key={key} />
               ))}
             </div>
           </div>

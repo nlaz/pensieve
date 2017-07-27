@@ -58,12 +58,12 @@ const ProgressBar = ({ progress }) => (
 	</div>
 );
 
-const ItemCard = ({ item }) => {
+export const ItemCard = ({ item, className }) => {
 	const maxTime = Math.max(moment(item.nextReviewDate).diff(item.updatedAt, 'hours'), 0);
 	const progressTime = Math.max(moment(item.nextReviewDate).diff(moment(), 'hours'), 0);
 	const progress = (( progressTime / maxTime) * 100) || 0;
 	return (
-		<div className='itemCard-wrapper col-xs-3'>
+		<div className={`itemCard-wrapper ${className}`}>
 			<Link to={`/items/${item._id}`} className='itemCard'>
 				<ProgressBar progress={progress} />
 				<h4 style={{ margin: '0' }}>{item.title}</h4>
@@ -140,7 +140,7 @@ class ItemsContainer extends React.Component {
 						<SearchBar onSearchChange={this.onSearchChange} />
 						<div className='row'>
 							{pageItems.map((item, key) => (
-								<ItemCard item={item} key={key} />
+								<ItemCard className='col-xs-3' item={item} key={key} />
 							))}
 						</div>
 						{numPages > 1 &&

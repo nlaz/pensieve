@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_DECK, FETCH_DECKS, FETCH_DECK, DECK_ERROR } from './types';
+import { CREATE_DECK, FETCH_DECKS, FETCH_DECK, EDIT_DECK, DECK_ERROR } from './types';
 import cookie from 'react-cookie';
 
 export function fetchDecks() {
@@ -56,6 +56,30 @@ export function createDeck(params) {
     .then((response) => {
       dispatch({
         type: CREATE_DECK,
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: DECK_ERROR,
+        payload: {
+          error: error.response.data.error,
+          message: 'Error creating your deck.'
+        }
+      });
+    });
+  };
+}
+
+export function editDeck(params) {
+  const config = { headers: { Authorization: cookie.load('token') }};
+  console.log('editDeck', params);
+
+  return function (dispatch) {
+    axios.put(`/api/decks/${params.deckId}`, params, config)
+    .then((response) => {
+      dispatch({
+        type: EDIT_DECK,
         payload: response.data,
       });
     })
