@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  app:
+    build: .
+    env_file:
+      - .docker.config.env
+    volumes:
+      - .:/var/www/boreas:rw
+      - /var/www/boreas/node_modules
+    ports:
+      - "3000:3000"
+    command: yarn prod
+    links:
+      - mongo
+
+  mongo:
+    image: mongo:3.4.6
+    ports:
+      - "27017:27017"
+    volumes_from:
+      - data
+
+  data:
+    image: tianon/true
+    volumes:
+      - /data/db
