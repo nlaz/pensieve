@@ -7,7 +7,7 @@ import Header from '../Header';
 import * as deckActions from '../../actions/deckActions';
 
 const DeckCard = ({ deck }) => (
-  <div className='col-xs-3 deckCard--wrapper'>
+  <div className='col-xs-6 col-sm-3 deckCard--wrapper'>
     <Link to={`/decks/${deck._id}`} className='deckCard'>
       <span className='deckCard--itemCount'>
         {deck.items.length}

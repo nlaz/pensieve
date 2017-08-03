@@ -23,15 +23,34 @@
     line-height: 26px;
     color: $C_black;
   }
+  .navbar-toggle {
+    background: none;
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border: 1px solid $C_black;
+    }
+  }
+  .navbar-toggle .icon-bar {
+    background: $C_black;
+  }
 
   .navbar-nav > li > a {
+    background: $C_black;
     border: 1px solid $C_black;
-    border-radius: 6px;
-    color: $C_black;
+    color: $C_white;
     line-height: 28px;
     margin: 10px 0;
     padding: 6px 35px;
     transition: all .2s ease;
+
+    @include atSmallUp {
+      border-radius: 6px;
+      color: $C_black;
+      background: none;
+    }
 
     &:hover {
       color: $C_white;
