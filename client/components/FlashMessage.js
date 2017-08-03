@@ -13,7 +13,7 @@ export const FlashMessage = ({ message, error, onDismiss }) => {
 	const decorator = Boolean(error) ? 'Oops!' : 'Success!';
 
 	return (
-		<div className='container'>
+		<div className='flashMessage container'>
 			<div className={classNames} role='alert'>
 				<button onClick={onDismiss} type='button' className='close' data-dismiss='alert' aria-label='Close'>
 					<span aria-hidden='true'>&times;</span>

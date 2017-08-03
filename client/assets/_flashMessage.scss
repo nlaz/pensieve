@@ -1,0 +1,18 @@
+/**
+ * Flash message styles
+ * http://bit.ly/1ywfhq7
+ */
+
+
+.flashMessage {
+  position: relative;
+  z-index: 100;
+}
+
+.flashMessage .alert {
+  left: 0;
+  margin-top: 10px;
+  right: 0;
+  position: absolute;
+  top: 0;
+}
