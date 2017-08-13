@@ -3,6 +3,7 @@ import * as ActivityController from './controllers/activity';
 import * as ItemController from './controllers/items';
 import * as SessionController from './controllers/sessions';
 import * as DeckController from './controllers/decks';
+import * as EmailController from './controllers/emails';
 
 export default function(app) {
 	/* Authentication Routes */
@@ -11,6 +12,9 @@ export default function(app) {
 	app.post('/users/login', AuthenticationController.loginUser);
 
 	app.get('/self', AuthenticationController.getSelf);
+
+	/* Email Routes */
+	app.post('/api/emails/prelaunch', EmailController.addEmailToPrelaunchList);
 
 	/* Item Routes */
 	app.get('/api/items', authenticateUser, ItemController.getItems);

@@ -84,3 +84,35 @@ export const sendEmail = (user, items) => {
 			console.log('Emailer Error', error.response.statusCode, error.response);
 		});
 };
+
+/* Id of sendgrid list for prelaunch emails */
+const PRELAUNCH_LIST_ID = 1769636;
+
+export const addEmailToPrelaunchList = (req, res) => {
+	const email = req.body.email;
+
+	// Step 1. Create SG recipient object
+	const createRecipientRequest = sendgrid.emptyRequest({
+		method: 'POST',
+		path: '/v3/contactdb/recipients',
+		body: [{ email: email }],
+	});
+	return sendgrid.API(createRecipientRequest)
+		.then(response => {
+			const { persisted_recipients } = response.body;
+
+			// Step 2. Add SG recipient id to prelaunch list
+			const addToListRequest = sendgrid.emptyRequest({
+				method: 'POST',
+				path: `/v3/contactdb/lists/${PRELAUNCH_LIST_ID}/recipients`,
+				body: persisted_recipients,
+			});
+			return sendgrid.API(addToListRequest);
+		})
+		.then(response => {
+			return res.status(response.statusCode).json({ message: 'Success!'});
+		})
+		.catch(error => {
+			console.log('Emailer Error', error.response.statusCode, error.response);
+		});
+};
