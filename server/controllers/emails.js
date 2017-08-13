@@ -7,7 +7,7 @@ import { REVIEW_SESSION_SIZE } from './sessions';
 const sendgrid = sg(process.env.SENDGRID_API_KEY);
 
 const domain = process.env.HOST_URL;
-const sourceEmail = new helper.Email('hi@boreas.space');
+const sourceEmail = new helper.Email('hi@boreas.space', 'Your friend, Boreas');
 const subjects = [
 	'Start your morning with some knowledge - Boreas',
 	'Well, Check This Out - Boreas',
