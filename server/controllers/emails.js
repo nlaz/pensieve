@@ -113,6 +113,6 @@ export const addEmailToPrelaunchList = (req, res) => {
 			return res.status(response.statusCode).json({ message: 'Success!'});
 		})
 		.catch(error => {
-			console.log('Emailer Error', error.response.statusCode, error.response);
+			return res.status(404).json({ error });
 		});
 };

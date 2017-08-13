@@ -31,5 +31,8 @@ export const DECK_ERROR = 'deckError';
 export const FETCH_ACTIVITY = 'fetchActivity';
 export const ACTIVITY_ERROR = 'activityError';
 
+export const EMAIL_SIGN_UP_PRELAUNCH = 'emailSignUpPrelaunch';
+export const EMAIL_SIGN_UP_PRELAUNCH_ERROR = 'emailSignUpPrelaunchError';
+
 export const DISMISS_ERROR = 'dismissError';
 export const UPDATE_MESSAGE = 'updateMessage';
