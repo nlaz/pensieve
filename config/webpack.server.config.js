@@ -2,6 +2,10 @@
 
 var nodeExternals = require('webpack-node-externals');
 var paths = require('./paths');
+var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+var webpackIsomorphicToolsPlugin =
+  new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools-configuration'))
+	.development();
 
 var publicPath = '/';
 var config = {
@@ -23,9 +27,23 @@ var config = {
 				query: {
 					cacheDirectory: true
 				}
+			},
+			{
+			  test: /\.(png|jpg|jpeg|gif|svg)$/,
+				use: [
+					{
+						loader: 'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+					},
+					{
+						loader: 'image-webpack-loader'
+					}
+				],
 			}
 		]
 	},
+	plugins: [
+		webpackIsomorphicToolsPlugin,
+	],
 	externals: [
 		nodeExternals({
 			modulesDir: 'node_modules',

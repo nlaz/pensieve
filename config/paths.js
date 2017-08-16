@@ -17,6 +17,7 @@ var nodePaths = (process.env.NODE_PATH || '')
 module.exports = {
   appBuild: resolveApp('build'),
   appAssets: resolveApp('public/assets'),
+  appImages: resolveApp('images'),
   appPublic: resolveApp('public'),
   appClient: resolveApp('client'),
   postCssConfig: resolveApp('config'),

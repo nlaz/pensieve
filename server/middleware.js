@@ -36,6 +36,12 @@ export default (req, res) => {
 		} else if (redirect) {
 			res.redirect(redirect.pathname + redirect.search);
 		} else if (props) {
+			// clear require() cache if in development mode
+			// (makes asset hot reloading work)
+			if (process.env.NODE_ENV !== 'production') {
+				webpackIsomorphicTools.refresh();
+			}
+
 			const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 			const store = createStoreWithMiddleware(appReducer);
 			const html = renderToString(

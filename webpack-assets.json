@@ -1,0 +1,12 @@
+{
+  "javascript": {
+    "main": "/bundle.js"
+  },
+  "styles": {},
+  "assets": {
+    "./client/assets/images/illustration.png": "/28d594174870c346ab193c826eee05cf.png"
+  },
+  "webpack": {
+    "version": "2.2.1"
+  }
+}

@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 import path from 'path';
 import openBrowser from 'react-dev-utils/openBrowser';
+var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 
 import middleware from './middleware';
 import { broadcastEmailsCronJob } from './cron';
@@ -61,8 +62,15 @@ if (process.env.NODE_ENV === 'development') {
 			chunkModules: false
 		}
 	}));
+  // app.use(require('webpack-dev-server')(compiler, { noInfo: true }));
 	app.use(require('webpack-hot-middleware')(compiler));
 	app.use('/', express.static(path.resolve(__dirname, '..', 'public')));
+	var projectBasePath = path.resolve(__dirname, '..');
+	// this global variable will be used later in express middleware
+	global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../config/webpack-isomorphic-tools-configuration'))
+	.server(projectBasePath, function() {
+		console.log('sup');
+	});
 } else if (process.env.NODE_ENV === 'production') {
 	app.use('/', express.static(path.resolve(__dirname, '..', 'build')));
 }

@@ -1,7 +1,11 @@
 'use strict';
-
 var webpack = require('webpack');
 var paths = require('./paths');
+
+var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+var webpackIsomorphicToolsPlugin =
+  new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools-configuration'))
+	.development();
 
 var publicPath = '/';
 var config = {
@@ -52,10 +56,16 @@ var config = {
 						loader: 'sass-loader'
 					}
 				]
+			},
+
+			{
+			  test: /\.(png|jpg|jpeg|gif|svg)$/,
+				loader: 'url-loader?limit=10240',
 			}
 		]
 	},
 	plugins: [
+		webpackIsomorphicToolsPlugin,
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.DefinePlugin({
