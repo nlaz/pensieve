@@ -23,7 +23,7 @@ const NotFoundPage = () => (
 	<h1>Page Not Found :(</h1>
 );
 
-const routes = (
+const getRoutes = (store) => (
 	<Route path='/'>
 		<IndexRoute component={SwitchContainer} />
 		<Route path='items' component={ReqAuth(Items)} />
@@ -45,4 +45,4 @@ const routes = (
 	</Route>
 );
 
-export default routes;
+export default getRoutes;

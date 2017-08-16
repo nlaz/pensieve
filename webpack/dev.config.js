@@ -1,16 +1,17 @@
 'use strict';
 var webpack = require('webpack');
-var paths = require('./paths');
+var paths = require('../config/paths');
 
+const { webpackHost, webpackPort } = require('../config/env');
+
+var WebpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin =
-  new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools-configuration'))
-	.development();
+var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(WebpackIsomorphicToolsConfig);
 
 var publicPath = '/';
-var config = {
+module.exports = {
 	entry: [
-		'webpack-hot-middleware/client',
+		`webpack-hot-middleware/client?path=http://${webpackHost}:${webpackPort}/__webpack_hmr`,
 		paths.appIndexJs
 	],
 	devtool: 'eval',
@@ -57,27 +58,33 @@ var config = {
 					}
 				]
 			},
-
 			{
 			  test: /\.(png|jpg|jpeg|gif|svg)$/,
 				loader: 'url-loader?limit=10240',
 			}
 		]
 	},
+  resolve: {
+    modules: [
+      'node_modules',
+      'client',
+    ],
+    extensions: ['.json', '.js', '.jsx'],
+  },
 	plugins: [
-		webpackIsomorphicToolsPlugin,
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.DefinePlugin({
+      __CLIENT__: true,
+      __DEVTOOLS__: true,
 			'process.env': {
 				NODE_ENV: JSON.stringify('development'),
 				BUILD: true
 			}
-		})
+		}),
+    webpackIsomorphicToolsPlugin.development(),
 	],
 	node: {
 		fs: 'empty',
 	}
 };
-
-module.exports = config;
