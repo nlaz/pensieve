@@ -3,10 +3,7 @@ import Header from './Header';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as emailActions from '../actions/emailActions';
-// import HEADER_IMAGE from '../../assets/images/illustration.png';
-// require('images-require-hook')(['.png'], '/build');
 const HEADER_IMAGE = require('../assets/images/illustration.png');
-// const HEADER_IMAGE = require('file-loader!../../assets/images/illustration.png');
 
 export class LandingPage extends React.Component {
 	constructor(props) {
@@ -30,6 +27,7 @@ export class LandingPage extends React.Component {
 
 	render() {
 		const { email } = this.state;
+		const { isSuccess, hasErrored } = this.props;
 		return (
 			<Header className='landing-page text-center'>
 				<div className='landing-body container'>
@@ -38,12 +36,21 @@ export class LandingPage extends React.Component {
 						<h1 className='title'>Cut your study time in half</h1>
 						<h4 className='subtitle'><strong>Learn smarter.</strong> Boreas uses intelligent flashcards to find the best time for you to review so you learn better.</h4>
 						<form className='landing-form' onSubmit={this.onSubmit}>
-              <label htmlFor='email'>Beta coming early September. Request an invite.</label>
-							<div className='landing-input'>
-								<input onChange={this.onChange} name='email' type='text' placeholder='Email Address' value={email} />
-								<button onClick={this.onSubmit} type='submit' className='btn btn-primary'>Request Access</button>
-							</div>
-							<div className='input-error'>Sorry! You broke our thing :(</div>
+							{isSuccess &&
+								<div className='info-success'>Success! Thanks for signing up to our magical product.</div>
+							}
+							{!isSuccess &&
+								<div>
+		              <label htmlFor='email'>Beta coming early September. Request an invite.</label>
+									<div className='landing-input'>
+										<input onChange={this.onChange} name='email' type='text' placeholder='Email Address' value={email} />
+										<button onClick={this.onSubmit} type='submit' className='btn btn-primary'>Request Access</button>
+									</div>
+									{hasErrored &&
+										<div className='input-error'>Sorry! You broke our thing :(</div>
+									}
+								</div>
+							}
 						</form>
 						</div>
 					<div className='landing-image col-xs-5'>
@@ -59,4 +66,9 @@ const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(emailActions, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(LandingPage);
+const mapStateToProps = state => ({
+	isSuccess: state.prelaunch.isSuccess,
+	hasErrored: state.prelaunch.hasErrored
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

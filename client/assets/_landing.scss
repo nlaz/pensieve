@@ -6,6 +6,7 @@
 $C_primaryBlue: #1574FB;
 $C_darkGray: #4B4B4B;
 $C_mediumGray: #8D8D8D;
+$C_errorRed: #E35A5A;
 
 .landing-page {
   background: $C_white;
@@ -140,4 +141,9 @@ $C_mediumGray: #8D8D8D;
       background: #2C8B6E;
     }
   }
+}
+
+.landing-form .input-error {
+  color: $C_errorRed;
+  margin-top: 5px;
 }
