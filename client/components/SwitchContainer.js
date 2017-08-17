@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import LandingPage from './pages/LandingPage';
+import LandingPage from './LandingPage';
 import HomeContainer from './home/HomeContainer';
 
 class SwitchContainer extends React.Component {
