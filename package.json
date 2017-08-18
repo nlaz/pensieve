@@ -4,13 +4,12 @@
   "description": "memory tool",
   "main": "src/server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development babel-node ./server/index.js",
-    "build": "yarn run build:client && yarn run build:server",
-    "serve": "cross-env NODE_ENV=production node ./build/bundle.server.js",
-    "serve:dev": "cross-env NODE_ENV=development node ./build/bundle.server.js",
+    "start": "cross-env NODE_ENV=development yarn build && yarn serve",
+    "prod": "cross-env NODE_ENV=production yarn build && yarn serve",
+    "build": "yarn build:client && yarn build:server",
+    "serve": "node ./build/bundle.server.js",
     "build:client": "webpack --config config/webpack.config.prod.js",
     "build:server": "webpack --config config/webpack.server.config.js",
-    "prod": "yarn build && yarn serve",
     "forever": "yarn start:prod",
     "start:prod": "forever start -c 'yarn prod' ./",
     "stop": "forever stopall"
