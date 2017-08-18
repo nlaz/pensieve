@@ -6,8 +6,12 @@
 /* Variables */
 $C_white: #ffffff;
 $C_black: #222B2D;
-$C_lightGray: #F4F4F4;
+$C_lightGray: #F8F8F8;
 $C_blue: #3b85bf;
+$C_primaryBlue: #1574FB;
+$C_darkGray: #4B4B4B;
+$C_mediumGray: #8D8D8D;
+$C_errorRed: #E35A5A;
 
 /* Breakpoint mixins */
 @mixin atSmallUp {
@@ -36,10 +40,27 @@ body {
   margin-top: 40px;
 }
 
+.text-bold {
+  font-weight: 700;
+}
+
+input.form-control {
+  padding: 20px 15px;
+}
+
+button.btn {
+  padding: 10px;
+}
+
+button.btn.btn-primary {
+  background: $C_primaryBlue;
+}
+
 @import './landing';
 @import './navbar';
 @import './flashMessage';
 @import './decks';
+@import './login';
 @import './review';
 @import './activity';
 @import './items';

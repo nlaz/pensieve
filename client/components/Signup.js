@@ -40,10 +40,10 @@ class Signup extends React.Component {
 	render() {
 		return (
 			<Header className='signup-page'>
-				<div className='container'>
+				<div className='signup-form container'>
 					<div className='row'>
-						<div className='col-md-6 col-md-offset-3'>
-							<h2>Join Boreas Today</h2>
+						<div className='col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'>
+							<h3 className='text-bold'>Join Boreas Today</h3>
 							<form action='/signup' method='post'>
 								<div className='form-group'>
 									<label htmlFor='nameInput'>Name</label>
@@ -64,8 +64,8 @@ class Signup extends React.Component {
 							<hr/>
 
 							<div className='row'>
-								<p className='text-center'>Already have an account? <Link to="/login">Login</Link></p>
-								<p className='text-center'>Or go <Link to="/">home</Link>.</p>
+								<p className='text-center'>Already have an account? <Link className='link' to="/login">Login</Link></p>
+								<p className='text-center'>Or go <Link className='link' to="/">home</Link>.</p>
 							</div>
 						</div>
 					</div>

@@ -3,11 +3,6 @@
  * http://bit.ly/1ywfhq7
  */
 
-$C_primaryBlue: #1574FB;
-$C_darkGray: #4B4B4B;
-$C_mediumGray: #8D8D8D;
-$C_errorRed: #E35A5A;
-
 .landing-page {
   background: $C_white;
   min-height: 100vh;
@@ -26,7 +21,6 @@ $C_errorRed: #E35A5A;
   .navbar-brand {
     height: 60px;
     line-height: 26px;
-    font-weight: 700;
     color: $C_primaryBlue;
   }
   .navbar-toggle {
