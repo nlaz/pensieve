@@ -4,6 +4,39 @@ A simple app to run daily flashcards in email
 ## Running Locally
 This app built on Node(link) and MongoDB(link). Install those if you haven't already.
 
+### Running Locally with Docker
+Confirm you have the Docker config file '.docker.config.env' && that you have Docker installed if you haven't already.
+
+In order to run the development application run:
+```
+$ docker-compose up
+```
+
+In order to run the production application run:
+```
+$ docker-compose -f docker-compose-prod.yaml up
+```
+
+This is all you need to do to minimally run the application, if you would prefer not to use Docker you can set it up manually as instructed below.
+
+### Running Locally on MacOS
+Install homebrew & install node and mongodb
+```
+$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+$ brew install node
+$ brew install mongodb
+```
+
+In order to start mongodb from homebrew run this command
+```
+$ brew services start mongodb
+```
+
+In order to stop mongodb from homebrew run this
+```
+$ brew services stop mongodb
+```
+
 #### 0. Project Setup
 Pull project down from GitHub. Install the Node dependencies.
 ```
