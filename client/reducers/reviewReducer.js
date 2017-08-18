@@ -1,7 +1,7 @@
 import {
 	CREATE_ITEM, FETCH_DUE_ITEMS, FETCH_ITEMS, FETCH_ITEM, EDIT_ITEM, DELETE_ITEM,
 	CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, FINISH_SESSION,
-	CREATE_DECK, EDIT_DECK, FETCH_DECKS, FETCH_DECK, FETCH_ACTIVITY,
+	CREATE_DECK, EDIT_DECK, DELETE_DECK, FETCH_DECKS, FETCH_DECK, FETCH_ACTIVITY,
 } from '../actions/types';
 
 const INITIAL_STATE = {};
@@ -54,6 +54,10 @@ export default function (state = INITIAL_STATE, action) {
 			const items = (state.items || []).filter(item => item._id != action.payload.itemId );
 			return { ...state, item: {}, items: items };
 		}
+    case DELETE_DECK: {
+      const decks = (state.decks || []).filter(deck => deck._id != action.payload.itemId );
+      return { ...state, deck: {}, decks: decks };
+    }
 	}
 
 	return state;

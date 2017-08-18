@@ -3,8 +3,8 @@ import Item from '../models/item';
 
 export const getDecks = (req, res) => {
   Deck.find({ user_id: req.user._id })
-    .then( decks => res.status(200).json({ decks }))
-    .catch( error => res.status(404).json({ error }));
+    .then(decks => res.status(200).json({ decks }))
+    .catch(error => res.status(404).json({ error }));
 };
 
 export const getDeck = (req, res) => {
@@ -13,16 +13,16 @@ export const getDeck = (req, res) => {
   const userId = req.user._id;
 
   Deck.findOne({ _id: deckId, user_id: userId })
-    .then( _deck => {
+    .then(_deck => {
       deck = _deck;
 
       return Item.find().where('_id').in(deck.items);
     })
-    .then( items => {
+    .then(items => {
       deck.items = items;
       res.status(200).json({ deck: deck });
     })
-    .catch( error => res.status(404).json({ error }));
+    .catch(error => res.status(404).json({ error }));
 };
 
 /**
@@ -32,8 +32,15 @@ export const getDeck = (req, res) => {
 export const createDeck = (req, res) => {
   let savedId;
   if (req.body.items && req.body.items.length === 0) {
-    return res.status(404).json({ error: 'Decks must have at least one item'});
+    return res.status(404).json({ error: 'Decks must have at least one item' });
   }
+
+  for (let item of req.body.items) {
+    if (item.title === '') {
+      return res.status(404).json({ error: 'Items must have a non-empty title' });
+    }
+  }
+
   const newDeck = new Deck({
     user_id: req.user._id,
     title: req.body.title,
@@ -41,7 +48,7 @@ export const createDeck = (req, res) => {
   });
 
   newDeck.save()
-    .then( deck => {
+    .then(deck => {
       savedId = deck._id;
       const itemObjs = req.body.items.map(item => ({
         ...item,
@@ -51,12 +58,12 @@ export const createDeck = (req, res) => {
 
       return Item.create(itemObjs);
     })
-    .then( items => {
+    .then(items => {
       const itemIds = items.map(item => item._id);
-      return Deck.findOneAndUpdate({ _id: savedId}, { items: itemIds }, { new: true });
+      return Deck.findOneAndUpdate({ _id: savedId }, { items: itemIds }, { new: true });
     })
-    .then( deck => res.status(200).json({ deck }))
-    .catch( error => res.status(404).json({ error }));
+    .then(deck => res.status(200).json({ deck }))
+    .catch(error => res.status(404).json({ error }));
 };
 
 /**
@@ -77,16 +84,16 @@ export const editDeck = (req, res) => {
 
       oldDeck.save();
     })
-    .then( _deck => {
+    .then(_deck => {
       newDeck = _deck;
 
       return Item.find().where('_id').in(deck.items);
     })
-    .then( items => {
+    .then(items => {
       newDeck.items = items;
       res.status(200).json({ deck: deck });
     })
-    .catch( error => res.status(404).json({ error }));
+    .catch(error => res.status(404).json({ error }));
 };
 
 /**
@@ -95,7 +102,7 @@ export const editDeck = (req, res) => {
  */
 export const deleteDeck = (req, res) => {
   Item.remove({ deck_id: req.params.deck_id })
-    .then( () => Deck.remove({ _id: req.params.deck_id }))
-    .then( () => res.status(200).json({ message: 'Success!' }))
-    .catch( error => res.status(404).json({ error }));
+    .then(() => Deck.remove({ _id: req.params.deck_id }))
+    .then(() => res.status(200).json({ message: 'Success!' }))
+    .catch(error => res.status(404).json({ error }));
 };
