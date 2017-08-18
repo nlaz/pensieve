@@ -3,6 +3,8 @@
  * http://bit.ly/1ywfhq7
  */
 
+ $C_buttonGreen: #41D0A5;
+
 .navbar {
   background: $C_white;
   border-radius: 0;
@@ -15,10 +17,35 @@
     height: 60px;
     line-height: 26px;
     color: $C_primaryBlue;
+
+    &:hover,
+    &:focus {
+      color: $C_primaryBlue;
+    }
   }
 
   .navbar-nav > li > a {
     line-height: 28px;
     color: $C_darkGray;
+
+    &:hover,
+    &:focus {
+      color: $C_black;
+    }
+  }
+
+  .btn-reviewNow {
+    color: $C_white !important;
+    background: $C_buttonGreen;
+    border-color: transparent;
+    padding: 5px 25px;
+    margin: 10px 0;
+    transition: all .1s ease-in-out;
+    margin-right: 20px;
+
+    &:hover,
+    &:active {
+      background: #3BC29A !important;
+    }
   }
 }
