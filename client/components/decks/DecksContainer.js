@@ -31,9 +31,9 @@ class DecksContainer extends React.Component {
       <Header className='decks-page'>
         <div className='container'>
           <div className='row'>
-           <h1>Decks page</h1>
-            <div className='text-right col-xs-12'>
-              <Link to='decks/new' className='newDeck--btn btn btn-primary'>
+            <div className='page-header'>
+              <h4>Decks</h4>
+              <Link to='decks/new' className='btn-newDeck btn btn-primary'>
                 New Deck +
               </Link>
             </div>

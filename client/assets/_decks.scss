@@ -60,9 +60,15 @@ $C_buttonDarkGreen: #339777;
   }
 }
 
-.newDeck--btn {
-  background: $C_buttonGreen;
-  border: 1px solid #3CC199;
+.decks-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.btn-newDeck {
+  background: $C_primaryBlue;
   color: $C_white;
   font-size: 14px;
   padding: 7px 17px;
@@ -70,8 +76,7 @@ $C_buttonDarkGreen: #339777;
   text-shadow: 0 .5px 0 #3CC199;
 
   &:hover {
-    background: $C_buttonDarkGreen;
-    border: 1px solid $C_buttonDarkGreen;
+    background: #024AB1;
     color: $C_white;
     text-shadow: none;
   }

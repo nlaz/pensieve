@@ -66,7 +66,7 @@ export const ItemCard = ({ item, className }) => {
 		<div className={`itemCard-wrapper ${className}`}>
 			<Link to={`/items/${item._id}`} className='itemCard'>
 				<ProgressBar progress={progress} />
-				<h4 style={{ margin: '0' }}>{item.title}</h4>
+				<h5 style={{ margin: '0', fontSize: '16px' }}>{item.title}</h5>
 				{item.hidden &&
 					<div className='hideIcon'>
 						<span className='glyphicon glyphicon-eye-close' aria-hidden='true' ></span>
@@ -119,7 +119,7 @@ class ItemsContainer extends React.Component {
 
 		if (!items) {
 			return (
-				<div className='col-md-8 col-md-offset-2'>
+				<div className='col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2'>
 					<h4 className='page-header'>Your Items</h4>
 					<h4>You don't have any items yet. <em>Ahem. Bummer...</em></h4>
 				</div>
@@ -135,23 +135,21 @@ class ItemsContainer extends React.Component {
 		return (
 			<Header className='items-page'>
 				<div className='container'>
-					<div className='col-md-8 col-md-offset-2'>
-						<h4 className='page-header'>Your Items</h4>
-						<SearchBar onSearchChange={this.onSearchChange} />
-						<div className='row'>
-							{pageItems.map((item, key) => (
-								<ItemCard className='col-xs-3' item={item} key={key} />
-							))}
-						</div>
-						{numPages > 1 &&
-							<PageNavigation
-								numPages={numPages}
-								onIncrementPage={this.onIncrementPage}
-								onDecrementPage={this.onDecrementPage}
-								onChangePage={this.onChangePage}
-							/>
-						}
+					<h4 className='page-header'>Items</h4>
+					<SearchBar onSearchChange={this.onSearchChange} />
+					<div className='row'>
+						{pageItems.map((item, key) => (
+							<ItemCard className='col-xs-6 col-sm-3 col-lg-2' item={item} key={key} />
+						))}
 					</div>
+					{numPages > 1 &&
+						<PageNavigation
+							numPages={numPages}
+							onIncrementPage={this.onIncrementPage}
+							onDecrementPage={this.onDecrementPage}
+							onChangePage={this.onChangePage}
+						/>
+					}
 				</div>
 			</Header>
 		);
