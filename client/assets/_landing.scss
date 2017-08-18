@@ -26,7 +26,8 @@ $C_errorRed: #E35A5A;
   .navbar-brand {
     height: 60px;
     line-height: 26px;
-    color: $C_black;
+    font-weight: 700;
+    color: $C_primaryBlue;
   }
   .navbar-toggle {
     background: none;
@@ -42,24 +43,27 @@ $C_errorRed: #E35A5A;
     background: $C_black;
   }
 
+  .navbar-collapse {
+    border-color: $C_primaryBlue;
+  }
+
   .navbar-nav > li > a {
-    background: $C_black;
-    border: 1px solid $C_black;
     color: $C_white;
     line-height: 28px;
     margin: 10px 0;
     padding: 6px 35px;
     transition: all .2s ease;
+    border: 1px solid transparent;
+    background: $C_primaryBlue;
 
     @include atSmallUp {
       border-radius: 6px;
-      color: $C_black;
+      color: $C_primaryBlue;
       background: none;
     }
 
     &:hover {
-      color: $C_white;
-      background: $C_black;
+      border: 1px solid $C_primaryBlue;
     }
   }
 }
@@ -75,9 +79,13 @@ $C_errorRed: #E35A5A;
 }
 
 .landing-copy {
-  text-align: left;
-  width: 50%;
-  margin-right: 30px;
+  text-align: center;
+
+  @include atSmallUp {
+    text-align: left;
+    max-width: 440px;
+    margin-right: 30px;
+  }
 
   .title {
     color: $C_primaryBlue;
@@ -103,6 +111,14 @@ $C_errorRed: #E35A5A;
   }
 }
 
+.landing-image {
+  display: none;
+  margin: auto;
+
+  @include atSmallUp {
+    display: inline;
+  }
+}
 .landing-image img {
   background-size: cover;
   width: 100%;
@@ -114,6 +130,11 @@ $C_errorRed: #E35A5A;
 
   .landing-input {
     display: flex;
+    flex-direction: column;
+
+    @include atSmallUp {
+      flex-direction: row;
+    }
   }
 
   label {
@@ -125,20 +146,30 @@ $C_errorRed: #E35A5A;
   input {
     background: transparent;
     border: 2px solid $C_primaryBlue;
-    border-radius: 3px 0 0 3px;
+    border-radius: 3px;
     padding: 10px 15px;
     width: 100%;
+
+    @include atSmallUp {
+      border-radius: 3px 0 0 3px;
+    }
   }
 
   .btn {
     background: $C_primaryBlue;
-    border: 0;
-    border-radius: 0 3px 3px 0;
+    border: 2px solid $C_primaryBlue;
+    border-radius: 3px;
     font-weight: 400;
     padding: 10px 20px;
+    margin-top: 5px;
+
+    @include atSmallUp {
+      border-radius: 0 3px 3px 0;
+      margin-top: 0;
+    }
 
     &:active {
-      background: #2C8B6E;
+      background: #024AB1;
     }
   }
 }
@@ -146,4 +177,21 @@ $C_errorRed: #E35A5A;
 .landing-form .input-error {
   color: $C_errorRed;
   margin-top: 5px;
+}
+
+.landing-footer {
+  color: #CBCBCB;
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+
+  .footer-item {
+    display: inline;
+    padding: 10px 20px;
+
+    a {
+      color: #CBCBCB;
+    }
+  }
 }

@@ -31,7 +31,7 @@ export class LandingPage extends React.Component {
 		return (
 			<Header className='landing-page text-center'>
 				<div className='landing-body container'>
-					<div className='landing-copy'>
+					<div className='landing-copy col-sm-6'>
 						<h4 className='coming-soon'>COMING SOON</h4>
 						<h1 className='title'>Cut your study time in half</h1>
 						<h4 className='subtitle'><strong>Learn smarter.</strong> Boreas uses intelligent flashcards to find the best time for you to review so you learn better.</h4>
@@ -53,8 +53,17 @@ export class LandingPage extends React.Component {
 							}
 						</form>
 						</div>
-					<div className='landing-image col-xs-5'>
+					<div className='landing-image col-sm-6'>
 						<img alt='Hero image' src={HEADER_IMAGE} />
+					</div>
+				</div>
+				<div className='landing-footer'>
+					<div className='footer-item'>
+						<span>Boreas &copy; 2017</span>
+					</div>
+					{'|'}
+					<div className='footer-item'>
+						<a href="mailto:nikolazaris@gmail.com">Contact</a>
 					</div>
 				</div>
 			</Header>
