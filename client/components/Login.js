@@ -40,10 +40,10 @@ class Login extends React.Component {
 	render() {
 		return (
 			<Header className='login-page'>
-				<div className='container'>
+				<div className='login-form container'>
 					<div className='row'>
-						<div className='col-md-6 col-md-offset-3'>
-							<h2>Login</h2>
+						<div className='col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'>
+							<h3 className='text-bold'>Login</h3>
 							<form onSubmit={(e) => e.preventDefault()}>
 								<div className='form-group'>
 									<label htmlFor='emailInput'>Email</label>
@@ -60,8 +60,8 @@ class Login extends React.Component {
 							<hr/>
 
 							<div className='row'>
-								<p className='text-center'>Need an account? <Link to='/signup'>Signup</Link></p>
-								<p className='text-center'>Or go <Link to='/'>home</Link>.</p>
+								<p className='text-center'>Need an account? <Link className='link' to='/signup'>Signup</Link></p>
+								<p className='text-center'>Or go <Link className='link' to='/'>home</Link>.</p>
 							</div>
 						</div>
 					</div>
