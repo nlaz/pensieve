@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -30,10 +31,11 @@ export class SignupForm extends React.Component {
 		const { email, isInvalidEmail } = this.state;
 		const { isSuccess, hasErrored } = this.props;
 		const showError = hasErrored || isInvalidEmail;
+		const formClasses = cx('landing-form', { 'success': isSuccess, 'error': showError });
 
 		if (isSuccess) {
 			return (
-				<form className='landing-form form-success'>
+				<form className={formClasses}>
 					<div className='success-checkmark'>
 						<img src={require('../assets/images/check.png')} />
 					</div>
@@ -43,7 +45,7 @@ export class SignupForm extends React.Component {
 		}
 
 		return (
-			<form className='landing-form' onSubmit={this.onSubmit}>
+			<form className={formClasses} onSubmit={this.onSubmit}>
 				<div>
 					<label htmlFor='email'>Beta coming early September. Request an invite.</label>
 					<div className='landing-input'>

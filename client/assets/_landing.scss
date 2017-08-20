@@ -156,14 +156,18 @@
     font-weight: 400;
     padding: 10px 20px;
     margin-top: 5px;
+    transition: all .2s ease-in-out;
 
     @include atSmallUp {
       border-radius: 0 3px 3px 0;
       margin-top: 0;
     }
 
+    &:hover,
+    &:focus,
     &:active {
-      background: #024AB1;
+      border: 2px solid #0F65DF;
+      background: #0F65DF;
     }
   }
 }
@@ -171,6 +175,14 @@
 .landing-form {
   position: relative;
   margin-bottom: 35px;
+
+  &.error .landing-input {
+    animation: shake 200ms 2 linear;
+  }
+
+  &.success {
+    animation: dropIn 200ms 1 ease-in-out;
+  }
 }
 
 .landing-form .input-error {
@@ -182,7 +194,7 @@
   left: 0;
 }
 
-.landing-form.form-success {
+.landing-form.success {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -221,5 +233,31 @@
     a {
       color: #CBCBCB;
     }
+  }
+}
+
+@keyframes dropIn {
+  0% {
+    opacity: 0;
+    transform: translate(0, -10px);
+  }
+  50% {
+    transform: translate(0, -5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(6px, 0);
+  }
+  50% {
+    transform: translate(-6px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
   }
 }
