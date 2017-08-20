@@ -67,6 +67,7 @@ $C_buttonDarkGreen: #339777;
   margin-left: 20px;
 }
 
+.btn-newItem,
 .btn-newDeck {
   background: $C_primaryBlue;
   color: $C_white;
@@ -74,6 +75,7 @@ $C_buttonDarkGreen: #339777;
   padding: 7px 17px;
   transition: all .1s ease;
   text-shadow: 0 .5px 0 #3CC199;
+  line-height: 24px;
 
   &:hover {
     background: #024AB1;
@@ -89,10 +91,6 @@ $C_buttonDarkGreen: #339777;
   justify-content: space-between;
 }
 
-.newDeck--btn,
-.newItem--btn {
-  margin-bottom: 10px;
-}
 .itemCard {
   position: relative;
 }

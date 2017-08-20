@@ -30,20 +30,6 @@ const PageNavigation = ({ numPages, onDecrementPage, onIncrementPage, onChangePa
 	</nav>
 );
 
-const SearchBar = ({ onSearchChange }) => (
-	<div className='items-search'>
-		<div className='searchInput'>
-			<label htmlFor='search'>Title includes</label>
-			<input onChange={onSearchChange} type='text' id='search' className='form-control' placeholder='Search for items...' />
-		</div>
-		<div>
-			<Link to='/items/new' className='item-newItemLink btn pull-right'>
-				New Item
-			</Link>
-		</div>
-	</div>
-);
-
 const ProgressBar = ({ progress }) => (
 	<div className='progress'>
 		<div className='progress-bar progress-bar-info'
@@ -62,6 +48,7 @@ export const ItemCard = ({ item, className }) => {
 	const maxTime = Math.max(moment(item.nextReviewDate).diff(item.updatedAt, 'hours'), 0);
 	const progressTime = Math.max(moment(item.nextReviewDate).diff(moment(), 'hours'), 0);
 	const progress = (( progressTime / maxTime) * 100) || 0;
+
 	return (
 		<div className={`itemCard-wrapper ${className}`}>
 			<Link to={`/items/${item._id}`} className='itemCard'>
@@ -76,14 +63,38 @@ export const ItemCard = ({ item, className }) => {
 	);
 };
 
+export const PageHeader = ({ count, onSearchChange }) => {
+	return (
+		<div className='page-header'>
+			<div className='info'>
+				<h4 className='title'>Items</h4>
+				{count &&
+					<p className='subtitle'>{count} items in your collection</p>
+				}
+			</div>
+			<div className='actions'>
+				<div className='search'>
+					<input onChange={onSearchChange} type='text' id='search' className='form-control' placeholder='Search for items...' />
+				</div>
+				<div className='createItem'>
+				<Link to='/items/new' className='btn-newItem btn pull-right'>
+					New Item +
+				</Link>
+				</div>
+			</div>
+		</div>
+	);
+};
+
 class ItemsContainer extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.state = { activePage: 0, filter: '' };
 		this.onIncrementPage = this.onIncrementPage.bind(this);
 		this.onDecrementPage = this.onDecrementPage.bind(this);
 		this.onChangePage = this.onChangePage.bind(this);
 		this.onSearchChange = this.onSearchChange.bind(this);
-		this.state = { activePage: 0, filter: '' };
 	}
 
 	componentWillMount() {
@@ -135,8 +146,10 @@ class ItemsContainer extends React.Component {
 		return (
 			<Header className='items-page'>
 				<div className='container'>
-					<h4 className='page-header'>Items</h4>
-					<SearchBar onSearchChange={this.onSearchChange} />
+					<PageHeader
+						count={items.length}
+						onSearchChange={this.onSearchChange}
+					/>
 					<div className='row'>
 						{pageItems.map((item, key) => (
 							<ItemCard className='col-xs-6 col-sm-3 col-lg-2' item={item} key={key} />

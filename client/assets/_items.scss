@@ -8,31 +8,6 @@ $C_borderRadius: 4px;
 $C_buttonGreen: #41D0A5;
 $C_buttonDarkGreen: #339777;
 
-.items-search {
-  align-items: flex-end;
-  background: $C_white;
-  border: 1px solid $C_borderColor;
-  border-radius: $C_borderRadius;
-  padding: 10px 20px 17px 20px;
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 30px;
-}
-
-.items-search label {
-  font-weight: 600;
-  margin-bottom: 0;
-}
-
-.items-search input {
-  height: 36px;
-}
-
-.items-search .searchInput {
-  flex-grow: 1;
-  margin-right: 10px;
-}
-
 .item-newItemLink {
   background: $C_buttonGreen;
   border: 1px solid #3CC199;
@@ -79,4 +54,53 @@ $C_buttonDarkGreen: #339777;
   top: 15px;
   right: 15px;
   left: 15px;
+}
+
+.items-page .page-header {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  @include atSmallUp {
+    align-items: center;
+    flex-direction: row;
+    margin-top: 40px;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    @include atSmallUp {
+      width: auto;
+    }
+  }
+
+  .title {
+    flex-grow: 1;
+    margin-bottom: 5px;
+  }
+
+  .subtitle {
+    color: #8C8787;
+  }
+
+  .search {
+    flex-grow: 1;
+    margin-right: 30px;
+
+    @include atSmallUp {
+      flex-grow: none;
+    };
+  }
+
+  .search input {
+    border-radius: 999px;
+    padding: 10px 20px;
+    background: transparent;
+  }
 }
