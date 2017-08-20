@@ -76,7 +76,7 @@ export const PageHeader = ({ count, onSearchChange }) => {
 				<div className='search'>
 					<input onChange={onSearchChange} type='text' id='search' className='form-control' placeholder='Search for items...' />
 				</div>
-				<div className='createItem'>
+				<div className='create'>
 				<Link to='/items/new' className='btn-newItem btn pull-right'>
 					New Item +
 				</Link>

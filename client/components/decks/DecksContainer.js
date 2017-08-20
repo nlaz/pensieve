@@ -18,26 +18,63 @@ const DeckCard = ({ deck }) => (
   </div>
 );
 
+export const PageHeader = ({ count, onSearchChange }) => {
+	return (
+		<div className='page-header'>
+			<div className='info'>
+				<h4 className='title'>Decks</h4>
+				{count &&
+					<p className='subtitle'>{count} decks in your collection</p>
+				}
+			</div>
+			<div className='actions'>
+				<div className='search'>
+					<input onChange={onSearchChange} type='text' id='search' className='form-control' placeholder='Search for decks...' />
+				</div>
+				<div className='create'>
+          <Link to='decks/new' className='btn-newDeck btn btn-primary'>
+            New Deck +
+          </Link>
+				</div>
+			</div>
+		</div>
+	);
+};
+
 class DecksContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+		this.state = { activePage: 0, filter: '' };
+    this.onSearchChange = this.onSearchChange.bind(this);
+  }
+
   componentWillMount() {
     if(!this.props.decks) {
       this.props.actions.fetchDecks();
     }
   }
 
+  onSearchChange(e) {
+		const value = e.target.value;
+		this.setState({ filter: value });
+	}
+
   render() {
-    const { decks } = this.props;
+    const { filter } = this.state;
+    const { decks = [] } = this.props;
+
+		const filteredDecks = filter.length > 0 ? decks.filter(deck => deck.title.indexOf(filter) !== -1) : decks;
+
     return (
       <Header className='decks-page'>
         <div className='container'>
           <div className='row'>
-            <div className='page-header'>
-              <h4>Decks</h4>
-              <Link to='decks/new' className='btn-newDeck btn btn-primary'>
-                New Deck +
-              </Link>
-            </div>
-           {decks && decks.length > 0 && decks.map((deck, key) => (
+            <PageHeader
+              count={decks.length}
+              onSearchChange={this.onSearchChange}
+            />
+           {filteredDecks.length > 0 && filteredDecks.map((deck, key) => (
              <DeckCard deck={deck} key={key} />
            ))}
           </div>
