@@ -17,6 +17,7 @@
   left: 0;
   right: 0;
   position: absolute;
+  z-index: 10;
 
   .navbar-brand {
     height: 60px;
@@ -68,16 +69,28 @@
 }
 
 .landing-body {
+  align-items: center;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  @include atMediumUp {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .landing-copy {
   text-align: center;
+  max-width: 440px;
+  z-index: 1;
+  margin: 40px 0;
 
-  @include atSmallUp {
+  @include atMediumUp {
     text-align: left;
-    max-width: 440px;
     margin-right: 30px;
   }
 
@@ -106,16 +119,27 @@
 }
 
 .landing-image {
-  display: none;
+  background-image: url('../assets/images/splash_hero2.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top;
   margin: auto;
-
-  @include atSmallUp {
-    display: inline;
-  }
-}
-.landing-image img {
-  background-size: cover;
+  max-width: 260px;
+  top: 10px;
+  height: 100%;
   width: 100%;
+  position: absolute;
+  z-index: 0;
+  opacity: .9;
+
+  @include atMediumUp {
+    background-image: url('../assets/images/splash_hero.png');
+    background-position: center;
+    display: inline;
+    max-width: 50%;
+    position: static;
+    opacity: 1;
+  }
 }
 
 .landing-form {
@@ -173,7 +197,6 @@
 }
 
 .landing-form {
-  position: relative;
   margin-bottom: 35px;
 
   &.error .landing-input {
@@ -183,6 +206,10 @@
   &.success {
     animation: dropIn 200ms 1 ease-in-out;
   }
+}
+
+.landing-form .input-errorWrapper {
+  position: relative;
 }
 
 .landing-form .input-error {

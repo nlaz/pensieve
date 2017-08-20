@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as emailActions from '../actions/emailActions';
 import { SignupForm } from './SignupForm';
-const HEADER_IMAGE = require('../assets/images/illustration.png');
 
 export class LandingPage extends React.Component {
 	constructor(props) {
@@ -22,7 +21,7 @@ export class LandingPage extends React.Component {
 		return (
 			<Header className='landing-page text-center'>
 				<div className='landing-body container'>
-					<div className='landing-copy col-sm-6'>
+					<div className='landing-copy col-sm-8 col-md-6'>
 						<h4 className='coming-soon'>COMING SOON</h4>
 						<h1 className='title'>Cut your study time in half</h1>
 						<h4 className='subtitle'><strong>Learn smarter.</strong> Boreas uses intelligent flashcards to find the best time for you to review so you learn better.</h4>
@@ -32,9 +31,7 @@ export class LandingPage extends React.Component {
 							onSignup={this.onSignup}
 						/>
 						</div>
-					<div className='landing-image col-sm-6'>
-						<img alt='Hero image' src={HEADER_IMAGE} />
-					</div>
+					<div className='landing-image col-sm-4 col-md-6' />
 				</div>
 				<div className='landing-footer'>
 					<div className='footer-item'>

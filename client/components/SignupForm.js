@@ -53,11 +53,13 @@ export class SignupForm extends React.Component {
 						<button onClick={this.onSubmit} type='submit' className='btn btn-primary'>Request Access</button>
 					</div>
 					{showError &&
-						<div className='input-error'>
-							{isInvalidEmail
-								? <span><strong>Oops!</strong> That doesn't look like a real email. Try something else</span>
-								: <span><strong>Uh oh!</strong> Looks like something went wrong. Please check your connection and try again.</span>
-							}
+						<div className='input-errorWrapper'>
+							<div className='input-error'>
+								{isInvalidEmail
+									? <span><strong>Oops!</strong> That doesn't look like a real email. Try something else.</span>
+									: <span><strong>Uh oh!</strong> Looks like something went wrong. Please check your connection and try again.</span>
+								}
+							</div>
 						</div>
 					}
 				</div>
