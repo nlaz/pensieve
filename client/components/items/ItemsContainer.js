@@ -7,40 +7,41 @@ import { connect } from 'react-redux';
 import Header from '../Header';
 import * as itemActions from '../../actions/itemActions';
 
-export const PAGE_SIZE = 15;
+export const PAGE_SIZE = 24;
 
-const PageNavigation = ({ numPages, onDecrementPage, onIncrementPage, onChangePage}) => (
-	<nav aria-label="Page navigation">
-	  <ul className="pagination">
-	    <li>
-	      <a onClick={onDecrementPage} href="#" aria-label="Previous">
-	        <span aria-hidden="true">&laquo;</span>
-	      </a>
-	    </li>
+export const PageNavigation = ({ numPages, onDecrementPage, onIncrementPage, onChangePage}) => (
+	<nav aria-label="Page navigation" style={{ textAlign: 'center' }}>
+		<ul className="pagination">
+			<li>
+				<a onClick={onDecrementPage} href="#" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+
 			{Array(numPages).fill(1).map((obj, key) => (
-		    <li key={key} onClick={() => onChangePage(key)}><a href="#">{key}</a></li>
+				<li key={key} onClick={() => onChangePage(key)}><a href="#">{key}</a></li>
 			))}
 
-	    <li>
-	      <a onClick={onIncrementPage} href="#" aria-label="Next">
-	        <span aria-hidden="true">&raquo;</span>
-	      </a>
-	    </li>
-	  </ul>
+			<li>
+				<a onClick={onIncrementPage} href="#" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
 	</nav>
 );
 
 const ProgressBar = ({ progress }) => (
 	<div className='progress'>
-		<div className='progress-bar progress-bar-info'
-			role='progressbar'
-			aria-valuenow={progress}
-			aria-valuemin='0'
-			aria-valuemax='100'
-			style={{ width: `${progress}%` }}
-		>
-			<span className="sr-only">{progress}% Complete</span>
-		</div>
+	<div className='progress-bar progress-bar-info'
+	role='progressbar'
+	aria-valuenow={progress}
+	aria-valuemin='0'
+	aria-valuemax='100'
+	style={{ width: `${progress}%` }}
+	>
+	<span className="sr-only">{progress}% Complete</span>
+	</div>
 	</div>
 );
 
@@ -52,36 +53,36 @@ export const ItemCard = ({ item, className }) => {
 	return (
 		<div className={`itemCard-wrapper ${className}`}>
 			<Link to={`/items/${item._id}`} className='itemCard'>
-				<ProgressBar progress={progress} />
-				<h5 style={{ margin: '0', fontSize: '16px' }}>{item.title}</h5>
-				{item.hidden &&
-					<div className='hideIcon'>
-						<span className='glyphicon glyphicon-eye-close' aria-hidden='true' ></span>
-					</div>}
-			</Link>
+			<ProgressBar progress={progress} />
+			<h5 style={{ margin: '0', fontSize: '16px' }}>{item.title}</h5>
+			{item.hidden &&
+				<div className='hideIcon'>
+				<span className='glyphicon glyphicon-eye-close' aria-hidden='true' ></span>
+				</div>}
+				</Link>
 		</div>
-	);
+		);
 };
 
 export const PageHeader = ({ count, onSearchChange }) => {
 	return (
 		<div className='page-header'>
-			<div className='info'>
-				<h4 className='title'>Items</h4>
-				{count &&
-					<p className='subtitle'>{count} items in your collection</p>
-				}
-			</div>
-			<div className='actions'>
-				<div className='search'>
-					<input onChange={onSearchChange} type='text' id='search' className='form-control' placeholder='Search for items...' />
-				</div>
-				<div className='create'>
-				<Link to='/items/new' className='btn-newItem btn pull-right'>
-					New Item +
-				</Link>
-				</div>
-			</div>
+		<div className='info'>
+		<h4 className='title'>Items</h4>
+		{count &&
+			<p className='subtitle'>{count} items in your collection</p>
+		}
+		</div>
+		<div className='actions'>
+		<div className='search'>
+		<input onChange={onSearchChange} type='text' id='search' className='form-control' placeholder='Search for items...' />
+		</div>
+		<div className='create'>
+		<Link to='/items/new' className='btn-newItem btn pull-right'>
+		New Item +
+		</Link>
+		</div>
+		</div>
 		</div>
 	);
 };
@@ -131,8 +132,8 @@ class ItemsContainer extends React.Component {
 		if (!items) {
 			return (
 				<div className='col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2'>
-					<h4 className='page-header'>Your Items</h4>
-					<h4>You don't have any items yet. <em>Ahem. Bummer...</em></h4>
+				<h4 className='page-header'>Your Items</h4>
+				<h4>You don't have any items yet. <em>Ahem. Bummer...</em></h4>
 				</div>
 			);
 		}
