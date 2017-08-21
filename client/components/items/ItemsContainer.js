@@ -138,7 +138,7 @@ class ItemsContainer extends React.Component {
 			);
 		}
 
-		const filteredItems = filter.length > 0 ? items.filter(item => item.title.indexOf(filter) !== -1) : items;
+		const filteredItems = filter.length > 0 ? items.filter(item => item.title.toLowerCase().indexOf(filter.toLowerCase()) !== -1) : items;
 		const numPages = Math.ceil(filteredItems.length / PAGE_SIZE);
 		const pageStart = activePage * PAGE_SIZE;
 		const pageEnd = Math.min((activePage + 1) * PAGE_SIZE, filteredItems.length);

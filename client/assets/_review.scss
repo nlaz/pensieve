@@ -3,6 +3,8 @@
  * http://bit.ly/1ywfhq7
  */
 
+$C_greenCheck: #41D0A5;
+
 .reviewCard--hide {
   position: absolute;
   bottom: 10px;
@@ -25,4 +27,8 @@
 
 .btn-reset {
   background: none;
+}
+
+.green-check {
+  color: $C_greenCheck;
 }

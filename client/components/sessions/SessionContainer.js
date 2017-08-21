@@ -49,9 +49,7 @@ const valueToClass = {
 const SessionResultItem = ({ item }) => (
 	<li className='list-group-item'>
 		{item.title}
-		<span className={`badge ${valueToClass[item.value]}`}>
-			<span className='glyphicon glyphicon-ok' aria-hidden='true'></span>
-		</span>
+		<span className='glyphicon glyphicon-ok pull-right green-check' aria-hidden='true'></span>
 	</li>
 );
 

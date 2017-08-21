@@ -15,6 +15,11 @@ class DeckContainer extends React.Component {
     }
   }
 
+  onDeleteDeck() {
+    const itemId = this.props.deck._id;
+    this.props.actions.deleteDeck(itemId);
+  }
+
   render() {
     const { deck = {} } = this.props;
     const { items = [] } = deck;
@@ -24,6 +29,7 @@ class DeckContainer extends React.Component {
           <div className='row'>
             <h1>Deck page</h1>
             <div className='col-xs-12 text-right'>
+              <button onClick={() => this.onDeleteDeck()} className='newDeck--btn btn btn--default' style={{ marginRight: '5px' }}>Delete</button>
               <Link to={`/decks/${deck._id}/edit`} className='newDeck--btn btn btn--default'>Edit</Link>
             </div>
 

@@ -26,6 +26,7 @@ export const FETCH_DECKS = 'fetchDecks';
 export const FETCH_DECK = 'fetchDeck';
 export const CREATE_DECK = 'createDeck';
 export const EDIT_DECK = 'editDeck';
+export const DELETE_DECK = 'deleteDeck';
 export const DECK_ERROR = 'deckError';
 
 export const FETCH_ACTIVITY = 'fetchActivity';
