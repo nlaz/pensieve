@@ -39,6 +39,7 @@
   }
 
   .navbar-collapse {
+    background: $C_white;
     border-color: $C_primaryBlue;
   }
 
@@ -216,7 +217,7 @@
   color: $C_errorRed;
   margin-top: 5px;
   position: absolute;
-  bottom: -25px;
+  top: 0;
   right: 0;
   left: 0;
 }

@@ -6,7 +6,7 @@ export const NavBar = ({ self, authenticated, showNavMenu, onshowNavMenu }) => (
 	<nav className='navbar navbar-inverse'>
 		<div className='container'>
 			<div className='navbar-header'>
-				<button type='button' onClick={() => onshowNavMenu(!showNavMenu)} className='navbar-toggle collapsed'>
+				<button type='button' onClick={() => onshowNavMenu(!showNavMenu)} className={cx('navbar-toggle', { 'collapsed': !showNavMenu })} >
 					<span className='sr-only'>Toggle Navigation</span>
 					<span className='icon-bar'></span>
 					<span className='icon-bar'></span>

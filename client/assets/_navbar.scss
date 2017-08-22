@@ -34,6 +34,20 @@
     }
   }
 
+  .navbar-toggle,
+  .navbar-toggle:hover {
+    background: transparent;
+    border-color: $C_primaryBlue;
+    transition: all .1s ease-in-out;
+
+    .icon-bar { background: $C_primaryBlue; }
+  }
+  .navbar-toggle.collapsed {
+    border-color: transparent;
+
+    .icon-bar { background: $C_black; }
+  }
+
   .btn-reviewNow {
     color: $C_white !important;
     background: $C_buttonGreen;
