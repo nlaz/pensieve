@@ -39,33 +39,62 @@ class Login extends React.Component {
 
 	render() {
 		return (
-			<Header className='login-page'>
-				<div className='login-form container'>
-					<div className='row'>
-						<div className='col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'>
-							<h3 className='text-bold'>Login</h3>
-							<form onSubmit={(e) => e.preventDefault()}>
-								<div className='form-group'>
-									<label htmlFor='emailInput'>Email</label>
-									<input onChange={this.onChange} name='email' id='emailInput' className='form-control' type='email' placeholder='you@your-domain.com'/>
+			<Header className="login-page">
+				<div className="login-form container">
+					<div className="row">
+						<div className="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+							<h3 className="text-bold">Login</h3>
+							<form onSubmit={e => e.preventDefault()}>
+								<div className="form-group">
+									<label htmlFor="emailInput">Email</label>
+									<input
+										onChange={this.onChange}
+										name="email"
+										id="emailInput"
+										className="form-control"
+										type="email"
+										placeholder="you@your-domain.com"
+									/>
 								</div>
-								<div className='form-group'>
-									<label htmlFor='passwordInput'>Password</label>
-									<input onChange={this.onChange} name='password' id='passwordInput' className='form-control' type='password' placeholder='Shhh! Keep this secret.'/>
+								<div className="form-group">
+									<label htmlFor="passwordInput">Password</label>
+									<input
+										onChange={this.onChange}
+										name="password"
+										id="passwordInput"
+										className="form-control"
+										type="password"
+										placeholder="Shhh! Keep this secret."
+									/>
 								</div>
 
-								<button onClick={this.onSave} type='submit' className='btn btn-primary btn-block'>Login</button>
+								<button
+									onClick={this.onSave}
+									type="submit"
+									className="btn btn-primary btn-block"
+								>
+									Login
+								</button>
 							</form>
 
-							<hr/>
+							<hr />
 
 							{/* Disable for Prelaunch */}
 							{false &&
-								<div className='row'>
-									<p className='text-center'>Need an account? <Link className='link' to='/signup'>Signup</Link></p>
-									<p className='text-center'>Or go <Link className='link' to='/'>home</Link>.</p>
-								</div>
-							}
+								<div className="row">
+									<p className="text-center">
+										Need an account?{' '}
+										<Link className="link" to="/signup">
+											Signup
+										</Link>
+									</p>
+									<p className="text-center">
+										Or go{' '}
+										<Link className="link" to="/">
+											home
+										</Link>.
+									</p>
+								</div>}
 						</div>
 					</div>
 				</div>
@@ -74,11 +103,11 @@ class Login extends React.Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(sessionActions, dispatch)
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 	authenticated: state.app.authenticated
 });
 

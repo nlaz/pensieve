@@ -23,38 +23,46 @@ class Header extends React.Component {
 		this.setState({ showNavMenu: showMenu });
 	}
 
-  render() {
-		const { authenticated, children, error, message, self, className } = this.props;
+	render() {
+		const {
+			authenticated,
+			children,
+			error,
+			message,
+			self,
+			className
+		} = this.props;
 		const showMessage = Boolean(message);
 
-    return (
-      <div className={className}>
+		return (
+			<div className={className}>
 				<NavBar
 					self={self}
 					showNavMenu={this.state.showNavMenu}
 					onshowNavMenu={this.onshowNavMenu}
-					authenticated={authenticated} />
-				{ showMessage &&
+					authenticated={authenticated}
+				/>
+				{showMessage &&
 					<FlashMessage
-            error={error}
-            message={message}
-            onDismiss={this.onClose} />
-				}
-        {children}
-      </div>
-    );
-  }
+						error={error}
+						message={message}
+						onDismiss={this.onClose}
+					/>}
+				{children}
+			</div>
+		);
+	}
 }
 
 const mapDispatchToProps = dispatch => ({
-	appActions: bindActionCreators(appActions, dispatch),
+	appActions: bindActionCreators(appActions, dispatch)
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 	self: state.app.self,
 	authenticated: state.app.authenticated,
 	message: state.app.message,
-	error: state.app.error,
+	error: state.app.error
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

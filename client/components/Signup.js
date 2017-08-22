@@ -39,33 +39,70 @@ class Signup extends React.Component {
 
 	render() {
 		return (
-			<Header className='signup-page'>
-				<div className='signup-form container'>
-					<div className='row'>
-						<div className='col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'>
-							<h3 className='text-bold'>Join Boreas Today</h3>
-							<form action='/signup' method='post'>
-								<div className='form-group'>
-									<label htmlFor='nameInput'>Name</label>
-									<input onChange={this.onChange} name='name' id='nameInput' className='form-control' type="text" placeholder='What should we call you?'/>
+			<Header className="signup-page">
+				<div className="signup-form container">
+					<div className="row">
+						<div className="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+							<h3 className="text-bold">Join Boreas Today</h3>
+							<form action="/signup" method="post">
+								<div className="form-group">
+									<label htmlFor="nameInput">Name</label>
+									<input
+										onChange={this.onChange}
+										name="name"
+										id="nameInput"
+										className="form-control"
+										type="text"
+										placeholder="What should we call you?"
+									/>
 								</div>
-								<div className='form-group'>
-									<label htmlFor='emailInput'>Email</label>
-									<input onChange={this.onChange} name='email' id='emailInput' className='form-control' type="email" placeholder='you@your-domain.com'/>
+								<div className="form-group">
+									<label htmlFor="emailInput">Email</label>
+									<input
+										onChange={this.onChange}
+										name="email"
+										id="emailInput"
+										className="form-control"
+										type="email"
+										placeholder="you@your-domain.com"
+									/>
 								</div>
-								<div className='form-group'>
-									<label htmlFor='passwordInput'>Password</label>
-									<input onChange={this.onChange} name='password' id='passwordInput' className='form-control' type="password" placeholder='Shhh! Keep this secret.'/>
+								<div className="form-group">
+									<label htmlFor="passwordInput">Password</label>
+									<input
+										onChange={this.onChange}
+										name="password"
+										id="passwordInput"
+										className="form-control"
+										type="password"
+										placeholder="Shhh! Keep this secret."
+									/>
 								</div>
 
-								<button onClick={this.onSave} type="submit" className='btn btn-primary btn-block'>Join</button>
+								<button
+									onClick={this.onSave}
+									type="submit"
+									className="btn btn-primary btn-block"
+								>
+									Join
+								</button>
 							</form>
 
-							<hr/>
+							<hr />
 
-							<div className='row'>
-								<p className='text-center'>Already have an account? <Link className='link' to="/login">Login</Link></p>
-								<p className='text-center'>Or go <Link className='link' to="/">home</Link>.</p>
+							<div className="row">
+								<p className="text-center">
+									Already have an account?{' '}
+									<Link className="link" to="/login">
+										Login
+									</Link>
+								</p>
+								<p className="text-center">
+									Or go{' '}
+									<Link className="link" to="/">
+										home
+									</Link>.
+								</p>
 							</div>
 						</div>
 					</div>
@@ -75,11 +112,11 @@ class Signup extends React.Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(sessionActions, dispatch)
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 	authenticated: state.app.authenticated
 });
 

@@ -20,7 +20,7 @@ const ReqAuth = ComposedComponent => {
 		}
 	}
 
-	const mapStateToProps = (state) => ({
+	const mapStateToProps = state => ({
 		authenticated: state.app.authenticated
 	});
 
