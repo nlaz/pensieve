@@ -13,6 +13,9 @@ export const signupUser = (req, res) => {
 	const email = req.body.email.trim();
 	const password = req.body.password.trim();
 
+	// Disable signup for prelaunch
+	return res.status(404).json({ error: true, message: 'Sign up not allowed at the moment'});
+
 	if (!isValidEmail(email)) {
 		return res.status(404).json({
 			error: true,

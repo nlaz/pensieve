@@ -59,10 +59,13 @@ class Login extends React.Component {
 
 							<hr/>
 
-							<div className='row'>
-								<p className='text-center'>Need an account? <Link className='link' to='/signup'>Signup</Link></p>
-								<p className='text-center'>Or go <Link className='link' to='/'>home</Link>.</p>
-							</div>
+							{/* Disable for Prelaunch */}
+							{false &&
+								<div className='row'>
+									<p className='text-center'>Need an account? <Link className='link' to='/signup'>Signup</Link></p>
+									<p className='text-center'>Or go <Link className='link' to='/'>home</Link>.</p>
+								</div>
+							}
 						</div>
 					</div>
 				</div>
