@@ -39,7 +39,7 @@ export class LandingPage extends React.Component {
 					</div>
 					{'|'}
 					<div className='footer-item'>
-						<a href="mailto:nikolazaris@gmail.com">Contact</a>
+						<a href="mailto:info@boreas.space">Contact</a>
 					</div>
 				</div>
 			</Header>
