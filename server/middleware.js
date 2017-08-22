@@ -17,6 +17,7 @@ const renderFullPage = (appHtml, preloadedState) => (
 	<head>
 		<meta charset='utf-8'>
 		<meta content='width=device-width, initial-scale=1' name='viewport'/>
+		<meta name="google-site-verification" content="UsghB5oUWO4R7iGRIyloNyUg393dawgDoQdbF6QXHF0" />
 		<title>Boreas</title>
 		<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
 	</head>
