@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
 import {
 	CREATE_ITEM,
 	FETCH_ITEMS,
@@ -13,215 +12,94 @@ import {
 } from './types';
 import cookie from 'react-cookie';
 
-const ITEMS_API_URL = `/api/items`;
+const ITEMS_API = `/api/items`;
+const DUE_ITEMS_API = '/api/due_items';
 
-export function fetchItems() {
-	return function(dispatch) {
-		axios
-			.get(ITEMS_API_URL, {
-				headers: { Authorization: cookie.load('token') }
-			})
-			.then(response => {
-				dispatch({
-					type: FETCH_ITEMS,
-					payload: response.data
-				});
-			})
-			.catch(error => {
-				dispatch({
-					type: ITEM_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message:
-							'Issue retrieving your items. Doublecheck your network connection and try again.'
-					}
-				});
-			});
-	};
-}
-
-export function getDueItems() {
-	return function(dispatch) {
-		axios
-			.get('/api/due_items', {
-				headers: { Authorization: cookie.load('token') }
-			})
-			.then(response => {
-				dispatch({
-					type: FETCH_DUE_ITEMS,
-					payload: response.data
-				});
-			})
-			.catch(error => {
-				dispatch({
-					type: ITEM_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message:
-							'Issue retrieving your items. Doublecheck your network connection and try again.'
-					}
-				});
-			});
-	};
-}
-
-export function fetchItem(itemId) {
-	return function(dispatch) {
-		axios
-			.get(`${ITEMS_API_URL}/${itemId}`, {
-				headers: { Authorization: cookie.load('token') }
-			})
-			.then(response => {
-				dispatch({
-					type: FETCH_ITEM,
-					payload: response.data
-				});
-			})
-			.catch(error => {
-				dispatch({
-					type: ITEM_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message: 'Issue retrieving item. Doublecheck your network connection and try again.'
-					}
-				});
-			});
-	};
-}
-
-export function createItem(params) {
+export const fetchItems = () => dispatch => {
 	const config = { headers: { Authorization: cookie.load('token') } };
 
-	return function(dispatch) {
-		axios
-			.post(ITEMS_API_URL, params, config)
-			.then(response => {
-				dispatch({
-					type: CREATE_ITEM,
-					payload: response.data
-				});
-				browserHistory.push(`/items/${response.data.item._id}`);
-			})
-			.catch(error => {
-				dispatch({
-					type: ITEM_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message:
-							'There was a problem creating your item. Doublecheck your network connection and try again.'
-					}
-				});
-			});
-	};
-}
+	axios
+		.get(ITEMS_API, config)
+		.then(resp => dispatch({ type: FETCH_ITEMS, payload: resp.data }))
+		.catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+};
 
-export function reviewItem(params) {
+export const fetchItem = itemId => dispatch => {
+	const config = { headers: { Authorization: cookie.load('token') } };
+
+	axios
+		.get(`${ITEMS_API}/${itemId}`, config)
+		.then(resp => dispatch({ type: FETCH_ITEM, payload: resp.data }))
+		.catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+};
+
+export const fetchDueItems = () => dispatch => {
+	const config = { headers: { Authorization: cookie.load('token') } };
+
+	axios
+		.get(DUE_ITEMS_API, config)
+		.then(resp => dispatch({ type: FETCH_DUE_ITEMS, payload: resp.data }))
+		.catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+};
+
+export const createItem = params => dispatch => {
+	const config = { headers: { Authorization: cookie.load('token') } };
+
+	axios
+		.post(ITEMS_API, params, config)
+		.then(resp => dispatch({ type: CREATE_ITEM, payload: resp.data }))
+		.catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+};
+
+export const reviewItem = params => dispatch => {
 	const config = { headers: { Authorization: cookie.load('token') } };
 	const route = `/api/items/${params.itemId}/review`;
 
-	return function(dispatch) {
-		axios
-			.post(route, params, config)
-			.then(response => {
-				dispatch({
-					type: REVIEW_ITEM,
-					payload: response.data
-				});
-			})
-			.catch(error => {
-				console.error('Error', error);
-			});
-	};
-}
+	axios
+		.post(route, params, config)
+		.then(resp => dispatch({ type: REVIEW_ITEM, payload: resp.data }))
+		.catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+};
 
-export function toggleHideItem(item) {
+export const toggleHideItem = item => dispatch => {
 	const config = { headers: { Authorization: cookie.load('token') } };
-	const route = `${ITEMS_API_URL}/${item._id}`;
+	const route = `${ITEMS_API}/${item._id}`;
 	const params = { hidden: !item.hidden };
 
-	return function(dispatch) {
-		axios
-			.put(route, params, config)
-			.then(response => {
-				dispatch({
-					type: EDIT_ITEM,
-					payload: { item: response.data.item }
-				});
-			})
-			.catch(error => {
-				console.error('Error', error);
-				dispatch({
-					type: ITEM_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message:
-							'There was a problem editting your item. Doublecheck your network connection and try again.'
-					}
-				});
-			});
-	};
-}
+	axios
+		.put(route, params, config)
+		.then(resp => dispatch({ type: EDIT_ITEM, payload: { item: resp.data.item } }))
+		.catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+};
 
-export function editItem(params) {
+export const editItem = params => dispatch => {
 	const config = { headers: { Authorization: cookie.load('token') } };
-	const route = `${ITEMS_API_URL}/${params.itemId}`;
+	const route = `${ITEMS_API}/${params.itemId}`;
 
-	return function(dispatch) {
-		axios
-			.put(route, params, config)
-			.then(response => {
-				dispatch({
-					type: EDIT_ITEM,
-					payload: { item: response.data.item }
-				});
-
-				dispatch({
-					type: UPDATE_MESSAGE,
-					payload: { message: 'Your well thought out changes were successfully saved!' }
-				});
-			})
-			.catch(error => {
-				console.error('Error', error);
-				dispatch({
-					type: ITEM_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message:
-							'There was a problem editting your item. Doublecheck your network connection and try again.'
-					}
-				});
+	axios
+		.put(route, params, config)
+		.then(resp => {
+			dispatch({ type: EDIT_ITEM, payload: { item: resp.data.item } });
+			dispatch({
+				type: UPDATE_MESSAGE,
+				payload: { message: 'Your well thought out changes were successfully saved!' }
 			});
-	};
-}
+		})
+		.catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+};
 
-export function deleteItem(itemId) {
+export const deleteItem = itemId => dispatch => {
 	const config = { headers: { Authorization: cookie.load('token') } };
-	const route = `${ITEMS_API_URL}/${itemId}`;
+	const route = `${ITEMS_API}/${itemId}`;
 
-	return function(dispatch) {
-		axios
-			.delete(route, config)
-			.then(() => {
-				browserHistory.push('/items');
-				dispatch({
-					type: DELETE_ITEM,
-					payload: { itemId: itemId }
-				});
-
-				dispatch({
-					type: UPDATE_MESSAGE,
-					payload: { message: 'That item was wiped from memory.' }
-				});
-			})
-			.catch(error => {
-				dispatch({
-					type: ITEM_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message:
-							'There was a problem removing your item. Doublecheck your network connection and try again.'
-					}
-				});
+	axios
+		.delete(route, config)
+		.then(() => {
+			dispatch({ type: DELETE_ITEM, payload: { itemId } });
+			dispatch({
+				type: UPDATE_MESSAGE,
+				payload: { message: 'That item was wiped from memory.' }
 			});
-	};
-}
+		})
+		.catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+};
