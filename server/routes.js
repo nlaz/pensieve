@@ -29,12 +29,9 @@ export default function(app) {
 
 	app.post('/api/items/:item_id/review', authenticateUser, ItemController.reviewItem);
 
-	app.post('/api/v2/items/:item_id/review', authenticateUser, ItemController.newReviewAction);
-
 	app.get('/api/due_items', authenticateUser, ItemController.getDueItems);
 
 	/* Activity Routes */
-	app.get('/api/raw_activity', authenticateUser, ActivityController.getActivity);
 	app.get('/api/activity', authenticateUser, ActivityController.getReviewItems);
 
 	/* Deck Routes */
