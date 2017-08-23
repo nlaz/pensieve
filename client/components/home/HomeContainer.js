@@ -6,22 +6,12 @@ import Header from '../Header';
 import * as homeActions from '../../actions/homeActions';
 import * as itemActions from '../../actions/itemActions';
 
-const PageHead = ({ children, onStartClick, dueItems }) => {
-	const canReview = dueItems && dueItems.length > 0;
-	const buttonLabel = canReview ? `Review Now (${dueItems.length})` : 'Review Now';
-	const button = (
-		<button onClick={onStartClick} disabled={!canReview} className="btn btn-success pull-right">
-			{buttonLabel}
-		</button>
-	);
-
+const PageHead = ({ children }) => {
 	return (
 		<Header className="sessions-page">
 			<div className="container">
 				<div className="col-md-8 col-md-offset-2">
-					<h4 className="page-header">
-						Recent Activity {button}
-					</h4>
+					<h4 className="page-header">Recent Activity</h4>
 					{children}
 				</div>
 			</div>
@@ -99,28 +89,18 @@ const getActivityData = (reviewData = []) => {
 };
 
 class HomeContainer extends React.Component {
-	constructor(props) {
-		super(props);
-		this.onStartClick = this.onStartClick.bind(this);
-	}
-
 	componentWillMount() {
 		if (!this.props.sessions) {
 			this.props.homeActions.fetchActivity();
-			this.props.itemActions.fetchDueItems();
 		}
 	}
 
-	onStartClick() {
-		this.props.reviewActions.createSession();
-	}
-
 	render() {
-		const { reviewItems, dueItems } = this.props;
+		const { reviewItems } = this.props;
 		const activity = getActivityData(reviewItems);
 
 		return (
-			<PageHead onStartClick={this.onStartClick} dueItems={dueItems}>
+			<PageHead>
 				<div className="sectionTitle">Activity</div>
 				<ActivityGraph activity={activity} />
 			</PageHead>
@@ -129,8 +109,7 @@ class HomeContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	reviewItems: state.data.reviewItems,
-	dueItems: state.data.due_items
+	reviewItems: state.data.reviewItems
 });
 
 const mapDispatchToProps = dispatch => ({
