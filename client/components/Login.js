@@ -68,11 +68,7 @@ class Login extends React.Component {
 									/>
 								</div>
 
-								<button
-									onClick={this.onSave}
-									type="submit"
-									className="btn btn-primary btn-block"
-								>
+								<button onClick={this.onSave} type="submit" className="btn btn-primary btn-block">
 									Login
 								</button>
 							</form>
@@ -80,21 +76,27 @@ class Login extends React.Component {
 							<hr />
 
 							{/* Disable for Prelaunch */}
-							{false &&
-								<div className="row">
+							<div className="row">
+								{false &&
 									<p className="text-center">
 										Need an account?{' '}
 										<Link className="link" to="/signup">
 											Signup
 										</Link>
-									</p>
-									<p className="text-center">
-										Or go{' '}
-										<Link className="link" to="/">
-											home
-										</Link>.
-									</p>
-								</div>}
+									</p>}
+								<p className="text-center">
+									Forgot your password?{' '}
+									<a className="link" href="mailto:info@boreas.space">
+										Send us a message
+									</a>
+								</p>
+								<p className="text-center">
+									Or go{' '}
+									<Link className="link" to="/">
+										home
+									</Link>.
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
