@@ -12,7 +12,7 @@ import {
 } from './types';
 import cookie from 'react-cookie';
 
-const ITEMS_API = `/api/items`;
+const ITEMS_API = '/api/items';
 const DUE_ITEMS_API = '/api/due_items';
 
 export const fetchItems = () => dispatch => {

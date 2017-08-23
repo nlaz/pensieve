@@ -50,7 +50,7 @@ export const PageHeader = ({ count, onSearchChange }) => {
 				</div>
 				<div className="create">
 					<Link to="decks/new" className="btn-newDeck btn btn-primary">
-						Create Deck +
+						New Deck +
 					</Link>
 				</div>
 			</div>

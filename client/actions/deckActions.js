@@ -9,132 +9,56 @@ import {
 	DECK_ERROR
 } from './types';
 import cookie from 'react-cookie';
-import { browserHistory } from 'react-router';
 
-export function fetchDecks() {
-	return function(dispatch) {
-		axios
-			.get('/api/decks', {
-				headers: { Authorization: cookie.load('token') }
-			})
-			.then(response => {
-				dispatch({
-					type: FETCH_DECKS,
-					payload: response.data
-				});
-			})
-			.catch(error => {
-				dispatch({
-					type: DECK_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message: 'Error retrieving your decks.'
-					}
-				});
-			});
-	};
-}
+const DECKS_API = '/api/decks';
 
-export function fetchDeck(deckId) {
-	return function(dispatch) {
-		axios
-			.get(`/api/decks/${deckId}`, {
-				headers: { Authorization: cookie.load('token') }
-			})
-			.then(response => {
-				dispatch({
-					type: FETCH_DECK,
-					payload: response.data
-				});
-			})
-			.catch(error => {
-				dispatch({
-					type: DECK_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message: 'Error retrieving your deck.'
-					}
-				});
-			});
-	};
-}
-
-export function createDeck(params) {
+export const fetchDecks = () => dispatch => {
 	const config = { headers: { Authorization: cookie.load('token') } };
 
-	return function(dispatch) {
-		axios
-			.post('/api/decks', params, config)
-			.then(response => {
-				dispatch({
-					type: CREATE_DECK,
-					payload: response.data
-				});
-				browserHistory.push(`/decks/${response.data.deck._id}`);
-			})
-			.catch(error => {
-				dispatch({
-					type: DECK_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message: 'Error creating your deck.'
-					}
-				});
-			});
-	};
-}
+	axios
+		.get(DECKS_API, config)
+		.then(resp => dispatch({ type: FETCH_DECKS, payload: resp.data }))
+		.catch(error => dispatch({ type: DECK_ERROR, payload: { error: error.response } }));
+};
 
-export function editDeck(params) {
+export const fetchDeck = deckId => dispatch => {
 	const config = { headers: { Authorization: cookie.load('token') } };
 
-	return function(dispatch) {
-		axios
-			.put(`/api/decks/${params.deckId}`, params, config)
-			.then(response => {
-				dispatch({
-					type: EDIT_DECK,
-					payload: response.data
-				});
-			})
-			.catch(error => {
-				dispatch({
-					type: DECK_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message: 'Error creating your deck.'
-					}
-				});
-			});
-	};
-}
+	axios
+		.get(`${DECKS_API}/${deckId}`, config)
+		.then(resp => dispatch({ type: FETCH_DECK, payload: resp.data }))
+		.catch(error => dispatch({ type: DECK_ERROR, payload: { error: error.response } }));
+};
 
-export function deleteDeck(itemId) {
+export const createDeck = params => dispatch => {
 	const config = { headers: { Authorization: cookie.load('token') } };
 
-	return function(dispatch) {
-		axios
-			.delete(`/api/decks/${itemId}`, config)
-			.then(() => {
-				browserHistory.push('/decks');
-				dispatch({
-					type: DELETE_DECK,
-					payload: { itemId: itemId }
-				});
+	axios
+		.post(DECKS_API, params, config)
+		.then(resp => dispatch({ type: CREATE_DECK, payload: resp.data }))
+		.catch(error => dispatch({ type: DECK_ERROR, payload: { error: error.response } }));
+};
 
-				dispatch({
-					type: UPDATE_MESSAGE,
-					payload: { message: 'That deck was wiped from memory.' }
-				});
-			})
-			.catch(error => {
-				dispatch({
-					type: DECK_ERROR,
-					payload: {
-						error: error.response.data.error,
-						message:
-							'There was a problem removing your deck. Doublecheck your network connection and try again.'
-					}
-				});
+export const editDeck = params => dispatch => {
+	const config = { headers: { Authorization: cookie.load('token') } };
+
+	axios
+		.put(`${DECKS_API}/${params.deckId}`, params, config)
+		.then(resp => dispatch({ type: EDIT_DECK, payload: resp.data }))
+		.catch(error => dispatch({ type: DECK_ERROR, payload: { error: error.response } }));
+};
+
+export const deleteDeck = itemId => dispatch => {
+	const config = { headers: { Authorization: cookie.load('token') } };
+
+	axios
+		.delete(`${DECKS_API}/${itemId}`, config)
+		.then(() => {
+			dispatch({ type: DELETE_DECK, payload: { itemId } });
+			dispatch({
+				type: UPDATE_MESSAGE,
+				payload: { message: 'That deck was wiped from memory.' }
 			});
-	};
-}
+		})
+		.catch(error => dispatch({ type: DECK_ERROR, payload: { error: error.response } }));
+};
