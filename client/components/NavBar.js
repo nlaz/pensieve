@@ -17,7 +17,7 @@ export const NavBar = ({ self, authenticated, showNavMenu, onshowNavMenu }) =>
 					<span className="icon-bar" />
 				</button>
 				<Link className="navbar-brand" to="/">
-					Boreas
+					Pensieve
 				</Link>
 			</div>
 			<div

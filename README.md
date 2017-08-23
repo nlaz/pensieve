@@ -4,7 +4,7 @@
 An open sourced spaced repetition platform. Pensieve is an isomorphic Node.js web app that takes advantage of modern studying techniques to make studying efficient, reducing time spent reviewing and increasing retention.
 
 ### How does it work?
-Magic ✨. Though it also uses a good amount of science. In the simplest terms, Pensieve determines an item's lifecycle based on an item's frequency and difficulty and notifies you when it's time to review it again.
+*Magic* ✨. Though it also uses a good amount of science. In the simplest terms, Pensieve determines an item's lifecycle based on an item's frequency and difficulty and notifies you when it's time to review it again.
 
 ### Installation
 Make sure you have MongoDB and Node installed then on over to [INSTALLATION.md](INSTALLATION.md) and follow the rest of the installation steps.

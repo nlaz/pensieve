@@ -1,59 +1,67 @@
 /**
- * Boreas Stylesheet
+ * Pensieve Stylesheet
  * http://bit.ly/1ywfhq7
  */
 
 /* Variables */
 $C_white: #ffffff;
-$C_black: #222B2D;
-$C_lightGray: #F8F8F8;
+$C_black: #222b2d;
+$C_lightGray: #f8f8f8;
 $C_blue: #3b85bf;
-$C_primaryBlue: #1574FB;
-$C_darkGray: #4B4B4B;
-$C_mediumGray: #8D8D8D;
-$C_errorRed: #E35A5A;
+$C_primaryBlue: #1574fb;
+$C_darkGray: #4b4b4b;
+$C_mediumGray: #8d8d8d;
+$C_errorRed: #e35a5a;
 
 /* Breakpoint mixins */
 @mixin atSmallUp {
-  @media (min-width: 600px) { @content; }
+	@media (min-width: 600px) {
+		@content;
+	}
 }
 @mixin atMediumUp {
-  @media (min-width: 900px) { @content; }
+	@media (min-width: 900px) {
+		@content;
+	}
 }
 @mixin atLargeUp {
-  @media (min-width: 1200px) { @content; }
+	@media (min-width: 1200px) {
+		@content;
+	}
 }
 @mixin atExtraLargeUp {
-  @media (min-width: 1800px) { @content; }
+	@media (min-width: 1800px) {
+		@content;
+	}
 }
 /* Google fonts */
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
 
 body {
-  font-family: 'Lato', sans-serif;
-  letter-spacing: -.2px;
-  min-height: 100vh;
-  background: $C_lightGray;
+	font-family: 'Lato', sans-serif;
+	letter-spacing: -.2px;
+	min-height: 100vh;
+	background: $C_lightGray;
 }
 
 .margin-top {
-  margin-top: 40px;
+	margin-top: 40px;
 }
 
 .text-bold {
-  font-weight: 700;
+	font-weight: 700;
 }
 
 input.form-control {
-  padding: 20px 15px;
+	padding: 20px 15px;
 }
 
 button.btn {
-  padding: 10px;
+	padding: 10px;
 }
 
 button.btn.btn-primary {
-  background: $C_primaryBlue;
+	background: $C_primaryBlue;
 }
 
 @import './landing';

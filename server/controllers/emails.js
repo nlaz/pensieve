@@ -7,21 +7,21 @@ import { REVIEW_SESSION_SIZE } from './sessions';
 const sendgrid = sg(process.env.SENDGRID_API_KEY);
 
 const domain = process.env.HOST_URL;
-const sourceEmail = new helper.Email('hi@boreas.space', 'Your friend, Boreas');
+const sourceEmail = new helper.Email('info@boreas.space', 'Albus');
 const subjects = [
-	'Start your morning with some knowledge - Boreas',
-	'Well, Check This Out - Boreas',
-	'Some fresh baked notes for you to review - Boreas',
-	'Hey Good Looking - Boreas',
-	'>>>>CLICK HERE<<<<< (Or Don\'t) - Boreas'
+	'Start your morning with some knowledge - Pensieve',
+	'Well, Check This Out - Pensi',
+	'Some fresh baked notes for you to review - Pensieve',
+	'Hey Good Looking - Pensieve',
+	'>>>>CLICK HERE<<<<< (Or Don\'t) - Pensieve'
 ];
 
 const template = (name, items) => {
 	const url = `${domain}/sessions/new`;
-	const buttonStyle = 'background-color:#2e78ba;border-radius:3px;color:#ffffff;line-height:30px;height:30px;text-align:center;text-decoration:none;width:100px;';
+	const buttonStyle =
+		'background-color:#2e78ba;border-radius:3px;color:#ffffff;line-height:30px;height:30px;text-align:center;text-decoration:none;width:100px;';
 
-	return (
-	`<div style='color:#000000;'>
+	return `<div style='color:#000000;'>
 		<p>You have <span style='font-weight:bold;'>${items.length} items</span> that need review. Review them now before you forget.</p>
 
 		<div style='${buttonStyle}'>
@@ -31,43 +31,47 @@ const template = (name, items) => {
 		<p>Anyways that was fun. See you later!</p>
 
 		<p>Your friend,</p>
-		<p>Boreas</p>
-	</div>`
-	);
+		<p>Pensieve</p>
+	</div>`;
 };
 
-const constructEmailRequest = (targetName, targetEmail, items	) => {
+const constructEmailRequest = (targetName, targetEmail, items) => {
 	const subject = subjects[Math.floor(Math.random() * subjects.length)];
 	const content = new helper.Content('text/html', template(targetName, items));
-	const mail = new helper.Mail(sourceEmail, subject, new helper.Email(targetEmail), content);
+	const mail = new helper.Mail(
+		sourceEmail,
+		subject,
+		new helper.Email(targetEmail),
+		content
+	);
 	return sendgrid.emptyRequest({
 		method: 'POST',
 		path: '/v3/mail/send',
-		body: mail.toJSON(),
+		body: mail.toJSON()
 	});
 };
 
 export const broadcastEmailToUser = user => {
 	ItemController.getDueItemsHelper(user.id)
 		.then(items => {
-			if (items.length >= REVIEW_SESSION_SIZE ) {
+			if (items.length >= REVIEW_SESSION_SIZE) {
 				// Only send email if items less than review size.
 				sendEmail(user, items);
 			}
 		})
-		.catch( error => {
+		.catch(error => {
 			console.log(error);
 		});
 };
 
 export const broadcastEmailsToAll = () => {
 	User.find({ is_email_on: true })
-		.then( users => {
-			users.forEach( user => {
+		.then(users => {
+			users.forEach(user => {
 				broadcastEmailToUser(user);
 			});
 		})
-		.catch( error => {
+		.catch(error => {
 			return console.log(error);
 		});
 };
@@ -76,7 +80,8 @@ export const sendEmail = (user, items) => {
 	console.log(`Attempting email to ${user.email}...`);
 	const request = constructEmailRequest(user.name, user.email, items);
 
-	return sendgrid.API(request)
+	return sendgrid
+		.API(request)
 		.then(response => {
 			console.log('Email Success - Status Code:', response.statusCode);
 		})
@@ -95,9 +100,10 @@ export const addEmailToPrelaunchList = (req, res) => {
 	const createRecipientRequest = sendgrid.emptyRequest({
 		method: 'POST',
 		path: '/v3/contactdb/recipients',
-		body: [{ email: email }],
+		body: [{ email: email }]
 	});
-	return sendgrid.API(createRecipientRequest)
+	return sendgrid
+		.API(createRecipientRequest)
 		.then(response => {
 			const { persisted_recipients } = response.body;
 
@@ -105,12 +111,12 @@ export const addEmailToPrelaunchList = (req, res) => {
 			const addToListRequest = sendgrid.emptyRequest({
 				method: 'POST',
 				path: `/v3/contactdb/lists/${PRELAUNCH_LIST_ID}/recipients`,
-				body: persisted_recipients,
+				body: persisted_recipients
 			});
 			return sendgrid.API(addToListRequest);
 		})
 		.then(response => {
-			return res.status(response.statusCode).json({ message: 'Success!'});
+			return res.status(response.statusCode).json({ message: 'Success!' });
 		})
 		.catch(error => {
 			return res.status(404).json({ error });

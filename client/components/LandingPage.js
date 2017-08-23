@@ -25,8 +25,9 @@ export class LandingPage extends React.Component {
 						<h4 className="coming-soon">COMING SOON</h4>
 						<h1 className="title">Cut your study time in half</h1>
 						<h4 className="subtitle">
-							<strong>Learn smarter.</strong> Boreas uses intelligent flashcards
-							to find the best time for you to review so you learn better.
+							<strong>Learn smarter.</strong> Pensieve uses intelligent
+							flashcards to find the best time for you to review so you learn
+							better.
 						</h4>
 						<SignupForm
 							isSuccess={isSuccess}
@@ -38,7 +39,7 @@ export class LandingPage extends React.Component {
 				</div>
 				<div className="landing-footer">
 					<div className="footer-item">
-						<span>Boreas &copy; 2017</span>
+						<span>Pensieve &copy; 2017</span>
 					</div>
 					{'|'}
 					<div className="footer-item">

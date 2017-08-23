@@ -6,8 +6,8 @@ services:
     env_file:
       - .docker.config.env
     volumes:
-      - .:/var/www/boreas:rw
-      - /var/www/boreas/node_modules
+      - .:/var/www/pensieve:rw
+      - /var/www/pensieve/node_modules
     ports:
       - "3000:3000"
     command: yarn prod

@@ -37,8 +37,8 @@ $ brew services stop mongodb
 #### 0. Project Setup
 Pull project down from GitHub. Install the Node dependencies.
 ```
-$ git clone https://github.com/nlaz/boreas.git
-$ cd boreas/
+$ git clone https://github.com/nlaz/pensieve.git
+$ cd pensieve/
 ```
 
 Setup the app's environment variables. It won't work without them. There's a lot of ways to do this. A sample config file is provided.
@@ -51,7 +51,7 @@ Add your environment variables here.
 ```
 export NODE_ENV='development'
 export PORT='3000'
-export MONGODB_HOST='mongodb://localhost:27017/boreas'
+export MONGODB_HOST='mongodb://localhost:27017/pensieve'
 export SENDGRID_API_KEY='{YOUR_SENDGRID_KEY_HERE}'
 ```
 
@@ -68,10 +68,10 @@ Connect to the MongoDB shell.
 $ mongo
 ```
 
-Use a database called `boreas`.
+Use a database called `pensieve`.
 ```
 > show dbs
-> use boreas
+> use pensieve
 ```
 Insert a user item for with your test email.
 ```

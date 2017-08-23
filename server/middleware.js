@@ -10,7 +10,7 @@ import appReducer from '../client/reducers/appReducer';
 
 const BUNDLE_URL = `${process.env.HOST_URL}/bundle.js`;
 
-const renderFullPage = (appHtml, preloadedState) => (
+const renderFullPage = (appHtml, preloadedState) =>
 	`
 	<!doctype html public='storage'>
 	<html>
@@ -18,17 +18,19 @@ const renderFullPage = (appHtml, preloadedState) => (
 		<meta charset='utf-8'>
 		<meta content='width=device-width, initial-scale=1' name='viewport'/>
 		<meta name="google-site-verification" content="UsghB5oUWO4R7iGRIyloNyUg393dawgDoQdbF6QXHF0" />
-		<title>Boreas</title>
+		<title>Pensieve</title>
 		<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
 	</head>
 	<body>
 		<div id='root'>${appHtml}</div>
-		<script>window.INITIAL_STATE=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}</script>
+		<script>window.INITIAL_STATE=${JSON.stringify(preloadedState).replace(
+			/</g,
+			'\\u003c'
+		)}</script>
 		<script src='${BUNDLE_URL}' type='text/javascript'></script>
 	</body>
 	</html>
-	`
-);
+	`;
 
 export default (req, res) => {
 	match({ routes: routes, location: req.url }, (err, redirect, props) => {
@@ -37,7 +39,9 @@ export default (req, res) => {
 		} else if (redirect) {
 			res.redirect(redirect.pathname + redirect.search);
 		} else if (props) {
-			const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+			const createStoreWithMiddleware = applyMiddleware(reduxThunk)(
+				createStore
+			);
 			const store = createStoreWithMiddleware(appReducer);
 			const html = renderToString(
 				<Provider store={store}>

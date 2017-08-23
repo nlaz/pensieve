@@ -43,7 +43,7 @@ class Signup extends React.Component {
 				<div className="signup-form container">
 					<div className="row">
 						<div className="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-							<h3 className="text-bold">Join Boreas Today</h3>
+							<h3 className="text-bold">Join Pensieve Today</h3>
 							<form action="/signup" method="post">
 								<div className="form-group">
 									<label htmlFor="nameInput">Name</label>
