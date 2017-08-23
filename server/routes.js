@@ -52,7 +52,5 @@ export default function(app) {
 
 	app.post('/api/sessions', authenticateUser, SessionController.createSession);
 
-	app.post('/api/v2/sessions', authenticateUser, SessionController.newCreateSession);
-
 	app.post('/api/sessions/:session_id/finish', authenticateUser, SessionController.finishSession);
 }

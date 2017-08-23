@@ -7,7 +7,7 @@ export const REVIEW_SESSION_MAX = 35;
 
 export const getSessions = (req, res) => {
 	Session.find({ user_id: req.user._id })
-		.then((sessions) => res.status(200).json({ sessions }))
+		.then(sessions => res.status(200).json({ sessions }))
 		.catch(error => res.status(404).json({ error }));
 };
 
@@ -18,7 +18,6 @@ export const getSession = (req, res) => {
 
 	Session.findOne({ _id: sessionId })
 		.then(_session => {
-
 			if (_session.user_id !== userId) {
 				return res.status(404).json({
 					error: true,
@@ -30,7 +29,7 @@ export const getSession = (req, res) => {
 			session = _session;
 			return Item.find().where('_id').in(session.items);
 		})
-		.then((items) => {
+		.then(items => {
 			session.items = items;
 			res.status(200).json({ session });
 		})
@@ -39,14 +38,16 @@ export const getSession = (req, res) => {
 
 export const generateReviewSession = userId => {
 	let session, items, itemIds;
-	const MIN = 15, MAX = 25;
+	const MIN = 15,
+		MAX = 25;
 	const queryLimit = Math.floor(Math.random() * (MAX - MIN)) + MIN;
 
 	return Item.aggregate([
-			{ $match: { user_id: userId } },
-			{ $sort: { reviewCount: 1 } },
-			{ $limit: queryLimit }
-		]).exec()
+		{ $match: { user_id: userId } },
+		{ $sort: { reviewCount: 1 } },
+		{ $limit: queryLimit }
+	])
+		.exec()
 		.then(_items => {
 			items = _items;
 			if (!items.length) {
@@ -61,29 +62,21 @@ export const generateReviewSession = userId => {
 			session.items = items;
 			return session;
 		})
-		.catch( error => {
-			throw(error);
+		.catch(error => {
+			throw error;
 		});
 };
 
 export const createSession = (req, res) => {
-	generateReviewSession(req.user._id)
-		.then( session => res.status(200).json({ session }))
-		.catch( error => {
-			res.status(404).json({ error });
-		});
-};
-
-export const newCreateSession = (req, res) => {
 	let session, items, itemIds;
 	const userId = req.user._id;
 	ItemController.getDueItemsHelper(userId)
-		.then( _items => {
+		.then(_items => {
 			if (!_items.length) {
 				throw new Error('No available items to create session.');
 			}
 
-			items = _items.sort(() => (0.5 - Math.random())); // "randomize" the items
+			items = _items.sort(() => 0.5 - Math.random()); // "randomize" the items
 
 			itemIds = items
 				.slice(0, REVIEW_SESSION_MAX) // truncate the returned items
@@ -96,14 +89,13 @@ export const newCreateSession = (req, res) => {
 			session.items = items;
 			res.status(200).json({ session });
 		})
-		.catch( error => res.status(404).json({ error: error }));
+		.catch(error => res.status(404).json({ error: error }));
 };
 
 export const finishSession = (req, res) => {
 	let session;
 	const sessionId = req.params.session_id;
 	const userId = req.user._id;
-
 
 	Session.findOne({ _id: sessionId, user_id: userId })
 		.then(_session => {
