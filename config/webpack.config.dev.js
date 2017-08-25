@@ -1,19 +1,14 @@
-'use strict';
-
 var webpack = require('webpack');
 var paths = require('./paths');
 
 var publicPath = '/';
 var config = {
-	entry: [
-		'webpack-hot-middleware/client',
-		paths.appIndexJs
-	],
+	entry: ['babel-polyfill', 'webpack-hot-middleware/client', paths.appIndexJs],
 	devtool: 'eval',
 	output: {
 		path: paths.appPublic,
 		filename: 'bundle.js',
-		publicPath: publicPath,
+		publicPath: publicPath
 	},
 	module: {
 		loaders: [
@@ -27,17 +22,17 @@ var config = {
 				}
 			},
 			{
-        test: /\.(css|scss)$/,
+				test: /\.(css|scss)$/,
 				include: paths.appClient,
 				exclude: /node_modules/,
 				use: [
 					{
-						loader: 'style-loader',
+						loader: 'style-loader'
 					},
 					{
 						loader: 'css-loader',
 						options: {
-							importLoaders: 1,
+							importLoaders: 1
 						}
 					},
 					{
@@ -54,16 +49,16 @@ var config = {
 				]
 			},
 			{
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192
-            }
-          }
-        ]
-      }
+				test: /\.(png|jpg|gif)$/,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 8192
+						}
+					}
+				]
+			}
 		]
 	},
 	plugins: [
@@ -77,7 +72,7 @@ var config = {
 		})
 	],
 	node: {
-		fs: 'empty',
+		fs: 'empty'
 	}
 };
 

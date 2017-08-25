@@ -1,4 +1,4 @@
-'use strict';
+
 
 var nodeExternals = require('webpack-node-externals');
 var paths = require('./paths');
@@ -6,13 +6,11 @@ var paths = require('./paths');
 var publicPath = '/';
 var config = {
 	target: 'node',
-	entry: [
-		paths.serverIndexJs
-	],
+	entry: ['babel-polyfill', paths.serverIndexJs],
 	output: {
 		path: paths.serverBuild,
 		filename: 'bundle.server.js',
-		publicPath: publicPath,
+		publicPath: publicPath
 	},
 	module: {
 		loaders: [
@@ -25,28 +23,28 @@ var config = {
 				}
 			},
 			{
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192
-            }
-          }
-        ]
-      }
+				test: /\.(png|jpg|gif)$/,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 8192
+						}
+					}
+				]
+			}
 		]
 	},
 	externals: [
 		nodeExternals({
 			modulesDir: 'node_modules',
-			whitelist: ['react-dom/server', 'react/addons'],
-		}),
+			whitelist: ['react-dom/server', 'react/addons']
+		})
 	],
 	node: {
 		__filename: true,
-		__dirname: true,
-	},
+		__dirname: true
+	}
 };
 
 module.exports = config;
