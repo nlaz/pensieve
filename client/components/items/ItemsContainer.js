@@ -164,23 +164,21 @@ class ItemsContainer extends React.Component {
 		const pageItems = filteredItems.slice(pageStart, pageEnd);
 
 		return (
-			<Header className="items-page">
-				<div className="container">
-					<PageHeader count={items.length} onSearchChange={this.onSearchChange} />
-					<div className="row">
-						{pageItems.map((item, key) =>
-							<ItemCard className="col-xs-6 col-sm-3 col-lg-2" item={item} key={key} />
-						)}
-					</div>
-					{numPages > 1 &&
-						<PageNavigation
-							numPages={numPages}
-							onIncrementPage={this.onIncrementPage}
-							onDecrementPage={this.onDecrementPage}
-							onChangePage={this.onChangePage}
-						/>}
+			<div className="items-page container">
+				<PageHeader count={items.length} onSearchChange={this.onSearchChange} />
+				<div className="row">
+          {pageItems.map((item, key) =>
+						<ItemCard className="col-xs-6 col-sm-3 col-lg-2" item={item} key={key} />
+          )}
 				</div>
-			</Header>
+        {numPages > 1 &&
+				<PageNavigation
+					numPages={numPages}
+					onIncrementPage={this.onIncrementPage}
+					onDecrementPage={this.onDecrementPage}
+					onChangePage={this.onChangePage}
+				/>}
+			</div>
 		);
 	}
 }

@@ -3,7 +3,7 @@ import { IndexRoute, Route } from 'react-router';
 
 import ReqAuth from './components/ReqAuth';
 import Item from './components/items/ItemContainer';
-import Items from './components/items/ItemsContainer';
+import Items from './components/pages/ItemsPage';
 import ItemNew from './components/items/ItemNewContainer';
 import ItemEdit from './components/items/ItemEditContainer';
 import Deck from './components/decks/DeckContainer';
