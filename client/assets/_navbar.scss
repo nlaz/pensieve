@@ -24,6 +24,18 @@
     }
   }
 
+  .navbar-nav > li > .active-nav-link {
+    color: #ffffff;
+    background-color: $C_buttonGreen;
+    height: 60px;
+
+    &:hover,
+    &:focus {
+      background-color: $C_buttonGreen;
+      color: $C_darkGray;
+    }
+  }
+
   .navbar-nav > li > a {
     line-height: 28px;
     color: $C_darkGray;
