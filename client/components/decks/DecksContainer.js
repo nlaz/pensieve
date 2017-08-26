@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import Header from '../Header';
 import * as deckActions from '../../actions/deckActions';
-import { PageNavigation } from '../items/ItemsContainer';
+import { PageNavigation } from '../organisms/ItemsContainer';
 
 export const PAGE_SIZE = 16;
 

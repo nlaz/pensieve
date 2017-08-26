@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as deckActions from '../../actions/deckActions';
-import { ItemCard } from '../items/ItemsContainer';
+import { ItemCard } from '../organisms/ItemsContainer';
 
 import Header from '../Header';
 

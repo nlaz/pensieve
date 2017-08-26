@@ -35,7 +35,9 @@ const ContentWrapper = ({ children }) => {
       width: '100%',
       boxSizing: 'border-box',
       margin: '2rem auto',
-      marginTop: '60px'
+      marginTop: '60px',
+      display: 'flex',
+      flexGrow: 1,
     }}>
       {children}
     </div>
@@ -45,7 +47,6 @@ const ContentWrapper = ({ children }) => {
 const FooterWrapper = ({ children }) => {
   return (
     <div style={{
-      marginTop: 'auto'
     }}>
       {children}
     </div>

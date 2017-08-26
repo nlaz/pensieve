@@ -123,15 +123,19 @@
   background-image: url('../assets/images/splash_hero2.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: top;
-  margin: auto;
+  background-position: center;
   max-width: 260px;
-  top: 10px;
-  height: 100%;
   width: 100%;
-  position: absolute;
+  height: auto;
   z-index: 0;
   opacity: .9;
+
+  @media (max-width: 899px) {
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 180px; right: 0;
+  }
+
 
   @include atMediumUp {
     background-image: url('../assets/images/splash_hero.png');
@@ -249,10 +253,11 @@
 
 .landing-footer {
   color: #CBCBCB;
-  position: absolute;
-  bottom: 25px;
-  left: 0;
-  right: 0;
+  //position: absolute;
+  //bottom: 25px;
+  margin-bottom: 25px;
+  //left: 0;
+  //right: 0;
 
   .footer-item {
     display: inline;

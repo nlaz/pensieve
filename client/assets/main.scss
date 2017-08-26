@@ -38,10 +38,14 @@ $C_errorRed: #e35a5a;
 	}
 }
 
+html, body {
+	min-height: 100vh;
+}
+
+
 body {
 	font-family: 'Lato', sans-serif;
 	letter-spacing: -.2px;
-	min-height: 100vh;
 	background: $C_lightGray;
 }
 

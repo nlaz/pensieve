@@ -1,8 +1,7 @@
 import React from 'react';
 
 import PageTemplate from '../templates/PageTemplate';
-import Header from '../Header';
-import ItemsContainer from '../items/ItemsContainer';
+import ItemsContainer from '../organisms/ItemsContainer';
 
 const ItemsPage = () => {
   return (

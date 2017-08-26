@@ -8,14 +8,12 @@ import * as itemActions from '../../actions/itemActions';
 
 const PageHead = ({ children }) => {
 	return (
-		<Header className="sessions-page">
-			<div className="container">
-				<div className="col-md-8 col-md-offset-2">
-					<h4 className="page-header">Recent Activity</h4>
-					{children}
-				</div>
+		<div className="sessions-page container">
+			<div className="col-md-8 col-md-offset-2">
+				<h4 className="page-header">Recent Activity</h4>
+        {children}
 			</div>
-		</Header>
+		</div>
 	);
 };
 

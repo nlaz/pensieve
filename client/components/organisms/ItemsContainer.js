@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from '../Header';
 import * as itemActions from '../../actions/itemActions';
 
 export const PAGE_SIZE = 24;
@@ -18,7 +17,7 @@ export const PageNavigation = ({ numPages, onDecrementPage, onIncrementPage, onC
 				</a>
 			</li>
 
-			{Array(numPages).fill(1).map((obj, key) =>
+			{new Array(numPages).fill(1).map((obj, key) =>
 				<li key={key} onClick={() => onChangePage(key)}>
 					<a href="#">
 						{key}
