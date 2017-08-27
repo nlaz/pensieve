@@ -47,9 +47,7 @@ export class LandingPage extends React.Component {
               onSignup={this.onSignup}
             />
           </div>
-          <div className="landing-image col-sm-4 col-md-6">
-            <div />
-          </div>
+          <div className="landing-image col-sm-4 col-md-6" />
         </div>
       </PageTemplate>
     );

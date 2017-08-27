@@ -7,20 +7,17 @@ import Items from './components/pages/ItemsPage';
 import ItemNew from './components/items/ItemNewContainer';
 import ItemEdit from './components/items/ItemEditContainer';
 import Deck from './components/decks/DeckContainer';
-import Decks from './components/decks/DecksContainer';
+import Decks from './components/pages/DecksPage';
 import DeckNew from './components/decks/DeckNewContainer';
 import DeckEdit from './components/decks/DeckEditContainer';
 import Session from './components/sessions/SessionContainer';
 import SessionNew from './components/sessions/SessionNewContainer';
 import SwitchContainer from './components/SwitchContainer';
+import NotFoundPage from './components/pages/NotFoundPage';
 
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Signup from './components/Signup';
-
-const NotFoundPage = () => (
-	<h1>Page Not Found :(</h1>
-);
 
 const routes = (
 	<Route path='/'>
