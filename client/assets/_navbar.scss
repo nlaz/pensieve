@@ -4,6 +4,7 @@
  */
 
  $C_buttonGreen: #41D0A5;
+ $C_buttonDarkGreen: #3BC29A;
 
 .navbar {
   background: $C_white;
@@ -31,8 +32,8 @@
 
     &:hover,
     &:focus {
-      background-color: $C_buttonGreen;
-      color: $C_darkGray;
+      background-color: $C_buttonDarkGreen !important;
+      color: #ffffff;
     }
   }
 
@@ -71,7 +72,7 @@
 
     &:hover,
     &:active {
-      background: #3BC29A !important;
+      background: $C_buttonDarkGreen !important;
     }
   }
 }

@@ -3,14 +3,8 @@
  * http://bit.ly/1ywfhq7
  */
 
-.landing-page {
-  background: $C_white;
-  min-height: 100vh;
-  position: relative;
-}
-
 .landing-page .navbar.navbar-inverse {
-  background: transparent;
+  background: $C_white;
   border: 0;
   color: $C_black;
   top: 0;
@@ -62,11 +56,6 @@
       border: 1px solid $C_primaryBlue;
     }
   }
-}
-.landing-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .landing-body {

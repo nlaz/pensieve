@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import * as emailActions from '../../actions/emailActions';
 import { SignupForm } from '../SignupForm';
 import PageTemplate from '../templates/PageTemplate';
+import Header from '../Header';
 
 export class LandingPage extends React.Component {
   constructor(props) {
@@ -19,7 +21,7 @@ export class LandingPage extends React.Component {
   render() {
     const { isSuccess, hasErrored } = this.props;
     return (
-      <PageTemplate footer={
+      <PageTemplate header={<Header className="landing-page" />} footer={
         <div className="landing-footer text-center">
           <div className="footer-item">
             <span>Pensieve &copy; 2017</span>
