@@ -11,7 +11,7 @@ const panelStyles = {
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
-	whiteSpace: 'pre-wrap',
+	whiteSpace: 'pre-wrap'
 };
 
 class ItemContainer extends React.Component {
@@ -50,35 +50,52 @@ class ItemContainer extends React.Component {
 		const { showAnswer } = this.state;
 
 		if (!item) {
-			 return (
-				 <h3>
-					 <strong>Hmm.</strong> Item does not exist
-				 </h3>
-			 );
-		 }
+			return (
+				<h3>
+					<strong>Hmm.</strong> Item does not exist
+				</h3>
+			);
+		}
 
 		const itemContent = showAnswer ? item.description : item.title;
-		const editButton = <button onClick={this.onEditClick} className='btn btn-success pull-right' style={{ marginLeft: '5px' }}>Edit</button>;
-		const newItemButton = <Link to='/items/new' className='btn btn-success pull-right'>New Item</Link>;
+		const editButton = (
+			<button
+				onClick={this.onEditClick}
+				className="btn btn-success pull-right"
+				style={{ marginLeft: '5px' }}
+			>
+				Edit
+			</button>
+		);
+		const newItemButton = (
+			<Link to="/items/new" className="btn btn-success pull-right">
+				New Item
+			</Link>
+		);
 
 		return (
-			<Header className='item-page'>
-				<div className='container'>
-					<div className='row'>
-						<div className='col-md-8 col-md-offset-2'>
-							<div className='page-header'>
-								<h2>Item {editButton}{newItemButton}</h2>
+			<Header className="item-page">
+				<div className="container">
+					<div className="row">
+						<div className="col-md-8 col-md-offset-2">
+							<div className="page-header">
+								<h2>
+									Item {editButton}
+									{newItemButton}
+								</h2>
 							</div>
-							<div className='panel panel-default'>
-								<div className='panel-body' style={panelStyles} onClick={this.onItemClick}>
-									<h3 className='text-center' style={{ margin: '0' }}>
+							<div className="panel panel-default">
+								<div className="panel-body" style={panelStyles} onClick={this.onItemClick}>
+									<h3 className="text-center" style={{ margin: '0' }}>
 										{itemContent}
 									</h3>
-									<button onClick={(e) => this.onToggleHideItem(e, item)} className='reviewCard--hide btn btn-reset'>
+									<button
+										onClick={e => this.onToggleHideItem(e, item)}
+										className="reviewCard--hide btn btn-reset"
+									>
 										{item.hidden
-											? <span className='glyphicon glyphicon-eye-close' aria-hidden='true' ></span>
-											: <span className='glyphicon glyphicon-eye-open' aria-hidden='true' ></span>
-										}
+											? <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
+											: <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />}
 									</button>
 								</div>
 							</div>
@@ -90,11 +107,11 @@ class ItemContainer extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
-	item: state.data.item,
+const mapStateToProps = state => ({
+	item: state.data.item
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(itemActions, dispatch)
 });
 

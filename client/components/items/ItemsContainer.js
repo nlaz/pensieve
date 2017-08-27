@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import moment from 'moment';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
@@ -34,21 +35,37 @@ export const PageNavigation = ({ numPages, onDecrementPage, onIncrementPage, onC
 		</ul>
 	</nav>;
 
-const ProgressBar = ({ progress }) =>
-	<div className="progress">
-		<div
-			className="progress-bar progress-bar-info"
-			role="progressbar"
-			aria-valuenow={progress}
-			aria-valuemin="0"
-			aria-valuemax="100"
-			style={{ width: `${progress}%` }}
-		>
-			<span className="sr-only">
-				{progress}% Complete
-			</span>
+const ProgressBar = ({ progress }) => {
+	const classNames = cx('progress-bar', {
+		'progress-bar--good': progress > 60,
+		'progress-bar--warm': progress > 30 && progress <= 60,
+		'progress-bar--hot': progress <= 30
+	});
+
+	if (progress === 0) {
+		return (
+			<div className="progress progress-reviewNow">
+				<button className="button-reviewNow">Review now</button>
+			</div>
+		);
+	}
+	return (
+		<div className="progress">
+			<div
+				className={classNames}
+				role="progressbar"
+				aria-valuenow={progress}
+				aria-valuemin="0"
+				aria-valuemax="100"
+				style={{ width: `${progress}%` }}
+			>
+				<span className="sr-only">
+					{progress}% Complete
+				</span>
+			</div>
 		</div>
-	</div>;
+	);
+};
 
 export const ItemCard = ({ item, className }) => {
 	const maxTime = Math.max(moment(item.nextReviewDate).diff(item.updatedAt, 'hours'), 0);
@@ -62,10 +79,11 @@ export const ItemCard = ({ item, className }) => {
 				<h5 style={{ margin: '0', fontSize: '16px' }}>
 					{item.title}
 				</h5>
-				{item.hidden &&
-					<div className="hideIcon">
-						<span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
-					</div>}
+				<div className="hideIcon">
+					{item.hidden
+						? <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
+						: <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />}
+				</div>
 			</Link>
 		</div>
 	);
