@@ -50,7 +50,7 @@ class EditItemContainer extends React.Component {
 	}
 
 	render() {
-		const deleteButton = <button onClick={this.onDeleteClick} className='btn btn-success pull-right'>Delete</button>;
+		const deleteButton = <button onClick={this.onDeleteClick} className='btn btn-danger pull-right'>Delete</button>;
 
 		return (
 			<Header className='editItem-page'>

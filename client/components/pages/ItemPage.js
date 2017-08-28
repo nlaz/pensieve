@@ -3,10 +3,10 @@ import React from 'react';
 import PageTemplate from '../templates/PageTemplate';
 import ItemContainer from '../organisms/ItemContainer';
 
-const ItemPage = ({params}) => {
+const ItemPage = ({params, router}) => {
   return (
     <PageTemplate>
-      <ItemContainer itemId={params.itemId}/>
+      <ItemContainer itemId={params.itemId} router={router}/>
     </PageTemplate>
   );
 };
