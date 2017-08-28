@@ -3,10 +3,10 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from './Header';
-import * as sessionActions from '../actions/sessionActions';
+import PageTemplate from '../templates/PageTemplate';
+import * as sessionActions from '../../actions/sessionActions';
 
-class Login extends React.Component {
+class LoginPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { email: '', password: '' };
@@ -39,7 +39,7 @@ class Login extends React.Component {
 
 	render() {
 		return (
-			<Header className="login-page">
+			<PageTemplate>
 				<div className="login-form container">
 					<div className="row">
 						<div className="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -100,7 +100,7 @@ class Login extends React.Component {
 						</div>
 					</div>
 				</div>
-			</Header>
+			</PageTemplate>
 		);
 	}
 }
@@ -113,4 +113,4 @@ const mapStateToProps = state => ({
 	authenticated: state.app.authenticated
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

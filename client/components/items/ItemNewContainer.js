@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from '../Header';
+import Header from '../molecules/Header';
 import * as itemActions from '../../actions/itemActions';
 
 class ItemNewContainer extends React.Component {

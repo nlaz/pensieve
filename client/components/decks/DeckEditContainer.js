@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Header from '../Header';
+import Header from '../molecules/Header';
 import * as deckActions from '../../actions/deckActions';
 
 const EditItemCard = ({ item, onInputChange, onRemove }) => (

@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as emailActions from '../../actions/emailActions';
-import { SignupForm } from '../SignupForm';
+import { EmailSignupForm } from '../atoms/EmailSignupForm';
 import PageTemplate from '../templates/PageTemplate';
-import Header from '../Header';
+import Header from '../molecules/Header';
 
 export class LandingPage extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ export class LandingPage extends React.Component {
               flashcards to find the best time for you to review so you learn
               better.
             </h4>
-            <SignupForm
+            <EmailSignupForm
               isSuccess={isSuccess}
               hasErrored={hasErrored}
               onSignup={this.onSignup}

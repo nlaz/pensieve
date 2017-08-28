@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PageTemplate from '../templates/PageTemplate';
 import HomeContainer from '../home/HomeContainer';
 
-class InitialPage extends React.Component {
+class HomePage extends React.Component {
   render() {
     return (
       <PageTemplate>
@@ -18,4 +18,4 @@ const mapStateToProps = state => ({
   authenticated: state.app.authenticated
 });
 
-export default connect(mapStateToProps)(InitialPage);
+export default connect(mapStateToProps)(HomePage);

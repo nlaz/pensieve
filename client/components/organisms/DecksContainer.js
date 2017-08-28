@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Header from '../Header';
+import Header from '../molecules/Header';
 import * as deckActions from '../../actions/deckActions';
 import { PageNavigation } from './ItemsContainer';
 

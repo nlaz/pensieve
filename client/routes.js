@@ -15,9 +15,9 @@ import SessionNew from './components/sessions/SessionNewContainer';
 import SwitchContainer from './components/SwitchContainer';
 import NotFoundPage from './components/pages/NotFoundPage';
 
-import Login from './components/Login';
-import Logout from './components/Logout';
-import Signup from './components/Signup';
+import Login from './components/pages/LoginPage';
+import Logout from './components/pages/LogoutPage';
+import Signup from './components/pages/SignupPage';
 
 const routes = (
 	<Route path='/'>
