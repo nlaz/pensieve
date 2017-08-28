@@ -4,14 +4,7 @@
  */
 
 /* Variables */
-$C_white: #ffffff;
-$C_black: #222b2d;
-$C_lightGray: #f8f8f8;
-$C_blue: #3b85bf;
-$C_primaryBlue: #1574fb;
-$C_darkGray: #4b4b4b;
-$C_mediumGray: #8d8d8d;
-$C_errorRed: #e35a5a;
+@import "./vars";
 
 /* Google fonts */
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
@@ -46,7 +39,7 @@ html, body {
 body {
 	font-family: 'Lato', sans-serif;
 	letter-spacing: -.2px;
-	background: $C_lightGray;
+	background: $C_darkWhite;
 }
 
 .margin-top {
@@ -61,12 +54,28 @@ input.form-control {
 	padding: 20px 15px;
 }
 
-button.btn {
+.btn {
 	padding: 10px;
 }
 
-button.btn.btn-primary {
+.btn.btn-primary {
 	background: $C_primaryBlue;
+	border-color: transparent;
+
+	&:hover {
+		background: $C_primaryDarkBlue;
+		border-color: transparent;
+	}
+}
+
+.btn.btn-danger {
+	background: $C_errorRed;
+	border-color: transparent;
+
+	&:hover {
+		background: $C_errorDarkRed;
+		border-color: transparent;
+	}
 }
 
 @import './landing';

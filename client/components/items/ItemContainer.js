@@ -58,8 +58,8 @@ class ItemContainer extends React.Component {
 		 }
 
 		const itemContent = showAnswer ? item.description : item.title;
-		const editButton = <button onClick={this.onEditClick} className='btn btn-success pull-right' style={{ marginLeft: '5px' }}>Edit</button>;
-		const newItemButton = <Link to='/items/new' className='btn btn-success pull-right'>New Item</Link>;
+		const editButton = <button onClick={this.onEditClick} className='btn btn-primary pull-right' style={{ marginLeft: '5px' }}>Edit</button>;
+		const newItemButton = <Link to='/items/new' className='btn btn-primary pull-right'>New Item</Link>;
 
 		return (
 			<Header className='item-page'>

@@ -2,24 +2,22 @@
  * Items styles
  * http://bit.ly/1ywfhq7
  */
+@import "./vars";
 
-$C_borderColor: #DDDDDD;
 $C_borderRadius: 4px;
-$C_buttonGreen: #41D0A5;
-$C_buttonDarkGreen: #339777;
 
 .item-newItemLink {
-  background: $C_buttonGreen;
-  border: 1px solid #3CC199;
+  background: $C_primaryGreen;
+  border: 1px solid $C_primaryDarkGreen;
   color: $C_white;
   font-size: 14px;
   padding: 7px 17px;
   transition: all .1s ease;
-  text-shadow: 0 .5px 0 #3CC199;
+  text-shadow: 0 .5px 0 $C_primaryDarkGreen;
 
   &:hover {
-    background: $C_buttonDarkGreen;
-    border: 1px solid $C_buttonDarkGreen;
+    background: $C_primaryDarkGreen;
+    border: 1px solid $C_primaryDarkGreen;
     color: $C_white;
     text-shadow: none;
   }
@@ -28,7 +26,7 @@ $C_buttonDarkGreen: #339777;
 .itemCard {
   align-items: center;
   color: $C_black;
-  border: 1px solid $C_borderColor;
+  border: 1px solid $C_cardBorder;
   border-radius: $C_borderRadius;
   display: flex;
   flex-direction: column;
@@ -46,7 +44,7 @@ $C_buttonDarkGreen: #339777;
   position: absolute;
   bottom: 10px;
   right: 10px;
-  color: #aaa;
+  color: $C_mediumGray;
 }
 
 .itemCard .progress {
@@ -87,7 +85,7 @@ $C_buttonDarkGreen: #339777;
   }
 
   .subtitle {
-    color: #8C8787;
+    color: $C_mediumGray;
   }
 
   .search {
