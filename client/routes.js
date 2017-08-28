@@ -2,7 +2,7 @@ import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 
 import ReqAuth from './components/ReqAuth';
-import Item from './components/items/ItemContainer';
+import Item from './components/pages/ItemPage';
 import Items from './components/pages/ItemsPage';
 import ItemNew from './components/items/ItemNewContainer';
 import ItemEdit from './components/items/ItemEditContainer';
