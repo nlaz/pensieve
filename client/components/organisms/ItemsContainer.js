@@ -58,7 +58,7 @@ export const ItemCard = ({ item, className }) => {
 		<div className={`itemCard-wrapper ${className}`}>
 			<Link to={`/items/${item._id}`} className="itemCard">
 				<ProgressBar progress={progress} />
-				<h5 style={{ margin: '0', fontSize: '16px' }}>
+				<h5 style={{ margin: '0', fontSize: '16px', textAlign: 'center' }}>
 					{item.title}
 				</h5>
 				{item.hidden &&
