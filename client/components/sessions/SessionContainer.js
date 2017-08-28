@@ -33,7 +33,7 @@ const ProgressBar = ({ progress }) => (
 			aria-valuenow={progress}
 			aria-valuemin='0'
 			aria-valuemax='100'
-			style={{ width: `${progress}%` }}
+			style={{ width: `${progress}%`, backgroundColor: '#1574fb' }}
 		>
 			<span className="sr-only">{progress}% Complete</span>
 		</div>
@@ -61,7 +61,7 @@ const SessionResults = ({ items }) => (
 			)}
 		</ul>
 		<div className='text-right'>
-			<Link to='/activity' className='btn btn-primary'>Back</Link>
+			<Link to='/' className='btn btn-primary'>Back</Link>
 		</div>
 	</div>
 );
