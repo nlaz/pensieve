@@ -22,14 +22,18 @@ import Signup from './components/pages/SignupPage';
 const routes = (
 	<Route path='/'>
 		<IndexRoute component={SwitchContainer} />
-		<Route path='items' component={ReqAuth(Items)} />
-		<Route path='items/new' component={ReqAuth(ItemNew)} />
-		<Route path='items/:itemId' component={ReqAuth(Item)} />
-		<Route path='items/:itemId/edit' component={ReqAuth(ItemEdit)} />
-		<Route path='decks' component={ReqAuth(Decks)} />
-		<Route path='decks/new' component={ReqAuth(DeckNew)} />
-		<Route path='decks/:deckId' component={ReqAuth(Deck)} />
-		<Route path='decks/:deckId/edit' component={ReqAuth(DeckEdit)} />
+		<Route path='/items'>
+			<IndexRoute component={ReqAuth(Items)}/>
+			<Route path='new' component={ReqAuth(ItemNew)} />
+			<Route path=':itemId' component={ReqAuth(Item)} />
+			<Route path=':itemId/edit' component={ReqAuth(ItemEdit)} />
+		</Route>
+		<Route path="/decks">
+			<IndexRoute component={ReqAuth(Decks)} />
+			<Route path='new' component={ReqAuth(DeckNew)} />
+			<Route path=':deckId' component={ReqAuth(Deck)} />
+			<Route path=':deckId/edit' component={ReqAuth(DeckEdit)} />
+		</Route>
 		<Route path='sessions/new' component={ReqAuth(SessionNew)} />
 		<Route path='sessions/:sessionId' component={ReqAuth(Session)} />
 		<Route path='login' component={Login} />
