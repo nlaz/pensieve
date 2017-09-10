@@ -4,6 +4,15 @@
 */
 @import './vars';
 
+.landing-page {
+  background: $C_white;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .landing-page .navbar.navbar-inverse {
   background: $C_white;
   border: 0;
@@ -116,18 +125,10 @@
   background-position: center;
   max-width: 260px;
   width: 100%;
-  height: auto;
+  height: 100%;
   z-index: 0;
   opacity: 0.9;
-
-  @media (max-width: 899px) {
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 180px;
-    right: 0;
-  }
+  position: absolute;
 
   @include atMediumUp {
     background-image: url('../assets/images/splash_hero.png');
