@@ -3,8 +3,8 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import PageTemplate from '../templates/PageTemplate';
-import * as sessionActions from '../../actions/sessionActions';
+import PageTemplate from '../../../components/PageTemplate';
+import * as sessionActions from '../authActions';
 
 class LoginContainer extends React.Component {
   constructor(props) {

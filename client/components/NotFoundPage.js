@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PageTemplate from '../templates/PageTemplate';
+import PageTemplate from './PageTemplate';
 
 const NotFoundPage = () => {
   return (

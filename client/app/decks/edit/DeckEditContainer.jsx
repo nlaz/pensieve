@@ -2,22 +2,36 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Header from '../molecules/Header';
-import * as deckActions from '../../actions/deckActions';
+import Header from '../../../components/Header';
+import * as deckActions from '../deckActions';
 
 const EditItemCard = ({ item, onInputChange, onRemove }) => (
-  <div className='col-xs-4 itemCard--wrapper'>
-    <div className='itemCard' >
-      <button onClick={onRemove} className='itemCard--close btn btn-default btn-xs'>
-				<span className='glyphicon glyphicon-remove' aria-hidden='true' ></span>
+  <div className="col-xs-4 itemCard--wrapper">
+    <div className="itemCard">
+      <button onClick={onRemove} className="itemCard--close btn btn-default btn-xs">
+        <span className="glyphicon glyphicon-remove" aria-hidden="true" />
       </button>
-      <div className='form-group'>
-        <label htmlFor='title'>Item title</label>
-        <input onChange={onInputChange} value={item.title} name='title' className='form-control' type='text' placeholder='Give me a name...'/>
+      <div className="form-group">
+        <label htmlFor="title">Item title</label>
+        <input
+          onChange={onInputChange}
+          value={item.title}
+          name="title"
+          className="form-control"
+          type="text"
+          placeholder="Give me a name..."
+        />
       </div>
-      <div className='form-group' style={{ flexGrow: '1' }}>
-        <label htmlFor='description'>Item description</label>
-        <textarea onChange={onInputChange} value={item.description} name='description' className='form-control' type='textarea' placeholder='Add some details...'/>
+      <div className="form-group" style={{ flexGrow: '1' }}>
+        <label htmlFor="description">Item description</label>
+        <textarea
+          onChange={onInputChange}
+          value={item.description}
+          name="description"
+          className="form-control"
+          type="textarea"
+          placeholder="Add some details..."
+        />
       </div>
     </div>
   </div>
@@ -37,18 +51,18 @@ class DeckEditContainer extends React.Component {
 
   componentWillMount() {
     const { deck, params } = this.props;
-    if (!deck || deck._id !== params.deckId ) {
+    if (!deck || deck._id !== params.deckId) {
       this.props.actions.fetchDeck(params.deckId);
     } else if (deck && deck._id === params.deckId) {
       const itemsObj = deck.items.map(item => ({
         title: item.title,
-        description: item.description,
+        description: item.description
       }));
 
       this.setState(() => ({
         title: deck.title,
         description: deck.description,
-        items: itemsObj,
+        items: itemsObj
       }));
     }
   }
@@ -59,20 +73,20 @@ class DeckEditContainer extends React.Component {
     if (deck && deck._id === params.deckId) {
       const itemsObj = deck.items.map(item => ({
         title: item.title,
-        description: item.description,
+        description: item.description
       }));
 
       this.setState(() => ({
         title: deck.title,
         description: deck.description,
-        items: itemsObj,
+        items: itemsObj
       }));
     }
   }
 
   onAddCard() {
     const { items } = this.state;
-    this.setState(() => ({ items: [...items, { title: '', description: ''}] }) );
+    this.setState(() => ({ items: [...items, { title: '', description: '' }] }));
   }
   onRemoveCard(index) {
     const { items } = this.state;
@@ -94,41 +108,72 @@ class DeckEditContainer extends React.Component {
       deckId: deck._id,
       title: title,
       description: description,
-      items: items,
+      items: items
     });
   }
 
   render() {
     const { title, description, items } = this.state;
     return (
-      <Header className='newDeck-page'>
-        <div className='container'>
-          <div className='row'>
+      <Header className="newDeck-page">
+        <div className="container">
+          <div className="row">
             <h2>Edit deck page</h2>
-            <div className='text-right col-xs-12'>
-              <button onClick={this.onAddCard} type='button' className='newItem--btn btn btn-primary'>New item +</button>
+            <div className="text-right col-xs-12">
+              <button
+                onClick={this.onAddCard}
+                type="button"
+                className="newItem--btn btn btn-primary"
+              >
+                New item +
+              </button>
             </div>
           </div>
-          <div className='row'>
-            <form onSubmit={(e) => e.preventDefault()} className='col-xs-3 editDeckInfo--wrapper'>
-              <div className='editDeckInfo'>
-                <div className='form-group'>
-                  <label htmlFor='title'>Deck title</label>
-                  <input onChange={(e) => this.onDeckInputChange(e.target.name, e.target.value)} value={title} name='title' className='form-control' type='text' placeholder='Give me a name...'/>
+          <div className="row">
+            <form onSubmit={e => e.preventDefault()} className="col-xs-3 editDeckInfo--wrapper">
+              <div className="editDeckInfo">
+                <div className="form-group">
+                  <label htmlFor="title">Deck title</label>
+                  <input
+                    onChange={e => this.onDeckInputChange(e.target.name, e.target.value)}
+                    value={title}
+                    name="title"
+                    className="form-control"
+                    type="text"
+                    placeholder="Give me a name..."
+                  />
                 </div>
-                <div className='form-group'>
-                  <label htmlFor='description'>Deck description</label>
-                  <textarea onChange={(e) => this.onDeckInputChange(e.target.name, e.target.value)} value={description} name='description' className='form-control' type='textarea' placeholder='Add some details...'/>
+                <div className="form-group">
+                  <label htmlFor="description">Deck description</label>
+                  <textarea
+                    onChange={e => this.onDeckInputChange(e.target.name, e.target.value)}
+                    value={description}
+                    name="description"
+                    className="form-control"
+                    type="textarea"
+                    placeholder="Add some details..."
+                  />
                 </div>
               </div>
-              <button onClick={this.onUpdateDeck} type='submit' className='btn btn-primary btn-block'>
+              <button
+                onClick={this.onUpdateDeck}
+                type="submit"
+                className="btn btn-primary btn-block"
+              >
                 Save Deck
               </button>
             </form>
-            <div className='col-xs-9 items--wrapper'>
-              {items && items.length > 0 && items.map((item, key) => (
-                <EditItemCard item={item} onInputChange={(e) => this.onItemInputChange(e, key)} onRemove={() => this.onRemoveCard(key)} key={key} />
-              ))}
+            <div className="col-xs-9 items--wrapper">
+              {items &&
+                items.length > 0 &&
+                items.map((item, key) => (
+                  <EditItemCard
+                    item={item}
+                    onInputChange={e => this.onItemInputChange(e, key)}
+                    onRemove={() => this.onRemoveCard(key)}
+                    key={key}
+                  />
+                ))}
             </div>
           </div>
         </div>
@@ -137,12 +182,12 @@ class DeckEditContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  deck: state.data.deck,
+const mapStateToProps = state => ({
+  deck: state.data.deck
 });
 
-const mapDispatchToProps = (dispatch) => ({
-	actions: bindActionCreators(deckActions, dispatch)
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(deckActions, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckEditContainer);

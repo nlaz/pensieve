@@ -3,10 +3,11 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from '../molecules/Header';
-import * as reviewActions from '../../actions/reviewActions';
-import * as itemActions from '../../actions/itemActions';
-import PageTemplate from '../templates/PageTemplate';
+import * as reviewActions from './reviewActions';
+import * as itemActions from '../items/itemActions';
+
+import Header from '../../components/Header';
+import PageTemplate from '../../components/PageTemplate';
 
 export const REVIEW_TYPE = {
   EASY: 'easy',
@@ -41,12 +42,6 @@ const ProgressBar = ({ progress }) => (
     </div>
   </div>
 );
-
-const valueToClass = {
-  hard: 'alert-danger',
-  good: 'alert-info',
-  easy: 'alert-success'
-};
 
 const SessionResultItem = ({ item }) => (
   <li className="list-group-item">

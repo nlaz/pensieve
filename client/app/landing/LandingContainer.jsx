@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as emailActions from '../../actions/emailActions';
-import { EmailSignupForm } from '../atoms/EmailSignupForm';
-import PageTemplate from '../templates/PageTemplate';
-import Header from '../molecules/Header';
+import * as emailActions from './emailActions';
+import { EmailSignupForm } from './EmailSignupForm';
+import PageTemplate from '../../components/PageTemplate';
+import Header from '../../components/Header';
 
-export class LandingPage extends React.Component {
+export class LandingContainer extends React.Component {
   constructor(props) {
     super(props);
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as sessionActions from '../../actions/sessionActions';
+
+import * as sessionActions from '../authActions';
 
 class LogoutContainer extends React.Component {
   componentWillMount() {

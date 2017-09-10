@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as itemActions from '../../actions/itemActions';
+import * as itemActions from './itemActions';
 
 export const PAGE_SIZE = 24;
 

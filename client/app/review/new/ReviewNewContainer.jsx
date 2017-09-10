@@ -1,7 +1,8 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as reviewActions from '../../actions/reviewActions';
+
+import * as reviewActions from '../reviewActions';
 
 class ReviewNewContainer extends React.Component {
   componentDidMount() {
