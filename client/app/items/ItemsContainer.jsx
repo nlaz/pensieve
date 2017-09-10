@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -7,66 +6,10 @@ import { connect } from 'react-redux';
 import * as itemActions from './itemActions';
 import PageTemplate from '../../components/PageTemplate';
 
+import ItemCard from './ItemCard';
+import PageNavigation from '../../components/PageNavigation';
+
 export const PAGE_SIZE = 24;
-
-export const PageNavigation = ({ numPages, onDecrementPage, onIncrementPage, onChangePage }) => (
-  <nav aria-label="Page navigation" style={{ textAlign: 'center' }}>
-    <ul className="pagination">
-      <li>
-        <a onClick={onDecrementPage} href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-
-      {new Array(numPages).fill(1).map((obj, key) => (
-        <li key={key} onClick={() => onChangePage(key)}>
-          <a href="#">{key}</a>
-        </li>
-      ))}
-
-      <li>
-        <a onClick={onIncrementPage} href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-);
-
-const ProgressBar = ({ progress }) => (
-  <div className="progress">
-    <div
-      className="progress-bar progress-bar-info"
-      role="progressbar"
-      aria-valuenow={progress}
-      aria-valuemin="0"
-      aria-valuemax="100"
-      style={{ width: `${progress}%` }}
-    >
-      <span className="sr-only">{progress}% Complete</span>
-    </div>
-  </div>
-);
-
-export const ItemCard = ({ item, className }) => {
-  const maxTime = Math.max(moment(item.nextReviewDate).diff(item.updatedAt, 'hours'), 0);
-  const progressTime = Math.max(moment(item.nextReviewDate).diff(moment(), 'hours'), 0);
-  const progress = progressTime / maxTime * 100 || 0;
-
-  return (
-    <div className={`itemCard-wrapper ${className}`}>
-      <Link to={`/items/${item._id}`} className="itemCard">
-        <ProgressBar progress={progress} />
-        <h5 style={{ margin: '0', fontSize: '16px', textAlign: 'center' }}>{item.title}</h5>
-        {item.hidden && (
-          <div className="hideIcon">
-            <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
-          </div>
-        )}
-      </Link>
-    </div>
-  );
-};
 
 export const PageHeader = ({ count, onSearchChange }) => {
   return (

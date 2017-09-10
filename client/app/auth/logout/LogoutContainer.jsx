@@ -6,7 +6,6 @@ import * as sessionActions from '../authActions';
 
 class LogoutContainer extends React.Component {
   componentWillMount() {
-    console.log('componentWillMount');
     if (this.props.authenticated) {
       this.props.logoutUser();
     } else {

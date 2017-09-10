@@ -4,25 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as deckActions from './deckActions';
-import { PageNavigation } from '../items/ItemsContainer';
 import PageTemplate from '../../components/PageTemplate';
+import PageNavigation from '../../components/PageNavigation';
 
 export const PAGE_SIZE = 16;
-
-export function DeckCard({ deck }) {
-  return (
-    <div className="col-xs-6 col-sm-3 deckCard-wrapper">
-      <Link to={`/decks/${deck._id}`} className="deckCard">
-        <span className="deckCard-itemCount">
-          {deck.items.length}
-          <span className="glyphicon glyphicon-file" aria-hidden="true" />
-        </span>
-        <h4 className="deckCard-title">{deck.title}</h4>
-        <p className="deckCard-subtitle">{deck.description}</p>
-      </Link>
-    </div>
-  );
-}
 
 export const PageHeader = ({ count, onSearchChange }) => {
   return (
