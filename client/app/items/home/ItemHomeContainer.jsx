@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import Header from '../../../components/Header';
 import * as itemActions from '../itemActions';
 
 const panelStyles = {
@@ -73,35 +74,37 @@ class ItemContainer extends React.Component {
     );
 
     return (
-      <div className="item-page container">
-        <div className="row">
-          <div className="col-md-8 col-md-offset-2">
-            <div className="page-header">
-              <h2>
-                Item {editButton}
-                {newItemButton}
-              </h2>
-            </div>
-            <div className="panel panel-default">
-              <div className="panel-body" style={panelStyles} onClick={this.onItemClick}>
-                <h3 className="text-center" style={{ margin: '0' }}>
-                  {itemContent}
-                </h3>
-                <button
-                  onClick={e => this.onToggleHideItem(e, item)}
-                  className="reviewCard--hide btn btn-reset"
-                >
-                  {item.hidden ? (
-                    <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
-                  ) : (
-                    <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />
-                  )}
-                </button>
+      <Header className="item-page">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 col-md-offset-2">
+              <div className="page-header">
+                <h2>
+                  Item {editButton}
+                  {newItemButton}
+                </h2>
+              </div>
+              <div className="panel panel-default">
+                <div className="panel-body" style={panelStyles} onClick={this.onItemClick}>
+                  <h3 className="text-center" style={{ margin: '0' }}>
+                    {itemContent}
+                  </h3>
+                  <button
+                    onClick={e => this.onToggleHideItem(e, item)}
+                    className="reviewCard--hide btn btn-reset"
+                  >
+                    {item.hidden ? (
+                      <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
+                    ) : (
+                      <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Header>
     );
   }
 }

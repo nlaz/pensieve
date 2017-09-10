@@ -1,8 +1,8 @@
-/**
+/*u*
  * Items styles
  * http://bit.ly/1ywfhq7
  */
-@import "./vars";
+@import './vars';
 
 $C_borderRadius: 4px;
 
@@ -12,8 +12,8 @@ $C_borderRadius: 4px;
   color: $C_white;
   font-size: 14px;
   padding: 7px 17px;
-  transition: all .1s ease;
-  text-shadow: 0 .5px 0 $C_primaryDarkGreen;
+  transition: all 0.1s ease;
+  text-shadow: 0 0.5px 0 $C_primaryDarkGreen;
 
   &:hover {
     background: $C_primaryDarkGreen;
@@ -48,10 +48,52 @@ $C_borderRadius: 4px;
 }
 
 .itemCard .progress {
-  position: absolute;
-  top: 15px;
-  right: 15px;
+  border-radius: 999px;
+  height: 16px;
   left: 15px;
+  right: 15px;
+  top: 15px;
+  position: absolute;
+  box-shadow: none;
+}
+
+$C_darkBorder: #d5d5d5;
+
+.itemCard .progress.progress-reviewNow {
+  background: none;
+  border: none;
+  border-radius: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
+
+  .button-reviewNow {
+    background: #f3f3f3;
+    border-radius: 999px;
+    height: 20px;
+    width: 100%;
+    color: $C_darkBorder;
+    border: 1px solid $C_darkBorder;
+    line-height: 12px;
+    font-size: 12px;
+  }
+}
+
+.itemCard .glyphicon-eye-open {
+  color: #585858;
+}
+
+.itemCard .progress-bar {
+  background-color: #50e3c2;
+}
+.itemCard .progress-bar--good {
+  background-color: #50e3c2;
+}
+.itemCard .progress-bar--warm {
+  background-color: #f5a623;
+}
+.itemCard .progress-bar--hot {
+  background-color: #ff3232;
 }
 
 .decks-page .page-header,
@@ -94,7 +136,7 @@ $C_borderRadius: 4px;
 
     @include atSmallUp {
       flex-grow: none;
-    };
+    }
   }
 
   .search input {

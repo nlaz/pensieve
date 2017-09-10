@@ -10,12 +10,14 @@ export default function ItemCard({ item, className }) {
     <div className={`itemCard-wrapper ${className}`}>
       <Link to={`/items/${item._id}`} className="itemCard">
         <ProgressBar progress={progress} />
-        <h5 style={{ margin: '0', fontSize: '16px', textAlign: 'center' }}>{item.title}</h5>
-        {item.hidden && (
-          <div className="hideIcon">
+        <h5 style={{ margin: '0', fontSize: '16px' }}>{item.title}</h5>
+        <div className="hideIcon">
+          {item.hidden ? (
             <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
-          </div>
-        )}
+          ) : (
+            <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />
+          )}
+        </div>
       </Link>
     </div>
   );

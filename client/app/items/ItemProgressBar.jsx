@@ -1,10 +1,25 @@
 import React from 'react';
+import cx from 'classnames';
 
 export default function ItemProgressBar({ progress }) {
+  const classNames = cx('progress-bar', {
+    'progress-bar--good': progress > 60,
+    'progress-bar--warm': progress > 30 && progress <= 60,
+    'progress-bar--hot': progress <= 30
+  });
+
+  if (progress === 0) {
+    return (
+      <div className="progress progress-reviewNow">
+        <button className="button-reviewNow">Review now</button>
+      </div>
+    );
+  }
+
   return (
     <div className="progress">
       <div
-        className="progress-bar progress-bar-info"
+        className={classNames}
         role="progressbar"
         aria-valuenow={progress}
         aria-valuemin="0"

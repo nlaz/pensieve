@@ -94,7 +94,7 @@ export async function reviewItem(req, res) {
     const item = await Item.findById(newReview.item_id);
 
     item.counter = getNewCounter(value, item.counter);
-    item.newReviewDate = getNextReviewDate(item.counter);
+    item.nextReviewDate = getNextReviewDate(item.counter);
 
     const newItem = await item.save();
     return res.status(200).json({ item: newItem });
