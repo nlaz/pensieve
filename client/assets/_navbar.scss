@@ -2,14 +2,13 @@
  * Navbar styles
  * http://bit.ly/1ywfhq7
  */
-
- $C_buttonGreen: #41D0A5;
+@import "./vars";
 
 .navbar {
   background: $C_white;
   border-radius: 0;
   border: none;
-  box-shadow: 0 2px 2px rgba(178, 178, 178, .5);
+  box-shadow: 0 2px 2px $C_transparentGray;
   color: $C_primaryBlue;
   margin-bottom: 0;
 
@@ -21,6 +20,18 @@
     &:hover,
     &:focus {
       color: $C_primaryBlue;
+    }
+  }
+
+  .navbar-nav > li > .active-nav-link {
+    color: $C_white;
+    background-color: $C_primaryGreen;
+    height: 60px;
+
+    &:hover,
+    &:focus {
+      background-color: $C_primaryDarkGreen !important;
+      color: $C_white;
     }
   }
 
@@ -50,7 +61,7 @@
 
   .btn-reviewNow {
     color: $C_white !important;
-    background: $C_buttonGreen;
+    background: $C_primaryGreen;
     border-color: transparent;
     padding: 5px 25px;
     margin: 10px 0;
@@ -59,7 +70,7 @@
 
     &:hover,
     &:active {
-      background: #3BC29A !important;
+      background: $C_primaryDarkGreen !important;
     }
   }
 }

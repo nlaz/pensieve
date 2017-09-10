@@ -2,15 +2,10 @@
  * Landing styles
  * http://bit.ly/1ywfhq7
  */
-
-.landing-page {
-  background: $C_white;
-  min-height: 100vh;
-  position: relative;
-}
+@import "./vars";
 
 .landing-page .navbar.navbar-inverse {
-  background: transparent;
+  background: $C_white;
   border: 0;
   color: $C_black;
   top: 0;
@@ -62,11 +57,6 @@
       border: 1px solid $C_primaryBlue;
     }
   }
-}
-.landing-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .landing-body {
@@ -123,15 +113,19 @@
   background-image: url('../assets/images/splash_hero2.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: top;
-  margin: auto;
+  background-position: center;
   max-width: 260px;
-  top: 10px;
-  height: 100%;
   width: 100%;
-  position: absolute;
+  height: auto;
   z-index: 0;
   opacity: .9;
+
+  @media (max-width: 899px) {
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 180px; right: 0;
+  }
+
 
   @include atMediumUp {
     background-image: url('../assets/images/splash_hero.png');
@@ -191,8 +185,8 @@
     &:hover,
     &:focus,
     &:active {
-      border: 2px solid #0F65DF;
-      background: #0F65DF;
+      border: 2px solid $C_primaryDarkBlue;
+      background: $C_primaryDarkBlue;
     }
   }
 }
@@ -229,7 +223,7 @@
 
   .success-checkmark {
     align-items: center;
-    background: #51D5AF;
+    background: $C_primaryGreen;
     border-radius: 100%;
     display: flex;
     height: 40px;
@@ -248,18 +242,19 @@
 }
 
 .landing-footer {
-  color: #CBCBCB;
-  position: absolute;
-  bottom: 25px;
-  left: 0;
-  right: 0;
+  color: $C_lightGray;
+  //position: absolute;
+  //bottom: 25px;
+  margin-bottom: 25px;
+  //left: 0;
+  //right: 0;
 
   .footer-item {
     display: inline;
     padding: 10px 20px;
 
     a {
-      color: #CBCBCB;
+      color: $C_lightGray;
     }
   }
 }
