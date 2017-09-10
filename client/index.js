@@ -5,8 +5,8 @@ import App from './app/App';
 render(<App />, document.getElementById('root'));
 
 if (process.env.NODE_ENV == 'development' && module.hot) {
-  module.hot.accept('./app', () => {
-    const NewApp = require('./app').default;
+  module.hot.accept('./app/App', () => {
+    const NewApp = require('./app/App').default;
     render(<NewApp />, document.getElementById('root'));
   });
 }
