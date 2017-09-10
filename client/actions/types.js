@@ -2,9 +2,6 @@
  * Authentication Actions
  */
 
-export const AUTH_USER = 'authUser';
-export const AUTH_ERROR = 'authUserError';
-export const UNAUTH_USER = 'unauthUser';
 export const FETCH_SELF = 'fetchSelf';
 
 export const FETCH_ITEMS = 'fetchItems';
@@ -28,9 +25,6 @@ export const CREATE_DECK = 'createDeck';
 export const EDIT_DECK = 'editDeck';
 export const DELETE_DECK = 'deleteDeck';
 export const DECK_ERROR = 'deckError';
-
-export const FETCH_ACTIVITY = 'fetchActivity';
-export const ACTIVITY_ERROR = 'activityError';
 
 export const EMAIL_SIGN_UP_PRELAUNCH = 'emailSignUpPrelaunch';
 export const EMAIL_SIGN_UP_PRELAUNCH_ERROR = 'emailSignUpPrelaunchError';

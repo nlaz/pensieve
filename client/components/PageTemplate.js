@@ -5,12 +5,14 @@ import Header from '../molecules/Header';
 
 const Wrapper = ({ children }) => {
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
-      boxSizing: 'border-box'
-    }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        boxSizing: 'border-box'
+      }}
+    >
       {children}
     </div>
   );
@@ -18,12 +20,14 @@ const Wrapper = ({ children }) => {
 
 const HeaderWrapper = ({ children }) => {
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      width: '100%',
-      zIndex: 999
-    }}>
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        zIndex: 999
+      }}
+    >
       {children}
     </div>
   );
@@ -31,26 +35,23 @@ const HeaderWrapper = ({ children }) => {
 
 const ContentWrapper = ({ children }) => {
   return (
-    <div style={{
-      width: '100%',
-      boxSizing: 'border-box',
-      margin: '2rem auto',
-      marginTop: '60px',
-      display: 'flex',
-      flexGrow: 1,
-    }}>
+    <div
+      style={{
+        width: '100%',
+        boxSizing: 'border-box',
+        margin: '2rem auto',
+        marginTop: '60px',
+        display: 'flex',
+        flexGrow: 1
+      }}
+    >
       {children}
     </div>
   );
 };
 
 const FooterWrapper = ({ children }) => {
-  return (
-    <div style={{
-    }}>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 };
 
 const PageTemplate = ({ header, children, footer, ...props }) => {
@@ -66,12 +67,12 @@ const PageTemplate = ({ header, children, footer, ...props }) => {
 PageTemplate.propTypes = {
   header: PropTypes.node,
   footer: PropTypes.node,
-  children: PropTypes.any.isRequired,
+  children: PropTypes.any.isRequired
 };
 
 PageTemplate.defaultProps = {
   header: <Header />,
-  footer: <div />,
+  footer: <div />
 };
 
 export default PageTemplate;
