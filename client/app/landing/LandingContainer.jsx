@@ -21,25 +21,27 @@ export class LandingPage extends React.Component {
   render() {
     const { isSuccess, hasErrored } = this.props;
     return (
-      <PageTemplate header={<Header className="landing-page" />} footer={
-        <div className="landing-footer text-center">
-          <div className="footer-item">
-            <span>Pensieve &copy; 2017</span>
+      <PageTemplate
+        header={<Header className="landing-page" />}
+        footer={
+          <div className="landing-footer text-center">
+            <div className="footer-item">
+              <span>Pensieve &copy; 2017</span>
+            </div>
+            {'|'}
+            <div className="footer-item">
+              <a href="mailto:info@boreas.space">Contact</a>
+            </div>
           </div>
-          {'|'}
-          <div className="footer-item">
-            <a href="mailto:info@boreas.space">Contact</a>
-          </div>
-        </div>
-      }>
-        <div className="container" style={{display: 'flex'}}>
-          <div className="landing-copy col-sm-8 col-md-6" style={{margin: 'auto'}}>
+        }
+      >
+        <div className="container" style={{ display: 'flex' }}>
+          <div className="landing-copy col-sm-8 col-md-6" style={{ margin: 'auto' }}>
             <h4 className="coming-soon">COMING SOON</h4>
             <h1 className="title">Cut your study time in half</h1>
             <h4 className="subtitle">
-              <strong>Learn smarter.</strong> Pensieve uses intelligent
-              flashcards to find the best time for you to review so you learn
-              better.
+              <strong>Learn smarter.</strong> Pensieve uses intelligent flashcards to find the best
+              time for you to review so you learn better.
             </h4>
             <EmailSignupForm
               isSuccess={isSuccess}
@@ -63,4 +65,4 @@ const mapStateToProps = state => ({
   hasErrored: state.prelaunch.hasErrored
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);

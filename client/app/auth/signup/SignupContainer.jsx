@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import PageTemplate from '../templates/PageTemplate';
 import * as sessionActions from '../../actions/sessionActions';
 
-class Signup extends React.Component {
+class SignupContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { email: '', password: '', name: '' };
@@ -79,11 +79,7 @@ class Signup extends React.Component {
                   />
                 </div>
 
-                <button
-                  onClick={this.onSave}
-                  type="submit"
-                  className="btn btn-primary btn-block"
-                >
+                <button onClick={this.onSave} type="submit" className="btn btn-primary btn-block">
                   Join
                 </button>
               </form>
@@ -120,4 +116,4 @@ const mapStateToProps = state => ({
   authenticated: state.app.authenticated
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer);
