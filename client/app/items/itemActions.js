@@ -1,6 +1,8 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
 
+import { SHOW_ERROR, UPDATE_MESSAGE } from '../appActions';
+
 export const FETCH_ITEMS = 'fetchItems';
 export const FETCH_DUE_ITEMS = 'fetchDueItems';
 export const FETCH_ITEM = 'fetchItem';
@@ -8,8 +10,6 @@ export const CREATE_ITEM = 'createItem';
 export const REVIEW_ITEM = 'reviewItem';
 export const EDIT_ITEM = 'editItem';
 export const DELETE_ITEM = 'deleteItem';
-export const ITEM_ERROR = 'itemError';
-export const ITEM_UPDATE_MESSAGE = 'updateMessage';
 
 const ITEMS_API = '/api/items';
 const DUE_ITEMS_API = '/api/due_items';
@@ -20,7 +20,7 @@ export const fetchItems = () => dispatch => {
   axios
     .get(ITEMS_API, config)
     .then(resp => dispatch({ type: FETCH_ITEMS, payload: resp.data }))
-    .catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };
 
 export const fetchItem = itemId => dispatch => {
@@ -29,7 +29,7 @@ export const fetchItem = itemId => dispatch => {
   axios
     .get(`${ITEMS_API}/${itemId}`, config)
     .then(resp => dispatch({ type: FETCH_ITEM, payload: resp.data }))
-    .catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };
 
 export const fetchDueItems = () => dispatch => {
@@ -38,7 +38,7 @@ export const fetchDueItems = () => dispatch => {
   axios
     .get(DUE_ITEMS_API, config)
     .then(resp => dispatch({ type: FETCH_DUE_ITEMS, payload: resp.data }))
-    .catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };
 
 export const createItem = params => dispatch => {
@@ -47,7 +47,7 @@ export const createItem = params => dispatch => {
   axios
     .post(ITEMS_API, params, config)
     .then(resp => dispatch({ type: CREATE_ITEM, payload: resp.data }))
-    .catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };
 
 export const reviewItem = params => dispatch => {
@@ -57,7 +57,7 @@ export const reviewItem = params => dispatch => {
   axios
     .post(route, params, config)
     .then(resp => dispatch({ type: REVIEW_ITEM, payload: resp.data }))
-    .catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };
 
 export const toggleHideItem = item => dispatch => {
@@ -68,7 +68,7 @@ export const toggleHideItem = item => dispatch => {
   axios
     .put(route, params, config)
     .then(resp => dispatch({ type: EDIT_ITEM, payload: { item: resp.data.item } }))
-    .catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };
 
 export const editItem = params => dispatch => {
@@ -84,7 +84,7 @@ export const editItem = params => dispatch => {
         payload: { message: 'Your well thought out changes were successfully saved!' }
       });
     })
-    .catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };
 
 export const deleteItem = itemId => dispatch => {
@@ -100,5 +100,5 @@ export const deleteItem = itemId => dispatch => {
         payload: { message: 'That item was wiped from memory.' }
       });
     })
-    .catch(error => dispatch({ type: ITEM_ERROR, payload: { error: error.response } }));
+    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };

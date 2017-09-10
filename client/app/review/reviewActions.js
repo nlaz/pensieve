@@ -2,11 +2,12 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import cookie from 'react-cookie';
 
+import { SHOW_ERROR } from '../appActions';
+
 export const FETCH_SESSIONS = 'fetchSessions';
 export const FETCH_SESSION = 'fetchSession';
 export const CREATE_SESSION = 'createSession';
 export const FINISH_SESSION = 'finishSession';
-export const SESSION_ERROR = 'sessionError';
 
 const SESSIONS_API_URL = `/api/sessions`;
 
@@ -24,7 +25,7 @@ export function fetchSessions() {
       })
       .catch(error => {
         dispatch({
-          type: SESSION_ERROR,
+          type: SHOW_ERROR,
           payload: error.response.data
         });
       });
@@ -45,7 +46,7 @@ export function fetchSession(sessionId) {
       })
       .catch(error => {
         dispatch({
-          type: SESSION_ERROR,
+          type: SHOW_ERROR,
           payload: error.response.data
         });
       });
@@ -66,9 +67,8 @@ export function createSession() {
         browserHistory.push(`/sessions/${response.data.session._id}`);
       })
       .catch(error => {
-        console.log(error);
         dispatch({
-          type: SESSION_ERROR,
+          type: SHOW_ERROR,
           payload: error.response.data
         });
       });
@@ -90,7 +90,7 @@ export function finishSession(sessionId) {
       })
       .catch(error => {
         dispatch({
-          type: SESSION_ERROR,
+          type: SHOW_ERROR,
           payload: error.response.data
         });
       });
