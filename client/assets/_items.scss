@@ -2,144 +2,145 @@
  * Items styles
  * http://bit.ly/1ywfhq7
  */
-@import "./vars";
+@import './vars';
 
 $C_borderRadius: 4px;
 $C_darkBorder: #d5d5d5;
 
 .item-newItemLink {
-	background: $C_primaryGreen;
-	border: 1px solid $C_primaryDarkGreen;
-	color: $C_white;
-	font-size: 14px;
-	padding: 7px 17px;
-	transition: all .1s ease;
-	text-shadow: 0 .5px 0 $C_primaryDarkGreen;
+  background: $C_primaryGreen;
+  border: 1px solid $C_primaryDarkGreen;
+  color: $C_white;
+  font-size: 14px;
+  padding: 7px 17px;
+  transition: all 0.1s ease;
+  text-shadow: 0 0.5px 0 $C_primaryDarkGreen;
 
-	&:hover {
-		background: $C_primaryDarkGreen;
-		border: 1px solid $C_primaryDarkGreen;
-		color: $C_white;
-		text-shadow: none;
-	}
+  &:hover {
+    background: $C_primaryDarkGreen;
+    border: 1px solid $C_primaryDarkGreen;
+    color: $C_white;
+    text-shadow: none;
+  }
 }
 
 .itemCard {
-	align-items: center;
-	color: $C_black;
-	border: 1px solid $C_cardBorder;
-	border-radius: $C_borderRadius;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: 200px;
-	position: relative;
+  align-items: center;
+  color: $C_black;
+  border: 1px solid $C_cardBorder;
+  border-radius: $C_borderRadius;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+  position: relative;
 
-	&:hover {
-		text-decoration: none;
-		color: $C_black;
-	}
+  &:hover {
+    text-decoration: none;
+    color: $C_black;
+  }
 }
 
 .itemCard .hideIcon {
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
-	color: $C_mediumGray;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: $C_mediumGray;
 }
 
 .itemCard .progress {
-	height: 16px;
-	left: 15px;
-	right: 15px;
-	top: 15px;
-	position: absolute;
-	box-shadow: none;
+  border-radius: 999px;
+  height: 16px;
+  left: 15px;
+  right: 15px;
+  top: 15px;
+  position: absolute;
+  box-shadow: none;
 }
 
 .itemCard .progress.progress-reviewNow {
-	background: none;
-	border: none;
-	border-radius: 0;
-	height: auto;
-	margin: 0;
-	padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
 
-	.button-reviewNow {
-		background: #f3f3f3;
-		border-radius: 999px;
-		height: 20px;
-		width: 100%;
-		color: $C_darkBorder;
-		border: 1px solid $C_darkBorder;
-		line-height: 12px;
-		font-size: 12px;
-	}
+  .button-reviewNow {
+    background: #f3f3f3;
+    border-radius: 999px;
+    height: 20px;
+    width: 100%;
+    color: $C_darkBorder;
+    border: 1px solid $C_darkBorder;
+    line-height: 12px;
+    font-size: 12px;
+  }
 }
 
 .itemCard .glyphicon-eye-open {
-	color: #585858;
+  color: #585858;
 }
 
 .itemCard .progress-bar {
-	background-color: #50e3c2;
+  background-color: #50e3c2;
 }
 .itemCard .progress-bar--good {
-	background-color: #50e3c2;
+  background-color: #50e3c2;
 }
 .itemCard .progress-bar--warm {
-	background-color: #f5a623;
+  background-color: #f5a623;
 }
 .itemCard .progress-bar--hot {
-	background-color: #ff3232;
+  background-color: #ff3232;
 }
 
 .decks-page .page-header,
 .items-page .page-header {
-	align-items: flex-start;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	margin-top: 20px;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 20px;
 
-	@include atSmallUp {
-		align-items: center;
-		flex-direction: row;
-		margin-top: 40px;
-	}
+  @include atSmallUp {
+    align-items: center;
+    flex-direction: row;
+    margin-top: 40px;
+  }
 
-	.actions {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 
-		@include atSmallUp {
-			width: auto;
-		}
-	}
+    @include atSmallUp {
+      width: auto;
+    }
+  }
 
-	.title {
-		flex-grow: 1;
-		margin-bottom: 5px;
-	}
+  .title {
+    flex-grow: 1;
+    margin-bottom: 5px;
+  }
 
-	.subtitle {
-		color: $C_mediumGray;
-	}
+  .subtitle {
+    color: $C_mediumGray;
+  }
 
-	.search {
-		flex-grow: 1;
-		margin-right: 30px;
+  .search {
+    flex-grow: 1;
+    margin-right: 30px;
 
-		@include atSmallUp {
-			flex-grow: none;
-		}
-	}
+    @include atSmallUp {
+      flex-grow: none;
+    }
+  }
 
-	.search input {
-		border-radius: 999px;
-		padding: 10px 20px;
-		background: transparent;
-	}
+  .search input {
+    border-radius: 999px;
+    padding: 10px 20px;
+    background: transparent;
+  }
 }

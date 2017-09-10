@@ -2,116 +2,116 @@
  * Deck styles
  * http://bit.ly/1ywfhq7
  */
-@import "./vars";
+@import './vars';
 
 $deckCardHeight: 250px;
 
 .editDeckInfo,
 .deckInfo {
-	border: 1px solid $C_cardBorder;
-	border-radius: 3px;
-	background-color: $C_white;
-	height: 400px;
-	margin-bottom: 10px;
-	padding: 10px;
+  border: 1px solid $C_cardBorder;
+  border-radius: 3px;
+  background-color: $C_white;
+  height: 400px;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 .itemCard,
 .deckCard {
-	background-color: $C_white;
-	height: 200px;
-	margin-bottom: 20px;
-	padding: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-decoration: none;
-	color: $C_black;
+  background-color: $C_white;
+  height: 200px;
+  margin-bottom: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: $C_black;
 
-	&:hover > p {
-		text-decoration: none;
-	}
+  &:hover > p {
+    text-decoration: none;
+  }
 }
 
 .deckCard {
-	border: 1px solid $C_cardBorder;
-	border-radius: 3px;
-	color: $C_black;
-	box-shadow: 0 1px 1px $C_lightShadow;
-	position: relative;
-	height: $deckCardHeight;
+  border: 1px solid $C_cardBorder;
+  border-radius: 3px;
+  color: $C_black;
+  box-shadow: 0 1px 1px $C_lightShadow;
+  position: relative;
+  height: $deckCardHeight;
 
-	&:hover {
-		text-decoration: none;
-		color: $C_black;
-	}
+  &:hover {
+    text-decoration: none;
+    color: $C_black;
+  }
 }
 
 .deckCard-itemCount {
-	color: $C_mediumGray;
-	position: absolute;
-	top: 10px;
-	right: 10px;
+  color: $C_mediumGray;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 
-	.glyphicon {
-		margin-left: 5px;
-	}
+  .glyphicon {
+    margin-left: 5px;
+  }
 }
 
 .deckCard-title {
-	color: $C_black;
-	font-weight: 700;
-	margin: 0;
+  color: $C_black;
+  font-weight: 700;
+  margin: 0;
 }
 
 .deckCard-subtitle {
-	color: $C_mediumGray;
-	margin: 0;
+  color: $C_mediumGray;
+  margin: 0;
 }
 
 .btn-newItem,
 .btn-newDeck {
-	background: $C_primaryBlue;
-	color: $C_white;
-	font-size: 14px;
-	padding: 7px 17px;
-	transition: all .1s ease;
-	text-shadow: 0 .5px 0 $C_primaryDarkBlue;
-	line-height: 24px;
+  background: $C_primaryBlue;
+  color: $C_white;
+  font-size: 14px;
+  padding: 7px 17px;
+  transition: all 0.1s ease;
+  text-shadow: 0 0.5px 0 $C_primaryDarkBlue;
+  line-height: 24px;
 
-	&:hover {
-		background: $C_primaryDarkBlue;
-		color: $C_white;
-		text-shadow: none;
-	}
+  &:hover {
+    background: $C_primaryDarkBlue;
+    color: $C_white;
+    text-shadow: none;
+  }
 }
 
 .itemCard {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .itemCard {
-	position: relative;
+  position: relative;
 }
 .itemCard--close.btn {
-	background: $C_white;
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	height: 20px;
-	width: 20px;
-	text-align: center;
-	padding: 0;
+  background: $C_white;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  padding: 0;
 
-	& .glyphicon {
-		line-height: 15px;
-		width: 13px;
-		text-align: center;
-	}
+  & .glyphicon {
+    line-height: 15px;
+    width: 13px;
+    text-align: center;
+  }
 }
 .items--wrapper {
-	padding: 0;
+  padding: 0;
 }
