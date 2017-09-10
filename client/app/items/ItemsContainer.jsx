@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as itemActions from './itemActions';
+import PageTemplate from '../../components/PageTemplate';
 
 export const PAGE_SIZE = 24;
 
@@ -138,12 +139,14 @@ class ItemsContainer extends React.Component {
 
     if (!items) {
       return (
-        <div className="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-          <h4 className="page-header">Your Items</h4>
-          <h4>
-            You don't have any items yet. <em>Ahem. Bummer...</em>
-          </h4>
-        </div>
+        <PageTemplate>
+          <div className="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <h4 className="page-header">Your Items</h4>
+            <h4>
+              You don't have any items yet. <em>Ahem. Bummer...</em>
+            </h4>
+          </div>
+        </PageTemplate>
       );
     }
 
@@ -157,22 +160,24 @@ class ItemsContainer extends React.Component {
     const pageItems = filteredItems.slice(pageStart, pageEnd);
 
     return (
-      <div className="items-page container">
-        <PageHeader count={items.length} onSearchChange={this.onSearchChange} />
-        <div className="row">
-          {pageItems.map((item, key) => (
-            <ItemCard className="col-xs-6 col-sm-3 col-lg-2" item={item} key={key} />
-          ))}
+      <PageTemplate>
+        <div className="items-page container">
+          <PageHeader count={items.length} onSearchChange={this.onSearchChange} />
+          <div className="row">
+            {pageItems.map((item, key) => (
+              <ItemCard className="col-xs-6 col-sm-3 col-lg-2" item={item} key={key} />
+            ))}
+          </div>
+          {numPages > 1 && (
+            <PageNavigation
+              numPages={numPages}
+              onIncrementPage={this.onIncrementPage}
+              onDecrementPage={this.onDecrementPage}
+              onChangePage={this.onChangePage}
+            />
+          )}
         </div>
-        {numPages > 1 && (
-          <PageNavigation
-            numPages={numPages}
-            onIncrementPage={this.onIncrementPage}
-            onDecrementPage={this.onDecrementPage}
-            onChangePage={this.onChangePage}
-          />
-        )}
-      </div>
+      </PageTemplate>
     );
   }
 }

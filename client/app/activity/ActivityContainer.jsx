@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import * as homeActions from './activityActions';
 import * as itemActions from '../items/itemActions';
+import PageTemplate from '../../components/PageTemplate';
 
 const PageHead = ({ children }) => {
   return (
@@ -97,10 +98,12 @@ class ActivityContainer extends React.Component {
     const activity = getActivityData(reviewItems);
 
     return (
-      <PageHead>
-        <div className="sectionTitle">Activity</div>
-        <ActivityGraph activity={activity} />
-      </PageHead>
+      <PageTemplate>
+        <PageHead>
+          <div className="sectionTitle">Activity</div>
+          <ActivityGraph activity={activity} />
+        </PageHead>
+      </PageTemplate>
     );
   }
 }

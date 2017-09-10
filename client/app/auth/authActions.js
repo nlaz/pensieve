@@ -1,6 +1,5 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
-import { browserHistory } from 'react-router';
 
 export const AUTH_USER = 'authUser';
 export const AUTH_ERROR = 'authUserError';
@@ -10,7 +9,6 @@ const LOGIN_URL = '/users/login';
 const SIGNUP_URL = '/users/signup';
 
 export function loginUser(params) {
-  console.log('loginUser');
   return function(dispatch) {
     axios
       .post(LOGIN_URL, params)
@@ -63,6 +61,5 @@ export function logoutUser(error) {
     dispatch({ type: UNAUTH_USER, payload: error || '' });
     cookie.remove('token', { path: '/' });
     cookie.remove('user', { path: '/' });
-    browserHistory.push('/');
   };
 }

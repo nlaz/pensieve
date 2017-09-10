@@ -147,67 +147,65 @@ class ReviewContainer extends React.Component {
     const itemContent = showAnswer ? selectedItem.description : selectedItem.title;
 
     return (
-      <PageTemplate>
-        <SessionPage title="Review">
-          <ProgressBar progress={index / (items.length - 1) * 100} />
-          <div className="panel panel-default">
-            <div className="panel-body" onClick={this.onItemClick}>
-              <h3 className="text-center" style={{ margin: '0' }}>
-                {itemContent}
-              </h3>
+      <SessionPage title="Review">
+        <ProgressBar progress={index / (items.length - 1) * 100} />
+        <div className="panel panel-default">
+          <div className="panel-body" onClick={this.onItemClick}>
+            <h3 className="text-center" style={{ margin: '0' }}>
+              {itemContent}
+            </h3>
+            <button
+              onClick={e => this.onToggleHideItem(e, selectedItem)}
+              className="reviewCard--hide btn btn-reset"
+            >
+              {selectedItem.hidden ? (
+                <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
+              ) : (
+                <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
+        {showNextOptions ? (
+          <div className="row">
+            <div className="col-xs-4 text-center">
               <button
-                onClick={e => this.onToggleHideItem(e, selectedItem)}
-                className="reviewCard--hide btn btn-reset"
+                onClick={() => this.onNextAction(REVIEW_TYPE.HARD)}
+                type="button"
+                className="btn btn-primary"
               >
-                {selectedItem.hidden ? (
-                  <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
-                ) : (
-                  <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />
-                )}
+                Hard
+              </button>
+            </div>
+            <div className="col-xs-4 text-center">
+              <button
+                onClick={() => this.onNextAction(REVIEW_TYPE.GOOD)}
+                type="button"
+                className="btn btn-primary"
+              >
+                Good
+              </button>
+            </div>
+            <div className="col-xs-4 text-center">
+              <button
+                onClick={() => this.onNextAction(REVIEW_TYPE.EASY)}
+                type="button"
+                className="btn btn-primary"
+              >
+                Easy
               </button>
             </div>
           </div>
-          {showNextOptions ? (
-            <div className="row">
-              <div className="col-xs-4 text-center">
-                <button
-                  onClick={() => this.onNextAction(REVIEW_TYPE.HARD)}
-                  type="button"
-                  className="btn btn-primary"
-                >
-                  Hard
-                </button>
-              </div>
-              <div className="col-xs-4 text-center">
-                <button
-                  onClick={() => this.onNextAction(REVIEW_TYPE.GOOD)}
-                  type="button"
-                  className="btn btn-primary"
-                >
-                  Good
-                </button>
-              </div>
-              <div className="col-xs-4 text-center">
-                <button
-                  onClick={() => this.onNextAction(REVIEW_TYPE.EASY)}
-                  type="button"
-                  className="btn btn-primary"
-                >
-                  Easy
-                </button>
-              </div>
+        ) : (
+          <div className="row">
+            <div className="col-xs-12 text-center">
+              <button onClick={this.onItemClick} type="button" className="btn btn-primary">
+                Show Answer
+              </button>
             </div>
-          ) : (
-            <div className="row">
-              <div className="col-xs-12 text-center">
-                <button onClick={this.onItemClick} type="button" className="btn btn-primary">
-                  Show Answer
-                </button>
-              </div>
-            </div>
-          )}
-        </SessionPage>
-      </PageTemplate>
+          </div>
+        )}
+      </SessionPage>
     );
   }
 }

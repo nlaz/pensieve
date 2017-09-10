@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import * as deckActions from './deckActions';
 import { PageNavigation } from '../items/ItemsContainer';
+import PageTemplate from '../../components/PageTemplate';
 
 export const PAGE_SIZE = 16;
 
@@ -100,20 +101,22 @@ class DecksContainer extends React.Component {
     const pageItems = filteredDecks.slice(pageStart, pageEnd);
 
     return (
-      <div className="decks-page container">
-        <PageHeader count={decks.length} onSearchChange={this.onSearchChange} />
-        <div className="row">
-          {pageItems.map((deck, key) => <DeckCard deck={deck} key={key} />)}
+      <PageTemplate>
+        <div className="decks-page container">
+          <PageHeader count={decks.length} onSearchChange={this.onSearchChange} />
+          <div className="row">
+            {pageItems.map((deck, key) => <DeckCard deck={deck} key={key} />)}
+          </div>
+          {numPages > 1 && (
+            <PageNavigation
+              numPages={numPages}
+              onIncrementPage={this.onIncrementPage}
+              onDecrementPage={this.onDecrementPage}
+              onChangePage={this.onChangePage}
+            />
+          )}
         </div>
-        {numPages > 1 && (
-          <PageNavigation
-            numPages={numPages}
-            onIncrementPage={this.onIncrementPage}
-            onDecrementPage={this.onDecrementPage}
-            onChangePage={this.onChangePage}
-          />
-        )}
-      </div>
+      </PageTemplate>
     );
   }
 }

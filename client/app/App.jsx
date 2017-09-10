@@ -9,7 +9,7 @@ import reduxThunk from 'redux-thunk';
 import routes from '../routes';
 import { Router } from 'react-router';
 import appReducer from './appReducer';
-import { AUTH_USER } from './appActions';
+import { AUTH_USER } from './auth/authActions';
 
 import '../assets/main.scss';
 
