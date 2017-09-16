@@ -2,14 +2,13 @@
  * Review styles
  * http://bit.ly/1ywfhq7
  */
-
-$C_greenCheck: #41D0A5;
+@import './vars';
 
 .reviewCard--hide {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  color: #aaa;
+  color: $C_mediumGray;
 }
 
 .panel-body {
@@ -30,5 +29,5 @@ $C_greenCheck: #41D0A5;
 }
 
 .green-check {
-  color: $C_greenCheck;
+  color: $C_primaryGreen;
 }
