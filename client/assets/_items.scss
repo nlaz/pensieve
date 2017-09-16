@@ -1,10 +1,8 @@
-/*u*
+/**
  * Items styles
  * http://bit.ly/1ywfhq7
  */
 @import './vars';
-
-$C_borderRadius: 4px;
 
 .item-newItemLink {
   background: $C_primaryGreen;
@@ -57,8 +55,6 @@ $C_borderRadius: 4px;
   box-shadow: none;
 }
 
-$C_darkBorder: #d5d5d5;
-
 .itemCard .progress.progress-reviewNow {
   background: none;
   border: none;
@@ -68,7 +64,7 @@ $C_darkBorder: #d5d5d5;
   padding: 0;
 
   .button-reviewNow {
-    background: #f3f3f3;
+    background: $C_lightGray;
     border-radius: 999px;
     height: 20px;
     width: 100%;
@@ -80,20 +76,20 @@ $C_darkBorder: #d5d5d5;
 }
 
 .itemCard .glyphicon-eye-open {
-  color: #585858;
+  color: $C_mediumGray;
 }
 
 .itemCard .progress-bar {
-  background-color: #50e3c2;
+  background-color: $C_progressGood;
 }
 .itemCard .progress-bar--good {
-  background-color: #50e3c2;
+  background-color: $C_progressGood;
 }
 .itemCard .progress-bar--warm {
-  background-color: #f5a623;
+  background-color: $C_progressWarm;
 }
 .itemCard .progress-bar--hot {
-  background-color: #ff3232;
+  background-color: $C_progressHot;
 }
 
 .decks-page .page-header,
