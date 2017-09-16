@@ -4,78 +4,78 @@
  */
 
 /* Variables */
-@import "./vars";
+@import './vars';
 
 /* Google fonts */
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
 
 /* Breakpoint mixins */
 @mixin atSmallUp {
-	@media (min-width: 600px) {
-		@content;
-	}
+  @media (min-width: 600px) {
+    @content;
+  }
 }
 @mixin atMediumUp {
-	@media (min-width: 900px) {
-		@content;
-	}
+  @media (min-width: 900px) {
+    @content;
+  }
 }
 @mixin atLargeUp {
-	@media (min-width: 1200px) {
-		@content;
-	}
+  @media (min-width: 1200px) {
+    @content;
+  }
 }
 @mixin atExtraLargeUp {
-	@media (min-width: 1800px) {
-		@content;
-	}
+  @media (min-width: 1800px) {
+    @content;
+  }
 }
 
-html, body {
-	min-height: 100vh;
+html,
+body {
+  min-height: 100vh;
 }
-
 
 body {
-	font-family: 'Lato', sans-serif;
-	letter-spacing: -.2px;
-	background: $C_darkWhite;
+  font-family: 'Lato', sans-serif;
+  letter-spacing: -.2px;
+  background: $C_darkWhite;
 }
 
 .margin-top {
-	margin-top: 40px;
+  margin-top: 40px;
 }
 
 .text-bold {
-	font-weight: 700;
+  font-weight: 700;
 }
 
 input.form-control {
-	padding: 20px 15px;
+  padding: 20px 15px;
 }
 
 .btn {
-	padding: 10px;
+  padding: 10px;
 }
 
 .btn.btn-primary {
-	background: $C_primaryBlue;
-	border-color: transparent;
+  background: $C_primaryBlue;
+  border-color: transparent;
 
-	&:hover {
-		background: $C_primaryDarkBlue;
-		border-color: transparent;
-	}
+  &:hover {
+    background: $C_primaryDarkBlue;
+    border-color: transparent;
+  }
 }
 
 .btn.btn-danger {
-	background: $C_errorRed;
-	border-color: transparent;
+  background: $C_errorRed;
+  border-color: transparent;
 
-	&:hover {
-		background: $C_errorDarkRed;
-		border-color: transparent;
-	}
+  &:hover {
+    background: $C_errorDarkRed;
+    border-color: transparent;
+  }
 }
 
 @import './landing';

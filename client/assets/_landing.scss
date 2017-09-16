@@ -2,7 +2,7 @@
  * Landing styles
  * http://bit.ly/1ywfhq7
  */
-@import "./vars";
+@import './vars';
 
 .landing-page .navbar.navbar-inverse {
   background: $C_white;
@@ -43,7 +43,7 @@
     line-height: 28px;
     margin: 10px 0;
     padding: 6px 35px;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
     border: 1px solid transparent;
     background: $C_primaryBlue;
 
@@ -118,14 +118,16 @@
   width: 100%;
   height: auto;
   z-index: 0;
-  opacity: .9;
+  opacity: 0.9;
 
   @media (max-width: 899px) {
     margin: auto;
     position: absolute;
-    top: 0; left: 0; bottom: 180px; right: 0;
+    top: 0;
+    left: 0;
+    bottom: 180px;
+    right: 0;
   }
-
 
   @include atMediumUp {
     background-image: url('../assets/images/splash_hero.png');
@@ -175,7 +177,7 @@
     font-weight: 400;
     padding: 10px 20px;
     margin-top: 5px;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     @include atSmallUp {
       border-radius: 0 3px 3px 0;
@@ -232,7 +234,9 @@
     padding: 5px;
     width: 40px;
 
-    img { width: 100%; }
+    img {
+      width: 100%;
+    }
   }
 
   .info-success {
