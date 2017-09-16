@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
-import routes from '../client/routes';
 
-import appReducer from '../client/reducers/appReducer';
+import routes from '../client/routes';
+import appReducer from '../client/app/appReducer';
 
 const BUNDLE_URL = `${process.env.HOST_URL}/bundle.js`;
 
 const renderFullPage = (appHtml, preloadedState) =>
-	`
+  `
 	<!doctype html public='storage'>
 	<html>
 	<head>
@@ -23,37 +23,32 @@ const renderFullPage = (appHtml, preloadedState) =>
 	</head>
 	<body>
 		<div id='root'>${appHtml}</div>
-		<script>window.INITIAL_STATE=${JSON.stringify(preloadedState).replace(
-			/</g,
-			'\\u003c'
-		)}</script>
+		<script>window.INITIAL_STATE=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}</script>
 		<script src='${BUNDLE_URL}' type='text/javascript'></script>
 	</body>
 	</html>
 	`;
 
 export default (req, res) => {
-	match({ routes: routes, location: req.url }, (err, redirect, props) => {
-		if (err) {
-			res.status(500).send(err.message);
-		} else if (redirect) {
-			res.redirect(redirect.pathname + redirect.search);
-		} else if (props) {
-			const createStoreWithMiddleware = applyMiddleware(reduxThunk)(
-				createStore
-			);
-			const store = createStoreWithMiddleware(appReducer);
-			const html = renderToString(
-				<Provider store={store}>
-					<RouterContext {...props} />
-				</Provider>
-			);
+  match({ routes: routes, location: req.url }, (err, redirect, props) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else if (redirect) {
+      res.redirect(redirect.pathname + redirect.search);
+    } else if (props) {
+      const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+      const store = createStoreWithMiddleware(appReducer);
+      const html = renderToString(
+        <Provider store={store}>
+          <RouterContext {...props} />
+        </Provider>
+      );
 
-			const preloadedState = store.getState();
+      const preloadedState = store.getState();
 
-			res.send(renderFullPage(html, preloadedState));
-		} else {
-			res.status(404).send('Not Found');
-		}
-	});
+      res.send(renderFullPage(html, preloadedState));
+    } else {
+      res.status(404).send('Not Found');
+    }
+  });
 };

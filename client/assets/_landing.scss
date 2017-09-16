@@ -1,18 +1,20 @@
 /**
-* Landing styles
-* http://bit.ly/1ywfhq7
-*/
+ * Landing styles
+ * http://bit.ly/1ywfhq7
+ */
 @import './vars';
 
 .landing-page {
   background: $C_white;
-  min-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+.landing-page .contentWrapper {
+  margin: 0 !important;
+}
 .landing-page .navbar.navbar-inverse {
   background: $C_white;
   border: 0;
