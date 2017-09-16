@@ -22,7 +22,8 @@ export class LandingContainer extends React.Component {
     const { isSuccess, hasErrored } = this.props;
     return (
       <PageTemplate
-        header={<Header className="landing-page" />}
+        className="landing-page"
+        header={<Header />}
         footer={
           <div className="landing-footer text-center">
             <div className="footer-item">

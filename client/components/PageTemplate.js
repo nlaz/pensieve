@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 import Header from './Header';
 
-const Wrapper = ({ children }) => {
+const Wrapper = ({ children, ...props }) => {
   return (
     <div
+      {...props}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -36,6 +37,7 @@ const HeaderWrapper = ({ children }) => {
 const ContentWrapper = ({ children }) => {
   return (
     <div
+      className="contentWrapper"
       style={{
         width: '100%',
         boxSizing: 'border-box',
