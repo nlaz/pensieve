@@ -14,7 +14,7 @@ export const PageHeader = ({ count, onSearchChange }) => {
     <div className="page-header">
       <div className="info">
         <h4 className="title">Decks</h4>
-        {count && <p className="subtitle">{count} decks in your collection</p>}
+        {count > 0 && <p className="subtitle">{count} decks in your collection</p>}
       </div>
       <div className="actions">
         <div className="search">

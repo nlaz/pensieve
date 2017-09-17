@@ -16,7 +16,7 @@ export const PageHeader = ({ count, onSearchChange }) => {
     <div className="page-header">
       <div className="info">
         <h4 className="title">Items</h4>
-        {count && <p className="subtitle">{count} items in your collection</p>}
+        {count > 0 && <p className="subtitle">{count} items in your collection</p>}
       </div>
       <div className="actions">
         <div className="search">
@@ -77,22 +77,10 @@ class ItemsContainer extends React.Component {
   }
 
   render() {
-    const { items } = this.props;
+    const { items = [] } = this.props;
     const { activePage, filter } = this.state;
 
-    if (!items) {
-      return (
-        <PageTemplate>
-          <div className="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-            <h4 className="page-header">Your Items</h4>
-            <h4>
-              You don't have any items yet. <em>Ahem. Bummer...</em>
-            </h4>
-          </div>
-        </PageTemplate>
-      );
-    }
-
+    console.log('ItemsContainer', items.length);
     const filteredItems =
       filter.length > 0
         ? items.filter(item => item.title.toLowerCase().indexOf(filter.toLowerCase()) !== -1)

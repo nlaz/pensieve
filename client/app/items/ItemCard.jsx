@@ -1,5 +1,7 @@
 import React from 'react';
-import ProgressBar from './ItemProgressBar';
+import { Link } from 'react-router';
+import moment from 'moment';
+import ItemProgressBar from './ItemProgressBar';
 
 export default function ItemCard({ item, className }) {
   const maxTime = Math.max(moment(item.nextReviewDate).diff(item.updatedAt, 'hours'), 0);
@@ -9,7 +11,7 @@ export default function ItemCard({ item, className }) {
   return (
     <div className={`itemCard-wrapper ${className}`}>
       <Link to={`/items/${item._id}`} className="itemCard">
-        <ProgressBar progress={progress} />
+        <ItemProgressBar progress={progress} />
         <h5 style={{ margin: '0', fontSize: '16px' }}>{item.title}</h5>
         <div className="hideIcon">
           {item.hidden ? (

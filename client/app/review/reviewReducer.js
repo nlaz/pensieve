@@ -1,10 +1,4 @@
 import {
-  CREATE_ITEM,
-  FETCH_DUE_ITEMS,
-  FETCH_ITEMS,
-  FETCH_ITEM,
-  EDIT_ITEM,
-  DELETE_ITEM,
   CREATE_SESSION,
   FETCH_SESSIONS,
   FETCH_SESSION,
@@ -16,6 +10,15 @@ import {
   FETCH_DECK,
   FETCH_ACTIVITY
 } from './reviewActions';
+
+import {
+  FETCH_ITEMS,
+  FETCH_ITEM,
+  EDIT_ITEM,
+  DELETE_ITEM,
+  CREATE_ITEM,
+  FETCH_DUE_ITEMS
+} from '../items/itemActions';
 
 const INITIAL_STATE = {};
 
