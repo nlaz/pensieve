@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 
 import * as sessionActions from '../authActions';
 
@@ -9,13 +8,13 @@ class LogoutContainer extends React.Component {
     if (this.props.authenticated) {
       this.props.logoutUser();
     } else {
-      browserHistory.push('/');
+      this.props.router.push('/');
     }
   }
 
-  componentDidUpdate(nextProps) {
-    if (!nextProps.authenticated) {
-      browserHistory.push('/');
+  componentDidUpdate() {
+    if (!this.props.authenticated) {
+      this.props.router.push('/');
     }
   }
 
