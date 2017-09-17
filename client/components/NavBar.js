@@ -26,12 +26,12 @@ export function NavBar({ self, authenticated, showNavMenu, onshowNavMenu }) {
 						authenticated &&
 						<ul className="nav navbar-nav navbar-left">
 							<li>
-								<Link to="/decks" onClick={() => onshowNavMenu(false)}>
+								<Link to="/decks" activeClassName={'active-nav-link'} onClick={() => onshowNavMenu(false)}>
 									Decks
 								</Link>
 							</li>
 							<li>
-								<Link to="/items" onClick={() => onshowNavMenu(false)}>
+								<Link to="/items" activeClassName={'active-nav-link'} onClick={() => onshowNavMenu(false)}>
 									Items
 								</Link>
 							</li>

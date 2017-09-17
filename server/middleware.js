@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
-import routes from '../client/routes';
 
-import appReducer from '../client/reducers/appReducer';
+import routes from '../client/routes';
+import appReducer from '../client/app/appReducer';
 
 const BUNDLE_URL = `${process.env.HOST_URL}/bundle.js`;
 

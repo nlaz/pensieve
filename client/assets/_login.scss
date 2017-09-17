@@ -2,24 +2,20 @@
  * Login styles
  * http://bit.ly/1ywfhq7
  */
+@import './vars';
 
- .login-page,
- .signup-page {
-   height: 100vh;
+.login-form,
+.signup-form {
+  margin-top: 100px;
 
-   .login-form,
-   .signup-form {
-     margin-top: 100px;
-   }
+  form {
+    margin-top: 10px;
+  }
+  label {
+    color: $C_darkGray;
+  }
 
-   form {
-     margin-top: 10px;
-   }
-   label {
-     color: $C_darkGray;
-   }
-
-   .link {
-     color: $C_primaryBlue;
-   }
- }
+  .link {
+    color: $C_primaryBlue;
+  }
+}

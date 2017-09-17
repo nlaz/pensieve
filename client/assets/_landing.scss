@@ -2,15 +2,21 @@
  * Landing styles
  * http://bit.ly/1ywfhq7
  */
+@import './vars';
 
 .landing-page {
   background: $C_white;
-  min-height: 100vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
+.landing-page .contentWrapper {
+  margin: 0 !important;
+}
 .landing-page .navbar.navbar-inverse {
-  background: transparent;
+  background: $C_white;
   border: 0;
   color: $C_black;
   top: 0;
@@ -48,7 +54,7 @@
     line-height: 28px;
     margin: 10px 0;
     padding: 6px 35px;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
     border: 1px solid transparent;
     background: $C_primaryBlue;
 
@@ -62,11 +68,6 @@
       border: 1px solid $C_primaryBlue;
     }
   }
-}
-.landing-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .landing-body {
@@ -123,15 +124,13 @@
   background-image: url('../assets/images/splash_hero2.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: top;
-  margin: auto;
+  background-position: center;
   max-width: 260px;
-  top: 10px;
-  height: 100%;
   width: 100%;
-  position: absolute;
+  height: 100%;
   z-index: 0;
-  opacity: .9;
+  opacity: 0.9;
+  position: absolute;
 
   @include atMediumUp {
     background-image: url('../assets/images/splash_hero.png');
@@ -181,7 +180,7 @@
     font-weight: 400;
     padding: 10px 20px;
     margin-top: 5px;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     @include atSmallUp {
       border-radius: 0 3px 3px 0;
@@ -191,8 +190,8 @@
     &:hover,
     &:focus,
     &:active {
-      border: 2px solid #0F65DF;
-      background: #0F65DF;
+      border: 2px solid $C_primaryDarkBlue;
+      background: $C_primaryDarkBlue;
     }
   }
 }
@@ -229,7 +228,7 @@
 
   .success-checkmark {
     align-items: center;
-    background: #51D5AF;
+    background: $C_primaryGreen;
     border-radius: 100%;
     display: flex;
     height: 40px;
@@ -238,7 +237,9 @@
     padding: 5px;
     width: 40px;
 
-    img { width: 100%; }
+    img {
+      width: 100%;
+    }
   }
 
   .info-success {
@@ -248,7 +249,8 @@
 }
 
 .landing-footer {
-  color: #CBCBCB;
+  color: $C_lightGray;
+  margin-bottom: 25px;
   position: absolute;
   bottom: 25px;
   left: 0;
@@ -259,7 +261,7 @@
     padding: 10px 20px;
 
     a {
-      color: #CBCBCB;
+      color: $C_lightGray;
     }
   }
 }
