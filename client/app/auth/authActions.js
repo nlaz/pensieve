@@ -1,6 +1,8 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
 
+import { SHOW_ERROR } from '../appActions';
+
 export const AUTH_USER = 'authUser';
 export const AUTH_ERROR = 'authUserError';
 export const UNAUTH_USER = 'unauthUser';

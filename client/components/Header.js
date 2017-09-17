@@ -49,8 +49,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   self: state.app.self,
   authenticated: state.app.authenticated,
-  message: state.app.message,
-  error: state.app.error
+  message: state.errors.message,
+  error: state.errors.value
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

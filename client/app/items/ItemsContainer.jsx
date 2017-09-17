@@ -80,7 +80,6 @@ class ItemsContainer extends React.Component {
     const { items = [] } = this.props;
     const { activePage, filter } = this.state;
 
-    console.log('ItemsContainer', items.length);
     const filteredItems =
       filter.length > 0
         ? items.filter(item => item.title.toLowerCase().indexOf(filter.toLowerCase()) !== -1)
