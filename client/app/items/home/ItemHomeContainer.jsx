@@ -26,7 +26,7 @@ class ItemContainer extends React.Component {
   componentWillMount() {
     const { item } = this.props;
     if (!item || item._id !== this.props.itemId) {
-      this.props.actions.fetchItem(this.props.itemId);
+      this.props.actions.fetchItem(this.props.params.itemId);
     }
   }
 
@@ -51,9 +51,13 @@ class ItemContainer extends React.Component {
 
     if (!item) {
       return (
-        <h3>
-          <strong>Hmm.</strong> Item does not exist
-        </h3>
+        <Header className="item-page">
+          <div className="container">
+            <h3>
+              <strong>Hmm.</strong> That item does not seem to exist.
+            </h3>
+          </div>
+        </Header>
       );
     }
 
