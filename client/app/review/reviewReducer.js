@@ -6,7 +6,8 @@ import {
   EDIT_ITEM,
   DELETE_ITEM,
   CREATE_ITEM,
-  FETCH_DUE_ITEMS
+  FETCH_DUE_ITEMS,
+  CLEAR_ITEM
 } from '../items/itemActions';
 
 import { CREATE_DECK, EDIT_DECK, DELETE_DECK, FETCH_DECKS, FETCH_DECK } from '../decks/deckActions';
@@ -44,13 +45,14 @@ export default function(state = INITIAL_STATE, action) {
     case FETCH_ACTIVITY:
       return { ...state, reviewItems: action.payload.reviewItems };
 
+    case CLEAR_ITEM:
+      return { ...state, item: {} };
     case CREATE_ITEM: {
       const newItem = action.payload.item;
       return {
         ...state,
         item: newItem,
-        items: [...state.items, newItem],
-        message: action.payload.message
+        items: [...state.items, newItem]
       };
     }
     case EDIT_ITEM: {

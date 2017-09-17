@@ -10,6 +10,7 @@ export const CREATE_ITEM = 'createItem';
 export const REVIEW_ITEM = 'reviewItem';
 export const EDIT_ITEM = 'editItem';
 export const DELETE_ITEM = 'deleteItem';
+export const CLEAR_ITEM = 'clearItem';
 
 const ITEMS_API = '/api/items';
 const DUE_ITEMS_API = '/api/due_items';
@@ -101,4 +102,8 @@ export const deleteItem = itemId => dispatch => {
       });
     })
     .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
+};
+
+export const clearItem = () => dispatch => {
+  return dispatch({ type: CLEAR_ITEM });
 };

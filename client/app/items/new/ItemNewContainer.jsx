@@ -18,10 +18,22 @@ class ItemNewContainer extends React.Component {
     this.setState({ [field]: event.target.value });
   }
 
+  componentWillMount() {
+    if (this.props.item) {
+      this.props.actions.clearItem();
+    }
+  }
+
   onSave(event) {
     event.preventDefault();
     const { title, description } = this.state;
     this.props.actions.createItem({ title, description });
+  }
+
+  componentDidUpdate() {
+    if (this.props.item) {
+      this.props.router.push('/items/' + this.props.item._id);
+    }
   }
 
   render() {
@@ -63,8 +75,12 @@ class ItemNewContainer extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  item: state.data.item
+});
+
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(itemActions, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(ItemNewContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemNewContainer);
