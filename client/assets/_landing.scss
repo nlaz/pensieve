@@ -14,6 +14,10 @@
 
 .landing-page .contentWrapper {
   margin: 0 !important;
+
+  & > .container {
+    justify-content: center;
+  }
 }
 .landing-page .navbar.navbar-inverse {
   background: $C_white;
@@ -131,6 +135,7 @@
   z-index: 0;
   opacity: 0.9;
   position: absolute;
+  top: -20px;
 
   @include atMediumUp {
     background-image: url('../assets/images/splash_hero.png');

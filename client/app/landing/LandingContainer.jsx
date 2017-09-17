@@ -31,7 +31,7 @@ export class LandingContainer extends React.Component {
             </div>
             {'|'}
             <div className="footer-item">
-              <a href="mailto:info@boreas.space">Contact</a>
+              <a href="mailto:hello@boreas.space">Contact</a>
             </div>
           </div>
         }
