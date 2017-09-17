@@ -1,15 +1,4 @@
-import {
-  CREATE_SESSION,
-  FETCH_SESSIONS,
-  FETCH_SESSION,
-  FINISH_SESSION,
-  CREATE_DECK,
-  EDIT_DECK,
-  DELETE_DECK,
-  FETCH_DECKS,
-  FETCH_DECK,
-  FETCH_ACTIVITY
-} from './reviewActions';
+import { CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, FINISH_SESSION } from './reviewActions';
 
 import {
   FETCH_ITEMS,
@@ -19,6 +8,9 @@ import {
   CREATE_ITEM,
   FETCH_DUE_ITEMS
 } from '../items/itemActions';
+
+import { CREATE_DECK, EDIT_DECK, DELETE_DECK, FETCH_DECKS, FETCH_DECK } from '../decks/deckActions';
+import { FETCH_ACTIVITY } from '../activity/activityActions';
 
 const INITIAL_STATE = {};
 

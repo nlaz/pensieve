@@ -7,6 +7,8 @@ import * as deckActions from './deckActions';
 import PageTemplate from '../../components/PageTemplate';
 import PageNavigation from '../../components/PageNavigation';
 
+import DeckCard from './DeckCard';
+
 export const PAGE_SIZE = 16;
 
 export const PageHeader = ({ count, onSearchChange }) => {

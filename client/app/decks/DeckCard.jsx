@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router';
 
-export function DeckCard({ deck }) {
+export default function DeckCard({ deck }) {
   return (
     <div className="col-xs-6 col-sm-3 deckCard-wrapper">
       <Link to={`/decks/${deck._id}`} className="deckCard">
