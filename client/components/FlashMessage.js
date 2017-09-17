@@ -10,7 +10,6 @@ export const FlashMessage = ({ message, error, onDismiss }) => {
     { 'alert-danger': Boolean(error) }
   );
 
-  console.log('FlashMessage', error);
   const decorator = Boolean(error) ? 'Oops!' : 'Success!';
 
   return (

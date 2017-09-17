@@ -45,6 +45,7 @@ class ItemNewContainer extends React.Component {
               <div className="form-group">
                 <label htmlFor="titleInput">Title</label>
                 <input
+                  value={this.state.title}
                   onChange={this.onChange}
                   name="title"
                   id="titleInput"
@@ -56,6 +57,7 @@ class ItemNewContainer extends React.Component {
               <div className="form-group">
                 <label htmlFor="descriptionInput">Description</label>
                 <textarea
+                  value={this.state.description}
                   onChange={this.onChange}
                   name="description"
                   id="descriptionInput"

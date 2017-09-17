@@ -27,6 +27,7 @@ export const fetchItems = () => dispatch => {
 export const fetchItem = itemId => dispatch => {
   const config = { headers: { Authorization: cookie.load('token') } };
 
+  console.log('fetchItem', itemId);
   axios
     .get(`${ITEMS_API}/${itemId}`, config)
     .then(resp => dispatch({ type: FETCH_ITEM, payload: resp.data }))

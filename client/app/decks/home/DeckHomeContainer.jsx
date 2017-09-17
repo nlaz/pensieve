@@ -7,7 +7,7 @@ import Header from '../../../components/Header';
 import * as deckActions from '../deckActions';
 import { ItemCard } from '../../items/ItemsContainer';
 
-class DeckContainer extends React.Component {
+class DeckHomeContainer extends React.Component {
   componentWillMount() {
     const { deck, params } = this.props;
     if (!deck || deck._id !== params.deckId) {
@@ -70,4 +70,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(deckActions, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeckContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(DeckHomeContainer);

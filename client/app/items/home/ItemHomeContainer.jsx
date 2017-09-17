@@ -25,7 +25,7 @@ class ItemContainer extends React.Component {
 
   componentWillMount() {
     const { item } = this.props;
-    if (!item || item._id !== this.props.itemId) {
+    if (item._id !== this.props.params.itemId) {
       this.props.actions.fetchItem(this.props.params.itemId);
     }
   }

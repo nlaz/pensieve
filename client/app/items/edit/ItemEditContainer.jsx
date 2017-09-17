@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Header from '../../../components/Header';
 import * as itemActions from '../itemActions';
 
-class EditItemContainer extends React.Component {
+class ItemEditContainer extends React.Component {
   constructor(props) {
     super(props);
     this.onSave = this.onSave.bind(this);
@@ -107,4 +107,4 @@ const mapStateToProps = state => ({
   item: state.data.item
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditItemContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemEditContainer);
