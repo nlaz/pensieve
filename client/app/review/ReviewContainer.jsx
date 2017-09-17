@@ -64,9 +64,7 @@ class ReviewContainer extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.session) {
-      this.props.actions.fetchSession(this.props.params.sessionId);
-    }
+    this.props.actions.fetchSession(this.props.params.sessionId);
   }
 
   onNextAction(value) {
@@ -112,12 +110,24 @@ class ReviewContainer extends React.Component {
     const { session } = this.props;
     const { index, showAnswer, showNextOptions, items = {} } = this.state;
 
-    if (!Boolean(items)) {
-      return <h3>No items available</h3>;
+    if (!Object.keys(items).length > 0) {
+      return (
+        <Header className="session-page">
+          <div className="container">
+            <h3>No items available</h3>
+          </div>
+        </Header>
+      );
     }
 
-    if (!Boolean(session)) {
-      return <h3>Loading session</h3>;
+    if (!Object.keys(session).length > 0) {
+      return (
+        <Header className="session-page">
+          <div className="container">
+            <h3>Loading session</h3>
+          </div>
+        </Header>
+      );
     }
 
     if (session.finishedAt || index > items.length - 1) {
@@ -197,7 +207,7 @@ class ReviewContainer extends React.Component {
 
 const mapStateToProps = state => ({
   session: state.data.session,
-  items: (state.data.session || {}).items
+  items: state.data.session.items
 });
 
 const mapDispatchToProps = dispatch => ({

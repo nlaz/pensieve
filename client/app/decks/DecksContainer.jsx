@@ -50,9 +50,7 @@ class DecksContainer extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.decks) {
-      this.props.actions.fetchDecks();
-    }
+    this.props.actions.fetchDecks();
   }
 
   onIncrementPage() {

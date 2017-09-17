@@ -50,9 +50,7 @@ class ItemsContainer extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.items) {
-      this.props.actions.fetchItems();
-    }
+    this.props.actions.fetchItems();
   }
 
   onIncrementPage() {

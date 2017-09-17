@@ -4,33 +4,11 @@ import cookie from 'react-cookie';
 
 import { SHOW_ERROR } from '../appActions';
 
-export const FETCH_SESSIONS = 'fetchSessions';
 export const FETCH_SESSION = 'fetchSession';
 export const CREATE_SESSION = 'createSession';
 export const FINISH_SESSION = 'finishSession';
 
 const SESSIONS_API_URL = `/api/sessions`;
-
-export function fetchSessions() {
-  return function(dispatch) {
-    axios
-      .get(SESSIONS_API_URL, {
-        headers: { Authorization: cookie.load('token') }
-      })
-      .then(response => {
-        dispatch({
-          type: FETCH_SESSIONS,
-          payload: response.data
-        });
-      })
-      .catch(error => {
-        dispatch({
-          type: SHOW_ERROR,
-          payload: error.response.data
-        });
-      });
-  };
-}
 
 export function fetchSession(sessionId) {
   return function(dispatch) {
