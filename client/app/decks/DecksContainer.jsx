@@ -90,7 +90,9 @@ class DecksContainer extends React.Component {
         <div className="decks-page container">
           <PageHeader count={decks.length} onSearchChange={this.onSearchChange} />
           <div className="row">
-            {pageItems.map((deck, key) => <DeckCard deck={deck} key={key} />)}
+            {pageItems.map((deck, key) => (
+              <DeckCard className="col-xs-6 col-sm-3" deck={deck} key={key} />
+            ))}
           </div>
           {numPages > 1 && (
             <PageNavigation

@@ -19,7 +19,7 @@ export const fetchActivity = () => {
       .catch(error => {
         dispatch({
           type: ACTIVITY_ERROR,
-          payload: error.response.data
+          payload: error.response
         });
       });
   };

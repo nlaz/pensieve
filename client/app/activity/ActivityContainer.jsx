@@ -6,39 +6,47 @@ import * as homeActions from './activityActions';
 import * as itemActions from '../items/itemActions';
 import PageTemplate from '../../components/PageTemplate';
 import ActivityGraph from './ActivityGraph';
-
-const PageHead = ({ children }) => {
-  return (
-    <div className="sessions-page container">
-      <div className="col-md-8 col-md-offset-2">
-        <h4 className="page-header">Recent Activity</h4>
-        {children}
-      </div>
-    </div>
-  );
-};
+import ItemCard from '../items/ItemCard';
+import DeckCard from '../decks/DeckCard';
 
 class ActivityContainer extends React.Component {
   componentWillMount() {
-    if (!this.props.sessions) {
-      this.props.homeActions.fetchActivity();
-    }
+    this.props.homeActions.fetchActivity();
   }
 
   render() {
+    const { reviewItems = [], popularDecks = [], dueItems = [] } = this.props;
     return (
       <PageTemplate>
-        <PageHead>
-          <div className="sectionTitle">Activity</div>
-          <ActivityGraph reviewItems={this.props.reviewItems} />
-        </PageHead>
+        <div className="sessions-page container">
+          <div className="col-md-8 col-md-offset-2">
+            <div className="row">
+              <h2 className="sectionTitle">Catch up</h2>
+              {dueItems
+                .slice(0, 8)
+                .map((item, key) => <ItemCard className="col-xs-3" item={item} key={key} />)}
+            </div>
+            <div className="row">
+              <h2 className="sectionTitle">Your favorite decks</h2>
+              {popularDecks
+                .slice(0, 3)
+                .map((deck, key) => <DeckCard className="col-xs-4" deck={deck} key={key} />)}
+            </div>
+            <div className="row">
+              <h2 className="sectionTitle">Activity</h2>
+              <ActivityGraph reviewItems={reviewItems} />
+            </div>
+          </div>
+        </div>
       </PageTemplate>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  reviewItems: state.data.reviewItems
+  reviewItems: state.data.activity.reviewItems,
+  popularDecks: state.data.activity.popularDecks,
+  dueItems: state.data.activity.dueItems
 });
 
 const mapDispatchToProps = dispatch => ({

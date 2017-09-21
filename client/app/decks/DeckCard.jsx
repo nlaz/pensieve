@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-export default function DeckCard({ deck }) {
+export default function DeckCard({ deck, className }) {
   return (
-    <div className="col-xs-6 col-sm-3 deckCard-wrapper">
+    <div className={`deckCard-wrapper ${className}`}>
       <Link to={`/decks/${deck._id}`} className="deckCard">
         <span className="deckCard-itemCount">
           {deck.items.length}
