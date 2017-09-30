@@ -9,11 +9,7 @@ export default function ItemProgressBar({ progress }) {
   });
 
   if (progress === 0) {
-    return (
-      <div className="progress progress-reviewNow">
-        <button className="button-reviewNow">Review now</button>
-      </div>
-    );
+    return <div className="progress progress-reviewNow">Needs review</div>;
   }
 
   return (

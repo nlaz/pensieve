@@ -7,7 +7,8 @@ export default function(state = INITIAL_STATE, action) {
     case FETCH_ITEMS:
       return action.payload.items;
     case CREATE_ITEM:
-      return [...state.items, action.payload.item];
+      const { items = [] } = state;
+      return [...items, action.payload.item];
     case EDIT_ITEM: {
       const updatedItem = action.payload.item;
       const updatedItems = (state.items || [])

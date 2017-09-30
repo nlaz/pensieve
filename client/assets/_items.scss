@@ -59,20 +59,13 @@
   background: none;
   border: none;
   border-radius: 0;
+  color: $C_lightGray;
+  font-size: 12px;
   height: auto;
   margin: 0;
   padding: 0;
-
-  .button-reviewNow {
-    background: #f3f3f3;
-    border-radius: 999px;
-    height: 20px;
-    width: 100%;
-    color: $C_darkBorder;
-    border: 1px solid $C_darkBorder;
-    line-height: 12px;
-    font-size: 12px;
-  }
+  text-align: center;
+  top: 10px;
 }
 
 .itemCard .glyphicon-eye-open {

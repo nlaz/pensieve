@@ -20,18 +20,22 @@ class ActivityContainer extends React.Component {
       <PageTemplate>
         <div className="sessions-page container">
           <div className="col-md-8 col-md-offset-2">
-            <div className="row">
-              <h2 className="sectionTitle">Catch up</h2>
-              {dueItems
-                .slice(0, 8)
-                .map((item, key) => <ItemCard className="col-xs-3" item={item} key={key} />)}
-            </div>
-            <div className="row">
-              <h2 className="sectionTitle">Your favorite decks</h2>
-              {popularDecks
-                .slice(0, 3)
-                .map((deck, key) => <DeckCard className="col-xs-4" deck={deck} key={key} />)}
-            </div>
+            {dueItems.length > 0 && (
+              <div className="row">
+                <h2 className="sectionTitle">Catch up</h2>
+                {dueItems
+                  .slice(0, 8)
+                  .map((item, key) => <ItemCard className="col-xs-3" item={item} key={key} />)}
+              </div>
+            )}
+            {popularDecks.length > 0 && (
+              <div className="row">
+                <h2 className="sectionTitle">Your favorite decks</h2>
+                {popularDecks
+                  .slice(0, 3)
+                  .map((deck, key) => <DeckCard className="col-xs-4" deck={deck} key={key} />)}
+              </div>
+            )}
             <div className="row">
               <h2 className="sectionTitle">Activity</h2>
               <ActivityGraph reviewItems={reviewItems} />

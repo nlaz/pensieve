@@ -15,6 +15,12 @@ class DeckHomeContainer extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (Object.keys(this.props.deck).length === 0) {
+      this.props.router.push('/decks');
+    }
+  }
+
   onDeleteDeck() {
     const itemId = this.props.deck._id;
     this.props.actions.deleteDeck(itemId);
@@ -31,7 +37,7 @@ class DeckHomeContainer extends React.Component {
             <div className="col-xs-12 text-right">
               <button
                 onClick={() => this.onDeleteDeck()}
-                className="newDeck--btn btn btn-danger btn--default"
+                className="newDeck--btn btn btn-danger btn-default"
                 style={{ marginRight: '5px' }}
               >
                 Delete

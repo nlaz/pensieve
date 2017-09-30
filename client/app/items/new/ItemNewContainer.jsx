@@ -31,7 +31,7 @@ class ItemNewContainer extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.item) {
+    if (Object.keys(this.props.item).length > 0) {
       this.props.router.push('/items/' + this.props.item._id);
     }
   }
