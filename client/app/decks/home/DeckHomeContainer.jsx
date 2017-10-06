@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import Header from '../../../components/Header';
 import * as deckActions from '../deckActions';
-import { ItemCard } from '../../items/ItemsContainer';
+import ItemCard from '../../items/ItemCard';
 
 class DeckHomeContainer extends React.Component {
   componentWillMount() {

@@ -9,13 +9,9 @@ class ItemNewContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { title: '', description: '' };
+
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
-  }
-
-  onChange(event) {
-    const field = event.target.name;
-    this.setState({ [field]: event.target.value });
   }
 
   componentWillMount() {
@@ -24,16 +20,21 @@ class ItemNewContainer extends React.Component {
     }
   }
 
-  onSave(event) {
-    event.preventDefault();
-    const { title, description } = this.state;
-    this.props.actions.createItem({ title, description });
-  }
-
   componentDidUpdate() {
     if (Object.keys(this.props.item).length > 0) {
       this.props.router.push('/items/' + this.props.item._id);
     }
+  }
+
+  onChange(event) {
+    const field = event.target.name;
+    this.setState({ [field]: event.target.value });
+  }
+
+  onSave(event) {
+    event.preventDefault();
+    const { title, description } = this.state;
+    this.props.actions.createItem({ title, description });
   }
 
   render() {

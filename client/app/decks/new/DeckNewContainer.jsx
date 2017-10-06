@@ -18,6 +18,12 @@ class DeckNewContainer extends React.Component {
     this.onDeckInputChange = this.onDeckInputChange.bind(this);
   }
 
+  componentDidUpdate() {
+    if (Object.keys(this.props.deck).length > 0) {
+      this.props.router.push(`/decks/` + this.props.deck._id);
+    }
+  }
+
   onAddCard() {
     const { items } = this.state;
     this.setState(() => ({ items: [...items, { title: '', description: '' }] }));

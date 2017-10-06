@@ -31,6 +31,12 @@ class ItemEditContainer extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (Object.keys(this.props.item).length === 0) {
+      this.props.router.push('/items');
+    }
+  }
+
   onSave(event) {
     event.preventDefault();
     const { item } = this.props;
