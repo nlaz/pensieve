@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import PageTemplate from '../../../components/PageTemplate';
+import Footer from '../../../components/Footer';
 import * as sessionActions from '../authActions';
 
 class LoginContainer extends React.Component {
@@ -39,7 +40,7 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
-      <PageTemplate>
+      <PageTemplate footer={<Footer />}>
         <div className="login-form container">
           <div className="row">
             <div className="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -87,7 +88,7 @@ class LoginContainer extends React.Component {
                 )}
                 <p className="text-center">
                   Forgot your password?{' '}
-                  <a className="link" href="mailto:info@boreas.space">
+                  <a className="link" href="mailto:hello@pensieve.space">
                     Send us a message
                   </a>
                 </p>

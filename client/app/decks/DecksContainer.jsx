@@ -89,7 +89,7 @@ class DecksContainer extends React.Component {
 
     return (
       <PageTemplate>
-        <div className="decks-page container">
+        <div className="decks-page container margin-top">
           <PageHeader count={decks.length} onSearchChange={this.onSearchChange} />
           {pageDecks.length > 0 ? (
             <div className="row">

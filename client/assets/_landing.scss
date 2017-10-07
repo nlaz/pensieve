@@ -254,12 +254,14 @@
 }
 
 .landing-footer {
-  color: $C_lightGray;
-  margin-bottom: 25px;
   position: absolute;
-  bottom: 25px;
   left: 0;
   right: 0;
+  bottom: 25px;
+}
+.footer {
+  color: $C_lightGray;
+  margin: 25px 0;
 
   .footer-item {
     display: inline;

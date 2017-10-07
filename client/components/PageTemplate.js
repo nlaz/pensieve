@@ -42,9 +42,7 @@ const ContentWrapper = ({ children }) => {
         width: '100%',
         boxSizing: 'border-box',
         margin: '2rem auto',
-        marginTop: '60px',
-        display: 'flex',
-        flexGrow: 1
+        marginTop: '60px'
       }}
     >
       {children}

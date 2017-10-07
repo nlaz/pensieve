@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import PageTemplate from '../../../components/PageTemplate';
+import Footer from '../../../components/Footer';
 import * as sessionActions from '../authActions';
 
 class SignupContainer extends React.Component {
@@ -39,7 +40,7 @@ class SignupContainer extends React.Component {
 
   render() {
     return (
-      <PageTemplate>
+      <PageTemplate footer={<Footer />}>
         <div className="signup-form container">
           <div className="row">
             <div className="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">

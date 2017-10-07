@@ -6,6 +6,7 @@ import * as emailActions from './emailActions';
 import { EmailSignupForm } from './EmailSignupForm';
 import PageTemplate from '../../components/PageTemplate';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 export class LandingContainer extends React.Component {
   constructor(props) {
@@ -24,17 +25,7 @@ export class LandingContainer extends React.Component {
       <PageTemplate
         className="landing-page"
         header={<Header />}
-        footer={
-          <div className="landing-footer text-center">
-            <div className="footer-item">
-              <span>Pensieve &copy; 2017</span>
-            </div>
-            {'|'}
-            <div className="footer-item">
-              <a href="mailto:hello@boreas.space">Contact</a>
-            </div>
-          </div>
-        }
+        footer={<Footer className="landing-footer" />}
       >
         <div className="container" style={{ display: 'flex' }}>
           <div className="landing-copy col-sm-8 col-md-6" style={{ margin: 'auto' }}>

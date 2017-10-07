@@ -91,7 +91,7 @@ class ItemsContainer extends React.Component {
 
     return (
       <PageTemplate>
-        <div className="items-page container">
+        <div className="items-page container margin-top">
           <PageHeader count={items.length} onSearchChange={this.onSearchChange} />
           {pageItems.length > 0 ? (
             <div className="row">
