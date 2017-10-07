@@ -54,21 +54,20 @@ class DeckNewContainer extends React.Component {
     const { title, description, items } = this.state;
     return (
       <Header className="newDeck-page">
-        <div className="container">
+        <div className="container margin-top">
           <div className="row">
-            <h2>New deck page</h2>
             <div className="text-right col-xs-12">
               <button
                 onClick={this.onAddCard}
                 type="button"
-                className="newItem--btn btn btn-primary"
+                className="btn-addItem btn btn-primary"
               >
-                New item +
+                Add item +
               </button>
             </div>
           </div>
           <div className="row">
-            <form onSubmit={e => e.preventDefault()} className="col-xs-3 editDeckInfo--wrapper">
+            <form onSubmit={e => e.preventDefault()} className="col-xs-4 editDeckInfo--wrapper">
               <div className="editDeckInfo">
                 <div className="form-group">
                   <label htmlFor="title">Deck title</label>
@@ -78,7 +77,7 @@ class DeckNewContainer extends React.Component {
                     name="title"
                     className="form-control"
                     type="text"
-                    placeholder="Give me a name..."
+                    placeholder="Add a deck title..."
                   />
                 </div>
                 <div className="form-group">
@@ -89,7 +88,7 @@ class DeckNewContainer extends React.Component {
                     name="description"
                     className="form-control"
                     type="textarea"
-                    placeholder="Add some details..."
+                    placeholder="Add a deck description..."
                   />
                 </div>
               </div>
@@ -98,10 +97,10 @@ class DeckNewContainer extends React.Component {
                 type="submit"
                 className="btn btn-primary btn-block"
               >
-                Create Deck
+                Save Deck
               </button>
             </form>
-            <div className="col-xs-9 items--wrapper">
+            <div className="col-xs-8 items--wrapper">
               {items &&
                 items.length > 0 &&
                 items.map((item, key) => (

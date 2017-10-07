@@ -11,9 +11,31 @@ $deckCardHeight: 250px;
   border: 1px solid $C_cardBorder;
   border-radius: 3px;
   background-color: $C_white;
-  height: 400px;
   margin-bottom: 10px;
   padding: 10px;
+}
+
+.editDeckInfo {
+  border-color: $C_lightCardBorder;
+
+  label {
+    color: $C_darkGray;
+  }
+
+  textarea {
+    resize: none;
+    height: 80px;
+  }
+
+  .form-control {
+    background: $C_darkWhite;
+    border-color: $C_lightCardBorder;
+    box-shadow: none;
+
+    &::placeholder {
+      color: $C_lightGray;
+    }
+  }
 }
 
 .itemCard,
@@ -71,6 +93,10 @@ $deckCardHeight: 250px;
   margin: 0;
 }
 
+.btn-addItem {
+  margin-bottom: 15px;
+}
+
 .btn-newItem,
 .btn-newDeck {
   background: $C_primaryBlue;
@@ -97,15 +123,16 @@ $deckCardHeight: 250px;
 .itemCard {
   position: relative;
 }
-.itemCard--close.btn {
-  background: $C_white;
+.btn.itemCard--close {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 3px;
+  right: 7px;
   height: 20px;
   width: 20px;
   text-align: center;
   padding: 0;
+  border: none;
+  color: $C_lightGray;
 
   & .glyphicon {
     line-height: 15px;
@@ -115,4 +142,28 @@ $deckCardHeight: 250px;
 }
 .items--wrapper {
   padding: 0;
+}
+
+.items-page .emptyView-wrapper,
+.decks-page .emptyView-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.items-page .emptyView,
+.decks-page .emptyView {
+  margin-top: 20px;
+  max-width: 500px;
+}
+.items-page .emptyView .title,
+.decks-page .emptyView .title {
+  color: $C_darkGray;
+  font-weight: 600;
+  font-size: 24px;
+  margin: 0;
+}
+.items-page .emptyView .description,
+.decks-page .emptyView .description {
+  color: $C_mediumGray;
+  font-size: 16px;
+  margin-top: 6px;
 }

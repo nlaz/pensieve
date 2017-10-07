@@ -38,6 +38,31 @@
   }
 }
 
+.itemCard-edit {
+  border-color: $C_lightCardBorder;
+  display: block;
+  height: auto;
+  padding-top: 25px;
+
+  label {
+    color: $C_darkGray;
+  }
+  textarea {
+    resize: none;
+    height: 80px;
+  }
+
+  .form-control {
+    background: $C_darkWhite;
+    border-color: $C_lightCardBorder;
+    box-shadow: none;
+
+    &::placeholder {
+      color: $C_lightGray;
+    }
+  }
+}
+
 .itemCard .hideIcon {
   position: absolute;
   bottom: 10px;
