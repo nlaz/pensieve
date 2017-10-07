@@ -122,6 +122,15 @@
   background-color: $C_progressHot;
 }
 
+.sessions-page .page-header .actions {
+  align-self: flex-end;
+}
+.sessions-page .page-header .link-seeAll {
+  color: $C_darkGray;
+  font-size: 16px;
+}
+
+.sessions-page .page-header,
 .decks-page .page-header,
 .items-page .page-header {
   align-items: flex-start;
@@ -154,6 +163,7 @@
 
   .subtitle {
     color: $C_mediumGray;
+    margin-bottom: 0;
   }
 
   .search {

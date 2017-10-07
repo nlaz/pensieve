@@ -128,6 +128,18 @@ $deckCardHeight: 250px;
   margin-bottom: 15px;
 }
 
+$C_midGray: #949494;
+
+.btn-deckAction {
+  border: 1.5px solid $C_lightGray;
+  color: $C_midGray;
+  background: none;
+
+  &:hover {
+    color: $C_midGray;
+  }
+}
+
 .btn-newItem,
 .btn-newDeck {
   background: $C_primaryBlue;
@@ -175,16 +187,20 @@ $deckCardHeight: 250px;
   padding: 0;
 }
 
+.sessions-page .emptyView-wrapper,
 .items-page .emptyView-wrapper,
 .decks-page .emptyView-wrapper {
   display: flex;
   justify-content: center;
+  margin-bottom: 60px;
 }
+.sessions-page .emptyView,
 .items-page .emptyView,
 .decks-page .emptyView {
   margin-top: 20px;
   max-width: 500px;
 }
+.sessions-page .emptyView .title,
 .items-page .emptyView .title,
 .decks-page .emptyView .title {
   color: $C_darkGray;
@@ -192,6 +208,7 @@ $deckCardHeight: 250px;
   font-size: 24px;
   margin: 0;
 }
+.sessions-page .emptyView .description,
 .items-page .emptyView .description,
 .decks-page .emptyView .description {
   color: $C_mediumGray;

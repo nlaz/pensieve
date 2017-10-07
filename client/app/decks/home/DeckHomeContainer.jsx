@@ -41,16 +41,23 @@ class DeckHomeContainer extends React.Component {
               <div className="deck-actions">
                 <button
                   onClick={() => this.onDeleteDeck()}
-                  className="newDeck--btn btn btn-danger btn-default"
+                  className="btn-deckAction btn btn-default"
                   style={{ marginRight: '5px' }}
                 >
                   Delete
+                  <span
+                    className="glyphicon glyphicon-trash"
+                    style={{ marginLeft: '10px' }}
+                    aria-hidden="true"
+                  />
                 </button>
-                <Link
-                  to={`/decks/${deck._id}/edit`}
-                  className="newDeck--btn btn btn-primary btn--default"
-                >
+                <Link to={`/decks/${deck._id}/edit`} className="btn-deckAction btn btn-default">
                   Edit
+                  <span
+                    className="glyphicon glyphicon-edit"
+                    style={{ marginLeft: '10px' }}
+                    aria-hidden="true"
+                  />
                 </Link>
               </div>
             </div>

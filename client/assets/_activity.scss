@@ -3,19 +3,18 @@
  * http://bit.ly/1ywfhq7
  */
 
-$C_borderColor: #E9E9E9;
+$C_borderColor: #e9e9e9;
 
-
-$C_extraSmallDotBlue: #C7DCF3;
+$C_extraSmallDotBlue: #bdd0e6;
 $C_extraSmallDotSize: 2px;
-$C_smallDotBlue: #BDD0E6;
-$C_smallDotSize: 4px;
-$C_mediumDotBlue: #88AED9;
-$C_mediumDotSize: 5px;
-$C_largeDotBlue: #547FB1;
-$C_largeDotSize: 7px;
-$C_extraLargeDotBlue: #37567A;
-$C_extraLargeDotSize: 8px;
+$C_smallDotBlue: #bdd0e6;
+$C_smallDotSize: 6px;
+$C_mediumDotBlue: #89b4f2;
+$C_mediumDotSize: 8px;
+$C_largeDotBlue: #1574fb;
+$C_largeDotSize: 10px;
+$C_extraLargeDotBlue: #1574fb;
+$C_extraLargeDotSize: 12px;
 
 .activity {
   background: $C_white;
@@ -25,6 +24,11 @@ $C_extraLargeDotSize: 8px;
   position: relative;
 }
 
+.activity .col-headers .row {
+  color: $C_mediumGray;
+  font-size: 12px;
+}
+
 .sectionTitle {
   font-size: 18px;
   margin-left: 20px;
@@ -32,11 +36,11 @@ $C_extraLargeDotSize: 8px;
 }
 
 .activity--reviewTotal {
-  color: #B2B2B2;
+  color: $C_mediumGray;
   font-size: 12px;
   margin-bottom: 3px;
   position: absolute;
-  top: 10px;
+  top: 8px;
   right: 22px;
   text-align: right;
 }

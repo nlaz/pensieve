@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const NUM_WEEKS = 52;
 const NUM_DAYS = 7;
@@ -45,10 +46,21 @@ const getActivityData = (reviewData = []) => {
   return activity;
 };
 
+const getDayLabels = () => {
+  const today = moment();
+  const rows = [...Array(NUM_DAYS)];
+
+  return rows.map((_, index) => {
+    let newDate = moment(today);
+    return index % 2 === 1 ? newDate.subtract(index, 'days').format('ddd') : undefined;
+  });
+};
+
 export default function ActivityGraph({ reviewItems }) {
   const columns = [...Array(NUM_WEEKS)];
   const rows = [...Array(NUM_DAYS)];
   const activity = getActivityData(reviewItems);
+  const rowLabels = getDayLabels();
 
   return (
     <div className="activity">
@@ -56,6 +68,13 @@ export default function ActivityGraph({ reviewItems }) {
         You reviewed <strong>{activity.totalReviews} items</strong> in the past year
       </p>
       <div className="graph">
+        <div className="col col-headers">
+          {rowLabels.map((label, key) => (
+            <div className="row" key={key}>
+              {label}
+            </div>
+          ))}
+        </div>
         {columns.map((_, colKey) => (
           <div className={`col col-${colKey}`} key={colKey}>
             {rows.map((_, rowKey) => (
