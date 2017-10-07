@@ -16,18 +16,20 @@ export const PageHeader = ({ count, onSearchChange }) => {
     <div className="page-header">
       <div className="info">
         <h4 className="title">Decks</h4>
-        {count > 0 && <p className="subtitle">{count} decks in your collection</p>}
+        <p className="subtitle">{count} decks in your collection</p>
       </div>
       <div className="actions">
-        <div className="search">
-          <input
-            onChange={onSearchChange}
-            type="text"
-            id="search"
-            className="form-control"
-            placeholder="Search for decks..."
-          />
-        </div>
+        {count > 0 && (
+          <div className="search">
+            <input
+              onChange={onSearchChange}
+              type="text"
+              id="search"
+              className="form-control"
+              placeholder="Search for decks..."
+            />
+          </div>
+        )}
         <div className="create">
           <Link to="decks/new" className="btn-newDeck btn btn-primary">
             Create Deck +
@@ -83,17 +85,30 @@ class DecksContainer extends React.Component {
     const numPages = Math.ceil(filteredDecks.length / PAGE_SIZE);
     const pageStart = activePage * PAGE_SIZE;
     const pageEnd = Math.min((activePage + 1) * PAGE_SIZE, filteredDecks.length);
-    const pageItems = filteredDecks.slice(pageStart, pageEnd);
+    const pageDecks = filteredDecks.slice(pageStart, pageEnd);
 
     return (
       <PageTemplate>
         <div className="decks-page container">
           <PageHeader count={decks.length} onSearchChange={this.onSearchChange} />
-          <div className="row">
-            {pageItems.map((deck, key) => (
-              <DeckCard className="col-xs-6 col-sm-3" deck={deck} key={key} />
-            ))}
-          </div>
+          {pageDecks.length > 0 ? (
+            <div className="row">
+              {pageDecks.map((deck, key) => (
+                <DeckCard className="col-xs-6 col-sm-3" deck={deck} key={key} />
+              ))}
+            </div>
+          ) : (
+            <div className="emptyView-wrapper">
+              <div className="text-center emptyView">
+                <span style={{ fontSize: '60px' }}>✌️</span>
+                <h2 className="title">No decks in your collection yet</h2>
+                <p className="description">
+                  Decks are groups of related items for organizing your notes. Haven’t created an
+                  deck yet? No problem. You can click ‘Create Deck’ to build your first deck.
+                </p>
+              </div>
+            </div>
+          )}
           {numPages > 1 && (
             <PageNavigation
               numPages={numPages}

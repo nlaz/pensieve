@@ -16,18 +16,20 @@ export const PageHeader = ({ count, onSearchChange }) => {
     <div className="page-header">
       <div className="info">
         <h4 className="title">Items</h4>
-        {count > 0 && <p className="subtitle">{count} items in your collection</p>}
+        <p className="subtitle">{count} items in your collection</p>
       </div>
       <div className="actions">
-        <div className="search">
-          <input
-            onChange={onSearchChange}
-            type="text"
-            id="search"
-            className="form-control"
-            placeholder="Search for items..."
-          />
-        </div>
+        {count > 0 && (
+          <div className="search">
+            <input
+              onChange={onSearchChange}
+              type="text"
+              id="search"
+              className="form-control"
+              placeholder="Search for items..."
+            />
+          </div>
+        )}
         <div className="create">
           <Link to="/items/new" className="btn-newItem btn pull-right">
             Create Item +
@@ -91,11 +93,24 @@ class ItemsContainer extends React.Component {
       <PageTemplate>
         <div className="items-page container">
           <PageHeader count={items.length} onSearchChange={this.onSearchChange} />
-          <div className="row">
-            {pageItems.map((item, key) => (
-              <ItemCard className="col-xs-6 col-sm-3 col-lg-2" item={item} key={key} />
-            ))}
-          </div>
+          {pageItems.length > 0 ? (
+            <div className="row">
+              {pageItems.map((item, key) => (
+                <ItemCard className="col-xs-6 col-sm-3 col-lg-2" item={item} key={key} />
+              ))}
+            </div>
+          ) : (
+            <div className="emptyView-wrapper">
+              <div className="text-center emptyView">
+                <span style={{ fontSize: '60px' }}>👋</span>
+                <h2 className="title">No items in your collection yet</h2>
+                <p className="description">
+                  Items are important notes that you want to remember. Haven’t created an item yet?
+                  No problem. Click ‘Create Item’ to build your first item now.
+                </p>
+              </div>
+            </div>
+          )}
           {numPages > 1 && (
             <PageNavigation
               numPages={numPages}
