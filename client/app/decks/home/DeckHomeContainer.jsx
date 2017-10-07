@@ -31,32 +31,30 @@ class DeckHomeContainer extends React.Component {
     const { items = [] } = deck;
     return (
       <Header className="deck-page">
-        <div className="container">
-          <div className="row">
-            <h1>Deck page</h1>
-            <div className="col-xs-12 text-right">
-              <button
-                onClick={() => this.onDeleteDeck()}
-                className="newDeck--btn btn btn-danger btn-default"
-                style={{ marginRight: '5px' }}
-              >
-                Delete
-              </button>
-              <Link
-                to={`/decks/${deck._id}/edit`}
-                className="newDeck--btn btn btn-primary btn--default"
-              >
-                Edit
-              </Link>
-            </div>
-
-            <div className="col-xs-3 deckInfo--wrapper">
+        <div className="container margin-top">
+          <div className="row margin-top">
+            <div className="col-xs-4 deckInfo--wrapper">
               <div className="deckInfo">
-                <h4>{deck.title}</h4>
-                <p>{deck.description}</p>
+                <h2 className="title">{deck.title}</h2>
+                <p className="description">{deck.description}</p>
+              </div>
+              <div className="deck-actions">
+                <button
+                  onClick={() => this.onDeleteDeck()}
+                  className="newDeck--btn btn btn-danger btn-default"
+                  style={{ marginRight: '5px' }}
+                >
+                  Delete
+                </button>
+                <Link
+                  to={`/decks/${deck._id}/edit`}
+                  className="newDeck--btn btn btn-primary btn--default"
+                >
+                  Edit
+                </Link>
               </div>
             </div>
-            <div className="row col-xs-9">
+            <div className="row col-xs-8">
               {items &&
                 items.length > 0 &&
                 items.map((item, key) => <ItemCard className="col-xs-4" item={item} key={key} />)}

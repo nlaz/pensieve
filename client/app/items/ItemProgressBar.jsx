@@ -9,7 +9,8 @@ export default function ItemProgressBar({ progress }) {
   });
 
   if (progress === 0) {
-    return <div className="progress progress-reviewNow">Needs review</div>;
+    const dot = <span className="dot" />;
+    return <div className="progress progress-reviewNow">{dot} Needs review</div>;
   }
 
   return (

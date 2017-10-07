@@ -8,11 +8,42 @@ $deckCardHeight: 250px;
 
 .editDeckInfo,
 .deckInfo {
-  border: 1px solid $C_cardBorder;
+  border: 1px solid $C_lightCardBorder;
   border-radius: 3px;
   background-color: $C_white;
   margin-bottom: 10px;
   padding: 10px;
+}
+
+.deckInfo {
+  text-align: center;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 200px;
+
+  .title {
+    color: $C_darkGray;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+
+  .description {
+    color: $C_mediumGray;
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.deck-page .deck-actions {
+  display: flex;
+
+  .btn {
+    width: 100%;
+  }
 }
 
 .editDeckInfo {

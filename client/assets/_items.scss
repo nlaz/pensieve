@@ -89,8 +89,20 @@
   height: auto;
   margin: 0;
   padding: 0;
-  text-align: center;
+  text-align: left;
   top: 10px;
+
+  $dotSize: 6px;
+
+  .dot {
+    background-color: $C_progressHot;
+    width: $dotSize;
+    height: $dotSize;
+    display: inline-block;
+    margin-right: 3px;
+    margin-bottom: 2px;
+    border-radius: 100%;
+  }
 }
 
 .itemCard .glyphicon-eye-open {
