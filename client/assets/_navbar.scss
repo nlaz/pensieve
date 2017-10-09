@@ -76,5 +76,14 @@
     &:active {
       background: $C_primaryDarkGreen !important;
     }
+
+    .items-due {
+      color: #288569;
+      background: #39b791;
+      border-radius: 3px;
+      padding: 2px 3px;
+      margin-left: 3px;
+      font-size: 11px;
+    }
   }
 }

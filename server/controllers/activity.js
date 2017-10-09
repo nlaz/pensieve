@@ -1,5 +1,6 @@
 import Review from '../models/review';
 import Deck from '../models/deck';
+import Item from '../models/item';
 import { getDueItemsHelper } from './items';
 
 export const getActivity = (req, res) => {
@@ -11,6 +12,7 @@ export const getActivity = (req, res) => {
 export async function getReviewItems(req, res) {
   const userId = req.user._id;
   try {
+    const numItems = await Item.count({ user_id: req.user._id, hidden: false });
     const reviewItems = await Review.aggregate([
       {
         $group: {
@@ -28,11 +30,13 @@ export async function getReviewItems(req, res) {
     const popularDecks = await Deck.find({ user_id: userId });
     const dueItems = await getDueItemsHelper(userId);
 
-    return res
-      .status(200)
-      .json({ reviewItems: reviewItems, popularDecks: popularDecks, dueItems: dueItems });
+    return res.status(200).json({
+      reviewItems: reviewItems,
+      popularDecks: popularDecks,
+      dueItems: dueItems,
+      numItems: numItems
+    });
   } catch (error) {
-    console.log('error', error);
     return res.status(404).json({ error });
   }
 }

@@ -41,7 +41,7 @@ class ActivityContainer extends React.Component {
   }
 
   render() {
-    const { reviewItems = [], popularDecks = [], dueItems = [] } = this.props;
+    const { reviewItems = [], popularDecks = [], dueItems = [], numItems } = this.props;
     return (
       <PageTemplate footer={<Footer />}>
         <div className="sessions-page container margin-top">
@@ -55,14 +55,26 @@ class ActivityContainer extends React.Component {
               </div>
             ) : (
               <div className="emptyView-wrapper">
-                <div className="text-center emptyView">
-                  <span style={{ fontSize: '60px' }}>👋</span>
-                  <h2 className="title">No items in your collection yet</h2>
-                  <p className="description">
-                    Items are important notes that you want to remember. Haven’t created an item
-                    yet? No problem. Click ‘Create Item’ to build your first item now.
-                  </p>
-                </div>
+                {numItems > 0 ? (
+                  <div className="text-center emptyView">
+                    <span style={{ fontSize: '60px' }}>👏</span>
+                    <h2 className="title">Tada! You're up to date.</h2>
+                    <p className="description">
+                      All items are reviewed. Item study dates are determined by the amount you've
+                      studied them and their difficulty. Come back to review them when they are
+                      expired.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="text-center emptyView">
+                    <span style={{ fontSize: '60px' }}>👋</span>
+                    <h2 className="title">No items in your collection yet</h2>
+                    <p className="description">
+                      Items are important notes that you want to remember. Haven’t created an item
+                      yet? No problem. Click ‘Create Item’ to build your first item now.
+                    </p>
+                  </div>
+                )}
               </div>
             )}
             {popularDecks.length > 0 && (
@@ -100,7 +112,8 @@ class ActivityContainer extends React.Component {
 const mapStateToProps = state => ({
   reviewItems: state.data.activity.reviewItems,
   popularDecks: state.data.activity.popularDecks,
-  dueItems: state.data.activity.dueItems
+  dueItems: state.data.activity.dueItems,
+  numItems: state.data.activity.numItems
 });
 
 const mapDispatchToProps = dispatch => ({

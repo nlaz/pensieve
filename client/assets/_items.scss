@@ -38,6 +38,11 @@
   }
 }
 
+.itemCard--hidden .progressWrapper,
+.itemCard--hidden .title {
+  opacity: 0.35;
+}
+
 .itemCard-edit {
   border-color: $C_lightCardBorder;
   display: block;
@@ -70,21 +75,33 @@
   color: $C_mediumGray;
 }
 
-.itemCard .progress {
-  border-radius: 999px;
-  height: 16px;
+.itemCard .progressWrapper {
   left: 15px;
   right: 15px;
   top: 15px;
   position: absolute;
-  box-shadow: none;
 }
 
-.itemCard .progress.progress-reviewNow {
+.itemCard .progress {
+  border-radius: 999px;
+  height: 16px;
+  box-shadow: none;
+  flex-grow: 1;
+}
+
+.itemCard .progress-time {
+  height: 16px;
+  padding-left: 5px;
+  line-height: 16px;
+  color: $C_mediumGray;
+  font-size: 12px;
+}
+
+.itemCard .progressWrapper .progress-reviewNow {
   background: none;
   border: none;
   border-radius: 0;
-  color: $C_lightGray;
+  color: $C_mediumGray;
   font-size: 12px;
   height: auto;
   margin: 0;
@@ -128,6 +145,10 @@
 .sessions-page .page-header .link-seeAll {
   color: $C_darkGray;
   font-size: 16px;
+}
+
+.session-page .btn-primary {
+  width: 100%;
 }
 
 .sessions-page .page-header,

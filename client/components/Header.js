@@ -24,8 +24,9 @@ class Header extends React.Component {
   }
 
   render() {
-    const { authenticated, children, error, message, self, className } = this.props;
+    const { authenticated, children, error, message, self, dueItems, className } = this.props;
     const showMessage = Boolean(message);
+    const numItemsDue = (dueItems || {}).length;
 
     return (
       <div className={className}>
@@ -34,6 +35,7 @@ class Header extends React.Component {
           showNavMenu={this.state.showNavMenu}
           onshowNavMenu={this.onshowNavMenu}
           authenticated={authenticated}
+          numItemsDue={numItemsDue}
         />
         {showMessage && <FlashMessage error={error} message={message} onDismiss={this.onClose} />}
         {children}
@@ -50,7 +52,8 @@ const mapStateToProps = state => ({
   self: state.app.self,
   authenticated: state.app.authenticated,
   message: state.errors.message,
-  error: state.errors.value
+  error: state.errors.value,
+  dueItems: state.data.activity.dueItems
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
