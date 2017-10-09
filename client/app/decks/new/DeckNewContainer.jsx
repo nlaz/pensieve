@@ -18,6 +18,12 @@ class DeckNewContainer extends React.Component {
     this.onDeckInputChange = this.onDeckInputChange.bind(this);
   }
 
+  componentWillMount() {
+    if (this.props.deck) {
+      this.props.actions.clearDeck();
+    }
+  }
+
   componentDidUpdate() {
     if (Object.keys(this.props.deck).length > 0) {
       this.props.router.push(`/decks/` + this.props.deck._id);

@@ -8,6 +8,7 @@ export const FETCH_DECK = 'fetchDeck';
 export const CREATE_DECK = 'createDeck';
 export const EDIT_DECK = 'editDeck';
 export const DELETE_DECK = 'deleteDeck';
+export const CLEAR_DECK = 'clearDeck';
 
 const DECKS_API = '/api/decks';
 
@@ -60,4 +61,8 @@ export const deleteDeck = itemId => dispatch => {
       });
     })
     .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
+};
+
+export const clearDeck = () => dispatch => {
+  return dispatch({ type: CLEAR_DECK });
 };

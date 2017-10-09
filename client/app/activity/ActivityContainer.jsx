@@ -66,19 +66,28 @@ class ActivityContainer extends React.Component {
               </div>
             )}
             {popularDecks.length > 0 && (
-              <div className="row">
-                <h2 className="sectionTitle">Your favorite decks</h2>
-                {popularDecks
-                  .slice(0, 3)
-                  .map((deck, key) => <DeckCard className="col-xs-4" deck={deck} key={key} />)}
+              <div className="decks-section">
+                <div className="page-header">
+                  <h4 className="title">Your favorite decks</h4>
+                  <Link to="decks" className="link-seeAll">
+                    See all
+                  </Link>
+                </div>
+                <div className="row">
+                  {popularDecks
+                    .slice(0, 3)
+                    .map((deck, key) => <DeckCard className="col-xs-4" deck={deck} key={key} />)}
+                </div>
               </div>
             )}
-            <div className="page-header">
-              <h4 className="title">Activity</h4>
-            </div>
-            <div className="row">
-              <div className="col-xs-12">
-                <ActivityGraph reviewItems={reviewItems} />
+            <div className="activity-section">
+              <div className="page-header">
+                <h4 className="title">Activity</h4>
+              </div>
+              <div className="row margin-bottom">
+                <div className="col-xs-12">
+                  <ActivityGraph reviewItems={reviewItems} />
+                </div>
               </div>
             </div>
           </div>
