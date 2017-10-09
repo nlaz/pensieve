@@ -64,10 +64,11 @@ export default function ActivityGraph({ reviewItems }) {
 
   return (
     <div className="activity">
-      <p className="activity--reviewTotal">
+      <p className="activity-reviewTotal">
         You reviewed <strong>{activity.totalReviews} items</strong> in the past year
+        {activity.totalReviews > 100 && <span className="activity-emoji">🎉</span>}
       </p>
-      <div className="graph">
+      <div className="activity-graph">
         <div className="col col-headers">
           {rowLabels.map((label, key) => (
             <div className="row" key={key}>

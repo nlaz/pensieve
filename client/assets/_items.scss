@@ -76,18 +76,18 @@
 }
 
 .itemCard .item-progress {
-  left: 15px;
-  right: 15px;
   position: absolute;
   display: flex;
+  left: 0;
+  right: 0;
+  padding: 10px;
   align-items: center;
   justify-content: space-between;
   color: $C_mediumGray;
   font-size: 12px;
   margin: 0;
-  padding: 0;
   text-align: left;
-  top: 10px;
+  top: 0;
 
   $dotSize: 6px;
 
@@ -154,19 +154,30 @@
   }
 
   .actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: inline-block;
     width: 100%;
+    margin-top: 15px;
 
     @include atSmallUp {
+      margin: 0;
       width: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 
   .title {
     flex-grow: 1;
     margin-bottom: 5px;
+  }
+
+  .create .btn {
+    width: 100%;
+
+    @include atSmallUp {
+      width: auto;
+    }
   }
 
   .subtitle {
@@ -176,10 +187,12 @@
 
   .search {
     flex-grow: 1;
-    margin-right: 30px;
+    margin-bottom: 8px;
 
     @include atSmallUp {
       flex-grow: none;
+      margin-right: 30px;
+      margin-bottom: 0;
     }
   }
 

@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 export function NavBar({ self, authenticated, showNavMenu, onshowNavMenu, numItemsDue }) {
   return (
-    <nav className="navbar navbar-inverse">
+    <nav className="navbar">
       <div className="container">
         <div className="navbar-header">
           <button

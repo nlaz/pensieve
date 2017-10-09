@@ -20,8 +20,12 @@ $C_extraLargeDotSize: 12px;
   background: $C_white;
   border: 1px solid $C_borderColor;
   border-radius: 6px;
-  padding: 25px 20px;
+  padding: 10px;
   position: relative;
+
+  @include atSmallUp {
+    padding: 25px 20px;
+  }
 }
 
 .activity .col-headers .row {
@@ -35,30 +39,50 @@ $C_extraLargeDotSize: 12px;
   margin-bottom: 3px;
 }
 
-.activity--reviewTotal {
+.activity-reviewTotal {
   color: $C_mediumGray;
   font-size: 12px;
   margin-bottom: 3px;
-  position: absolute;
   top: 8px;
-  right: 22px;
-  text-align: right;
+  position: relative;
+  right: 0;
+  left: 0;
+  text-align: center;
+
+  @include atSmallUp {
+    text-align: right;
+    padding-right: 22px;
+    position: absolute;
+  }
 }
 
-.graph {
-  display: flex;
+.activity-graph {
   flex-direction: row;
   align-items: center;
+  display: none;
+
+  @include atSmallUp {
+    display: flex;
+  }
 }
 
-.graph .col {
+.activity-emoji {
+  font-size: 40px;
+  display: block;
+
+  @include atSmallUp {
+    display: none;
+  }
+}
+
+.activity-graph .col {
   display: flex;
   flex-direction: column;
   height: 100px;
   width: 100%;
 }
 
-.graph .row {
+.activity-graph .row {
   height: 100%;
   margin: 0;
   width: 100%;
@@ -67,7 +91,7 @@ $C_extraLargeDotSize: 12px;
   justify-content: center;
 }
 
-.graph .dot {
+.activity-graph .dot {
   border-radius: 100%;
 
   &.dot-xs {

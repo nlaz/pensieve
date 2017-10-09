@@ -4,6 +4,7 @@
  */
 @import './vars';
 
+$itemCardHeight: 200px;
 $deckCardHeight: 250px;
 
 .editDeckInfo,
@@ -69,10 +70,13 @@ $deckCardHeight: 250px;
   }
 }
 
+.itemCard {
+  height: $itemCardHeight;
+}
+
 .itemCard,
 .deckCard {
   background-color: $C_white;
-  height: 200px;
   margin-bottom: 20px;
   padding: 10px;
   display: flex;
@@ -93,11 +97,15 @@ $deckCardHeight: 250px;
   border-radius: 6px;
   color: $C_black;
   position: relative;
-  height: $deckCardHeight;
+  height: 180px;
 
   &:hover {
     text-decoration: none;
     color: $C_black;
+  }
+
+  @include atSmallUp {
+    height: $deckCardHeight;
   }
 }
 

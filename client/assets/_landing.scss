@@ -9,7 +9,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center !important;
 }
 
 .landing-page .contentWrapper {
@@ -19,7 +19,7 @@
     justify-content: center;
   }
 }
-.landing-page .navbar.navbar-inverse {
+.landing-page .navbar {
   background: $C_white;
   border: 0;
   color: $C_black;
