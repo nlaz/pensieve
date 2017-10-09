@@ -70,6 +70,7 @@
     padding: 5px 25px;
     margin: 10px 0;
     transition: all 0.1s ease-in-out;
+    text-shadow: 0 0.5px 0 $C_primaryDarkGreen;
     margin-right: 20px;
 
     &:hover,
@@ -84,6 +85,7 @@
       padding: 2px 3px;
       margin-left: 3px;
       font-size: 11px;
+      font-weight: bold;
     }
   }
 }

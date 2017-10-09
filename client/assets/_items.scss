@@ -38,7 +38,7 @@
   }
 }
 
-.itemCard--hidden .progressWrapper,
+.itemCard--hidden .item-progress,
 .itemCard--hidden .title {
   opacity: 0.35;
 }
@@ -75,35 +75,15 @@
   color: $C_mediumGray;
 }
 
-.itemCard .progressWrapper {
+.itemCard .item-progress {
   left: 15px;
   right: 15px;
-  top: 15px;
   position: absolute;
-}
-
-.itemCard .progress {
-  border-radius: 999px;
-  height: 16px;
-  box-shadow: none;
-  flex-grow: 1;
-}
-
-.itemCard .progress-time {
-  height: 16px;
-  padding-left: 5px;
-  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   color: $C_mediumGray;
   font-size: 12px;
-}
-
-.itemCard .progressWrapper .progress-reviewNow {
-  background: none;
-  border: none;
-  border-radius: 0;
-  color: $C_mediumGray;
-  font-size: 12px;
-  height: auto;
   margin: 0;
   padding: 0;
   text-align: left;
@@ -111,8 +91,7 @@
 
   $dotSize: 6px;
 
-  .dot {
-    background-color: $C_progressHot;
+  .progress-dot {
     width: $dotSize;
     height: $dotSize;
     display: inline-block;
@@ -120,22 +99,30 @@
     margin-bottom: 2px;
     border-radius: 100%;
   }
+
+  .progress-time {
+    margin-left: 5px;
+    line-height: 16px;
+    font-size: 12px;
+  }
+
+  .progress-needsReview {
+    flex-grow: 1;
+    margin-left: 5px;
+  }
 }
 
 .itemCard .glyphicon-eye-open {
   color: $C_mediumGray;
 }
 
-.itemCard .progress-bar {
+.itemCard .progress-dot--good {
   background-color: $C_progressGood;
 }
-.itemCard .progress-bar--good {
-  background-color: $C_progressGood;
-}
-.itemCard .progress-bar--warm {
+.itemCard .progress-dot--warm {
   background-color: $C_progressWarm;
 }
-.itemCard .progress-bar--hot {
+.itemCard .progress-dot--hot {
   background-color: $C_progressHot;
 }
 

@@ -8,7 +8,7 @@ export default function PageNavigation({
 }) {
   return (
     <nav aria-label="Page navigation" style={{ textAlign: 'center' }}>
-      <ul className="pagination">
+      <ul className="pagination margin-top">
         <li>
           <a onClick={onDecrementPage} href="#" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>

@@ -6,13 +6,13 @@ configDB();
 
 const testUserId = '589a72ad50b48b715550680f';
 const emailOne = () => {
-	User.findById(testUserId)
-		.then( user => {
-			return Emailer.broadcastEmailToUser(user);
-		})
-		.catch( error => {
-			console.error(error);
-		});
+  User.findById(testUserId)
+    .then(user => {
+      return Emailer.broadcastEmailToUser(user);
+    })
+    .catch(error => {
+      console.error(error);
+    });
 };
 
 emailOne();

@@ -189,11 +189,17 @@ $C_midGray: #949494;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+  overflow: hidden;
 }
 
-.itemCard {
-  position: relative;
+.itemCard .title {
+  hyphens: auto;
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
 }
+
 .btn.itemCard--close {
   position: absolute;
   top: 3px;

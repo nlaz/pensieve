@@ -11,7 +11,8 @@ const Wrapper = ({ children, ...props }) => {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        justifyContent: 'space-between'
       }}
     >
       {children}
