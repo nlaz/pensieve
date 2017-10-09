@@ -5,7 +5,9 @@ const INITIAL_STATE = {};
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_SESSION:
+      return action.payload.session;
     case FINISH_SESSION:
+      return action.payload.session;
     case CREATE_SESSION:
       return action.payload.session;
   }

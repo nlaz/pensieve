@@ -4,10 +4,18 @@ import { connect } from 'react-redux';
 
 import * as reviewActions from '../reviewActions';
 import PageTemplate from '../../../components/PageTemplate';
+import { NO_ITEMS_ERROR } from '../../../../server/controllers/errors';
 
 class ReviewNewContainer extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.actions.createSession();
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate', this.props.error);
+    if (this.props.error === NO_ITEMS_ERROR) {
+      this.props.router.push(`/`);
+    }
   }
 
   render() {
@@ -21,8 +29,12 @@ class ReviewNewContainer extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  error: state.errors.value
+});
+
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(reviewActions, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(ReviewNewContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewNewContainer);
