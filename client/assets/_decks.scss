@@ -88,10 +88,10 @@ $deckCardHeight: 250px;
 }
 
 .deckCard {
-  border: 1px solid $C_cardBorder;
-  border-radius: 3px;
+  margin-top: 12px;
+  border: 1.5px solid $C_lightCardBorder;
+  border-radius: 6px;
   color: $C_black;
-  box-shadow: 0 1px 1px $C_lightShadow;
   position: relative;
   height: $deckCardHeight;
 
@@ -101,15 +101,42 @@ $deckCardHeight: 250px;
   }
 }
 
+.deckCard-stack-1 {
+  background: $C_white;
+  position: absolute;
+  bottom: 0;
+  top: -8px;
+  right: 5px;
+  left: 5px;
+  border: 1.5px solid $C_lightCardBorder;
+  border-radius: 6px;
+  z-index: -1;
+}
+
+.deckCard-stack-2 {
+  background: $C_white;
+  position: absolute;
+  bottom: 0;
+  top: -14px;
+  right: 15px;
+  left: 15px;
+  border: 1.5px solid $C_lightCardBorder;
+  border-radius: 6px;
+  z-index: -2;
+}
+
 .deckCard-itemCount {
   color: $C_mediumGray;
+  font-size: 16px;
   position: absolute;
-  top: 10px;
   right: 10px;
+  top: 10px;
+}
 
-  .glyphicon {
-    margin-left: 5px;
-  }
+.deckCard-cardIcon {
+  margin-bottom: 2px;
+  margin-left: 4px;
+  height: 16px;
 }
 
 .deckCard-title {

@@ -33,7 +33,7 @@ class DeckHomeContainer extends React.Component {
       <Header className="deck-page">
         <div className="container margin-top">
           <div className="row margin-top">
-            <div className="col-xs-4 deckInfo--wrapper">
+            <div className="col-xs-3 col-md-4 col-lg-3 deckInfo--wrapper">
               <div className="deckInfo">
                 <h2 className="title">{deck.title}</h2>
                 <p className="description">{deck.description}</p>
@@ -61,7 +61,7 @@ class DeckHomeContainer extends React.Component {
                 </Link>
               </div>
             </div>
-            <div className="row col-xs-8">
+            <div className="row col-xs-9 col-md-8 col-lg-9">
               {items &&
                 items.length > 0 &&
                 items.map((item, key) => <ItemCard className="col-xs-4" item={item} key={key} />)}
