@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ReviewProgressBar({ progress }) {
   return (
-    <div className="progress">
+    <div className="progress" style={{ height: '10px' }}>
       <div
         className="progress-bar"
         role="progressbar"

@@ -161,45 +161,47 @@ class ReviewContainer extends React.Component {
             </button>
           </div>
         </div>
-        {showNextOptions ? (
-          <div className="row">
-            <div className="col-xs-4 text-center">
-              <button
-                onClick={() => this.onNextAction(REVIEW_TYPE.HARD)}
-                type="button"
-                className="btn btn-primary"
-              >
-                Hard
-              </button>
+        <div className="review-actions">
+          {showNextOptions ? (
+            <div className="row">
+              <div className="col-xs-4 text-center">
+                <button
+                  onClick={() => this.onNextAction(REVIEW_TYPE.HARD)}
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  Hard
+                </button>
+              </div>
+              <div className="col-xs-4 text-center">
+                <button
+                  onClick={() => this.onNextAction(REVIEW_TYPE.GOOD)}
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  Good
+                </button>
+              </div>
+              <div className="col-xs-4 text-center">
+                <button
+                  onClick={() => this.onNextAction(REVIEW_TYPE.EASY)}
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  Easy
+                </button>
+              </div>
             </div>
-            <div className="col-xs-4 text-center">
-              <button
-                onClick={() => this.onNextAction(REVIEW_TYPE.GOOD)}
-                type="button"
-                className="btn btn-primary"
-              >
-                Good
-              </button>
+          ) : (
+            <div className="row">
+              <div className="col-xs-12 text-center">
+                <button onClick={this.onItemClick} type="button" className="btn btn-primary">
+                  Show Answer
+                </button>
+              </div>
             </div>
-            <div className="col-xs-4 text-center">
-              <button
-                onClick={() => this.onNextAction(REVIEW_TYPE.EASY)}
-                type="button"
-                className="btn btn-primary"
-              >
-                Easy
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="row">
-            <div className="col-xs-12 text-center">
-              <button onClick={this.onItemClick} type="button" className="btn btn-primary">
-                Show Answer
-              </button>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </SessionPage>
     );
   }

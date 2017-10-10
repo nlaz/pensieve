@@ -22,7 +22,7 @@ $deckCardHeight: 250px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  min-height: 200px;
+  min-height: 300px;
 
   .title {
     color: $C_darkGray;
@@ -36,6 +36,7 @@ $deckCardHeight: 250px;
     color: $C_mediumGray;
     font-size: 16px;
     margin: 0;
+    hyphens: auto;
   }
 }
 
@@ -124,6 +125,8 @@ $deckCardHeight: 250px;
   color: $C_black;
   position: relative;
   height: 180px;
+  hyphens: auto;
+  text-align: center;
 
   &:hover {
     text-decoration: none;
@@ -176,7 +179,7 @@ $deckCardHeight: 250px;
 .deckCard-title {
   color: $C_black;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 18px;
   margin: 0;
   text-align: center;
 }

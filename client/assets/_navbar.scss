@@ -73,6 +73,7 @@
     margin: 10px 15px;
     transition: all 0.1s ease-in-out;
     text-shadow: 0 0.5px 0 $C_primaryDarkGreen;
+    width: inherit;
 
     @include atSmallUp {
       margin-right: 20px;

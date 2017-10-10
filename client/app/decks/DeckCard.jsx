@@ -12,7 +12,6 @@ export default function DeckCard({ deck, className }) {
           <img className="deckCard-cardIcon" src={require('../../assets/images/icons/cards.svg')} />
         </span>
         <h4 className="deckCard-title">{deck.title}</h4>
-        <p className="deckCard-subtitle">{deck.description}</p>
       </Link>
     </div>
   );
