@@ -64,7 +64,9 @@ class ReviewContainer extends React.Component {
   }
 
   componentWillMount() {
-    this.props.actions.fetchSession(this.props.params.sessionId);
+    if (Object.keys(this.props.session).length === 0) {
+      this.props.actions.fetchSession(this.props.params.sessionId);
+    }
   }
 
   onNextAction(value) {

@@ -12,7 +12,6 @@ class ReviewNewContainer extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate', this.props.error);
     if (this.props.error === NO_ITEMS_ERROR) {
       this.props.router.push(`/`);
     }

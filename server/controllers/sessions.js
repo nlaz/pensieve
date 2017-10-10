@@ -7,6 +7,28 @@ import { NO_ITEMS_ERROR } from './errors';
 export const REVIEW_SESSION_SIZE = 15;
 export const REVIEW_SESSION_MAX = 35;
 
+// Shuffle function from SO
+// @see https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+export function shuffle(array) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 export const getSessions = (req, res) => {
   Session.find({ user_id: req.user._id })
     .then(sessions => res.status(200).json({ sessions }))
@@ -78,9 +100,7 @@ export async function createSession(req, res) {
     const dueItems = await ItemController.getDueItemsHelper(userId);
 
     const sessionItems =
-      dueItems.length > 0
-        ? dueItems
-        : await Item.find({ user_id: userId, hidden: false }).limit(REVIEW_SESSION_MAX);
+      dueItems.length > 0 ? dueItems : await Item.find({ user_id: userId, hidden: false });
 
     if (sessionItems.length === 0) {
       return res.status(400).json({
@@ -90,9 +110,7 @@ export async function createSession(req, res) {
       });
     }
 
-    const sortedSessionItems = sessionItems
-      .sort(() => 0.5 - Math.random())
-      .slice(0, REVIEW_SESSION_MAX); // "randomize" the items
+    const sortedSessionItems = shuffle(sessionItems).slice(0, REVIEW_SESSION_MAX);
 
     const itemIds = sortedSessionItems.map(item => item._id);
 
