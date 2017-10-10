@@ -92,8 +92,7 @@ $deckCardHeight: 250px;
   bottom: 20px;
 
   @include atSmallUp {
-    position: relative;
-    margin: 0;
+    position: unset;
   }
 }
 
@@ -189,6 +188,16 @@ $deckCardHeight: 250px;
 
 .btn-addItem {
   margin-bottom: 15px;
+  background: $C_white;
+  color: $C_darkGray;
+  border-radius: 999px;
+  padding: 5px 15px;
+  border: 1px solid $C_cardBorder;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border: 1px solid $C_mediumGray;
+  }
 }
 
 $C_midGray: #949494;
@@ -251,9 +260,6 @@ $C_midGray: #949494;
     width: 13px;
     text-align: center;
   }
-}
-.items--wrapper {
-  padding: 0;
 }
 
 .sessions-page .emptyView-wrapper,

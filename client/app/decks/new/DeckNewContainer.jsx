@@ -63,11 +63,7 @@ class DeckNewContainer extends React.Component {
         <div className="container margin-top">
           <div className="row">
             <div className="text-right col-xs-12">
-              <button
-                onClick={this.onAddCard}
-                type="button"
-                className="btn-addItem btn btn-primary"
-              >
+              <button onClick={this.onAddCard} type="button" className="btn-addItem btn">
                 Add item +
               </button>
             </div>
@@ -110,17 +106,19 @@ class DeckNewContainer extends React.Component {
                 </div>
               </div>
               <div className="col-xs-12 col-sm-8 items--wrapper">
-                {items &&
-                  items.length > 0 &&
-                  items.map((item, key) => (
-                    <EditItemCard
-                      item={item}
-                      onInputChange={e => this.onItemInputChange(e, key)}
-                      onRemove={() => this.onRemoveCard(key)}
-                      key={key}
-                      index={key}
-                    />
-                  ))}
+                <div className="row">
+                  {items &&
+                    items.length > 0 &&
+                    items.map((item, key) => (
+                      <EditItemCard
+                        item={item}
+                        onInputChange={e => this.onItemInputChange(e, key)}
+                        onRemove={() => this.onRemoveCard(key)}
+                        key={key}
+                        index={key}
+                      />
+                    ))}
+                </div>
               </div>
             </div>
           </form>
