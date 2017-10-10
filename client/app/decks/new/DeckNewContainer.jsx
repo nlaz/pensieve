@@ -72,53 +72,58 @@ class DeckNewContainer extends React.Component {
               </button>
             </div>
           </div>
-          <div className="row">
-            <form onSubmit={e => e.preventDefault()} className="col-xs-4 editDeckInfo--wrapper">
-              <div className="editDeckInfo">
-                <div className="form-group">
-                  <label htmlFor="title">Deck title</label>
-                  <input
-                    onChange={e => this.onDeckInputChange(e.target.name, e.target.value)}
-                    value={title}
-                    name="title"
-                    className="form-control"
-                    type="text"
-                    placeholder="Add a deck title..."
-                  />
+          <form className="form-saveDeck" onSubmit={e => e.preventDefault()}>
+            <div className="row">
+              <div className="col-xs-12 col-sm-4 editDeckInfo-wrapper">
+                <div className="editDeckInfo">
+                  <div className="form-group">
+                    <label htmlFor="title">Deck title</label>
+                    <input
+                      onChange={e => this.onDeckInputChange(e.target.name, e.target.value)}
+                      value={title}
+                      name="title"
+                      className="form-control"
+                      type="text"
+                      placeholder="Add a deck title..."
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="description">Deck description</label>
+                    <textarea
+                      onChange={e => this.onDeckInputChange(e.target.name, e.target.value)}
+                      value={description}
+                      name="description"
+                      className="form-control"
+                      type="textarea"
+                      placeholder="Add a deck description..."
+                    />
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="description">Deck description</label>
-                  <textarea
-                    onChange={e => this.onDeckInputChange(e.target.name, e.target.value)}
-                    value={description}
-                    name="description"
-                    className="form-control"
-                    type="textarea"
-                    placeholder="Add a deck description..."
-                  />
+                <div className="btn-saveDeck-wrapper">
+                  <button
+                    onClick={this.onCreateDeck}
+                    type="submit"
+                    className="btn btn-saveDeck btn-primary btn-block"
+                  >
+                    Save Deck
+                  </button>
                 </div>
               </div>
-              <button
-                onClick={this.onCreateDeck}
-                type="submit"
-                className="btn btn-primary btn-block"
-              >
-                Save Deck
-              </button>
-            </form>
-            <div className="col-xs-8 items--wrapper">
-              {items &&
-                items.length > 0 &&
-                items.map((item, key) => (
-                  <EditItemCard
-                    item={item}
-                    onInputChange={e => this.onItemInputChange(e, key)}
-                    onRemove={() => this.onRemoveCard(key)}
-                    key={key}
-                  />
-                ))}
+              <div className="col-xs-12 col-sm-8 items--wrapper">
+                {items &&
+                  items.length > 0 &&
+                  items.map((item, key) => (
+                    <EditItemCard
+                      item={item}
+                      onInputChange={e => this.onItemInputChange(e, key)}
+                      onRemove={() => this.onRemoveCard(key)}
+                      key={key}
+                      index={key}
+                    />
+                  ))}
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </Header>
     );

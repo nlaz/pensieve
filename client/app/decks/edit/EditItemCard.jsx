@@ -1,9 +1,10 @@
 import React from 'react';
 
-export default function EditItemCard({ item, onInputChange, onRemove }) {
+export default function EditItemCard({ item, onInputChange, onRemove, index }) {
   return (
-    <div className="col-xs-6 itemCard--wrapper">
+    <div className="col-xs-12 col-sm-6 itemCard--wrapper">
       <div className="itemCard itemCard-edit">
+        <label>Item {index + 1}</label>
         <button onClick={onRemove} className="itemCard--close btn btn-default btn-xs">
           <span className="glyphicon glyphicon-remove" aria-hidden="true" />
         </button>

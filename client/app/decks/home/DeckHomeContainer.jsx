@@ -31,14 +31,14 @@ class DeckHomeContainer extends React.Component {
     const { items = [] } = deck;
     return (
       <Header className="deck-page">
-        <div className="container margin-top">
+        <div className="container margin-top margin-bottom">
           <div className="row margin-top">
-            <div className="col-xs-3 col-md-4 col-lg-3 deckInfo--wrapper">
+            <div className="col-xs-12 col-sm-3 col-md-4 col-lg-3 deckInfo--wrapper">
               <div className="deckInfo">
                 <h2 className="title">{deck.title}</h2>
                 <p className="description">{deck.description}</p>
               </div>
-              <div className="deck-actions">
+              <div className="deck-actions margin-bottom">
                 <button
                   onClick={() => this.onDeleteDeck()}
                   className="btn-deckAction btn btn-default"
@@ -61,10 +61,14 @@ class DeckHomeContainer extends React.Component {
                 </Link>
               </div>
             </div>
-            <div className="row col-xs-9 col-md-8 col-lg-9">
-              {items &&
-                items.length > 0 &&
-                items.map((item, key) => <ItemCard className="col-xs-4" item={item} key={key} />)}
+            <div className=" col-xs-12 col-sm-9 col-md-8 col-lg-9">
+              <div className="row">
+                {items &&
+                  items.length > 0 &&
+                  items.map((item, key) => (
+                    <ItemCard className="col-xs-6 col-sm-4" item={item} key={key} />
+                  ))}
+              </div>
             </div>
           </div>
         </div>

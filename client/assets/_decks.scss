@@ -70,6 +70,33 @@ $deckCardHeight: 250px;
   }
 }
 
+.form-saveDeck {
+  position: relative;
+  padding-bottom: 50px;
+
+  @include atSmallUp {
+    padding-bottom: 0;
+  }
+}
+.form-saveDeck .editDeckInfo-wrapper {
+  position: unset;
+
+  @include atSmallUp {
+    position: relative;
+  }
+}
+.form-saveDeck .btn-saveDeck-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+
+  @include atSmallUp {
+    position: relative;
+    margin: 0;
+  }
+}
+
 .itemCard {
   height: $itemCardHeight;
 }
