@@ -4,125 +4,133 @@ import jwt from 'jsonwebtoken';
 const jwtSecret = process.env.JWT_SECRET;
 
 const isValidEmail = email => {
-	const re = /\S+@\S+\.\S+/;
-	return re.test(email);
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
 };
 
 export const signupUser = (req, res) => {
-	const name = req.body.name.trim();
-	const email = req.body.email.trim();
-	const password = req.body.password.trim();
+  const name = req.body.name.trim();
+  const email = req.body.email.trim();
+  const password = req.body.password.trim();
 
-	// Disable signup for prelaunch
-	return res.status(404).json({ error: true, message: 'Sign up not allowed at the moment'});
+  // // Disable signup for prelaunch
+  // return res.status(404).json({ error: true, message: 'Sign up not allowed at the moment'});
 
-	if (!isValidEmail(email)) {
-		return res.status(404).json({
-			error: true,
-			type: 'invalid_email',
-			message: 'Invalid email',
-		});
-	}
+  if (!isValidEmail(email)) {
+    return res.status(404).json({
+      error: true,
+      type: 'invalid_email',
+      message: 'Invalid email'
+    });
+  }
 
-	User.findOne({ email: email }, (err, user) => {
-		if (err) { return res.send(err); }
+  User.findOne({ email: email }, (err, user) => {
+    if (err) {
+      return res.send(err);
+    }
 
-		if (user) {
-			return res.status(404).json({
-				error: true,
-				type: 'email_taken',
-				message: 'Email is already taken',
-			});
-		}
+    if (user) {
+      return res.status(404).json({
+        error: true,
+        type: 'email_taken',
+        message: 'Email is already taken'
+      });
+    }
 
-		const newUser = new User();
-		newUser.name = name;
-		newUser.email = email;
-		newUser.password = newUser.generateHash(password);
+    const newUser = new User();
+    newUser.name = name;
+    newUser.email = email;
+    newUser.password = newUser.generateHash(password);
 
-		newUser.save((err, user) => {
-			if (err) { return res.send(err); }
+    newUser.save((err, user) => {
+      if (err) {
+        return res.send(err);
+      }
 
-			res.status(200).json({
-				user: user.getCleanUser(user),
-				token: user.generateToken(user),
-			});
-		});
-	});
+      res.status(200).json({
+        user: user.getCleanUser(user),
+        token: user.generateToken(user)
+      });
+    });
+  });
 };
 
 export const loginUser = (req, res) => {
-	const email = req.body.email.trim();
-	User.findOne({ email: email }, (err, user) => {
-		if (err) { return res.send(err); }
+  const email = req.body.email.trim();
+  User.findOne({ email: email }, (err, user) => {
+    if (err) {
+      return res.send(err);
+    }
 
-		if (!user) {
-			return res.status(404).json({
-				error: true,
-				type: 'user_not_found',
-				message: 'No user found with that email and password',
-			});
-		}
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        type: 'user_not_found',
+        message: 'No user found with that email and password'
+      });
+    }
 
-		if (!user.validPassword(req.body.password.trim())) {
-			return res.status(404).json({
-				error: true,
-				type: 'invalid_password',
-				message: 'No user found with that email and password',
-			});
-		}
+    if (!user.validPassword(req.body.password.trim())) {
+      return res.status(404).json({
+        error: true,
+        type: 'invalid_password',
+        message: 'No user found with that email and password'
+      });
+    }
 
-		res.json({
-			user: user.getCleanUser(user),
-			token: user.generateToken(user),
-		});
-	});
+    res.json({
+      user: user.getCleanUser(user),
+      token: user.generateToken(user)
+    });
+  });
 };
 
 export const getSelf = (req, res) => {
-	const token = req.body.token || req.query.token;
+  const token = req.body.token || req.query.token;
 
-	if (!token) {
-		return res.status(401).json({
-			error: true,
-			type: 'invalid_token',
-			message: 'Must include token',
-		});
-	}
+  if (!token) {
+    return res.status(401).json({
+      error: true,
+      type: 'invalid_token',
+      message: 'Must include token'
+    });
+  }
 
-	jwt.verify(token, jwtSecret, (err, user) => {
-		if (err) { throw err; }
-		console.log('user getself', user);
+  jwt.verify(token, jwtSecret, (err, user) => {
+    if (err) {
+      throw err;
+    }
+    console.log('user getself', user);
 
-		res.json({
-			user: user.getCleanUser(user),
-			token: token // could renew token here
-		});
-	});
+    res.json({
+      user: user.getCleanUser(user),
+      token: token // could renew token here
+    });
+  });
 };
 
 export default function authenticateUser(req, res, next) {
-	let token = req.headers.authorization;
-	if (!token) {
-		return res.status(404).json({
-			error: true,
-			type: 'invalid_token',
-			message: 'Invalid authentication. Please include a JWT token',
-		});
-	}
+  let token = req.headers.authorization;
+  if (!token) {
+    return res.status(404).json({
+      error: true,
+      type: 'invalid_token',
+      message: 'Invalid authentication. Please include a JWT token'
+    });
+  }
 
-	token = token.replace('Bearer ', '');
+  token = token.replace('Bearer ', '');
 
-	jwt.verify(token, jwtSecret, (err, user) => {
-		if (err) {
-			return res.status(401).json({
-				error: true,
-				type: 'invalid_token',
-				message: 'Invalid authentication. Please log in to make requests',
-			});
-		}
+  jwt.verify(token, jwtSecret, (err, user) => {
+    if (err) {
+      return res.status(401).json({
+        error: true,
+        type: 'invalid_token',
+        message: 'Invalid authentication. Please log in to make requests'
+      });
+    }
 
-		req.user = user;
-		next();
-	});
-};
+    req.user = user;
+    next();
+  });
+}

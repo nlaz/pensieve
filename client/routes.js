@@ -38,9 +38,7 @@ const routes = (
     <Route path="sessions/:sessionId" component={ReqAuth(Review)} />
     <Route path="login" component={Login} />
     <Route path="logout" component={Logout} />
-
-    {/* Disable for prelaunch */}
-    {false && <Route path="signup" component={Signup} />}
+    <Route path="signup" component={Signup} />
 
     <Route path="*" component={NotFoundPage} />
   </Route>

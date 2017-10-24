@@ -14,6 +14,7 @@ export async function getReviewItems(req, res) {
   try {
     const numItems = await Item.count({ user_id: req.user._id, hidden: false });
     const reviewItems = await Review.aggregate([
+      { $match: { user_id: req.user._id } },
       {
         $group: {
           _id: {
