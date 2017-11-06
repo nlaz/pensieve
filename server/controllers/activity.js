@@ -6,7 +6,7 @@ import { getDueItemsHelper } from './items';
 export const getActivity = (req, res) => {
   Review.find({ user_id: req.user._id })
     .then(reviews => res.status(200).json({ activity: reviews }))
-    .catch(error => res.status(404).json({ error }));
+    .catch(error => res.status(500).json({ error }));
 };
 
 export async function getReviewItems(req, res) {
@@ -38,6 +38,6 @@ export async function getReviewItems(req, res) {
       numItems: numItems
     });
   } catch (error) {
-    return res.status(404).json({ error });
+    return res.status(500).json({ error });
   }
 }

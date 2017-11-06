@@ -6,7 +6,7 @@ export async function getDecks(req, res) {
     const decks = await Deck.find({ user_id: req.user._id });
     return res.status(200).json({ decks });
   } catch (error) {
-    return res.status(404).json({ error });
+    return res.status(500).json({ error });
   }
 }
 
@@ -22,7 +22,7 @@ export async function getDeck(req, res) {
 
     return res.status(200).json({ deck });
   } catch (error) {
-    return res.status(404).json({ error });
+    return res.status(500).json({ error });
   }
 }
 
@@ -32,7 +32,7 @@ export async function getDeck(req, res) {
  */
 export async function createDeck(req, res) {
   if (req.body.items && req.body.items.length === 0) {
-    return res.status(404).json({ error: 'Decks must have at least one item' });
+    return res.status(500).json({ error: 'Decks must have at least one item' });
   }
 
   try {
@@ -54,7 +54,7 @@ export async function createDeck(req, res) {
 
     return res.status(200).json({ deck: newDeck });
   } catch (error) {
-    return res.status(404).json({ error });
+    return res.status(500).json({ error });
   }
 }
 
@@ -93,7 +93,7 @@ export async function editDeck(req, res) {
 
     return res.status(200).json({ deck });
   } catch (error) {
-    return res.status(404).json({ error });
+    return res.status(500).json({ error });
   }
 }
 
@@ -107,6 +107,6 @@ export async function deleteDeck(req, res) {
     const deck = await Deck.remove({ _id: req.params.deck_id });
     return res.status(200).json({ deck, items });
   } catch (error) {
-    return res.status(404).json({ error });
+    return res.status(500).json({ error });
   }
 }

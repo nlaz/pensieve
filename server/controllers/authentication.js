@@ -14,10 +14,10 @@ export const signupUser = (req, res) => {
   const password = req.body.password.trim();
 
   // // Disable signup for prelaunch
-  // return res.status(404).json({ error: true, message: 'Sign up not allowed at the moment'});
+  // return res.status(500).json({ error: true, message: 'Sign up not allowed at the moment'});
 
   if (!isValidEmail(email)) {
-    return res.status(404).json({
+    return res.status(400).json({
       error: true,
       type: 'invalid_email',
       message: 'Invalid email'
@@ -30,7 +30,7 @@ export const signupUser = (req, res) => {
     }
 
     if (user) {
-      return res.status(404).json({
+      return res.status(400).json({
         error: true,
         type: 'email_taken',
         message: 'Email is already taken'
@@ -71,7 +71,7 @@ export const loginUser = (req, res) => {
     }
 
     if (!user.validPassword(req.body.password.trim())) {
-      return res.status(404).json({
+      return res.status(400).json({
         error: true,
         type: 'invalid_password',
         message: 'No user found with that email and password'
@@ -112,7 +112,7 @@ export const getSelf = (req, res) => {
 export default function authenticateUser(req, res, next) {
   let token = req.headers.authorization;
   if (!token) {
-    return res.status(404).json({
+    return res.status(400).json({
       error: true,
       type: 'invalid_token',
       message: 'Invalid authentication. Please include a JWT token'

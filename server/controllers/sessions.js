@@ -32,7 +32,7 @@ export function shuffle(array) {
 export const getSessions = (req, res) => {
   Session.find({ user_id: req.user._id })
     .then(sessions => res.status(200).json({ sessions }))
-    .catch(error => res.status(404).json({ error }));
+    .catch(error => res.status(500).json({ error }));
 };
 
 export const getSession = (req, res) => {
@@ -43,7 +43,7 @@ export const getSession = (req, res) => {
   Session.findOne({ _id: sessionId })
     .then(_session => {
       if (_session.user_id !== userId) {
-        return res.status(404).json({
+        return res.status(500).json({
           error: true,
           type: 'invalid_user',
           message: 'Session not available. Are you signed in correctly?'
@@ -59,7 +59,7 @@ export const getSession = (req, res) => {
       session.items = items;
       res.status(200).json({ session });
     })
-    .catch(error => res.status(404).json({ error }));
+    .catch(error => res.status(500).json({ error }));
 };
 
 export const generateReviewSession = userId => {
@@ -70,7 +70,7 @@ export const generateReviewSession = userId => {
 
   return Item.aggregate([
     { $match: { user_id: userId } },
-    { $sort: { reviewCount: 1 } },
+    { $sort: { repetitions: 1 } },
     { $limit: queryLimit }
   ])
     .exec()
@@ -122,7 +122,7 @@ export async function createSession(req, res) {
 
     return res.status(200).json({ session });
   } catch (error) {
-    return res.status(404).json({ error });
+    return res.status(500).json({ error });
   }
 }
 
@@ -147,5 +147,5 @@ export const finishSession = (req, res) => {
       session.items = items;
       res.status(200).json({ session });
     })
-    .catch(error => res.status(404).json({ error }));
+    .catch(error => res.status(500).json({ error }));
 };

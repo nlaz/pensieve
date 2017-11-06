@@ -48,7 +48,7 @@ export default (req, res) => {
 
       res.send(renderFullPage(html, preloadedState));
     } else {
-      res.status(404).send('Not Found');
+      res.status(500).send('Not Found');
     }
   });
 };
