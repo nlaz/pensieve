@@ -27,7 +27,7 @@ export default class DeckListItem extends React.Component {
               </div>
             }
           >
-            <div className="itemActions-popover">
+            <div className="popoverActions">
               <div className="action">Reset Item</div>
               <div className="action">Remove from Deck</div>
               <div className="action border-top">Delete Item</div>

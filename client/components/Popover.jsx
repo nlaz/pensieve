@@ -30,7 +30,7 @@ export default class Popover extends React.Component {
   }
 
   render() {
-    const { trigger, align, children } = this.props;
+    const { trigger, align, children, className } = this.props;
     const { showPopover } = this.state;
     const classNames = cx('popover', {
       'popover--right': align === 'right',
@@ -38,7 +38,7 @@ export default class Popover extends React.Component {
     });
 
     return (
-      <div ref={c => (this.popover = c)} className="popover-wrapper">
+      <div ref={c => (this.popover = c)} className={cx(className, 'popover-wrapper')}>
         <div className="popver-trigger" onClick={this.onToggle}>
           {trigger}
         </div>

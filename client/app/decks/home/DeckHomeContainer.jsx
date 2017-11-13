@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Header from '../../../components/Header';
+import Popover from '../../../components/Popover';
 import DeleteModal from './DeleteModal';
 import DeckListItem from './DeckListItem';
 import * as deckActions from '../deckActions';
@@ -63,9 +64,6 @@ class DeckHomeContainer extends React.Component {
         <div className="container margin-top margin-bottom">
           <div className="row margin-top">
             <div className="deckHeader col-xs-12">
-              <button className="deckActions--overflow">
-                <span className="glyphicon glyphicon-option-vertical" aria-hidden="true" />
-              </button>
               <h5 className="deckSubtitle">DECK</h5>
               <h1 className="deckTitle">{deck.title}</h1>
               <p className="deckDescription">{deck.description}</p>
@@ -77,6 +75,19 @@ class DeckHomeContainer extends React.Component {
                 <button className="button button--primary">Study Now</button>
                 <button className="button button--default">Add Item</button>
               </div>
+              <Popover
+                align="right"
+                className="deckActions--overflow"
+                trigger={
+                  <span className="glyphicon glyphicon-option-vertical" aria-hidden="true" />
+                }
+              >
+                <div className="popoverActions">
+                  <div className="action">Reset Deck</div>
+                  <div className="action">Edit Deck</div>
+                  <div className="action border-top">Delete Deck</div>
+                </div>
+              </Popover>
               <hr />
             </div>
             <div className="col-xs-12">

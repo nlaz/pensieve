@@ -15,6 +15,11 @@
   top: 12px;
   background: none;
   border: none;
+
+  .glyphicon {
+    color: $C_darkGray;
+    font-size: 20px;
+  }
 }
 
 .deckSubtitle {
@@ -91,22 +96,22 @@
   .itemAction-hideItem {
     margin-left: 18px;
   }
-  .itemActions-popover .action {
-    padding: 12px;
-    font-size: 16px;
-    color: $C_mediumGray;
+}
+.popoverActions .action {
+  padding: 12px;
+  font-size: 16px;
+  color: $C_darkGray;
 
-    &:first-child {
-      border-radius: 4px 4px 0 0;
-    }
-    &:last-child {
-      border-radius: 0 0 4px 4px;
-    }
-    &:hover {
-      background: #f0f0f0;
-    }
-    &.border-top {
-      border-top: 1px solid #ecedee;
-    }
+  &:first-child {
+    border-radius: 4px 4px 0 0;
+  }
+  &:last-child {
+    border-radius: 0 0 4px 4px;
+  }
+  &:hover {
+    background: #f0f0f0;
+  }
+  &.border-top {
+    border-top: 1px solid #ecedee;
   }
 }
