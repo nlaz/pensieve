@@ -1,20 +1,20 @@
 import React from 'react';
-import cx from 'classnames';
 import moment from 'moment';
 import pluralize from 'pluralize';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Header from '../../../components/Header';
+import DeleteModal from './DeleteModal';
+import DeckListItem from './DeckListItem';
 import * as deckActions from '../deckActions';
 import * as itemActions from '../../items/itemActions';
-// import ItemCard from '../../items/ItemCard';
 
 class DeckHomeContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = { showDeleteDeckModal: false };
     this.onDeleteDeck = this.onDeleteDeck.bind(this);
     this.onHideItemClick = this.onHideItemClick.bind(this);
     this.onOverflowClick = this.onOverflowClick.bind(this);
@@ -30,6 +30,10 @@ class DeckHomeContainer extends React.Component {
     if (Object.keys(this.props.deck).length === 0) {
       this.props.router.push('/decks');
     }
+  }
+
+  onToggleDeleteModal() {
+    this.setState(state => ({ showDeleteDeckModal: !state.showDeleteDeckModal }));
   }
 
   onDeleteDeck() {
@@ -50,10 +54,12 @@ class DeckHomeContainer extends React.Component {
   }
 
   render() {
+    const { showDeleteDeckModal } = this.state;
     const { deck = {} } = this.props;
     const { items = [] } = deck;
     return (
       <Header className="DeckHomeContainer deck-page">
+        {showDeleteDeckModal && <DeleteModal />}
         <div className="container margin-top margin-bottom">
           <div className="row margin-top">
             <div className="deckHeader col-xs-12">
@@ -76,36 +82,7 @@ class DeckHomeContainer extends React.Component {
             <div className="col-xs-12">
               <div className="deckHome-items">
                 {items.length > 0 &&
-                  items.map((item, key) => (
-                    <Link
-                      className={cx('deckHome-item', { 'deckHome-item--hidden': item.hidden })}
-                      to={`/items/${item._id}`}
-                      key={key}
-                    >
-                      <span className="title">{item.title}</span>
-                      <div className="itemActions">
-                        <div
-                          onClick={e => this.onOverflowClick(e, item._id)}
-                          className="itemAction-overflow"
-                        >
-                          <span
-                            className="glyphicon glyphicon-option-horizontal"
-                            aria-hidden="true"
-                          />
-                        </div>
-                        <div
-                          onClick={e => this.onHideItemClick(e, item)}
-                          className="itemAction-hideItem"
-                        >
-                          {item.hidden ? (
-                            <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
-                          ) : (
-                            <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />
-                          )}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+                  items.map((item, key) => <DeckListItem item={item} key={key} />)}
               </div>
             </div>
           </div>

@@ -41,28 +41,11 @@
 .deckActions {
   margin-top: 16px;
 }
-
 .deckActions .button {
-  padding: 8px 24px;
-  font-size: 16px;
   margin-left: 12px;
 }
 .deckActions .button:first-child {
   margin-left: 0;
-}
-
-.deckActions .button--primary {
-  background: $C_primaryBlue;
-  border: 1px solid $C_primaryBlue;
-  border-radius: 3px;
-  color: $C_white;
-}
-
-.deckActions .button--default {
-  background: none;
-  border: 1px solid $C_mediumGray;
-  border-radius: 3px;
-  color: $C_mediumGray;
 }
 
 .deckHome-items {
@@ -81,7 +64,7 @@
   border-bottom: 1px solid #e9e9e9;
 
   &:hover {
-    background: #f0f0f0;
+    background: #f0f0f0 !important;
     color: $C_black;
     text-decoration: none;
   }
@@ -101,18 +84,29 @@
     border-radius: 0 0 4px 4px;
     border-bottom: none;
   }
-
   .itemActions {
     color: $C_mediumGray;
     display: flex;
   }
-  .itemAction-overflow {
-    display: none;
-  }
   .itemAction-hideItem {
     margin-left: 18px;
   }
-  &:hover .itemAction-overflow {
-    display: block;
+  .itemActions-popover .action {
+    padding: 12px;
+    font-size: 16px;
+    color: $C_mediumGray;
+
+    &:first-child {
+      border-radius: 4px 4px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 4px 4px;
+    }
+    &:hover {
+      background: #f0f0f0;
+    }
+    &.border-top {
+      border-top: 1px solid #ecedee;
+    }
   }
 }

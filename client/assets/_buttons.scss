@@ -1,0 +1,29 @@
+/**
+ * Button stylesheet
+ */
+
+.button {
+  padding: 8px 24px;
+  font-size: 16px;
+}
+
+.button--primary {
+  background: $C_primaryBlue;
+  border: 1px solid $C_primaryBlue;
+  border-radius: 3px;
+  color: $C_white;
+}
+
+.button--default {
+  background: none;
+  border: 1px solid $C_mediumGray;
+  border-radius: 3px;
+  color: $C_mediumGray;
+}
+
+.button--alert {
+  background: $C_errorRed;
+  border: 1px solid $C_errorRed;
+  border-radius: 3px;
+  color: $C_white;
+}
