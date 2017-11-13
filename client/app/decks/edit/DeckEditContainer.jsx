@@ -122,7 +122,7 @@ class DeckEditContainer extends React.Component {
                 </div>
                 <div className="btn-saveDeck-wrapper">
                   <button
-                    onClick={this.onCreateDeck}
+                    onClick={this.onUpdateDeck}
                     type="submit"
                     className="btn btn-saveDeck btn-primary btn-block"
                   >
