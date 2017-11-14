@@ -13,7 +13,7 @@
   margin-bottom: 0;
 
   .navbar-brand {
-    height: 60px;
+    height: 58px;
     line-height: 26px;
     color: $C_primaryBlue;
 
@@ -37,7 +37,6 @@
   .navbar-nav > li > a {
     line-height: 28px;
     color: $C_darkGray;
-    height: 60px;
 
     &:hover,
     &:focus {

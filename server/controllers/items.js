@@ -42,11 +42,9 @@ export async function createItem(req, res) {
 
       deck.items = [...deck.items, item._id];
       deck = await deck.save();
-      console.log('new deck', deck);
     }
     return res.status(200).json({ item: await item.save() });
   } catch (error) {
-    console.log('error', error);
     return res.status(500).json({ error });
   }
 }
