@@ -9,11 +9,13 @@ import Popover from '../../../components/Popover';
 import DeleteDeckModal from './modals/DeleteDeckModal';
 import ResetDeckModal from './modals/ResetDeckModal';
 import EditDeckModal from './modals/EditDeckModal';
+import AddItemModal from './modals/AddItemModal';
 import DeckListItem from './DeckListItem';
 import * as deckActions from '../deckActions';
 import * as itemActions from '../../items/itemActions';
 
 const MODAL_TYPES = {
+  ADD_ITEM: 'addItem',
   DELETE_DECK: 'deleteDeck',
   EDIT_DECK: 'editDeck',
   RESET_DECK: 'resetDeck'
@@ -24,6 +26,7 @@ class DeckHomeContainer extends React.Component {
     super(props);
 
     this.state = { showModalType: undefined };
+    this.onAddItem = this.onAddItem.bind(this);
     this.onDeleteDeck = this.onDeleteDeck.bind(this);
     this.onHideItemClick = this.onHideItemClick.bind(this);
     this.onShowModal = this.onShowModal.bind(this);
@@ -51,6 +54,15 @@ class DeckHomeContainer extends React.Component {
     this.setState(() => ({ showModalType: undefined }));
   }
 
+  onAddItem(data) {
+    const deckId = this.props.deck._id;
+    this.props.actions.createItem({
+      deck_id: deckId,
+      title: data.title,
+      description: data.description
+    });
+    this.setState(() => ({ showModalType: undefined }));
+  }
   onEditDeck(data) {
     const deckId = this.props.deck._id;
     this.props.actions.editDeck({ deckId, ...data });
@@ -75,6 +87,9 @@ class DeckHomeContainer extends React.Component {
 
     return (
       <Header className="DeckHomeContainer deck-page">
+        {showModalType === MODAL_TYPES.ADD_ITEM && (
+          <AddItemModal onSave={data => this.onAddItem(data)} onDismiss={this.onDismissModal} />
+        )}
         {showModalType === MODAL_TYPES.DELETE_DECK && (
           <DeleteDeckModal onDismiss={this.onDismissModal} onDelete={this.onDeleteDeck} />
         )}
@@ -100,7 +115,12 @@ class DeckHomeContainer extends React.Component {
               </span>
               <div className="deckActions">
                 <button className="button button--primary">Study Now</button>
-                <button className="button button--default">Add Item</button>
+                <button
+                  onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}
+                  className="button button--default"
+                >
+                  Add Item
+                </button>
               </div>
               <Popover
                 ref={c => (this.overflow = c)}
