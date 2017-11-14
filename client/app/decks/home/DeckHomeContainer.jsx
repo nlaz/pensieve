@@ -98,7 +98,7 @@ class DeckHomeContainer extends React.Component {
         )}
         <div className="container margin-top margin-bottom">
           <div className="row margin-top">
-            <div className="deckHeader col-xs-12">
+            <div className="deckHeader col-xs-12 col-md-10 col-md-offset-1">
               <h5 className="deckSubtitle">DECK</h5>
               <h1 className="deckTitle">{deck.title}</h1>
               <p className="deckDescription">{deck.description}</p>
@@ -140,7 +140,7 @@ class DeckHomeContainer extends React.Component {
               </Popover>
               <hr />
             </div>
-            <div className="col-xs-12">
+            <div className="col-xs-12 col-md-10 col-md-offset-1">
               <div className="deckHome-items">
                 {items.length > 0 &&
                   items.map((item, key) => (

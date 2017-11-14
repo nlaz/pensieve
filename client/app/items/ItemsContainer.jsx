@@ -13,7 +13,7 @@ export const PAGE_SIZE = 24;
 
 export const PageHeader = ({ count, onSearchChange }) => {
   return (
-    <div className="page-header">
+    <div className="page-header col-xs-12 col-md-10 col-md-offset-1">
       <div className="info">
         <h4 className="title">Items</h4>
         <p className="subtitle">{count} items in your collection</p>
@@ -95,7 +95,7 @@ class ItemsContainer extends React.Component {
           <PageHeader count={items.length} onSearchChange={this.onSearchChange} />
           {pageItems.length > 0 ? (
             <div className="row">
-              <div className="col-xs-12">
+              <div className="col-xs-12 col-md-10 col-md-offset-1">
                 <div className="itemList">
                   {pageItems.map((item, key) => (
                     <ListItem key={key} item={item} actions={this.props.actions} />
