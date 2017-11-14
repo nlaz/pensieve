@@ -10,7 +10,7 @@ class DeckNewContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { title: '', description: '', items: [{ title: '', description: '' }] };
+    this.state = { title: '', description: '', items: [{}, {}] };
     this.onAddCard = this.onAddCard.bind(this);
     this.onRemoveCard = this.onRemoveCard.bind(this);
     this.onCreateDeck = this.onCreateDeck.bind(this);
@@ -62,15 +62,11 @@ class DeckNewContainer extends React.Component {
       <Header className="newDeck-page">
         <div className="container margin-top">
           <div className="row">
-            <div className="text-right col-xs-12">
-              <button onClick={this.onAddCard} type="button" className="btn-addItem btn">
-                Add item +
-              </button>
-            </div>
-          </div>
-          <form className="form-saveDeck" onSubmit={e => e.preventDefault()}>
-            <div className="row">
-              <div className="col-xs-12 col-sm-4 editDeckInfo-wrapper">
+            <form
+              className="form-saveDeck col-md-8 col-md-offset-2"
+              onSubmit={e => e.preventDefault()}
+            >
+              <div className="editDeckInfo-wrapper">
                 <div className="editDeckInfo">
                   <div className="form-group">
                     <label htmlFor="title">Deck title</label>
@@ -95,33 +91,38 @@ class DeckNewContainer extends React.Component {
                     />
                   </div>
                 </div>
-                <div className="btn-saveDeck-wrapper">
-                  <button
-                    onClick={this.onCreateDeck}
-                    type="submit"
-                    className="btn btn-saveDeck btn-primary btn-block"
-                  >
-                    Save Deck
-                  </button>
-                </div>
+                <hr />
               </div>
-              <div className="col-xs-12 col-sm-8 items--wrapper">
-                <div className="row">
-                  {items &&
-                    items.length > 0 &&
-                    items.map((item, key) => (
-                      <EditItemCard
-                        item={item}
-                        onInputChange={e => this.onItemInputChange(e, key)}
-                        onRemove={() => this.onRemoveCard(key)}
-                        key={key}
-                        index={key}
-                      />
-                    ))}
-                </div>
+              <div className="margin-top">
+                {items &&
+                  items.length > 0 &&
+                  items.map((item, key) => (
+                    <EditItemCard
+                      item={item}
+                      onInputChange={e => this.onItemInputChange(e, key)}
+                      onRemove={() => this.onRemoveCard(key)}
+                      key={key}
+                      index={key}
+                    />
+                  ))}
               </div>
-            </div>
-          </form>
+              <button onClick={this.onAddCard} type="button" className="btn-addItem btn btn-block">
+                Add item +
+              </button>
+              <div className="margin-top" style={{ display: 'flex' }}>
+                <button onClick={this.onCreateDeck} className="btn button--default col-xs-6">
+                  Cancel
+                </button>
+                <button
+                  onClick={this.onCreateDeck}
+                  type="submit"
+                  className="btn btn-saveDeck button--primary col-xs-6"
+                >
+                  Create Deck
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </Header>
     );

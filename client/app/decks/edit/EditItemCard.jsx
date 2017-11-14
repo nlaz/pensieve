@@ -1,8 +1,9 @@
 import React from 'react';
+import cx from 'classnames';
 
-export default function EditItemCard({ item, onInputChange, onRemove, index }) {
+export default function EditItemCard({ item, onInputChange, onRemove, index, className }) {
   return (
-    <div className="col-xs-12 col-sm-6 itemCard--wrapper">
+    <div className={cx('itemCard--wrapper', className)}>
       <div className="itemCard itemCard-edit">
         <label>Item {index + 1}</label>
         <button onClick={onRemove} className="itemCard--close btn btn-default btn-xs">

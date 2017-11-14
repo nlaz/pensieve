@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import * as itemActions from './itemActions';
 import PageTemplate from '../../components/PageTemplate';
 
-import ItemCard from './ItemCard';
 import ListItem from './ListItem';
 import PageNavigation from '../../components/PageNavigation';
 
