@@ -151,7 +151,12 @@ class DeckHomeContainer extends React.Component {
               <div className="deckHome-items">
                 {items.length > 0 &&
                   items.map((item, key) => (
-                    <DeckListItem item={item} onHideItemClick={this.onHideItemClick} key={key} />
+                    <DeckListItem
+                      item={item}
+                      actions={this.props.actions}
+                      onHideItemClick={this.onHideItemClick}
+                      key={key}
+                    />
                   ))}
               </div>
             </div>
