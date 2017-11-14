@@ -23,9 +23,12 @@ export default class Popover extends React.Component {
     }
   }
 
+  toggle() {
+    this.setState(state => ({ showPopover: !state.showPopover }));
+  }
+
   onToggle(e) {
     e.preventDefault();
-    e.stopPropagation();
     this.setState(state => ({ showPopover: !state.showPopover }));
   }
 

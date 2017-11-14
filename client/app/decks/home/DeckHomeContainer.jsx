@@ -6,19 +6,28 @@ import { bindActionCreators } from 'redux';
 
 import Header from '../../../components/Header';
 import Popover from '../../../components/Popover';
-import DeleteModal from './DeleteModal';
+import DeleteDeckModal from './modals/DeleteDeckModal';
+import ResetDeckModal from './modals/ResetDeckModal';
+import EditDeckModal from './modals/EditDeckModal';
 import DeckListItem from './DeckListItem';
 import * as deckActions from '../deckActions';
 import * as itemActions from '../../items/itemActions';
+
+const MODAL_TYPES = {
+  DELETE_DECK: 'deleteDeck',
+  EDIT_DECK: 'editDeck',
+  RESET_DECK: 'resetDeck'
+};
 
 class DeckHomeContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { showDeleteDeckModal: false };
+    this.state = { showModalType: undefined };
     this.onDeleteDeck = this.onDeleteDeck.bind(this);
     this.onHideItemClick = this.onHideItemClick.bind(this);
-    this.onOverflowClick = this.onOverflowClick.bind(this);
+    this.onShowModal = this.onShowModal.bind(this);
+    this.onDismissModal = this.onDismissModal.bind(this);
   }
   componentWillMount() {
     const { deck, params } = this.props;
@@ -33,13 +42,24 @@ class DeckHomeContainer extends React.Component {
     }
   }
 
-  onToggleDeleteModal() {
-    this.setState(state => ({ showDeleteDeckModal: !state.showDeleteDeckModal }));
+  onShowModal(modalType) {
+    this.overflow.toggle();
+    this.setState(() => ({ showModalType: modalType }));
+  }
+
+  onDismissModal() {
+    this.setState(() => ({ showModalType: undefined }));
+  }
+
+  onEditDeck(data) {
+    const deckId = this.props.deck._id;
+    this.props.actions.editDeck({ deckId, ...data });
+    this.setState(() => ({ showModalType: undefined }));
   }
 
   onDeleteDeck() {
-    const itemId = this.props.deck._id;
-    this.props.actions.deleteDeck(itemId);
+    const deckId = this.props.deck._id;
+    this.props.actions.deleteDeck(deckId);
   }
 
   onHideItemClick(e, item) {
@@ -48,19 +68,26 @@ class DeckHomeContainer extends React.Component {
     this.props.actions.toggleHideItem(item);
   }
 
-  onOverflowClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    // TODO: Toggle popover menu
-  }
-
   render() {
-    const { showDeleteDeckModal } = this.state;
+    const { showModalType } = this.state;
     const { deck = {} } = this.props;
     const { items = [] } = deck;
+
     return (
       <Header className="DeckHomeContainer deck-page">
-        {showDeleteDeckModal && <DeleteModal />}
+        {showModalType === MODAL_TYPES.DELETE_DECK && (
+          <DeleteDeckModal onDismiss={this.onDismissModal} onDelete={this.onDeleteDeck} />
+        )}
+        {showModalType === MODAL_TYPES.EDIT_DECK && (
+          <EditDeckModal
+            deck={deck}
+            onSave={data => this.onEditDeck(data)}
+            onDismiss={this.onDismissModal}
+          />
+        )}
+        {showModalType === MODAL_TYPES.RESET_DECK && (
+          <ResetDeckModal onDismiss={this.onDismissModal} />
+        )}
         <div className="container margin-top margin-bottom">
           <div className="row margin-top">
             <div className="deckHeader col-xs-12">
@@ -76,6 +103,7 @@ class DeckHomeContainer extends React.Component {
                 <button className="button button--default">Add Item</button>
               </div>
               <Popover
+                ref={c => (this.overflow = c)}
                 align="right"
                 className="deckActions--overflow"
                 trigger={
@@ -83,9 +111,18 @@ class DeckHomeContainer extends React.Component {
                 }
               >
                 <div className="popoverActions">
-                  <div className="action">Reset Deck</div>
-                  <div className="action">Edit Deck</div>
-                  <div className="action border-top">Delete Deck</div>
+                  <div onClick={() => this.onShowModal(MODAL_TYPES.EDIT_DECK)} className="action">
+                    Edit Deck
+                  </div>
+                  <div
+                    onClick={() => this.onShowModal(MODAL_TYPES.RESET_DECK)}
+                    className="action border-top"
+                  >
+                    Reset Deck
+                  </div>
+                  <div onClick={() => this.onShowModal(MODAL_TYPES.DELETE_DECK)} className="action">
+                    Delete Deck
+                  </div>
                 </div>
               </Popover>
               <hr />
@@ -93,7 +130,9 @@ class DeckHomeContainer extends React.Component {
             <div className="col-xs-12">
               <div className="deckHome-items">
                 {items.length > 0 &&
-                  items.map((item, key) => <DeckListItem item={item} key={key} />)}
+                  items.map((item, key) => (
+                    <DeckListItem item={item} onHideItemClick={this.onHideItemClick} key={key} />
+                  ))}
               </div>
             </div>
           </div>

@@ -68,22 +68,11 @@ export async function editDeck(req, res) {
 
   try {
     let deck = await Deck.findOne({ _id: deckId, user_id: userId });
-    await Item.remove()
-      .where('_id')
-      .in(deck.items);
 
-    const itemObjs = req.body.items.map(item => ({
-      ...item,
-      user_id: req.user._id,
-      deck_id: deck._id
-    }));
-
-    const items = await Item.create(itemObjs);
-    const itemIds = items.map(item => item._id);
-
+    console.log('title', req.body);
     deck = await Deck.findOneAndUpdate(
       { _id: deck._id },
-      { items: itemIds, title: req.body.title, description: req.body.description },
+      { title: req.body.title, description: req.body.description },
       { new: true }
     );
 
