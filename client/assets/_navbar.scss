@@ -13,7 +13,7 @@
   margin-bottom: 0;
 
   .navbar-brand {
-    height: 60px;
+    height: 58px;
     line-height: 26px;
     color: $C_primaryBlue;
 
@@ -31,9 +31,6 @@
     &:focus {
       background-color: $C_primaryDarkGreen !important;
       color: $C_white;
-    }
-    @include atSmallUp {
-      height: 60px;
     }
   }
 
@@ -69,6 +66,7 @@
     color: $C_white !important;
     background: $C_primaryGreen;
     border-color: transparent;
+    height: 40px !important;
     padding: 5px 25px;
     margin: 10px 15px;
     transition: all 0.1s ease-in-out;

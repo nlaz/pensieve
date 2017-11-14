@@ -52,7 +52,7 @@ class ItemNewContainer extends React.Component {
                   id="titleInput"
                   className="form-control"
                   type="text"
-                  placeholder="Title"
+                  placeholder="Add a item title..."
                 />
               </div>
               <div className="form-group">
@@ -63,6 +63,7 @@ class ItemNewContainer extends React.Component {
                   name="description"
                   id="descriptionInput"
                   className="form-control"
+                  placeholder="Add a item description..."
                   rows="5"
                 />
               </div>

@@ -1,0 +1,29 @@
+/**
+ * Popover stylesheet
+ */
+
+.popover-wrapper {
+  position: relative;
+}
+
+.popover {
+  border: 1px solid #e7e7e7;
+  box-shadow: 0 2px 4px rgba(75, 75, 75, 0.16);
+  font-family: 'Lato';
+  padding: 0;
+  top: 4px;
+  width: 200px;
+}
+
+.popover--left {
+  left: 0;
+  right: auto;
+}
+.popover--right {
+  left: auto;
+  right: -12px;
+}
+
+.popover-content {
+  padding: 0px;
+}

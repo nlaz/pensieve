@@ -60,30 +60,15 @@ export async function createDeck(req, res) {
 
 /**
  * Edits a deck object from API request data.
- * Constructs item objects after building a deck.
  */
 export async function editDeck(req, res) {
   const deckId = req.params.deck_id;
   const userId = req.user._id;
 
   try {
-    let deck = await Deck.findOne({ _id: deckId, user_id: userId });
-    await Item.remove()
-      .where('_id')
-      .in(deck.items);
-
-    const itemObjs = req.body.items.map(item => ({
-      ...item,
-      user_id: req.user._id,
-      deck_id: deck._id
-    }));
-
-    const items = await Item.create(itemObjs);
-    const itemIds = items.map(item => item._id);
-
-    deck = await Deck.findOneAndUpdate(
-      { _id: deck._id },
-      { items: itemIds, title: req.body.title, description: req.body.description },
+    let deck = await Deck.findOneAndUpdate(
+      { _id: deckId, user_id: userId },
+      { title: req.body.title, description: req.body.description },
       { new: true }
     );
 

@@ -1,4 +1,5 @@
 import Item from '../models/item';
+import Deck from '../models/deck';
 import Review from '../models/review';
 import { REVIEW_TYPE } from '../../client/app/review/ReviewContainer';
 
@@ -25,15 +26,23 @@ export async function getItem(req, res) {
 }
 
 export async function createItem(req, res) {
+  const deckId = req.body.deck_id;
+  const userId = req.user._id;
+
   const item = new Item({
-    user_id: req.user._id,
+    user_id: userId,
     title: req.body.title,
     description: req.body.description,
-    nextReviewDate: new Date(),
-    counter: 0
+    deck_id: deckId
   });
 
   try {
+    if (deckId) {
+      let deck = await Deck.findOne({ _id: deckId, user_id: userId });
+
+      deck.items = [...deck.items, item._id];
+      deck = await deck.save();
+    }
     return res.status(200).json({ item: await item.save() });
   } catch (error) {
     return res.status(500).json({ error });

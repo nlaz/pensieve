@@ -11,9 +11,8 @@ export default function(state = INITIAL_STATE, action) {
       return [...items, action.payload.item];
     case EDIT_ITEM: {
       const updatedItem = action.payload.item;
-      const updatedItems = (state.items || [])
-        .map(item => (item._id === updatedItem._id ? updatedItem : item));
-      return updatedItems;
+      const items = state.map(item => (item._id === updatedItem._id ? updatedItem : item));
+      return items;
     }
     case DELETE_ITEM: {
       const items = (state.items || []).filter(item => item._id != action.payload.itemId);

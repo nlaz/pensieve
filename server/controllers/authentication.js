@@ -100,7 +100,6 @@ export const getSelf = (req, res) => {
     if (err) {
       throw err;
     }
-    console.log('user getself', user);
 
     res.json({
       user: user.getCleanUser(user),

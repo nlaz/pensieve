@@ -92,9 +92,9 @@ class ActivityContainer extends React.Component {
                   </div>
                   <div className="row">
                     {popularDecks
-                      .slice(0, 3)
+                      .slice(0, 4)
                       .map((deck, key) => (
-                        <DeckCard className="col-xs-6 col-sm-4" deck={deck} key={key} />
+                        <DeckCard className="col-xs-6 col-sm-4 col-lg-3" deck={deck} key={key} />
                       ))}
                   </div>
                 </div>
