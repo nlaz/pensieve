@@ -2,16 +2,16 @@ import React from 'react';
 import cx from 'classnames';
 import { Link } from 'react-router';
 
-import Popover from '../../../components/Popover';
-import DeleteItemModal from './modals/DeleteItemModal';
-import ResetItemModal from './modals/ResetItemModal';
+import Popover from '../../components/Popover';
+import DeleteItemModal from '../decks/home/modals/DeleteItemModal';
+import ResetItemModal from '../decks/home/modals/ResetItemModal';
 
 const MODAL_TYPES = {
   RESET_ITEM: 'resetItem',
   DELETE_ITEM: 'deleteItem'
 };
 
-export default class DeckListItem extends React.Component {
+export default class ListItem extends React.Component {
   constructor(props) {
     super(props);
 
@@ -45,12 +45,12 @@ export default class DeckListItem extends React.Component {
   render() {
     const { item } = this.props;
     const { showModalType } = this.state;
-    const classNames = cx('deckHome-item', {
-      'deckHome-item--hidden': item.hidden
+    const classNames = cx('itemList-item', {
+      'itemList-item--hidden': item.hidden
     });
 
     return (
-      <div className="deckHome-itemWrapper">
+      <div className="itemList-itemWrapper">
         {showModalType === MODAL_TYPES.RESET_ITEM && (
           <ResetItemModal onDismiss={this.onDismissModal} />
         )}
@@ -72,7 +72,6 @@ export default class DeckListItem extends React.Component {
                 <div onClick={() => this.onShowModal(MODAL_TYPES.RESET_ITEM)} className="action">
                   Reset Item
                 </div>
-                <div className="action">Remove from Deck</div>
                 <div
                   onClick={() => this.onShowModal(MODAL_TYPES.DELETE_ITEM)}
                   className="action border-top"

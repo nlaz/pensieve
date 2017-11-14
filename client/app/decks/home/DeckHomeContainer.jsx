@@ -28,7 +28,6 @@ class DeckHomeContainer extends React.Component {
     this.state = { showModalType: undefined };
     this.onAddItem = this.onAddItem.bind(this);
     this.onDeleteDeck = this.onDeleteDeck.bind(this);
-    this.onHideItemClick = this.onHideItemClick.bind(this);
     this.onShowModal = this.onShowModal.bind(this);
     this.onDismissModal = this.onDismissModal.bind(this);
   }
@@ -72,12 +71,6 @@ class DeckHomeContainer extends React.Component {
   onDeleteDeck() {
     const deckId = this.props.deck._id;
     this.props.actions.deleteDeck(deckId);
-  }
-
-  onHideItemClick(e, item) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.props.actions.toggleHideItem(item);
   }
 
   render() {
@@ -151,12 +144,7 @@ class DeckHomeContainer extends React.Component {
               <div className="deckHome-items">
                 {items.length > 0 &&
                   items.map((item, key) => (
-                    <DeckListItem
-                      item={item}
-                      actions={this.props.actions}
-                      onHideItemClick={this.onHideItemClick}
-                      key={key}
-                    />
+                    <DeckListItem key={key} item={item} actions={this.props.actions} />
                   ))}
               </div>
             </div>

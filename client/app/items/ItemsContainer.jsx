@@ -7,6 +7,7 @@ import * as itemActions from './itemActions';
 import PageTemplate from '../../components/PageTemplate';
 
 import ItemCard from './ItemCard';
+import ListItem from './ListItem';
 import PageNavigation from '../../components/PageNavigation';
 
 export const PAGE_SIZE = 24;
@@ -95,9 +96,13 @@ class ItemsContainer extends React.Component {
           <PageHeader count={items.length} onSearchChange={this.onSearchChange} />
           {pageItems.length > 0 ? (
             <div className="row">
-              {pageItems.map((item, key) => (
-                <ItemCard className="col-xs-6 col-sm-3 col-lg-2" item={item} key={key} />
-              ))}
+              <div className="col-xs-12">
+                <div className="itemList">
+                  {pageItems.map((item, key) => (
+                    <ListItem key={key} item={item} actions={this.props.actions} />
+                  ))}
+                </div>
+              </div>
             </div>
           ) : (
             <div className="emptyView-wrapper">
