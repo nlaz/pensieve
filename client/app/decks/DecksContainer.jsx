@@ -95,7 +95,7 @@ class DecksContainer extends React.Component {
             {pageDecks.length > 0 ? (
               <div className="row">
                 {pageDecks.map((deck, key) => (
-                  <DeckCard className="col-xs-6 col-sm-4 col-md-3 col-lg-2" deck={deck} key={key} />
+                  <DeckCard className="col-xs-6 col-sm-4 col-md-3" deck={deck} key={key} />
                 ))}
               </div>
             ) : (

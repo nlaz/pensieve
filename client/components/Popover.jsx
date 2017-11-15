@@ -46,7 +46,7 @@ export default class Popover extends React.Component {
           {trigger}
         </div>
         {showPopover && (
-          <div style={{ position: 'absolute' }}>
+          <div style={{ position: 'absolute', width: '100%' }}>
             <div style={{ display: 'block', opacity: 1 }} className={classNames}>
               <div className="popover-content" onClick={e => e.preventDefault()}>
                 {children}
