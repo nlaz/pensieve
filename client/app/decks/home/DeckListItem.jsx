@@ -23,6 +23,7 @@ export default class DeckListItem extends React.Component {
   }
 
   onShowModal(modalType) {
+    this.overflow.toggle();
     this.setState(() => ({ showModalType: modalType }));
   }
 
@@ -62,6 +63,7 @@ export default class DeckListItem extends React.Component {
           <div className="itemActions">
             <Popover
               align="right"
+              ref={c => (this.overflow = c)}
               trigger={
                 <div onClick={this.onTogglePopover} className="itemAction-overflow">
                   <span className="glyphicon glyphicon-option-horizontal" aria-hidden="true" />

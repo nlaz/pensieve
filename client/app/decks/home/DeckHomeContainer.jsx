@@ -112,12 +112,12 @@ class DeckHomeContainer extends React.Component {
                   onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}
                   className="button button--default"
                 >
-                  Add Item
+                  Add Item +
                 </button>
               </div>
               <Popover
-                ref={c => (this.overflow = c)}
                 align="right"
+                ref={c => (this.overflow = c)}
                 className="deckActions--overflow"
                 trigger={
                   <span className="glyphicon glyphicon-option-vertical" aria-hidden="true" />
