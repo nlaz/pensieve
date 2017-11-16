@@ -6,9 +6,16 @@ import * as reviewActions from '../reviewActions';
 import PageTemplate from '../../../components/PageTemplate';
 import { NO_ITEMS_ERROR } from '../../../../server/controllers/errors';
 
+const SESSION_TYPES = {
+  STUDY: 0,
+  LEARN: 1,
+  REVIEW: 2
+};
+
 class ReviewNewContainer extends React.Component {
   componentWillMount() {
-    this.props.actions.createSession();
+    const sessionType = this.props.params.sessionType || SESSION_TYPES.STUDY;
+    this.props.actions.createSession({ sessionType });
   }
 
   componentDidUpdate() {

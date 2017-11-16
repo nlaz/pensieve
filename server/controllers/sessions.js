@@ -1,11 +1,12 @@
 import Item from '../models/item';
 import Session from '../models/session';
 import * as ItemController from './items';
+import { getDueItemsHelper, getNewItemsHelper } from './items';
 
 import { NO_ITEMS_ERROR } from './errors';
 
 export const REVIEW_SESSION_SIZE = 15;
-export const REVIEW_SESSION_MAX = 35;
+export const REVIEW_SESSION_MAX = 30;
 
 // Shuffle function from SO
 // @see https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -95,6 +96,9 @@ export const generateReviewSession = userId => {
 
 export async function createSession(req, res) {
   const userId = req.user._id;
+  const sessionType = req.body.sessionType;
+
+  console.log('⚡️ sessionType', sessionType);
 
   try {
     const dueItems = await ItemController.getDueItemsHelper(userId);
@@ -121,6 +125,28 @@ export async function createSession(req, res) {
     session.items = sortedSessionItems;
 
     return res.status(200).json({ session });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
+export async function getSessionTypes(req, res) {
+  const userId = req.user._id;
+
+  try {
+    const dueItems = await getDueItemsHelper(userId);
+    const newItems = await getNewItemsHelper(userId);
+
+    const numDueItems = dueItems.length;
+    const numNewItems = newItems.length;
+
+    return res.status(200).json({
+      counts: {
+        study_items: Math.min(numDueItems + numNewItems, REVIEW_SESSION_MAX),
+        due_items: Math.min(numDueItems, REVIEW_SESSION_MAX),
+        new_items: Math.min(numNewItems, REVIEW_SESSION_MAX)
+      }
+    });
   } catch (error) {
     return res.status(500).json({ error });
   }

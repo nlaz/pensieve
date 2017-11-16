@@ -186,6 +186,10 @@ export const getDueItemsHelper = userId => {
     });
 };
 
+export const getNewItemsHelper = userId => {
+  return Item.find({ user_id: userId, hidden: false, repetitions: 0 });
+};
+
 export const getDueItems = (req, res) => {
   getDueItemsHelper(req.user._id)
     .then(items => res.status(200).json({ due_items: items }))

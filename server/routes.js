@@ -48,6 +48,8 @@ export default function(app) {
   /* Session Routes */
   app.get('/api/sessions', authenticateUser, SessionController.getSessions);
 
+  app.get('/api/session_types', authenticateUser, SessionController.getSessionTypes);
+
   app.get('/api/sessions/:session_id', authenticateUser, SessionController.getSession);
 
   app.post('/api/sessions', authenticateUser, SessionController.createSession);
