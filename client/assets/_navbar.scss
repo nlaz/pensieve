@@ -26,6 +26,7 @@
   .navbar-nav > li > .active-nav-link {
     color: $C_white;
     background-color: $C_primaryGreen;
+    text-shadow: 0 0.5px 0 $C_primaryDarkGreen;
 
     &:hover,
     &:focus {
@@ -35,7 +36,7 @@
   }
 
   .navbar-nav > li > a {
-    line-height: 28px;
+    line-height: 30px;
     color: $C_darkGray;
 
     &:hover,

@@ -13,27 +13,30 @@ export const PAGE_SIZE = 16;
 
 export const PageHeader = ({ count, onSearchChange }) => {
   return (
-    <div className="page-header col-md-10 col-md-offset-1">
-      <div className="info">
-        <h4 className="title">Decks</h4>
-        <p className="subtitle">{count} decks in your collection</p>
-      </div>
-      <div className="actions">
-        {count > 0 && (
-          <div className="search">
-            <input
-              onChange={onSearchChange}
-              type="text"
-              id="search"
-              className="form-control"
-              placeholder="Search for decks..."
-            />
+    <div className="col-md-10 col-md-offset-1">
+      <div className="page-header">
+        <div className="info">
+          <h4 className="title">Decks</h4>
+          <p className="subtitle">{count} decks in your collection</p>
+        </div>
+        <div className="actions">
+          {count > 0 && (
+            <div className="search">
+              <span className="glyphicon glyphicon-search" aria-hidden="true" />
+              <input
+                onChange={onSearchChange}
+                type="text"
+                id="search"
+                className="form-control"
+                placeholder="Search for decks..."
+              />
+            </div>
+          )}
+          <div className="create">
+            <Link to="decks/new" className="btn-newDeck btn btn-primary">
+              Create Deck +
+            </Link>
           </div>
-        )}
-        <div className="create">
-          <Link to="decks/new" className="btn-newDeck btn btn-primary">
-            Create Deck +
-          </Link>
         </div>
       </div>
     </div>
