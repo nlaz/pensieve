@@ -5,16 +5,11 @@ import { connect } from 'react-redux';
 import * as reviewActions from '../reviewActions';
 import PageTemplate from '../../../components/PageTemplate';
 import { NO_ITEMS_ERROR } from '../../../../server/controllers/errors';
-
-const SESSION_TYPES = {
-  STUDY: 0,
-  LEARN: 1,
-  REVIEW: 2
-};
+import { SESSION_TYPES } from '../../../../server/controllers/constants';
 
 class ReviewNewContainer extends React.Component {
   componentWillMount() {
-    const sessionType = this.props.params.sessionType || SESSION_TYPES.STUDY;
+    const sessionType = parseInt(this.props.params.sessionType, 10) || SESSION_TYPES.STUDY;
     this.props.actions.createSession({ sessionType });
   }
 

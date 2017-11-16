@@ -1,9 +1,9 @@
 import Item from '../models/item';
 import Session from '../models/session';
 import * as ItemController from './items';
-import { getDueItemsHelper, getNewItemsHelper } from './items';
 
 import { NO_ITEMS_ERROR } from './errors';
+import { SESSION_TYPES } from './constants';
 
 export const REVIEW_SESSION_SIZE = 15;
 export const REVIEW_SESSION_MAX = 30;
@@ -98,13 +98,18 @@ export async function createSession(req, res) {
   const userId = req.user._id;
   const sessionType = req.body.sessionType;
 
-  console.log('⚡️ sessionType', sessionType);
-
   try {
-    const dueItems = await ItemController.getDueItemsHelper(userId);
+    let sessionItems;
+    if (sessionType === SESSION_TYPES.STUDY) {
+      const dueItems = await ItemController.getDueItemsHelper(userId);
+      const newItems = await ItemController.getNewItemsHelper(userId);
 
-    const sessionItems =
-      dueItems.length > 0 ? dueItems : await Item.find({ user_id: userId, hidden: false });
+      sessionItems = [...dueItems, ...newItems];
+    } else if (sessionType === SESSION_TYPES.LEARN) {
+      sessionItems = await ItemController.getNewItemsHelper(userId);
+    } else if (sessionType === SESSION_TYPES.REVIEW) {
+      sessionItems = await ItemController.getDueItemsHelper(userId);
+    }
 
     if (sessionItems.length === 0) {
       return res.status(400).json({
@@ -118,7 +123,7 @@ export async function createSession(req, res) {
 
     const itemIds = sortedSessionItems.map(item => item._id);
 
-    let session = new Session({ user_id: userId, items: itemIds });
+    let session = new Session({ user_id: userId, type: sessionType, items: itemIds });
 
     session = await session.save();
 
@@ -134,8 +139,8 @@ export async function getSessionTypes(req, res) {
   const userId = req.user._id;
 
   try {
-    const dueItems = await getDueItemsHelper(userId);
-    const newItems = await getNewItemsHelper(userId);
+    const dueItems = await ItemController.getDueItemsHelper(userId);
+    const newItems = await ItemController.getNewItemsHelper(userId);
 
     const numDueItems = dueItems.length;
     const numNewItems = newItems.length;

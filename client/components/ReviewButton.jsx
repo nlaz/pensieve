@@ -106,7 +106,7 @@ class ReviewButton extends React.Component {
               <p className="reviewOption-title">Review</p>
               <p className="reviewOption-description">
                 This session will strengthen your recall of{' '}
-                {pluralize('card', counts.due_items, true)} that you have seen before.
+                {pluralize('card', counts.due_items, true)} that you already have seen before.
               </p>
             </div>
             <span className="reviewOption-count">{pluralize('card', counts.due_items, true)}</span>
