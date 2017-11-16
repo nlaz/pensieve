@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from '../../../../components/Modal';
 
-export default function ResetDeckModal({ onDismiss }) {
+export default function ResetDeckModal({ onDismiss, onReset }) {
   return (
     <Modal title="Reset Deck" onDismiss={onDismiss} narrow>
       <p>
@@ -16,7 +16,7 @@ export default function ResetDeckModal({ onDismiss }) {
         <button type="button" onClick={onDismiss} className="button button--default">
           Close
         </button>
-        <button type="button" className="button button--alert">
+        <button type="button" onClick={onReset} className="button button--alert">
           Reset
         </button>
       </div>

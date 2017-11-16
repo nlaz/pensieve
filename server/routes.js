@@ -29,6 +29,8 @@ export default function(app) {
 
   app.post('/api/items/:item_id/review', authenticateUser, ItemController.reviewSM2Item);
 
+  app.post('/api/items/:item_id/reset', authenticateUser, ItemController.resetItem);
+
   app.get('/api/due_items', authenticateUser, ItemController.getDueItems);
 
   /* Activity Routes */
@@ -42,6 +44,8 @@ export default function(app) {
   app.get('/api/decks/:deck_id', authenticateUser, DeckController.getDeck);
 
   app.put('/api/decks/:deck_id', authenticateUser, DeckController.editDeck);
+
+  app.post('/api/decks/:deck_id/reset', authenticateUser, DeckController.resetDeck);
 
   app.delete('/api/decks/:deck_id', authenticateUser, DeckController.deleteDeck);
 

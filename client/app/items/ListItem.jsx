@@ -19,6 +19,7 @@ export default class ListItem extends React.Component {
     this.onShowModal = this.onShowModal.bind(this);
     this.onDismissModal = this.onDismissModal.bind(this);
     this.onDelete = this.onDelete.bind(this);
+    this.onReset = this.onReset.bind(this);
     this.onHide = this.onHide.bind(this);
   }
 
@@ -33,6 +34,12 @@ export default class ListItem extends React.Component {
   onDelete() {
     const { item } = this.props;
     this.props.actions.deleteItem(item._id);
+    this.onDismissModal();
+  }
+
+  onReset() {
+    const { item } = this.props;
+    this.props.actions.resetItem(item._id);
     this.onDismissModal();
   }
 
@@ -52,7 +59,7 @@ export default class ListItem extends React.Component {
     return (
       <div className="itemList-itemWrapper">
         {showModalType === MODAL_TYPES.RESET_ITEM && (
-          <ResetItemModal onDismiss={this.onDismissModal} />
+          <ResetItemModal onReset={this.onReset} onDismiss={this.onDismissModal} />
         )}
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDelete} onDismiss={this.onDismissModal} />

@@ -29,6 +29,7 @@ class DeckHomeContainer extends React.Component {
     this.state = { showModalType: undefined };
     this.onAddItem = this.onAddItem.bind(this);
     this.onDeleteDeck = this.onDeleteDeck.bind(this);
+    this.onResetDeck = this.onResetDeck.bind(this);
     this.onShowModal = this.onShowModal.bind(this);
     this.onDismissModal = this.onDismissModal.bind(this);
   }
@@ -61,17 +62,24 @@ class DeckHomeContainer extends React.Component {
       title: data.title,
       description: data.description
     });
-    this.setState(() => ({ showModalType: undefined }));
+    this.onDismissModal();
   }
   onEditDeck(data) {
     const deckId = this.props.deck._id;
     this.props.actions.editDeck({ deckId, ...data });
-    this.setState(() => ({ showModalType: undefined }));
+    this.onDismissModal();
   }
 
   onDeleteDeck() {
     const deckId = this.props.deck._id;
     this.props.actions.deleteDeck(deckId);
+    this.onDismissModal();
+  }
+
+  onResetDeck() {
+    const deckId = this.props.deck._id;
+    this.props.actions.resetDeck(deckId);
+    this.onDismissModal();
   }
 
   render() {
@@ -95,7 +103,7 @@ class DeckHomeContainer extends React.Component {
           />
         )}
         {showModalType === MODAL_TYPES.RESET_DECK && (
-          <ResetDeckModal onDismiss={this.onDismissModal} />
+          <ResetDeckModal onReset={this.onResetDeck} onDismiss={this.onDismissModal} />
         )}
         <div className="container margin-top margin-bottom">
           <div className="row margin-top">

@@ -173,6 +173,33 @@ export async function reviewItem(req, res) {
   }
 }
 
+export async function resetItem(req, res) {
+  const userId = req.user._id;
+  const itemId = req.params.item_id;
+
+  try {
+    let item = await Item.findOne({ _id: itemId, user_id: userId });
+
+    item = getResetItem(item);
+
+    item = await item.save();
+
+    return res.status(200).json({ item });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
+// Helper method resetting item properties
+export const getResetItem = item => {
+  item.repetitions = 0;
+  item.EF = 2.5;
+  item.nextReviewDate = undefined;
+  item.interval = undefined;
+  item.reviewedAt = undefined;
+  return item;
+};
+
 // Helper method for email generation
 export const getDueItemsHelper = userId => {
   const currentTime = new Date();
