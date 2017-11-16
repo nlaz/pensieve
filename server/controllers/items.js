@@ -73,7 +73,6 @@ const getNextReviewDate = counter => {
   const currentTime = new Date();
   const interval = 0.75 * Math.exp(0.8 * counter) - 0.75;
   // TODO: update next date by interval. Not rounded integer.
-  console.log('💢 interval', interval);
   currentTime.setDate(currentTime.getDate() + Math.ceil(interval));
   return currentTime;
 };

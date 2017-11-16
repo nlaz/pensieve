@@ -63,44 +63,16 @@ export const getSession = (req, res) => {
     .catch(error => res.status(500).json({ error }));
 };
 
-export const generateReviewSession = userId => {
-  let session, items, itemIds;
-  const MIN = 15;
-  const MAX = 25;
-  const queryLimit = Math.floor(Math.random() * (MAX - MIN)) + MIN;
-
-  return Item.aggregate([
-    { $match: { user_id: userId } },
-    { $sort: { repetitions: 1 } },
-    { $limit: queryLimit }
-  ])
-    .exec()
-    .then(_items => {
-      items = _items;
-      if (!items.length) {
-        throw new Error('No available items to create session.');
-      }
-
-      itemIds = items.map(item => item._id);
-      session = new Session({ user_id: userId, items: itemIds });
-      return session.save();
-    })
-    .then(session => {
-      session.items = items;
-      return session;
-    })
-    .catch(error => {
-      throw error;
-    });
-};
-
 export async function createSession(req, res) {
   const userId = req.user._id;
   const sessionType = req.body.sessionType;
+  const deckId = req.body.deckId;
 
   try {
     let sessionItems;
-    if (sessionType === SESSION_TYPES.STUDY) {
+    if (deckId) {
+      sessionItems = await Item.find({ user_id: userId, deck_id: deckId, hidden: false });
+    } else if (sessionType === SESSION_TYPES.STUDY) {
       const dueItems = await ItemController.getDueItemsHelper(userId);
       const newItems = await ItemController.getNewItemsHelper(userId);
 

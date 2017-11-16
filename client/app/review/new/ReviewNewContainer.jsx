@@ -10,7 +10,8 @@ import { SESSION_TYPES } from '../../../../server/controllers/constants';
 class ReviewNewContainer extends React.Component {
   componentWillMount() {
     const sessionType = parseInt(this.props.params.sessionType, 10) || SESSION_TYPES.STUDY;
-    this.props.actions.createSession({ sessionType });
+    const { deckId } = this.props.location.query;
+    this.props.actions.createSession({ sessionType, deckId });
   }
 
   componentDidUpdate() {

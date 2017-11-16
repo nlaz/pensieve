@@ -30,6 +30,7 @@ class DeckHomeContainer extends React.Component {
     this.onAddItem = this.onAddItem.bind(this);
     this.onDeleteDeck = this.onDeleteDeck.bind(this);
     this.onResetDeck = this.onResetDeck.bind(this);
+    this.onStudyDeck = this.onStudyDeck.bind(this);
     this.onShowModal = this.onShowModal.bind(this);
     this.onDismissModal = this.onDismissModal.bind(this);
   }
@@ -82,6 +83,11 @@ class DeckHomeContainer extends React.Component {
     this.onDismissModal();
   }
 
+  onStudyDeck() {
+    const deckId = this.props.deck._id;
+    this.props.router.push(`/sessions/new?deckId=${deckId}`);
+  }
+
   render() {
     const { showModalType } = this.state;
     const { deck = {} } = this.props;
@@ -116,7 +122,9 @@ class DeckHomeContainer extends React.Component {
                 {pluralize('card', items.length, true)}
               </span>
               <div className="deckActions">
-                <button className="button button--primary">Study Now</button>
+                <button onClick={this.onStudyDeck} className="button button--primary">
+                  Study Now
+                </button>
                 <button
                   onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}
                   className="button button--default"
