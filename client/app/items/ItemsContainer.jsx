@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import * as itemActions from './itemActions';
 import PageTemplate from '../../components/PageTemplate';
 
-import ItemCard from './ItemCard';
 import ListItem from './ListItem';
 import PageNavigation from '../../components/PageNavigation';
 
@@ -14,27 +13,30 @@ export const PAGE_SIZE = 24;
 
 export const PageHeader = ({ count, onSearchChange }) => {
   return (
-    <div className="page-header">
-      <div className="info">
-        <h4 className="title">Items</h4>
-        <p className="subtitle">{count} items in your collection</p>
-      </div>
-      <div className="actions">
-        {count > 0 && (
-          <div className="search">
-            <input
-              onChange={onSearchChange}
-              type="text"
-              id="search"
-              className="form-control"
-              placeholder="Search for items..."
-            />
+    <div className="col-xs-12 col-md-10 col-md-offset-1">
+      <div className="page-header">
+        <div className="info">
+          <h4 className="title">Items</h4>
+          <p className="subtitle">{count} items in your collection</p>
+        </div>
+        <div className="actions">
+          {count > 0 && (
+            <div className="search">
+              <span className="glyphicon glyphicon-search" aria-hidden="true" />
+              <input
+                onChange={onSearchChange}
+                type="text"
+                id="search"
+                className="form-control"
+                placeholder="Search for items..."
+              />
+            </div>
+          )}
+          <div className="create">
+            <Link to="/items/new" className="btn-newItem btn pull-right">
+              Create Item +
+            </Link>
           </div>
-        )}
-        <div className="create">
-          <Link to="/items/new" className="btn-newItem btn pull-right">
-            Create Item +
-          </Link>
         </div>
       </div>
     </div>
@@ -93,10 +95,12 @@ class ItemsContainer extends React.Component {
     return (
       <PageTemplate>
         <div className="items-page container margin-top">
-          <PageHeader count={items.length} onSearchChange={this.onSearchChange} />
+          <div className="row">
+            <PageHeader count={items.length} onSearchChange={this.onSearchChange} />
+          </div>
           {pageItems.length > 0 ? (
             <div className="row">
-              <div className="col-xs-12">
+              <div className="col-xs-12 col-md-10 col-md-offset-1">
                 <div className="itemList">
                   {pageItems.map((item, key) => (
                     <ListItem key={key} item={item} actions={this.props.actions} />

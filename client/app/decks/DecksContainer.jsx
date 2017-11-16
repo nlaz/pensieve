@@ -13,27 +13,30 @@ export const PAGE_SIZE = 16;
 
 export const PageHeader = ({ count, onSearchChange }) => {
   return (
-    <div className="page-header">
-      <div className="info">
-        <h4 className="title">Decks</h4>
-        <p className="subtitle">{count} decks in your collection</p>
-      </div>
-      <div className="actions">
-        {count > 0 && (
-          <div className="search">
-            <input
-              onChange={onSearchChange}
-              type="text"
-              id="search"
-              className="form-control"
-              placeholder="Search for decks..."
-            />
+    <div className="col-md-10 col-md-offset-1">
+      <div className="page-header">
+        <div className="info">
+          <h4 className="title">Decks</h4>
+          <p className="subtitle">{count} decks in your collection</p>
+        </div>
+        <div className="actions">
+          {count > 0 && (
+            <div className="search">
+              <span className="glyphicon glyphicon-search" aria-hidden="true" />
+              <input
+                onChange={onSearchChange}
+                type="text"
+                id="search"
+                className="form-control"
+                placeholder="Search for decks..."
+              />
+            </div>
+          )}
+          <div className="create">
+            <Link to="decks/new" className="btn-newDeck btn btn-primary">
+              Create Deck +
+            </Link>
           </div>
-        )}
-        <div className="create">
-          <Link to="decks/new" className="btn-newDeck btn btn-primary">
-            Create Deck +
-          </Link>
         </div>
       </div>
     </div>
@@ -91,32 +94,34 @@ class DecksContainer extends React.Component {
       <PageTemplate>
         <div className="decks-page container margin-top">
           <PageHeader count={decks.length} onSearchChange={this.onSearchChange} />
-          {pageDecks.length > 0 ? (
-            <div className="row">
-              {pageDecks.map((deck, key) => (
-                <DeckCard className="col-xs-6 col-sm-4 col-md-3 col-lg-2" deck={deck} key={key} />
-              ))}
-            </div>
-          ) : (
-            <div className="emptyView-wrapper">
-              <div className="text-center emptyView">
-                <span style={{ fontSize: '60px' }}>✌️</span>
-                <h2 className="title">No decks in your collection yet</h2>
-                <p className="description">
-                  Decks are groups of related items for organizing your notes. Haven’t created an
-                  deck yet? No problem. You can click ‘Create Deck’ to build your first deck.
-                </p>
+          <div className="col-md-10 col-md-offset-1">
+            {pageDecks.length > 0 ? (
+              <div className="row">
+                {pageDecks.map((deck, key) => (
+                  <DeckCard className="col-xs-6 col-sm-4 col-md-3" deck={deck} key={key} />
+                ))}
               </div>
-            </div>
-          )}
-          {numPages > 1 && (
-            <PageNavigation
-              numPages={numPages}
-              onIncrementPage={this.onIncrementPage}
-              onDecrementPage={this.onDecrementPage}
-              onChangePage={this.onChangePage}
-            />
-          )}
+            ) : (
+              <div className="emptyView-wrapper">
+                <div className="text-center emptyView">
+                  <span style={{ fontSize: '60px' }}>✌️</span>
+                  <h2 className="title">No decks in your collection yet</h2>
+                  <p className="description">
+                    Decks are groups of related items for organizing your notes. Haven’t created an
+                    deck yet? No problem. You can click ‘Create Deck’ to build your first deck.
+                  </p>
+                </div>
+              </div>
+            )}
+            {numPages > 1 && (
+              <PageNavigation
+                numPages={numPages}
+                onIncrementPage={this.onIncrementPage}
+                onDecrementPage={this.onDecrementPage}
+                onChangePage={this.onChangePage}
+              />
+            )}
+          </div>
         </div>
       </PageTemplate>
     );

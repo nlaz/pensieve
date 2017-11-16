@@ -10,20 +10,26 @@
 .button--primary {
   background: $C_primaryBlue;
   border: 1px solid $C_primaryBlue;
-  border-radius: 3px;
+  border-radius: $borderRadius--button;
+  color: $C_white;
+}
+.button--secondary {
+  background: $C_primaryGreen;
+  border: 1px solid $C_borderGreen;
+  border-radius: $borderRadius--button;
   color: $C_white;
 }
 
 .button--default {
   background: none;
   border: 1px solid $C_mediumGray;
-  border-radius: 3px;
-  color: $C_mediumGray;
+  border-radius: $borderRadius--button;
+  color: #777777;
 }
 
 .button--alert {
   background: $C_errorRed;
   border: 1px solid $C_errorRed;
-  border-radius: 3px;
+  border-radius: $borderRadius--button;
   color: $C_white;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import cx from 'classnames';
+import ReviewButton from './ReviewButton';
 
 export function NavBar({ self, authenticated, showNavMenu, onshowNavMenu, numItemsDue }) {
   return (
@@ -48,9 +49,7 @@ export function NavBar({ self, authenticated, showNavMenu, onshowNavMenu, numIte
           {self && authenticated ? (
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <Link to="/sessions/new" className="btn-reviewNow btn btn-primary">
-                  Review Now {numItemsDue > 0 && <span className="items-due">{numItemsDue}</span>}
-                </Link>
+                <ReviewButton />
               </li>
               <li>
                 <Link to="/logout" onClick={() => onshowNavMenu(false)}>
