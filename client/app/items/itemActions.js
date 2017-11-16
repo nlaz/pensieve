@@ -8,6 +8,7 @@ export const FETCH_DUE_ITEMS = 'fetchDueItems';
 export const FETCH_ITEM = 'fetchItem';
 export const CREATE_ITEM = 'createItem';
 export const REVIEW_ITEM = 'reviewItem';
+export const RESET_ITEM = 'resetItem';
 export const EDIT_ITEM = 'editItem';
 export const DELETE_ITEM = 'deleteItem';
 export const CLEAR_ITEM = 'clearItem';
@@ -58,6 +59,16 @@ export const reviewItem = params => dispatch => {
   axios
     .post(route, params, config)
     .then(resp => dispatch({ type: REVIEW_ITEM, payload: resp.data }))
+    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
+};
+
+export const resetItem = itemId => dispatch => {
+  const config = { headers: { Authorization: cookie.load('token') } };
+  const route = `/api/items/${itemId}/reset`;
+
+  axios
+    .post(route, {}, config)
+    .then(resp => dispatch({ type: RESET_ITEM, payload: resp.data }))
     .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };
 

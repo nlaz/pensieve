@@ -20,6 +20,7 @@ export default class DeckListItem extends React.Component {
     this.onDismissModal = this.onDismissModal.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.onHide = this.onHide.bind(this);
+    this.onReset = this.onReset.bind(this);
   }
 
   onShowModal(modalType) {
@@ -43,6 +44,11 @@ export default class DeckListItem extends React.Component {
     this.props.actions.toggleHideItem(item);
   }
 
+  onReset() {
+    const { item } = this.props;
+    this.props.actions.resetItem(item._id);
+  }
+
   render() {
     const { item } = this.props;
     const { showModalType } = this.state;
@@ -53,7 +59,7 @@ export default class DeckListItem extends React.Component {
     return (
       <div className="deckHome-itemWrapper">
         {showModalType === MODAL_TYPES.RESET_ITEM && (
-          <ResetItemModal onDismiss={this.onDismissModal} />
+          <ResetItemModal onReset={this.onReset} onDismiss={this.onDismissModal} />
         )}
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDelete} onDismiss={this.onDismissModal} />

@@ -1,5 +1,6 @@
 import Deck from '../models/deck';
 import Item from '../models/item';
+import * as ItemController from './items';
 
 export async function getDecks(req, res) {
   try {
@@ -87,9 +88,32 @@ export async function editDeck(req, res) {
  * the deck as well.
  */
 export async function deleteDeck(req, res) {
+  const deckId = req.params.deck_id;
+  const userId = req.user._id;
+
   try {
-    const items = await Item.remove({ deck_id: req.params.deck_id });
-    const deck = await Deck.remove({ _id: req.params.deck_id });
+    const items = await Item.remove({ deck_id: deckId, user_id: userId });
+    const deck = await Deck.remove({ _id: deckId, user_id: userId });
+    return res.status(200).json({ deck, items });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
+export async function resetDeck(req, res) {
+  const deckId = req.params.deck_id;
+  const userId = req.user._id;
+
+  try {
+    let items = await Item.find({ deck_id: req.params.deck_id, user_id: userId });
+    const deck = await Deck.find({ _id: deckId, user_id: userId });
+
+    items = await items.map(item => {
+      item = ItemController.getResetItem(item);
+      return item.save();
+    });
+
+    deck.items = items;
     return res.status(200).json({ deck, items });
   } catch (error) {
     return res.status(500).json({ error });

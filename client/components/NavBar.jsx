@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import cx from 'classnames';
 import ReviewButton from './ReviewButton';
 
-export function NavBar({ self, authenticated, showNavMenu, onshowNavMenu, numItemsDue }) {
+export function NavBar({ self, authenticated, showNavMenu, onshowNavMenu }) {
   return (
     <nav className="navbar">
       <div className="container">

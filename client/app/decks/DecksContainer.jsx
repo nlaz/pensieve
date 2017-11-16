@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import * as deckActions from './deckActions';
 import PageTemplate from '../../components/PageTemplate';
+import Footer from '../../components/Footer';
 import PageNavigation from '../../components/PageNavigation';
 
 import DeckCard from './DeckCard';
@@ -91,7 +92,7 @@ class DecksContainer extends React.Component {
     const pageDecks = filteredDecks.slice(pageStart, pageEnd);
 
     return (
-      <PageTemplate>
+      <PageTemplate footer={<Footer />}>
         <div className="decks-page container margin-top">
           <PageHeader count={decks.length} onSearchChange={this.onSearchChange} />
           <div className="col-md-10 col-md-offset-1">

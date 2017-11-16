@@ -3,9 +3,10 @@ import Session from '../models/session';
 import * as ItemController from './items';
 
 import { NO_ITEMS_ERROR } from './errors';
+import { SESSION_TYPES } from './constants';
 
 export const REVIEW_SESSION_SIZE = 15;
-export const REVIEW_SESSION_MAX = 35;
+export const REVIEW_SESSION_MAX = 30;
 
 // Shuffle function from SO
 // @see https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -62,45 +63,25 @@ export const getSession = (req, res) => {
     .catch(error => res.status(500).json({ error }));
 };
 
-export const generateReviewSession = userId => {
-  let session, items, itemIds;
-  const MIN = 15;
-  const MAX = 25;
-  const queryLimit = Math.floor(Math.random() * (MAX - MIN)) + MIN;
-
-  return Item.aggregate([
-    { $match: { user_id: userId } },
-    { $sort: { repetitions: 1 } },
-    { $limit: queryLimit }
-  ])
-    .exec()
-    .then(_items => {
-      items = _items;
-      if (!items.length) {
-        throw new Error('No available items to create session.');
-      }
-
-      itemIds = items.map(item => item._id);
-      session = new Session({ user_id: userId, items: itemIds });
-      return session.save();
-    })
-    .then(session => {
-      session.items = items;
-      return session;
-    })
-    .catch(error => {
-      throw error;
-    });
-};
-
 export async function createSession(req, res) {
   const userId = req.user._id;
+  const sessionType = req.body.sessionType;
+  const deckId = req.body.deckId;
 
   try {
-    const dueItems = await ItemController.getDueItemsHelper(userId);
+    let sessionItems;
+    if (deckId) {
+      sessionItems = await Item.find({ user_id: userId, deck_id: deckId, hidden: false });
+    } else if (sessionType === SESSION_TYPES.STUDY) {
+      const dueItems = await ItemController.getDueItemsHelper(userId);
+      const newItems = await ItemController.getNewItemsHelper(userId);
 
-    const sessionItems =
-      dueItems.length > 0 ? dueItems : await Item.find({ user_id: userId, hidden: false });
+      sessionItems = [...dueItems, ...newItems];
+    } else if (sessionType === SESSION_TYPES.LEARN) {
+      sessionItems = await ItemController.getNewItemsHelper(userId);
+    } else if (sessionType === SESSION_TYPES.REVIEW) {
+      sessionItems = await ItemController.getDueItemsHelper(userId);
+    }
 
     if (sessionItems.length === 0) {
       return res.status(400).json({
@@ -114,13 +95,35 @@ export async function createSession(req, res) {
 
     const itemIds = sortedSessionItems.map(item => item._id);
 
-    let session = new Session({ user_id: userId, items: itemIds });
+    let session = new Session({ user_id: userId, type: sessionType, items: itemIds });
 
     session = await session.save();
 
     session.items = sortedSessionItems;
 
     return res.status(200).json({ session });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
+export async function getSessionTypes(req, res) {
+  const userId = req.user._id;
+
+  try {
+    const dueItems = await ItemController.getDueItemsHelper(userId);
+    const newItems = await ItemController.getNewItemsHelper(userId);
+
+    const numDueItems = dueItems.length;
+    const numNewItems = newItems.length;
+
+    return res.status(200).json({
+      counts: {
+        study_items: Math.min(numDueItems + numNewItems, REVIEW_SESSION_MAX),
+        due_items: Math.min(numDueItems, REVIEW_SESSION_MAX),
+        new_items: Math.min(numNewItems, REVIEW_SESSION_MAX)
+      }
+    });
   } catch (error) {
     return res.status(500).json({ error });
   }

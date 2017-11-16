@@ -5,10 +5,13 @@ import { connect } from 'react-redux';
 import * as reviewActions from '../reviewActions';
 import PageTemplate from '../../../components/PageTemplate';
 import { NO_ITEMS_ERROR } from '../../../../server/controllers/errors';
+import { SESSION_TYPES } from '../../../../server/controllers/constants';
 
 class ReviewNewContainer extends React.Component {
   componentWillMount() {
-    this.props.actions.createSession();
+    const sessionType = parseInt(this.props.params.sessionType, 10) || SESSION_TYPES.STUDY;
+    const { deckId } = this.props.location.query;
+    this.props.actions.createSession({ sessionType, deckId });
   }
 
   componentDidUpdate() {
@@ -20,8 +23,8 @@ class ReviewNewContainer extends React.Component {
   render() {
     return (
       <PageTemplate>
-        <div className="col-md-8 col-md-offset-2 text-center">
-          <h3 style={{ marginTop: '50px' }}>Creating your review session...</h3>
+        <div className="col-md-8 col-md-offset-2 text-center margin-top">
+          <h3>Creating your study session...</h3>
         </div>
       </PageTemplate>
     );

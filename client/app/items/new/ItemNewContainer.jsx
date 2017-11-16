@@ -2,7 +2,8 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from '../../../components/Header';
+import Footer from '../../../components/Footer';
+import PageTemplate from '../../../components/PageTemplate';
 import * as itemActions from '../itemActions';
 
 class ItemNewContainer extends React.Component {
@@ -39,7 +40,7 @@ class ItemNewContainer extends React.Component {
 
   render() {
     return (
-      <Header className="newItem-page">
+      <PageTemplate className="newItem-page" footer={<Footer />}>
         <div className="container margin-top">
           <div className="col-md-8 col-md-offset-2">
             <form>
@@ -74,7 +75,7 @@ class ItemNewContainer extends React.Component {
             </form>
           </div>
         </div>
-      </Header>
+      </PageTemplate>
     );
   }
 }

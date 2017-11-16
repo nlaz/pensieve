@@ -4,7 +4,8 @@ import pluralize from 'pluralize';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Header from '../../../components/Header';
+import Footer from '../../../components/Footer';
+import PageTemplate from '../../../components/PageTemplate';
 import Popover from '../../../components/Popover';
 import DeleteDeckModal from './modals/DeleteDeckModal';
 import ResetDeckModal from './modals/ResetDeckModal';
@@ -28,6 +29,8 @@ class DeckHomeContainer extends React.Component {
     this.state = { showModalType: undefined };
     this.onAddItem = this.onAddItem.bind(this);
     this.onDeleteDeck = this.onDeleteDeck.bind(this);
+    this.onResetDeck = this.onResetDeck.bind(this);
+    this.onStudyDeck = this.onStudyDeck.bind(this);
     this.onShowModal = this.onShowModal.bind(this);
     this.onDismissModal = this.onDismissModal.bind(this);
   }
@@ -60,17 +63,29 @@ class DeckHomeContainer extends React.Component {
       title: data.title,
       description: data.description
     });
-    this.setState(() => ({ showModalType: undefined }));
+    this.onDismissModal();
   }
   onEditDeck(data) {
     const deckId = this.props.deck._id;
     this.props.actions.editDeck({ deckId, ...data });
-    this.setState(() => ({ showModalType: undefined }));
+    this.onDismissModal();
   }
 
   onDeleteDeck() {
     const deckId = this.props.deck._id;
     this.props.actions.deleteDeck(deckId);
+    this.onDismissModal();
+  }
+
+  onResetDeck() {
+    const deckId = this.props.deck._id;
+    this.props.actions.resetDeck(deckId);
+    this.onDismissModal();
+  }
+
+  onStudyDeck() {
+    const deckId = this.props.deck._id;
+    this.props.router.push(`/sessions/new?deckId=${deckId}`);
   }
 
   render() {
@@ -79,7 +94,7 @@ class DeckHomeContainer extends React.Component {
     const { items = [] } = deck;
 
     return (
-      <Header className="DeckHomeContainer deck-page">
+      <PageTemplate className="DeckHomeContainer deck-page" footer={<Footer />}>
         {showModalType === MODAL_TYPES.ADD_ITEM && (
           <AddItemModal onSave={data => this.onAddItem(data)} onDismiss={this.onDismissModal} />
         )}
@@ -94,7 +109,7 @@ class DeckHomeContainer extends React.Component {
           />
         )}
         {showModalType === MODAL_TYPES.RESET_DECK && (
-          <ResetDeckModal onDismiss={this.onDismissModal} />
+          <ResetDeckModal onReset={this.onResetDeck} onDismiss={this.onDismissModal} />
         )}
         <div className="container margin-top margin-bottom">
           <div className="row margin-top">
@@ -107,7 +122,9 @@ class DeckHomeContainer extends React.Component {
                 {pluralize('card', items.length, true)}
               </span>
               <div className="deckActions">
-                <button className="button button--primary">Study Now</button>
+                <button onClick={this.onStudyDeck} className="button button--primary">
+                  Study Now
+                </button>
                 <button
                   onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}
                   className="button button--default"
@@ -150,7 +167,7 @@ class DeckHomeContainer extends React.Component {
             </div>
           </div>
         </div>
-      </Header>
+      </PageTemplate>
     );
   }
 }

@@ -172,7 +172,7 @@ class ReviewContainer extends React.Component {
                   type="button"
                   className="btn btn-primary"
                 >
-                  Hard
+                  Again
                 </button>
               </div>
               <div className="col-xs-4 text-center">

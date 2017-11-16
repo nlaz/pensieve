@@ -7,6 +7,7 @@ import { SHOW_ERROR } from '../appActions';
 export const FETCH_SESSION = 'fetchSession';
 export const CREATE_SESSION = 'createSession';
 export const FINISH_SESSION = 'finishSession';
+export const FETCH_SESSION_TYPES = 'fetchSessionTypes';
 
 const SESSIONS_API_URL = `/api/sessions`;
 
@@ -31,12 +32,21 @@ export function fetchSession(sessionId) {
   };
 }
 
-export function createSession() {
+export const fetchSessionTypes = () => dispatch => {
+  const config = { headers: { Authorization: cookie.load('token') } };
+
+  axios
+    .get('/api/session_types', config)
+    .then(resp => dispatch({ type: FETCH_SESSION_TYPES, payload: resp.data }))
+    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
+};
+
+export function createSession(params) {
   const config = { headers: { Authorization: cookie.load('token') } };
 
   return function(dispatch) {
     axios
-      .post('/api/sessions', {}, config)
+      .post('/api/sessions', params, config)
       .then(response => {
         dispatch({
           type: CREATE_SESSION,

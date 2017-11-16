@@ -35,6 +35,7 @@ const routes = (
       <Route path=":deckId/edit" component={ReqAuth(DeckEdit)} />
     </Route>
     <Route path="sessions/new" component={ReqAuth(ReviewNew)} />
+    <Route path="sessions/new/:sessionType" component={ReqAuth(ReviewNew)} />
     <Route path="sessions/:sessionId" component={ReqAuth(Review)} />
     <Route path="login" component={Login} />
     <Route path="logout" component={Logout} />
