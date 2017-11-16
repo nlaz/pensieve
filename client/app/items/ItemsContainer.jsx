@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import * as itemActions from './itemActions';
 import PageTemplate from '../../components/PageTemplate';
+import Footer from '../../components/Footer';
 
 import ListItem from './ListItem';
 import PageNavigation from '../../components/PageNavigation';
@@ -93,7 +94,7 @@ class ItemsContainer extends React.Component {
     const pageItems = filteredItems.slice(pageStart, pageEnd);
 
     return (
-      <PageTemplate>
+      <PageTemplate footer={<Footer />}>
         <div className="items-page container margin-top">
           <div className="row">
             <PageHeader count={items.length} onSearchChange={this.onSearchChange} />

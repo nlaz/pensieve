@@ -4,7 +4,8 @@ import pluralize from 'pluralize';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Header from '../../../components/Header';
+import Footer from '../../../components/Footer';
+import PageTemplate from '../../../components/PageTemplate';
 import Popover from '../../../components/Popover';
 import DeleteDeckModal from './modals/DeleteDeckModal';
 import ResetDeckModal from './modals/ResetDeckModal';
@@ -79,7 +80,7 @@ class DeckHomeContainer extends React.Component {
     const { items = [] } = deck;
 
     return (
-      <Header className="DeckHomeContainer deck-page">
+      <PageTemplate className="DeckHomeContainer deck-page" footer={<Footer />}>
         {showModalType === MODAL_TYPES.ADD_ITEM && (
           <AddItemModal onSave={data => this.onAddItem(data)} onDismiss={this.onDismissModal} />
         )}
@@ -150,7 +151,7 @@ class DeckHomeContainer extends React.Component {
             </div>
           </div>
         </div>
-      </Header>
+      </PageTemplate>
     );
   }
 }

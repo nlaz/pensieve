@@ -3,7 +3,8 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from '../../../components/Header';
+import Footer from '../../../components/Footer';
+import PageTemplate from '../../../components/PageTemplate';
 import * as itemActions from '../itemActions';
 
 const panelStyles = {
@@ -78,7 +79,7 @@ class ItemContainer extends React.Component {
     );
 
     return (
-      <Header className="item-page">
+      <PageTemplate className="item-page" footer={<Footer />}>
         <div className="container">
           <div className="row">
             <div className="col-md-8 col-md-offset-2">
@@ -108,7 +109,7 @@ class ItemContainer extends React.Component {
             </div>
           </div>
         </div>
-      </Header>
+      </PageTemplate>
     );
   }
 }
