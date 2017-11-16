@@ -20,8 +20,8 @@ class ReviewNewContainer extends React.Component {
   render() {
     return (
       <PageTemplate>
-        <div className="col-md-8 col-md-offset-2 text-center">
-          <h3 style={{ marginTop: '50px' }}>Creating your review session...</h3>
+        <div className="col-md-8 col-md-offset-2 text-center margin-top">
+          <h3>Creating your study session...</h3>
         </div>
       </PageTemplate>
     );
