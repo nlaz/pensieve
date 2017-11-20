@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'classnames';
 import moment from 'moment';
 import { Link } from 'react-router';
 
@@ -76,9 +75,6 @@ export default class ListItem extends React.Component {
   render() {
     const { item } = this.props;
     const { showModalType } = this.state;
-    const classNames = cx('itemList-item', {
-      'itemList-item--hidden': item.hidden
-    });
 
     return (
       <div className="itemList-itemWrapper">
@@ -88,7 +84,7 @@ export default class ListItem extends React.Component {
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDelete} onDismiss={this.onDismissModal} />
         )}
-        <Link className={classNames} to={`/items/${item._id}`}>
+        <Link className="itemList-item" to={`/items/${item._id}`}>
           <span className="title">{item.title}</span>
           <div className="itemActions">
             <TimeLeft date={item.nextReviewDate} />
