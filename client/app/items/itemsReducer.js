@@ -1,4 +1,4 @@
-import { FETCH_ITEMS, EDIT_ITEM, DELETE_ITEM, CREATE_ITEM } from './itemActions';
+import { FETCH_ITEMS, EDIT_ITEM, DELETE_ITEM, CREATE_ITEM, RESET_ITEM } from './itemActions';
 
 const INITIAL_STATE = [];
 
@@ -10,6 +10,11 @@ export default function(state = INITIAL_STATE, action) {
       const { items = [] } = state;
       return [...items, action.payload.item];
     case EDIT_ITEM: {
+      const updatedItem = action.payload.item;
+      const items = state.map(item => (item._id === updatedItem._id ? updatedItem : item));
+      return items;
+    }
+    case RESET_ITEM: {
       const updatedItem = action.payload.item;
       const items = state.map(item => (item._id === updatedItem._id ? updatedItem : item));
       return items;

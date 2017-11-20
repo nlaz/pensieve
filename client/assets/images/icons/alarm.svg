@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="11px" height="12px" viewBox="0 0 11 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>alarm</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-1024.000000, -12.000000)">
+            <g id="alarm" transform="translate(1023.831721, 12.000000)">
+                <path d="M9.40429274,0.594829339 L9.6469978,0.771164886 C10.1384863,1.12825221 10.24744,1.81615886 9.89035272,2.30764739 L7.86781023,0.83818426 C8.22489756,0.346695726 8.9128042,0.237742017 9.40429274,0.594829339 L9.40429274,0.594829339 Z" id="Rectangle-33" fill="#A9A9A9"></path>
+                <path d="M1.59570726,0.594829339 L1.3530022,0.771164886 C0.861513668,1.12825221 0.752559959,1.81615886 1.10964728,2.30764739 L3.13218977,0.83818426 C2.77510244,0.346695726 2.0871958,0.237742017 1.59570726,0.594829339 Z" id="Rectangle-33" fill="#A9A9A9"></path>
+                <circle id="Oval-5" stroke="#A9A9A9" cx="5.5" cy="6.17795648" r="4.5"></circle>
+                <polyline id="Line-4" stroke="#A9A9A9" stroke-linecap="round" stroke-linejoin="round" points="5.5 3.3999939 5.5 6.3999939 7.39513578 8.15755283"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
