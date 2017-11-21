@@ -37,23 +37,24 @@ class ReviewButton extends React.Component {
 
   render() {
     const { reviewType } = this.state;
-    const { counts = {} } = this.props.activity;
+    const { sessionTypes = {} } = this.props.activity;
+    const { study = {}, learn = {}, review = {} } = sessionTypes;
     return (
       <div className="reviewButton">
         <button onClick={this.onClick} className="reviewButton-action button button--secondary">
           {reviewType === OPTION_TYPES.STUDY && (
             <span className="action">
-              Study now <span className="items-due">{counts.study_items}</span>
+              Study now <span className="items-due">{study.size}</span>
             </span>
           )}
           {reviewType === OPTION_TYPES.LEARN && (
             <span className="action">
-              Learn now <span className="items-due">{counts.new_items}</span>
+              Learn now <span className="items-due">{learn.size}</span>
             </span>
           )}
           {reviewType === OPTION_TYPES.REVIEW && (
             <span className="action">
-              Review now <span className="items-due">{counts.due_items}</span>
+              Review now <span className="items-due">{review.size}</span>
             </span>
           )}
         </button>
@@ -78,7 +79,7 @@ class ReviewButton extends React.Component {
               </p>
             </div>
             <span className="reviewOption-count">
-              {pluralize('card', counts.study_items, true)}
+              {study.size} of {pluralize('card', study.total, true)}
             </span>
           </div>
           <div className="reviewOption" onClick={() => this.onChangeReview(OPTION_TYPES.LEARN)}>
@@ -90,11 +91,13 @@ class ReviewButton extends React.Component {
             <div>
               <p className="reviewOption-title">Learn</p>
               <p className="reviewOption-description">
-                This session will introduce you to {counts.new_items} new{' '}
-                {pluralize('card', counts.new_items)} that you have not seen before.
+                This session will introduce you to {learn.size} new {pluralize('card', learn.size)}{' '}
+                that you have not seen before.
               </p>
             </div>
-            <span className="reviewOption-count">{pluralize('card', counts.new_items, true)}</span>
+            <span className="reviewOption-count">
+              {learn.size} of {pluralize('card', learn.total, true)}
+            </span>
           </div>
           <div className="reviewOption" onClick={() => this.onChangeReview(OPTION_TYPES.REVIEW)}>
             <span
@@ -105,11 +108,13 @@ class ReviewButton extends React.Component {
             <div>
               <p className="reviewOption-title">Review</p>
               <p className="reviewOption-description">
-                This session will strengthen your recall of{' '}
-                {pluralize('card', counts.due_items, true)} that you already have seen before.
+                This session will strengthen your recall of {pluralize('card', review.size, true)}{' '}
+                that you already have seen before.
               </p>
             </div>
-            <span className="reviewOption-count">{pluralize('card', counts.due_items, true)}</span>
+            <span className="reviewOption-count">
+              {review.size} of {pluralize('card', review.total, true)}
+            </span>
           </div>
         </Popover>
       </div>

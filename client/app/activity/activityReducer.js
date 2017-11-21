@@ -8,7 +8,7 @@ export default function(state = INITIAL_STATE, action) {
     case FETCH_ACTIVITY:
       return { ...state, ...action.payload };
     case FETCH_SESSION_TYPES:
-      return { ...state, ...action.payload };
+      return { ...state, sessionTypes: action.payload };
   }
 
   return state;

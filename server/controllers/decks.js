@@ -1,6 +1,5 @@
 import Deck from '../models/deck';
 import Item from '../models/item';
-import * as ItemController from './items';
 
 export async function getDecks(req, res) {
   try {
