@@ -41,7 +41,6 @@ export function getNextInterval(item, grade) {
   if (grade < 3) {
     return 0;
   }
-  console.log(item, grade);
   if (item.repetitions === 0) {
     return 1;
   } else if (item.repetitions === 1) {

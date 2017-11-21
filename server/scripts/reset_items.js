@@ -16,6 +16,7 @@ Item.find()
       item.nextReviewDate = undefined;
       item.interval = undefined;
       item.reviewedAt = undefined;
+      item.hidden = false;
       item.save();
     });
   })

@@ -102,9 +102,6 @@ class ItemContainer extends React.Component {
                     <div onClick={() => this.onShowModal(MODAL_TYPES.EDIT_DECK)} className="action">
                       Edit Card
                     </div>
-                    <div onClick={() => this.onShowModal(MODAL_TYPES.EDIT_DECK)} className="action">
-                      Hide Card
-                    </div>
                     <div
                       onClick={() => this.onShowModal(MODAL_TYPES.RESET_DECK)}
                       className="action border-top"
@@ -137,17 +134,6 @@ class ItemContainer extends React.Component {
                   <p className="item-deckInfo">
                     Part of <span className="item-deckTitle">{item.deck.title}</span>
                   </p>
-                )}
-                {item.hidden ? (
-                  <span className="item-visibility text-right">
-                    <span>Hidden</span>
-                    <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
-                  </span>
-                ) : (
-                  <span className="item-visibility text-right">
-                    <span>Visible</span>
-                    <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />
-                  </span>
                 )}
               </div>
             </div>

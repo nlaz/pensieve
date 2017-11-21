@@ -24,7 +24,7 @@ export const REVIEW_GRADES = {
   HARD: 5
 };
 
-moment.locale('shortened', {
+moment.updateLocale('shortened', {
   relativeTime: {
     future: 'in %s',
     past: '%s ago',
