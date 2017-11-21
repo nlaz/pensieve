@@ -2,15 +2,15 @@
  * Item home page stylesheet
  */
 
-.item-page .item-header h5 {
-  color: $C_mediumGray;
-  margin: 0;
-  font-size: 16px;
-}
 .item-page .item-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.item-page .item-header h5 {
+  color: $C_mediumGray;
+  font-size: 16px;
+  margin: 0;
 }
 .item-page .item-header .glyphicon {
   font-size: 18px;
