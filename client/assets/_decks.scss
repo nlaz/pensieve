@@ -5,7 +5,7 @@
 @import './vars';
 
 $itemCardHeight: 200px;
-$deckCardHeight: 180px;
+$deckCardHeight: 200px;
 
 .deckInfo {
   border: 1px solid $C_lightCardBorder;
@@ -113,8 +113,9 @@ $deckCardHeight: 180px;
 }
 
 .deckCard {
+  border: 1px solid #e8e8e8;
   border-radius: 12px;
-  box-shadow: 0 6px 0 0 #f8f8f8;
+  box-shadow: inset 0 -8px 0 0 #f1f1f1;
   color: $C_darkGray;
   position: relative;
   height: 180px;
@@ -133,7 +134,7 @@ $deckCardHeight: 180px;
 
   &::before {
     border-radius: 12px;
-    bottom: -6px;
+    bottom: 0px;
     box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.06);
     content: '';
     right: 0;
@@ -144,7 +145,7 @@ $deckCardHeight: 180px;
 }
 
 .deckCard-itemCount {
-  color: #cbcbcb;
+  color: #afadad;
   font-size: 14px;
   position: absolute;
   right: 10px;

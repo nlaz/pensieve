@@ -13,9 +13,10 @@
 
 .panel-body {
   align-items: center;
+  cursor: pointer;
   display: flex;
   justify-content: center;
-  min-height: 300px;
+  min-height: 400px;
   white-space: pre-wrap;
   position: relative;
 }

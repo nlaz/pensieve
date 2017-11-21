@@ -15,11 +15,17 @@ export async function getItems(req, res) {
 export async function getItem(req, res) {
   const itemId = req.params.item_id;
   const userId = req.user._id;
+  const { fields } = req.query;
 
   try {
     const item = await Item.findOne({ _id: itemId, user_id: userId });
+    let deck;
 
-    return res.status(200).json({ item });
+    if (fields && fields.includes('deck')) {
+      deck = await Deck.findOne({ _id: item.deck_id, user_id: userId });
+    }
+
+    return res.status(200).json({ item, deck });
   } catch (error) {
     return res.status(500).json({ error });
   }

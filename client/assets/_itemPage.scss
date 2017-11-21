@@ -1,0 +1,78 @@
+/**
+ * Item home page stylesheet
+ */
+
+.item-page .item-header h5 {
+  color: $C_mediumGray;
+  margin: 0;
+  font-size: 16px;
+}
+.item-page .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item-page .item-header .glyphicon {
+  font-size: 18px;
+  color: $C_darkGray;
+}
+.item-page hr {
+  margin-top: 12px;
+}
+
+.item-page .panel-body {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 400px;
+  position: relative;
+  white-space: pre-wrap;
+}
+.item-page .panel-body .item-timeLeft {
+  position: absolute;
+  top: $space;
+  right: $space * 1.5;
+}
+.item-page .panel-face {
+  color: $C_mediumGray;
+  left: $space * 1.5;
+  font-style: italic;
+  font-size: 16px;
+  top: $space;
+  position: absolute;
+}
+
+.item-page .panel-default {
+  margin-bottom: $space;
+}
+
+.item-page .item-info {
+  align-items: center;
+  font-size: 16px;
+  font-style: italic;
+  color: $C_mediumGray;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 $space * 1.5;
+}
+.item-page .item-deckInfo {
+  flex-grow: 1;
+}
+.item-page .item-deckTitle {
+  background: #cde2ff;
+  border-radius: 999px;
+  color: $C_primaryBlue;
+  padding: 4px 8px;
+  margin-left: 2px;
+}
+.item-page .item-visibility {
+  align-items: center;
+  color: $C_mediumGray;
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+
+  .glyphicon {
+    margin-left: 5px;
+  }
+}
