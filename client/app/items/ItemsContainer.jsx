@@ -10,11 +10,11 @@ import Footer from '../../components/Footer';
 import ListItem from './ListItem';
 import PageNavigation from '../../components/PageNavigation';
 
-export const PAGE_SIZE = 24;
+export const PAGE_SIZE = 36;
 
 export const PageHeader = ({ count, onSearchChange }) => {
   return (
-    <div className="col-xs-12 col-md-10 col-md-offset-1">
+    <div className="col-md-10 col-md-offset-1">
       <div className="page-header">
         <div className="info">
           <h4 className="title">Items</h4>

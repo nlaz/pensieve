@@ -84,7 +84,7 @@ class ItemContainer extends React.Component {
     const itemContent = showAnswer ? item.description : item.title;
 
     return (
-      <PageTemplate className="item-page" footer={<Footer />}>
+      <PageTemplate className="item-page margin-top" footer={<Footer />}>
         <div className="container margin-top">
           <div className="row">
             <div className="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
