@@ -8,7 +8,7 @@ import PageTemplate from '../../../components/PageTemplate';
 import * as itemActions from '../itemActions';
 
 const panelStyles = {
-  minHeight: '300px',
+  minHeight: '400px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
