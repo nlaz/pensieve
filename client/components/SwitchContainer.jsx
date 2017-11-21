@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LandingContainer from '../app/landing/LandingContainer';
-import ActivityContainer from '../app/activity/ActivityContainer';
+import DecksContainer from '../app/decks/DecksContainer';
 
 class SwitchContainer extends React.Component {
   render() {
-    return this.props.authenticated ? <ActivityContainer /> : <LandingContainer />;
+    return this.props.authenticated ? <DecksContainer /> : <LandingContainer />;
   }
 }
 

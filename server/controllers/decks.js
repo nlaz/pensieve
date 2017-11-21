@@ -105,16 +105,28 @@ export async function resetDeck(req, res) {
   const userId = req.user._id;
 
   try {
-    let items = await Item.find({ deck_id: req.params.deck_id, user_id: userId });
-    const deck = await Deck.find({ _id: deckId, user_id: userId });
+    const deck = await Deck.findOne({ _id: deckId, user_id: userId });
 
-    items = await items.map(item => {
-      item = ItemController.getResetItem(item);
-      return item.save();
-    });
+    let items = await Item.update(
+      { deck_id: deckId, user_id: userId },
+      {
+        $set: {
+          repetitions: 0,
+          EF: 2.5
+        },
+        $unset: {
+          nextReviewDate: 1,
+          interval: 1,
+          reviewedAt: 1
+        }
+      },
+      { multi: true, new: true }
+    );
+
+    items = await Item.find({ deck_id: deckId, user_id: userId });
 
     deck.items = items;
-    return res.status(200).json({ deck, items });
+    return res.status(200).json({ deck });
   } catch (error) {
     return res.status(500).json({ error });
   }

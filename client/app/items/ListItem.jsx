@@ -1,5 +1,5 @@
 import React from 'react';
-import cx from 'classnames';
+import moment from 'moment';
 import { Link } from 'react-router';
 
 import Popover from '../../components/Popover';
@@ -10,6 +10,28 @@ const MODAL_TYPES = {
   RESET_ITEM: 'resetItem',
   DELETE_ITEM: 'deleteItem'
 };
+
+export function TimeLeft({ date }) {
+  if (!date) {
+    return false;
+  }
+
+  if (moment(date).isBefore(moment())) {
+    return (
+      <div className="item-timeLeft item-timeLeft--due">
+        <span>due</span>
+        <img className="icon-alarm" src={require('../../assets/images/icons/alarm_red.svg')} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="item-timeLeft">
+      <span>{moment().to(date, true)}</span>
+      <img className="icon-alarm" src={require('../../assets/images/icons/alarm.svg')} />
+    </div>
+  );
+}
 
 export default class ListItem extends React.Component {
   constructor(props) {
@@ -24,6 +46,7 @@ export default class ListItem extends React.Component {
   }
 
   onShowModal(modalType) {
+    this.overflow.toggle();
     this.setState(() => ({ showModalType: modalType }));
   }
 
@@ -52,9 +75,6 @@ export default class ListItem extends React.Component {
   render() {
     const { item } = this.props;
     const { showModalType } = this.state;
-    const classNames = cx('itemList-item', {
-      'itemList-item--hidden': item.hidden
-    });
 
     return (
       <div className="itemList-itemWrapper">
@@ -64,14 +84,19 @@ export default class ListItem extends React.Component {
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDelete} onDismiss={this.onDismissModal} />
         )}
-        <Link className={classNames} to={`/items/${item._id}`}>
+        <Link className="itemList-item" to={`/items/${item._id}`}>
           <span className="title">{item.title}</span>
           <div className="itemActions">
+            <TimeLeft date={item.nextReviewDate} />
             <Popover
               align="right"
+              ref={c => (this.overflow = c)}
               trigger={
                 <div onClick={this.onTogglePopover} className="itemAction-overflow">
-                  <span className="glyphicon glyphicon-option-horizontal" aria-hidden="true" />
+                  <img
+                    className="icon-overflow"
+                    src={require('../../assets/images/icons/overflow.svg')}
+                  />
                 </div>
               }
             >
@@ -87,13 +112,6 @@ export default class ListItem extends React.Component {
                 </div>
               </div>
             </Popover>
-            <div onClick={this.onHide} className="itemAction-hideItem">
-              {item.hidden ? (
-                <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
-              ) : (
-                <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />
-              )}
-            </div>
           </div>
         </Link>
       </div>

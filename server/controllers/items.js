@@ -1,7 +1,8 @@
 import Item from '../models/item';
 import Deck from '../models/deck';
 import Review from '../models/review';
-import { REVIEW_TYPE } from '../../client/app/review/ReviewContainer';
+
+import { getGrade, getNextInterval, getNewCounter, getNextReviewDate, getEF } from './utils';
 
 export async function getItems(req, res) {
   try {
@@ -15,11 +16,17 @@ export async function getItems(req, res) {
 export async function getItem(req, res) {
   const itemId = req.params.item_id;
   const userId = req.user._id;
+  const { fields } = req.query;
 
   try {
     const item = await Item.findOne({ _id: itemId, user_id: userId });
+    let deck;
 
-    return res.status(200).json({ item });
+    if (fields && fields.includes('deck')) {
+      deck = await Deck.findOne({ _id: item.deck_id, user_id: userId });
+    }
+
+    return res.status(200).json({ item, deck });
   } catch (error) {
     return res.status(500).json({ error });
   }
@@ -68,39 +75,6 @@ export const deleteItem = (req, res) => {
     .catch(error => res.status(500).json({ error }));
 };
 
-//=0.75*EXP(0.8*I2) - 0.75
-const getNextReviewDate = counter => {
-  const currentTime = new Date();
-  const interval = 0.75 * Math.exp(0.8 * counter) - 0.75;
-  // TODO: update next date by interval. Not rounded integer.
-  currentTime.setDate(currentTime.getDate() + Math.ceil(interval));
-  return currentTime;
-};
-
-const getNewCounter = (value, prevCount) => {
-  switch (value) {
-    case REVIEW_TYPE.EASY:
-      return prevCount + 1;
-    case REVIEW_TYPE.GOOD:
-      return prevCount;
-    case REVIEW_TYPE.HARD:
-      return 0;
-  }
-  return prevCount;
-};
-
-const getGrade = value => {
-  switch (value) {
-    case REVIEW_TYPE.EASY:
-      return 5;
-    case REVIEW_TYPE.GOOD:
-      return 3;
-    case REVIEW_TYPE.HARD:
-      return 0;
-  }
-  return 3;
-};
-
 // Implements the SM2 algorithm created by Peter Wozniak
 // @see https://www.supermemo.com/english/ol/sm2.htm
 export async function reviewSM2Item(req, res) {
@@ -122,23 +96,11 @@ export async function reviewSM2Item(req, res) {
       item.repetitions = 0;
       item.interval = 0;
     } else {
-      item.EF = Math.max(item.EF + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02)), 1.3);
       item.repetitions = item.repetitions + 1; // increment repetitions
-
-      if (item.repetitions === 1) {
-        item.interval = 1;
-      } else if (item.repetitions === 2) {
-        item.interval = 6;
-      } else {
-        item.interval = Math.round((item.interval - 1) * item.EF);
-      }
-
-      if (grade < 4) {
-        item.interval = 0;
-      }
+      item.EF = getEF(item.EF, grade);
+      item.interval = getNextInterval(item, grade);
     }
     const nextReviewDate = new Date();
-    nextReviewDate.setHours(0, 0, 0, 0);
     nextReviewDate.setDate(nextReviewDate.getDate() + item.interval);
     item.nextReviewDate = nextReviewDate;
 
