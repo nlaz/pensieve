@@ -20,7 +20,7 @@ export default function(state = INITIAL_STATE, action) {
       return items;
     }
     case DELETE_ITEM: {
-      const items = (state.items || []).filter(item => item._id != action.payload.itemId);
+      const items = state.filter(item => item._id != action.payload.itemId);
       return items;
     }
   }
