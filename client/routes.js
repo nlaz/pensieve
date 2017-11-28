@@ -9,7 +9,6 @@ import ItemEdit from './app/items/edit/ItemEditContainer';
 import Deck from './app/decks/home/DeckHomeContainer';
 import Decks from './app/decks/DecksContainer';
 import DeckNew from './app/decks/new/DeckNewContainer';
-import DeckEdit from './app/decks/edit/DeckEditContainer';
 import Review from './app/review/ReviewContainer';
 import ReviewNew from './app/review/new/ReviewNewContainer';
 import SwitchContainer from './components/SwitchContainer';
@@ -32,7 +31,6 @@ const routes = (
       <IndexRoute component={ReqAuth(Decks)} />
       <Route path="new" component={ReqAuth(DeckNew)} />
       <Route path=":deckId" component={ReqAuth(Deck)} />
-      <Route path=":deckId/edit" component={ReqAuth(DeckEdit)} />
     </Route>
     <Route path="sessions/new" component={ReqAuth(ReviewNew)} />
     <Route path="sessions/new/:sessionType" component={ReqAuth(ReviewNew)} />
