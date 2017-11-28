@@ -118,10 +118,17 @@ export async function getSessionTypes(req, res) {
     const numNewItems = newItems.length;
 
     return res.status(200).json({
-      counts: {
-        study_items: Math.min(numDueItems + numNewItems, REVIEW_SESSION_MAX),
-        due_items: Math.min(numDueItems, REVIEW_SESSION_MAX),
-        new_items: Math.min(numNewItems, REVIEW_SESSION_MAX)
+      study: {
+        size: Math.min(numDueItems + numNewItems, REVIEW_SESSION_MAX),
+        total: numDueItems + numNewItems
+      },
+      learn: {
+        size: Math.min(numNewItems, REVIEW_SESSION_MAX),
+        total: numNewItems
+      },
+      review: {
+        size: Math.min(numDueItems, REVIEW_SESSION_MAX),
+        total: numDueItems
       }
     });
   } catch (error) {

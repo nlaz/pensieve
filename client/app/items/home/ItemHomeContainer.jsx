@@ -9,6 +9,16 @@ import Popover from '../../../components/Popover';
 import PageTemplate from '../../../components/PageTemplate';
 import * as itemActions from '../itemActions';
 
+import ResetItemModal from '../../decks/home/modals/ResetItemModal';
+import DeleteItemModal from '../../decks/home/modals/DeleteItemModal';
+import EditItemModal from '../../decks/home/modals/EditItemModal';
+
+const MODAL_TYPES = {
+  RESET_ITEM: 'resetItem',
+  DELETE_ITEM: 'deleteItem',
+  EDIT_ITEM: 'editItem'
+};
+
 export function TimeLeft({ date }) {
   if (!date) {
     return false;
@@ -35,10 +45,14 @@ class ItemContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { showAnswer: false };
+    this.state = { showAnswer: false, showModalType: undefined };
     this.onItemClick = this.onItemClick.bind(this);
     this.onEditClick = this.onEditClick.bind(this);
     this.onToggleHideItem = this.onToggleHideItem.bind(this);
+    this.onShowModal = this.onShowModal.bind(this);
+    this.onResetClick = this.onResetClick.bind(this);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
+    this.onDismissModal = this.onDismissModal.bind(this);
   }
 
   componentWillMount() {
@@ -46,6 +60,10 @@ class ItemContainer extends React.Component {
     if (item._id !== this.props.params.itemId) {
       this.props.actions.fetchItem({ itemId: this.props.params.itemId, fields: 'deck' });
     }
+  }
+
+  onDismissModal() {
+    this.setState(() => ({ showModalType: undefined }));
   }
 
   onItemClick() {
@@ -57,15 +75,38 @@ class ItemContainer extends React.Component {
     this.props.router.push(`/items/${itemId}/edit`);
   }
 
+  onDeleteClick() {
+    const { item } = this.props;
+    this.props.actions.deleteItem(item._id);
+    this.onDismissModal();
+  }
+
+  onResetClick() {
+    const { item } = this.props;
+    this.props.actions.resetItem(item._id);
+    this.onDismissModal();
+  }
+
   onToggleHideItem(e, item) {
     e.preventDefault();
     e.stopPropagation();
     this.props.actions.toggleHideItem(item);
   }
 
+  onEditItem(data) {
+    const itemId = this.props.item._id;
+    this.props.actions.editItem({ itemId, ...data });
+    this.onDismissModal();
+  }
+
+  onShowModal(modalType) {
+    this.overflow.toggle();
+    this.setState(() => ({ showModalType: modalType }));
+  }
+
   render() {
     const { item } = this.props;
-    const { showAnswer } = this.state;
+    const { showAnswer, showModalType } = this.state;
 
     if (!item || Object.keys(item).length === 0) {
       return (
@@ -84,7 +125,20 @@ class ItemContainer extends React.Component {
     const itemContent = showAnswer ? item.description : item.title;
 
     return (
-      <PageTemplate className="item-page" footer={<Footer />}>
+      <PageTemplate className="item-page margin-top" footer={<Footer />}>
+        {showModalType === MODAL_TYPES.DELETE_ITEM && (
+          <DeleteItemModal onDelete={this.onDeleteClick} onDismiss={this.onDismissModal} />
+        )}
+        {showModalType === MODAL_TYPES.EDIT_ITEM && (
+          <EditItemModal
+            item={item}
+            onSave={data => this.onEditItem(data)}
+            onDismiss={this.onDismissModal}
+          />
+        )}
+        {showModalType === MODAL_TYPES.RESET_ITEM && (
+          <ResetItemModal onReset={this.onResetClick} onDismiss={this.onDismissModal} />
+        )}
         <div className="container margin-top">
           <div className="row">
             <div className="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
@@ -99,20 +153,19 @@ class ItemContainer extends React.Component {
                   }
                 >
                   <div className="popoverActions">
-                    <div onClick={() => this.onShowModal(MODAL_TYPES.EDIT_DECK)} className="action">
+                    <div onClick={() => this.onShowModal(MODAL_TYPES.EDIT_ITEM)} className="action">
                       Edit Card
                     </div>
-                    <div onClick={() => this.onShowModal(MODAL_TYPES.EDIT_DECK)} className="action">
-                      Hide Card
-                    </div>
+                    {item.nextReviewDate && (
+                      <div
+                        onClick={() => this.onShowModal(MODAL_TYPES.RESET_ITEM)}
+                        className="action border-top"
+                      >
+                        Reset Card
+                      </div>
+                    )}
                     <div
-                      onClick={() => this.onShowModal(MODAL_TYPES.RESET_DECK)}
-                      className="action border-top"
-                    >
-                      Reset Card
-                    </div>
-                    <div
-                      onClick={() => this.onShowModal(MODAL_TYPES.DELETE_DECK)}
+                      onClick={() => this.onShowModal(MODAL_TYPES.DELETE_ITEM)}
                       className="action"
                     >
                       Delete Card
@@ -137,17 +190,6 @@ class ItemContainer extends React.Component {
                   <p className="item-deckInfo">
                     Part of <span className="item-deckTitle">{item.deck.title}</span>
                   </p>
-                )}
-                {item.hidden ? (
-                  <span className="item-visibility text-right">
-                    <span>Hidden</span>
-                    <span className="glyphicon glyphicon-eye-close" aria-hidden="true" />
-                  </span>
-                ) : (
-                  <span className="item-visibility text-right">
-                    <span>Visible</span>
-                    <span className="glyphicon glyphicon-eye-open" aria-hidden="true" />
-                  </span>
                 )}
               </div>
             </div>

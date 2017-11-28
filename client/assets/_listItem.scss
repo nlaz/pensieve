@@ -27,6 +27,9 @@
   justify-content: space-between;
   padding: 0 16px;
 
+  .title {
+    padding: 6px 0;
+  }
   &:focus,
   &:hover {
     background: #f6f6f6 !important;

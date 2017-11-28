@@ -1,11 +1,11 @@
 import React from 'react';
 import Modal from '../../../../components/Modal';
 
-export default class AddItemModal extends React.Component {
+export default class EditItemModal extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { title: '', description: '' };
+    this.state = { title: props.item.title, description: props.item.description };
     this.onInputChange = this.onInputChange.bind(this);
   }
 
@@ -17,9 +17,10 @@ export default class AddItemModal extends React.Component {
   render() {
     const { onDismiss, onSave } = this.props;
     const { title, description } = this.state;
+
     return (
-      <Modal title="Add Item" onDismiss={onDismiss}>
-        <form className="form-editItem">
+      <Modal title="Edit Item" onDismiss={onDismiss}>
+        <form className="form-editDeck">
           <div className="form-group">
             <label htmlFor="title">Front</label>
             <textarea
@@ -27,7 +28,7 @@ export default class AddItemModal extends React.Component {
               className="form-control"
               type="text"
               value={title}
-              placeholder="Add a item title..."
+              placeholder="Add a card title..."
               onChange={this.onInputChange}
             />
           </div>
@@ -38,7 +39,7 @@ export default class AddItemModal extends React.Component {
               className="form-control"
               type="text"
               value={description}
-              placeholder="Add a item description..."
+              placeholder="Add a card description..."
               onChange={this.onInputChange}
             />
           </div>

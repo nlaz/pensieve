@@ -34,19 +34,23 @@ class DeckNewContainer extends React.Component {
     const { items } = this.state;
     this.setState(() => ({ items: [...items, { title: '', description: '' }] }));
   }
+
   onRemoveCard(index) {
     const { items } = this.state;
     items.splice(index, 1);
     this.setState(() => ({ items: items }));
   }
+
   onItemInputChange(e, key) {
     const { items } = this.state;
     items[key] = { ...items[key], [e.target.name]: e.target.value };
     this.setState(() => ({ items: items }));
   }
+
   onDeckInputChange(name, value) {
     this.setState(() => ({ [name]: value }));
   }
+
   onCreateDeck() {
     const { title, description, items } = this.state;
     this.props.actions.createDeck({

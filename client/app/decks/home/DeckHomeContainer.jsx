@@ -119,7 +119,7 @@ class DeckHomeContainer extends React.Component {
               <p className="deckDescription">{deck.description}</p>
               <span className="deckDetails">
                 {moment(deck.createdAt).format('MMMM D, YYYY')} &middot;{' '}
-                {pluralize('card', items.length, true)}
+                {pluralize('item', items.length, true)}
               </span>
               <div className="deckActions">
                 <button onClick={this.onStudyDeck} className="button button--primary">
