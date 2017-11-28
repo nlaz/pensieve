@@ -21,8 +21,8 @@ export default class AddItemModal extends React.Component {
       <Modal title="Add Item" onDismiss={onDismiss}>
         <form className="form-editItem">
           <div className="form-group">
-            <label htmlFor="title">Item Title</label>
-            <input
+            <label htmlFor="title">Front</label>
+            <textarea
               name="title"
               className="form-control"
               type="text"
@@ -32,7 +32,7 @@ export default class AddItemModal extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="description">Item Description</label>
+            <label htmlFor="description">Back</label>
             <textarea
               name="description"
               className="form-control"

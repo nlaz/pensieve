@@ -101,10 +101,11 @@ export default class DeckListItem extends React.Component {
               }
             >
               <div className="popoverActions">
-                <div onClick={() => this.onShowModal(MODAL_TYPES.RESET_ITEM)} className="action">
-                  Reset Item
-                </div>
-                <div className="action">Remove from Deck</div>
+                {item.nextReviewDate && (
+                  <div onClick={() => this.onShowModal(MODAL_TYPES.RESET_ITEM)} className="action">
+                    Reset Item
+                  </div>
+                )}
                 <div
                   onClick={() => this.onShowModal(MODAL_TYPES.DELETE_ITEM)}
                   className="action border-top"

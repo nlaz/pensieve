@@ -23,7 +23,7 @@ export default class EditItemModal extends React.Component {
         <form className="form-editDeck">
           <div className="form-group">
             <label htmlFor="title">Front</label>
-            <input
+            <textarea
               name="title"
               className="form-control"
               type="text"
