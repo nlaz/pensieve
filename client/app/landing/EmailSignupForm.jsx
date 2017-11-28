@@ -53,7 +53,7 @@ export class EmailSignupForm extends React.Component {
     return (
       <form className={formClasses} onSubmit={this.onSubmit}>
         <div>
-          <label htmlFor="email">Beta coming early October. Request an invite.</label>
+          <label htmlFor="email">Beta coming soon. Get Notified.</label>
           <div className="landing-input">
             <input
               onChange={this.onChange}
@@ -63,7 +63,7 @@ export class EmailSignupForm extends React.Component {
               value={email}
             />
             <button onClick={this.onSubmit} type="submit" className="btn btn-primary">
-              Request Access
+              Subscribe
             </button>
           </div>
           {showError && (
