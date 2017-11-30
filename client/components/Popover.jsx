@@ -13,6 +13,7 @@ export default class Popover extends React.Component {
   componentDidMount() {
     document.addEventListener('click', this.onClickOutside);
   }
+
   componentWillUnmount() {
     document.removeEventListener('click', this.onClickOutside);
   }

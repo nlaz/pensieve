@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import Header from '../../../components/Header';
 import * as deckActions from '../deckActions';
-import EditItemCard from '../edit/EditItemCard';
+import NewItemCard from './NewItemCard';
 
 class DeckNewContainer extends React.Component {
   constructor(props) {
@@ -101,7 +101,7 @@ class DeckNewContainer extends React.Component {
                 {items &&
                   items.length > 0 &&
                   items.map((item, key) => (
-                    <EditItemCard
+                    <NewItemCard
                       item={item}
                       onInputChange={e => this.onItemInputChange(e, key)}
                       onRemove={() => this.onRemoveCard(key)}

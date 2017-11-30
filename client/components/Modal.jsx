@@ -11,9 +11,11 @@ export default class Modal extends React.Component {
   componentDidMount() {
     document.addEventListener('click', this.onClickOutside);
   }
+
   componentWillUnmount() {
     document.removeEventListener('click', this.onClickOutside);
   }
+
   onClickOutside(e) {
     if (this.modal && !this.modal.contains(e.target)) {
       this.props.onDismiss();

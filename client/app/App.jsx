@@ -45,12 +45,10 @@ if (process.env.NODE_ENV == 'development' && module.hot) {
   });
 }
 
-export default class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router routes={routes} history={browserHistory} onUpdate={logPageView} />
-      </Provider>
-    );
-  }
+export default function App() {
+  return (
+    <Provider store={store}>
+      <Router routes={routes} history={browserHistory} onUpdate={logPageView} />
+    </Provider>
+  );
 }

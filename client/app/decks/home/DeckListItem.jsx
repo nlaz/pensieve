@@ -3,8 +3,9 @@ import moment from 'moment';
 import { Link } from 'react-router';
 
 import Popover from '../../../components/Popover';
-import DeleteItemModal from './modals/DeleteItemModal';
-import ResetItemModal from './modals/ResetItemModal';
+
+import DeleteItemModal from '../../items/modals/DeleteItemModal';
+import ResetItemModal from '../../items/modals/ResetItemModal';
 
 const MODAL_TYPES = {
   RESET_ITEM: 'resetItem',

@@ -1,15 +1,16 @@
 import React from 'react';
-import Modal from '../../../../components/Modal';
+import Modal from '../../../components/Modal';
 
-export default function ResetItemModal({ onReset, onDismiss }) {
+export default function ResetDeckModal({ onDismiss, onReset }) {
   return (
-    <Modal title="Reset Item" onDismiss={onDismiss} narrow>
+    <Modal title="Reset Deck" onDismiss={onDismiss} narrow>
       <p>
         <span style={{ fontWeight: 'bold' }}>
-          Resetting a item will remove your study progress with it. This action is irreversible.
+          Resetting a deck will remove all your progress studying its cards. This action is
+          irreversible.
         </span>
         {'  '}
-        Are you sure you want to reset it?
+        Are you sure you want to reset them?
       </p>
       <div className="modalActions">
         <button type="button" onClick={onDismiss} className="button button--default">

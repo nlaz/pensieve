@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 
-export default function EditItemCard({ item, onInputChange, onRemove, index, className }) {
+export default function NewItemCard({ item, onInputChange, onRemove, index, className }) {
   return (
     <div className={cx('itemCard--wrapper', className)}>
       <div className="itemCard itemCard-edit">

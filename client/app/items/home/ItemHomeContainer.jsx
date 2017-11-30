@@ -9,9 +9,9 @@ import Popover from '../../../components/Popover';
 import PageTemplate from '../../../components/PageTemplate';
 import * as itemActions from '../itemActions';
 
-import ResetItemModal from '../../decks/home/modals/ResetItemModal';
-import DeleteItemModal from '../../decks/home/modals/DeleteItemModal';
-import EditItemModal from '../../decks/home/modals/EditItemModal';
+import ResetItemModal from '../modals/ResetItemModal';
+import DeleteItemModal from '../modals/DeleteItemModal';
+import EditItemModal from '../modals/EditItemModal';
 
 const MODAL_TYPES = {
   RESET_ITEM: 'resetItem',

@@ -7,11 +7,13 @@ import { bindActionCreators } from 'redux';
 import Footer from '../../../components/Footer';
 import PageTemplate from '../../../components/PageTemplate';
 import Popover from '../../../components/Popover';
-import DeleteDeckModal from './modals/DeleteDeckModal';
-import ResetDeckModal from './modals/ResetDeckModal';
-import EditDeckModal from './modals/EditDeckModal';
-import AddItemModal from './modals/AddItemModal';
+
 import DeckListItem from './DeckListItem';
+import DeleteDeckModal from '../modals/DeleteDeckModal';
+import ResetDeckModal from '../modals/ResetDeckModal';
+import EditDeckModal from '../modals/EditDeckModal';
+import AddItemModal from '../modals/AddItemModal';
+
 import * as deckActions from '../deckActions';
 import * as itemActions from '../../items/itemActions';
 

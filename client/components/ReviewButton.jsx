@@ -124,6 +124,7 @@ class ReviewButton extends React.Component {
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(reviewActions, dispatch)
 });
+
 const mapStateToProps = state => ({
   activity: {}
 });
