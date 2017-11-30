@@ -86,7 +86,6 @@ const SessionResults = ({ items }) => (
 class ReviewContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.onToggleHideItem = this.onToggleHideItem.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
     this.onNextAction = this.onNextAction.bind(this);
     this.state = { index: 0, showAnswer: false, showNextOptions: false, items: props.items };
@@ -135,12 +134,6 @@ class ReviewContainer extends React.Component {
       showNextOptions: true,
       showAnswer: !this.state.showAnswer
     });
-  }
-
-  onToggleHideItem(e, item) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.props.actions.toggleHideItem(item);
   }
 
   render() {

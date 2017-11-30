@@ -3,7 +3,6 @@ import authReducer from './auth/authReducer';
 import reviewReducer from './review/reviewReducer';
 import prelaunchReducer from './landing/prelaunchReducer';
 import itemReducer from './items/home/itemReducer';
-import itemsReducer from './items/itemsReducer';
 import deckReducer from './decks/home/deckReducer';
 import decksReducer from './decks/decksReducer';
 
@@ -26,7 +25,6 @@ const errorReducer = (state = INITIAL_STATE, action) => {
 const dataReducer = combineReducers({
   decks: decksReducer,
   deck: deckReducer,
-  items: itemsReducer,
   item: itemReducer,
   session: reviewReducer
 });

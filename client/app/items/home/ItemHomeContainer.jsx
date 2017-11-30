@@ -48,7 +48,6 @@ class ItemContainer extends React.Component {
     this.state = { showAnswer: false, showModalType: undefined };
     this.onItemClick = this.onItemClick.bind(this);
     this.onEditClick = this.onEditClick.bind(this);
-    this.onToggleHideItem = this.onToggleHideItem.bind(this);
     this.onShowModal = this.onShowModal.bind(this);
     this.onResetClick = this.onResetClick.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);
@@ -85,12 +84,6 @@ class ItemContainer extends React.Component {
     const { item } = this.props;
     this.props.actions.resetItem(item._id);
     this.onDismissModal();
-  }
-
-  onToggleHideItem(e, item) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.props.actions.toggleHideItem(item);
   }
 
   onEditItem(data) {

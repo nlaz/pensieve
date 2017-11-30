@@ -41,7 +41,6 @@ export default class DeckListItem extends React.Component {
     this.onShowModal = this.onShowModal.bind(this);
     this.onDismissModal = this.onDismissModal.bind(this);
     this.onDelete = this.onDelete.bind(this);
-    this.onHide = this.onHide.bind(this);
     this.onReset = this.onReset.bind(this);
   }
 
@@ -58,12 +57,6 @@ export default class DeckListItem extends React.Component {
     const { item } = this.props;
     this.props.actions.deleteItem(item._id);
     this.onDismissModal();
-  }
-
-  onHide(e) {
-    e.preventDefault();
-    const { item } = this.props;
-    this.props.actions.toggleHideItem(item);
   }
 
   onReset() {

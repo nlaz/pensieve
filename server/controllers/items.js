@@ -155,11 +155,6 @@ export async function resetItem(req, res) {
   }
 }
 
-// Helper method resetting item properties
-export const reset = item => {
-  return item;
-};
-
 // Helper method for email generation
 export const getDueItemsHelper = userId => {
   const currentTime = new Date();

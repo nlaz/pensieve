@@ -67,13 +67,6 @@
   }
 }
 
-.itemCard .hideIcon {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: $C_mediumGray;
-}
-
 .itemCard .item-progress {
   position: absolute;
   display: flex;
@@ -109,20 +102,6 @@
     flex-grow: 1;
     margin-left: 5px;
   }
-}
-
-.itemCard .glyphicon-eye-open {
-  color: $C_mediumGray;
-}
-
-.itemCard .progress-dot--good {
-  background-color: $C_progressGood;
-}
-.itemCard .progress-dot--warm {
-  background-color: $C_progressWarm;
-}
-.itemCard .progress-dot--hot {
-  background-color: $C_progressHot;
 }
 
 .sessions-page .page-header .actions {

@@ -4,13 +4,6 @@
  */
 @import './vars';
 
-.reviewCard--hide {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: $C_mediumGray;
-}
-
 .panel-body {
   align-items: center;
   cursor: pointer;

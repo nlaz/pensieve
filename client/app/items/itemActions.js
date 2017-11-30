@@ -3,27 +3,14 @@ import cookie from 'react-cookie';
 
 import { SHOW_ERROR, UPDATE_MESSAGE } from '../appActions';
 
-export const FETCH_ITEMS = 'fetchItems';
-export const FETCH_DUE_ITEMS = 'fetchDueItems';
 export const FETCH_ITEM = 'fetchItem';
 export const CREATE_ITEM = 'createItem';
 export const REVIEW_ITEM = 'reviewItem';
 export const RESET_ITEM = 'resetItem';
 export const EDIT_ITEM = 'editItem';
 export const DELETE_ITEM = 'deleteItem';
-export const CLEAR_ITEM = 'clearItem';
 
 const ITEMS_API = '/api/items';
-const DUE_ITEMS_API = '/api/due_items';
-
-export const fetchItems = () => dispatch => {
-  const config = { headers: { Authorization: cookie.load('token') } };
-
-  axios
-    .get(ITEMS_API, config)
-    .then(resp => dispatch({ type: FETCH_ITEMS, payload: resp.data }))
-    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
-};
 
 export const fetchItem = ({ itemId, ...params }) => dispatch => {
   const config = { headers: { Authorization: cookie.load('token') }, params };
@@ -31,15 +18,6 @@ export const fetchItem = ({ itemId, ...params }) => dispatch => {
   axios
     .get(`${ITEMS_API}/${itemId}`, config)
     .then(resp => dispatch({ type: FETCH_ITEM, payload: resp.data }))
-    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
-};
-
-export const fetchDueItems = () => dispatch => {
-  const config = { headers: { Authorization: cookie.load('token') } };
-
-  axios
-    .get(DUE_ITEMS_API, config)
-    .then(resp => dispatch({ type: FETCH_DUE_ITEMS, payload: resp.data }))
     .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };
 
@@ -69,17 +47,6 @@ export const resetItem = itemId => dispatch => {
   axios
     .post(route, {}, config)
     .then(resp => dispatch({ type: RESET_ITEM, payload: resp.data }))
-    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
-};
-
-export const toggleHideItem = item => dispatch => {
-  const config = { headers: { Authorization: cookie.load('token') } };
-  const route = `${ITEMS_API}/${item._id}`;
-  const params = { hidden: !item.hidden };
-
-  axios
-    .put(route, params, config)
-    .then(resp => dispatch({ type: EDIT_ITEM, payload: { item: resp.data.item } }))
     .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
 };
 
@@ -113,8 +80,4 @@ export const deleteItem = itemId => dispatch => {
       });
     })
     .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
-};
-
-export const clearItem = () => dispatch => {
-  return dispatch({ type: CLEAR_ITEM });
 };

@@ -1,4 +1,4 @@
-import { FETCH_ITEM, EDIT_ITEM, DELETE_ITEM, CREATE_ITEM, CLEAR_ITEM } from '../itemActions';
+import { FETCH_ITEM, EDIT_ITEM, DELETE_ITEM, CREATE_ITEM } from '../itemActions';
 
 const INITIAL_STATE = {};
 
@@ -12,8 +12,6 @@ export default function(state = INITIAL_STATE, action) {
       return action.payload.item;
     case EDIT_ITEM:
       return action.payload.item;
-    case CLEAR_ITEM:
-      return INITIAL_STATE;
     case DELETE_ITEM:
       return INITIAL_STATE;
   }
