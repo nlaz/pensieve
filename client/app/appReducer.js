@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import activityReducer from './activity/activityReducer';
 import authReducer from './auth/authReducer';
 import reviewReducer from './review/reviewReducer';
 import prelaunchReducer from './landing/prelaunchReducer';
@@ -29,8 +28,7 @@ const dataReducer = combineReducers({
   deck: deckReducer,
   items: itemsReducer,
   item: itemReducer,
-  session: reviewReducer,
-  activity: activityReducer
+  session: reviewReducer
 });
 
 const appReducer = combineReducers({
