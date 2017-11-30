@@ -1,7 +1,7 @@
 var chalk = require('chalk');
 var webpack = require('webpack');
 var formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-var config = require('./webpack.config.dev');
+var config = require('./webpack.client.config');
 var host = process.env.HOST || 'localhost';
 var port = process.env.PORT || 3000;
 var protocol = process.env.HTTPS === 'true' ? 'https' : 'http';

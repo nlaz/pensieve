@@ -5,11 +5,11 @@
   "main": "src/server.js",
   "scripts": {
     "test": "mocha --colors --require babel-register './config/mocha.js' './client/**/*.spec.jsx' ",
-    "start": "cross-env NODE_ENV=development yarn build && yarn serve",
-    "prod": "cross-env NODE_ENV=production yarn build && yarn serve",
+    "start": "yarn build && yarn serve",
+    "prod": "NODE_ENV=production yarn build && yarn serve",
     "build": "yarn build:client && yarn build:server",
     "serve": "node ./build/bundle.server.js",
-    "build:client": "webpack --config config/webpack.config.prod.js",
+    "build:client": "webpack --config config/webpack.client.config.js",
     "build:server": "webpack --config config/webpack.server.config.js",
     "forever": "yarn start:prod",
     "start:prod": "forever start -c 'yarn prod' ./",
@@ -19,8 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/nlaz/pensieve.git"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/nlaz/pensieve/issues"
   },
@@ -47,7 +46,6 @@
     "classnames": "^2.2.5",
     "cookie-session": "^2.0.0-beta.1",
     "cron": "^1.2.1",
-    "cross-env": "^4.0.0",
     "css-loader": "^0.28.2",
     "eslint": "^3.19.0",
     "eslint-loader": "^1.7.1",

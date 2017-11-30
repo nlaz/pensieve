@@ -16,7 +16,7 @@ const app = express();
 const isProduction = process.env.NODE_ENV === 'production';
 const PORT = isProduction ? process.env.PORT : 3000;
 
-// Configure DB
+// Connect to database server
 configDB();
 
 // Setup logger
@@ -38,29 +38,28 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 configRoutes(app);
 
 if (process.env.NODE_ENV === 'development') {
-  const config = require('../config/webpack.config.dev');
+  const config = require('../config/webpack.client.config');
   const compiler = require('../config/compiler');
-  app.use(
-    require('webpack-dev-middleware')(compiler, {
-      noInfo: true,
-      publicPath: config.output.publicPath,
-      stats: {
-        assets: false,
-        colors: true,
-        version: false,
-        hash: false,
-        timings: false,
-        chunks: false,
-        chunkModules: false
-      }
-    })
-  );
+
+  const settings = {
+    noInfo: true,
+    publicPath: config.output.publicPath,
+    stats: {
+      assets: false,
+      colors: true,
+      version: false,
+      hash: false,
+      timings: false,
+      chunks: false,
+      chunkModules: false
+    }
+  };
+
+  app.use(require('webpack-dev-middleware')(compiler, settings));
   app.use(require('webpack-hot-middleware')(compiler));
-  app.use('/', express.static(path.resolve(__dirname, '..', 'public')));
-} else if (process.env.NODE_ENV === 'production') {
-  app.use('/', express.static(path.resolve(__dirname, '..', 'build')));
 }
 
+app.use('/', express.static(path.resolve(__dirname, '..', 'build')));
 app.get('*', middleware);
 
 app.listen(PORT, err => {

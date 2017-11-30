@@ -1,9 +1,37 @@
 var webpack = require('webpack');
 var paths = require('./paths');
 
+var isDev = process.env.NODE_ENV === 'development';
 var publicPath = '/';
+
+var devPlugins = [
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+    }
+  })
+];
+
+var prodPlugins = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+    }
+  }),
+  new webpack.optimize.UglifyJsPlugin({
+    compressor: {
+      warnings: false
+    }
+  })
+];
+
 var config = {
-  entry: [paths.appIndexJs],
+  entry: isDev
+    ? ['babel-polyfill', 'webpack-hot-middleware/client', paths.appIndexJs]
+    : [paths.appIndexJs],
+  devtool: 'eval',
   output: {
     path: paths.appBuild,
     filename: 'bundle.js',
@@ -60,19 +88,7 @@ var config = {
       }
     ]
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-        BUILD: true
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    })
-  ],
+  plugins: isDev ? devPlugins : prodPlugins,
   resolve: {
     extensions: ['.js', '.jsx']
   },

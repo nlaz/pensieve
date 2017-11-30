@@ -125,7 +125,7 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(reviewActions, dispatch)
 });
 const mapStateToProps = state => ({
-  activity: state.data.activity
+  activity: {}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewButton);

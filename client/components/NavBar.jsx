@@ -35,15 +35,6 @@ export function NavBar({ self, authenticated, showNavMenu, onshowNavMenu }) {
                   Decks
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/items"
-                  activeClassName={'active-nav-link'}
-                  onClick={() => onshowNavMenu(false)}
-                >
-                  Items
-                </Link>
-              </li>
             </ul>
           )}
           {self && authenticated ? (
