@@ -37,7 +37,7 @@ class ReviewButton extends React.Component {
 
   render() {
     const { reviewType } = this.state;
-    const { sessionTypes = {} } = this.props.activity;
+    const { sessionTypes = {} } = {};
     const { study = {}, learn = {}, review = {} } = sessionTypes;
     return (
       <div className="reviewButton">
@@ -125,8 +125,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(reviewActions, dispatch)
 });
 
-const mapStateToProps = state => ({
-  activity: {}
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewButton);
+export default connect(null, mapDispatchToProps)(ReviewButton);

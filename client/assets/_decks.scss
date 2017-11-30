@@ -2,77 +2,32 @@
  * Deck styles
  * http://bit.ly/1ywfhq7
  */
-@import './vars';
 
 $itemCardHeight: 200px;
 $deckCardHeight: 200px;
 
-.deckInfo {
-  border: 1px solid $C_lightCardBorder;
-  border-radius: 3px;
-  background-color: $C_white;
-  margin-bottom: 10px;
-  padding: 10px;
-}
-
-.deckInfo {
-  text-align: center;
-  padding: 20px 10px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 300px;
-
-  .title {
-    color: $C_darkGray;
-    font-size: 24px;
-    font-weight: 600;
-    margin: 0;
-    margin-bottom: 5px;
-  }
-
-  .description {
-    color: $C_mediumGray;
-    font-size: 16px;
-    margin: 0;
-    hyphens: auto;
-  }
-}
-
-.deck-page .deck-actions {
-  display: flex;
-
-  .btn {
-    width: 100%;
-  }
-}
-
-.editDeckInfo {
+.newDeck-info {
   border-color: $C_lightCardBorder;
-
-  label {
-    color: $C_darkGray;
-  }
-
-  textarea {
-    resize: none;
-    height: 80px;
-    background: $C_white;
-  }
-
-  .form-control {
-    background: $C_white;
-    border-color: $C_lightCardBorder;
-    box-shadow: none;
-
-    &::placeholder {
-      color: $C_lightGray;
-    }
-  }
 }
 
-.btn-saveDeck {
-  margin-left: 12px;
+.newDeck-info label {
+  color: $C_darkGray;
+}
+
+.newDeck-info textarea {
+  resize: none;
+  height: 80px;
+  background: $C_white;
+}
+
+.newDeck-info .form-control {
+  background: $C_white;
+  border-color: $C_lightCardBorder;
+  box-shadow: none;
+
+  &::placeholder {
+    color: $C_lightGray;
+  }
 }
 
 .form-saveDeck {
@@ -83,7 +38,12 @@ $deckCardHeight: 200px;
     padding-bottom: 0;
   }
 }
-.form-saveDeck .editDeckInfo-wrapper {
+
+.form-saveDeck .button-saveDeck {
+  margin-left: 12px;
+}
+
+.form-saveDeck .newDeck-infoWrapper {
   position: unset;
 
   @include atSmallUp {
@@ -91,37 +51,22 @@ $deckCardHeight: 200px;
   }
 }
 
-.itemCard {
-  height: $itemCardHeight;
-}
-
-.itemCard,
 .deckCard {
   background-color: $C_white;
-  margin-bottom: 20px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  color: $C_black;
-
-  &:hover > p {
-    text-decoration: none;
-  }
-}
-
-.deckCard {
   border: 1px solid #e8e8e8;
   border-radius: 12px;
   box-shadow: inset 0 -8px 0 0 #f1f1f1;
   color: $C_darkGray;
-  position: relative;
+  display: flex;
+  flex-direction: column;
   height: 180px;
   hyphens: auto;
-  text-align: center;
+  justify-content: center;
+  margin-bottom: 20px;
   margin-top: 12px;
+  position: relative;
+  padding: $space;
+  text-align: center;
 
   &:hover {
     text-decoration: none;
@@ -171,14 +116,14 @@ $deckCardHeight: 200px;
   margin: 0;
 }
 
-.btn-addItem {
-  margin-bottom: 15px;
+.button-addItem {
   background: $C_white;
-  color: $C_darkGray;
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(51, 51, 51, 0.16);
-  padding: 8px 15px;
   border: 1px solid #f4f4f4;
+  color: $C_darkGray;
+  margin-bottom: 15px;
+  padding: 8px 15px;
   transition: all 0.2s ease;
 
   &:hover {
@@ -186,82 +131,20 @@ $deckCardHeight: 200px;
   }
 }
 
-$C_midGray: #949494;
-
-.btn-deckAction {
-  border: 1.5px solid $C_lightGray;
-  color: $C_midGray;
-  background: none;
-
-  &:hover {
-    color: $C_midGray;
-  }
-}
-
-.btn-newItem,
-.btn-newDeck {
-  background: $C_primaryBlue;
-  color: $C_white;
-  font-size: 14px;
-  padding: 7px 17px;
-  transition: all 0.1s ease;
-  text-shadow: 0 0.5px 0 $C_primaryDarkBlue;
-  line-height: 24px;
-
-  &:hover {
-    background: $C_primaryDarkBlue;
-    color: $C_white;
-    text-shadow: none;
-  }
-}
-
-.itemCard {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  overflow: hidden;
-}
-
-.itemCard .title {
-  hyphens: auto;
-  margin: 0;
-  font-size: 16px;
-  text-align: center;
-}
-
-.btn.itemCard--close {
-  position: absolute;
-  top: 3px;
-  right: 7px;
-  height: 20px;
-  width: 20px;
-  text-align: center;
-  padding: 0;
-  border: none;
-  color: $C_lightGray;
-
-  & .glyphicon {
-    line-height: 15px;
-    width: 13px;
-    text-align: center;
-  }
-}
-
-.sessions-page .emptyView-wrapper,
+.review-page .emptyView-wrapper,
 .items-page .emptyView-wrapper,
 .decks-page .emptyView-wrapper {
   display: flex;
   justify-content: center;
   margin-bottom: 60px;
 }
-.sessions-page .emptyView,
+.review-page .emptyView,
 .items-page .emptyView,
 .decks-page .emptyView {
   margin-top: 20px;
   max-width: 500px;
 }
-.sessions-page .emptyView .title,
+.review-page .emptyView .title,
 .items-page .emptyView .title,
 .decks-page .emptyView .title {
   color: $C_darkGray;
@@ -269,7 +152,7 @@ $C_midGray: #949494;
   font-size: 24px;
   margin: 0;
 }
-.sessions-page .emptyView .description,
+.review-page .emptyView .description,
 .items-page .emptyView .description,
 .decks-page .emptyView .description {
   color: $C_mediumGray;

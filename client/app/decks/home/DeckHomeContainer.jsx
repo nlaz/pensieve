@@ -36,6 +36,7 @@ class DeckHomeContainer extends React.Component {
     this.onShowModal = this.onShowModal.bind(this);
     this.onDismissModal = this.onDismissModal.bind(this);
   }
+
   componentWillMount() {
     const { deck, params } = this.props;
     if (!deck || deck._id !== params.deckId) {

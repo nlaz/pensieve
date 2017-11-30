@@ -2,7 +2,6 @@
  * Review styles
  * http://bit.ly/1ywfhq7
  */
-@import './vars';
 
 .panel-body {
   align-items: center;
@@ -16,10 +15,6 @@
 
 .panel-body h3 {
   margin: 0;
-}
-
-.btn-reset {
-  background: none;
 }
 
 .green-check {

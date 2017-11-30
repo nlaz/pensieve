@@ -80,7 +80,11 @@ class SignupContainer extends React.Component {
                   />
                 </div>
 
-                <button onClick={this.onSave} type="submit" className="btn btn-primary btn-block">
+                <button
+                  onClick={this.onSave}
+                  type="submit"
+                  className="button button--primary button--full"
+                >
                   Join
                 </button>
               </form>

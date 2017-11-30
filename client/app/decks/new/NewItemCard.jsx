@@ -3,8 +3,8 @@ import cx from 'classnames';
 
 export default function NewItemCard({ item, onInputChange, onRemove, index, className }) {
   return (
-    <div className={cx('itemCard--wrapper', className)}>
-      <div className="itemCard itemCard-edit">
+    <div className={cx('newItemCard--wrapper', className)}>
+      <div className="newItemCard">
         <label>Item {index + 1}</label>
         <button onClick={onRemove} className="itemCard--close btn btn-default btn-xs">
           <span className="glyphicon glyphicon-remove" aria-hidden="true" />

@@ -62,7 +62,7 @@ export class EmailSignupForm extends React.Component {
               placeholder="Email Address"
               value={email}
             />
-            <button onClick={this.onSubmit} type="submit" className="btn btn-primary">
+            <button onClick={this.onSubmit} type="submit" className="button button--primary">
               Subscribe
             </button>
           </div>

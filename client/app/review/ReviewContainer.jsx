@@ -62,11 +62,11 @@ const SessionResultItem = ({ item }) => (
 );
 
 const SessionResults = ({ items }) => (
-  <PageTemplate className="session-page margin-top" footer={<Footer />}>
+  <PageTemplate className="review-page margin-top" footer={<Footer />}>
     <div className="container margin-top">
       <div className="row">
         <div className="col-md-8 col-md-offset-2">
-          <div className="session-header">
+          <div className="review-header">
             <h5>RESULTS</h5>
           </div>
           <ul className="list-group">
@@ -142,7 +142,7 @@ class ReviewContainer extends React.Component {
 
     if (!Object.keys(items).length > 0) {
       return (
-        <PageTemplate className="session-page" footer={<Footer />}>
+        <PageTemplate className="review-page" footer={<Footer />}>
           <div className="col-md-8 col-md-offset-2 text-center margin-top">
             <span style={{ fontSize: '80px', fontWeight: 'bold' }}>😅</span>
             <h3 style={{ marginBottom: '40px' }}>Oops, something seems to have gone wrong.</h3>
@@ -163,13 +163,13 @@ class ReviewContainer extends React.Component {
     const intervals = getIntervals(selectedItem);
 
     return (
-      <PageTemplate className="session-page margin-top" footer={<Footer />}>
+      <PageTemplate className="review-page margin-top" footer={<Footer />}>
         <div className="container margin-top">
           <div className="row">
             <div className="col-md-8 col-md-offset-2">
-              <div className="session-header">
+              <div className="review-header">
                 <h5>REVIEW</h5>
-                <p className="session-count">
+                <p className="review-count">
                   <span style={{ fontWeight: 'bold' }}>{index + 1}</span> out of {items.length}
                 </p>
               </div>
@@ -188,7 +188,7 @@ class ReviewContainer extends React.Component {
                       <button
                         onClick={() => this.onNextAction(REVIEW_TYPE.HARD)}
                         type="button"
-                        className="btn btn-primary"
+                        className="button button--primary button--full"
                       >
                         Again{' '}
                         {intervals && <span className="interval">{` < ${intervals[0]}`}</span>}
@@ -198,7 +198,7 @@ class ReviewContainer extends React.Component {
                       <button
                         onClick={() => this.onNextAction(REVIEW_TYPE.GOOD)}
                         type="button"
-                        className="btn btn-primary"
+                        className="button button--primary button--full"
                       >
                         Good {intervals && <span className="interval">{` < ${intervals[1]}`}</span>}
                       </button>
@@ -207,7 +207,7 @@ class ReviewContainer extends React.Component {
                       <button
                         onClick={() => this.onNextAction(REVIEW_TYPE.EASY)}
                         type="button"
-                        className="btn btn-primary"
+                        className="button button--primary button--full"
                       >
                         Easy {intervals && <span className="interval">{` < ${intervals[2]}`}</span>}
                       </button>
@@ -216,7 +216,11 @@ class ReviewContainer extends React.Component {
                 ) : (
                   <div className="row">
                     <div className="col-xs-12 text-center">
-                      <button onClick={this.onItemClick} type="button" className="btn btn-primary">
+                      <button
+                        onClick={this.onItemClick}
+                        type="button"
+                        className="button button--primary button--full"
+                      >
                         Show Answer
                       </button>
                     </div>

@@ -1,0 +1,77 @@
+/**
+ * Stylesheet for the decks page
+*/
+
+.decks-page .page-header {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  @include atSmallUp {
+    align-items: center;
+    flex-direction: row;
+    margin-top: 40px;
+  }
+
+  .actions {
+    display: inline-block;
+    width: 100%;
+    margin-top: 15px;
+
+    @include atSmallUp {
+      margin: 0;
+      width: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .title {
+    flex-grow: 1;
+    margin-bottom: 5px;
+  }
+
+  .create .btn {
+    width: 100%;
+
+    @include atSmallUp {
+      width: auto;
+    }
+  }
+
+  .subtitle {
+    color: $C_mediumGray;
+    margin-bottom: 0;
+  }
+
+  .search {
+    flex-grow: 1;
+    margin-bottom: 8px;
+    position: relative;
+
+    @include atSmallUp {
+      flex-grow: none;
+      margin-right: 24px;
+      margin-bottom: 0;
+    }
+  }
+
+  .search .glyphicon {
+    bottom: 0;
+    color: #ababab;
+    left: 12px;
+    line-height: 34px;
+    position: absolute;
+    top: 0;
+  }
+
+  .search input {
+    border-radius: 999px;
+    padding: 10px 20px;
+    background: transparent;
+    padding-left: 30px;
+  }
+}

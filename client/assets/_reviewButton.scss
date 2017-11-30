@@ -25,6 +25,7 @@
     display: flex;
     text-shadow: 0 0.5px 0.5px rgba(0, 0, 0, 0.16);
   }
+
   .items-due {
     color: $C_white;
     background: #1e8e6c;
@@ -64,6 +65,7 @@
   width: 320px;
   max-width: 320px;
 }
+
 .reviewButton .reviewOption {
   border-bottom: 1px solid #e7e7e7;
   color: $C_darkGray;
@@ -75,11 +77,13 @@
     border-radius: 5px 5px 0 0;
     padding-top: 18px;
   }
+
   &:last-child {
     border-bottom: 0;
     border-radius: 0 0 5px 5px;
     padding-bottom: 18px;
   }
+
   &:hover {
     background: $C_primaryBlue;
     color: $C_white;
@@ -96,6 +100,7 @@
 .reviewButton .glyphicon {
   margin-right: 6px;
 }
+
 .reviewButton .reviewOption-title {
   font-size: 16px;
   line-height: 1em;
@@ -106,12 +111,14 @@
     font-weight: normal;
   }
 }
+
 .reviewButton .reviewOption-description {
   color: $C_mediumGray;
   font-size: 12px;
   line-height: 1.2em;
   margin-top: 3px;
 }
+
 .reviewOption-count {
   background: #c5c5c5;
   border-radius: 999px;

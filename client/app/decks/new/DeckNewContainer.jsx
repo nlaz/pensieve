@@ -70,8 +70,8 @@ class DeckNewContainer extends React.Component {
               className="form-saveDeck col-md-8 col-md-offset-2"
               onSubmit={e => e.preventDefault()}
             >
-              <div className="editDeckInfo-wrapper">
-                <div className="editDeckInfo">
+              <div className="newDeck-infoWrapper">
+                <div className="newDeck-info">
                   <div className="form-group">
                     <label htmlFor="title">Deck title</label>
                     <input
@@ -110,7 +110,11 @@ class DeckNewContainer extends React.Component {
                     />
                   ))}
               </div>
-              <button onClick={this.onAddCard} type="button" className="btn-addItem btn btn-block">
+              <button
+                onClick={this.onAddCard}
+                type="button"
+                className="button-addItem btn btn-block"
+              >
                 Add item +
               </button>
               <div className="margin-top" style={{ display: 'flex' }}>
@@ -120,7 +124,7 @@ class DeckNewContainer extends React.Component {
                 <button
                   onClick={this.onCreateDeck}
                   type="submit"
-                  className="btn btn-saveDeck button--primary col-xs-6"
+                  className="button button-saveDeck button--primary col-xs-6"
                 >
                   Create Deck
                 </button>

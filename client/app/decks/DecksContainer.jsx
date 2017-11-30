@@ -34,7 +34,7 @@ export const PageHeader = ({ count, onSearchChange }) => {
             </div>
           )}
           <div className="create">
-            <Link to="decks/new" className="btn-newDeck btn btn-primary">
+            <Link to="decks/new" className="button button--primary button-newDeck">
               Create Deck +
             </Link>
           </div>

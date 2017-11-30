@@ -2,23 +2,26 @@
  * Session page stylesheet
  */
 
-.session-page .session-header {
+.review-page .review-header {
   align-items: center;
   display: flex;
   justify-content: space-between;
   margin-bottom: $space;
 }
-.session-page .session-header h5 {
+
+.review-page .review-header h5 {
   color: $C_mediumGray;
   font-size: 16px;
   margin: 0;
 }
-.session-page .session-count {
+
+.review-page .review-count {
   color: $C_mediumGray;
   font-style: italic;
   font-size: 16px;
 }
-.session-page .interval {
+
+.review-page .interval {
   color: #073a83;
   margin-left: 2px;
 }
