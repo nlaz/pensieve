@@ -1,5 +1,3 @@
-'use strict';
-
 var path = require('path');
 var fs = require('fs');
 
@@ -23,5 +21,5 @@ module.exports = {
   appIndexJs: resolveApp('client/index.js'),
   serverIndexJs: resolveApp('server/index.js'),
   serverBuild: resolveApp('build'),
-  nodePaths: nodePaths,
+  nodePaths: nodePaths
 };

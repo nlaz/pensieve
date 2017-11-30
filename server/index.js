@@ -8,27 +8,20 @@ import path from 'path';
 import middleware from './middleware';
 import { broadcastEmailsCronJob } from './cron';
 
-var host = process.env.HOST || 'localhost';
-var port = process.env.PORT || 3000;
-var protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
-
-//import passport from 'passport';
 import configRoutes from './routes';
 import configDB from '../config/db';
-//import configPassport from '../config/passport';
 
 const app = express();
 
 const isProduction = process.env.NODE_ENV === 'production';
 const PORT = isProduction ? process.env.PORT : 3000;
 
-// Config DB
+// Configure DB
 configDB();
 
 // Setup logger
 app.use(morgan('dev'));
 
-// Setup passport
 app.use(
   cookieSession({
     name: 'session',
@@ -43,8 +36,6 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 // Setup Api routes
 configRoutes(app);
-
-// app.use('/', express.static(path.resolve(__dirname, '..', 'build')));
 
 if (process.env.NODE_ENV === 'development') {
   const config = require('../config/webpack.config.dev');
@@ -71,9 +62,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.get('*', middleware);
-
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 app.listen(PORT, err => {
   if (err) {

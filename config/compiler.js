@@ -1,5 +1,3 @@
-'use strict';
-
 var chalk = require('chalk');
 var webpack = require('webpack');
 var formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
@@ -23,7 +21,6 @@ var isFirstCompile = true;
 // "done" event fires when Webpack has finished recompiling the bundle.
 // Whether or not you have warnings or errors, you will get this event.
 compiler.plugin('done', function(stats) {
-
   // We have switched off the default Webpack output in WebpackDevServer
   // options so we are going to "massage" the warnings and errors and present
   // them in a readable focused way.
@@ -68,7 +65,9 @@ compiler.plugin('done', function(stats) {
     // Teach some ESLint tricks.
     console.log('You may use special comments to disable some warnings.');
     console.log('Use ' + chalk.yellow('// eslint-disable-next-line') + ' to ignore the next line.');
-    console.log('Use ' + chalk.yellow('/* eslint-disable */') + ' to ignore all warnings in a file.');
+    console.log(
+      'Use ' + chalk.yellow('/* eslint-disable */') + ' to ignore all warnings in a file.'
+    );
   }
 });
 
