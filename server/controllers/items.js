@@ -76,7 +76,7 @@ export const deleteItem = (req, res) => {
 };
 
 // Implements the SM2 algorithm created by Peter Wozniak
-// @see https://www.supermemo.com/english/ol/sm2.htm
+// @see https://www.supermemo.com/english/ol/sm2.html
 export async function reviewSM2Item(req, res) {
   const value = req.body.value;
 
@@ -141,7 +141,11 @@ export async function resetItem(req, res) {
   try {
     let item = await Item.findOne({ _id: itemId, user_id: userId });
 
-    item = getResetItem(item);
+    item.repetitions = 0;
+    item.EF = 2.5;
+    item.nextReviewDate = undefined;
+    item.interval = undefined;
+    item.reviewedAt = undefined;
 
     item = await item.save();
 
@@ -152,12 +156,7 @@ export async function resetItem(req, res) {
 }
 
 // Helper method resetting item properties
-export const getResetItem = item => {
-  item.repetitions = 0;
-  item.EF = 2.5;
-  item.nextReviewDate = undefined;
-  item.interval = undefined;
-  item.reviewedAt = undefined;
+export const reset = item => {
   return item;
 };
 
