@@ -1,4 +1,6 @@
 import React from 'react';
+
+import Button from '../../../components/button';
 import Modal from '../../../components/modal';
 
 export default class EditItemModal extends React.Component {
@@ -44,12 +46,10 @@ export default class EditItemModal extends React.Component {
             />
           </div>
           <div className="modalActions">
-            <button type="button" onClick={onDismiss} className="button btn-default">
-              Close
-            </button>
-            <button type="button" onClick={() => onSave(this.state)} className="button btn-primary">
+            <Button onClick={onDismiss}>Close</Button>
+            <Button onClick={() => onSave(this.state)} primary>
               Save
-            </button>
+            </Button>
           </div>
         </form>
       </Modal>

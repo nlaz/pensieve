@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import * as deckActions from '../deckActions';
 import * as itemActions from '../../items/itemActions';
 
+import Button from '../../../components/button';
 import Footer from '../../../components/footer';
 import PageTemplate from '../../../components/pages/PageTemplate';
 import Popover from '../../../components/popover';
@@ -22,7 +23,7 @@ const MODAL_TYPES = {
   ADD_ITEM: 'addItem',
   DELETE_DECK: 'deleteDeck',
   EDIT_DECK: 'editDeck',
-  RESET_DECK: 'resetDeck'
+  RESET_DECK: 'resetDeck',
 };
 
 class DeckHomeContainer extends React.Component {
@@ -65,10 +66,11 @@ class DeckHomeContainer extends React.Component {
     this.props.actions.createItem({
       deck_id: deckId,
       title: data.title,
-      description: data.description
+      description: data.description,
     });
     this.onDismissModal();
   }
+
   onEditDeck(data) {
     const deckId = this.props.deck._id;
     this.props.actions.editDeck({ deckId, ...data });
@@ -126,15 +128,10 @@ class DeckHomeContainer extends React.Component {
                 {pluralize('item', items.length, true)}
               </span>
               <div className="deckActions">
-                <button onClick={this.onStudyDeck} className="btn btn-primary">
+                <Button onClick={this.onStudyDeck} primary>
                   Study Now
-                </button>
-                <button
-                  onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}
-                  className="btn btn-default"
-                >
-                  Add Item +
-                </button>
+                </Button>
+                <Button onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}>Add Item +</Button>
               </div>
               <Popover
                 align="right"
@@ -177,11 +174,11 @@ class DeckHomeContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  deck: state.data.deck
+  deck: state.data.deck,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...deckActions, ...itemActions }, dispatch)
+  actions: bindActionCreators({ ...deckActions, ...itemActions }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckHomeContainer);

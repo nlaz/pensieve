@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import * as deckActions from '../deckActions';
 
+import Button from '../../../components/button';
 import Header from '../../../components/header';
 
 import NewItemCard from './NewItemCard';
@@ -59,7 +60,7 @@ class DeckNewContainer extends React.Component {
     this.props.actions.createDeck({
       title: title,
       description: description,
-      items: items
+      items: items,
     });
   }
 
@@ -110,24 +111,21 @@ class DeckNewContainer extends React.Component {
                     />
                   ))}
               </div>
-              <button
-                onClick={this.onAddCard}
-                type="button"
-                className="button-addItem btn btn-block"
-              >
+              <Button className="button-addItem" onClick={this.onAddCard} block>
                 Add item +
-              </button>
+              </Button>
               <div className="margin-top" style={{ display: 'flex' }}>
-                <button onClick={this.onCreateDeck} className="btn btn-default col-xs-6">
+                <Button className="col-xs-6" onClick={this.onCreateDeck}>
                   Cancel
-                </button>
-                <button
+                </Button>
+                <Button
+                  className="button-saveDeck col-xs-6"
                   onClick={this.onCreateDeck}
                   type="submit"
-                  className="button button-saveDeck btn-primary col-xs-6"
+                  primary
                 >
                   Create Deck
-                </button>
+                </Button>
               </div>
             </form>
           </div>
@@ -138,11 +136,11 @@ class DeckNewContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  deck: state.data.deck
+  deck: state.data.deck,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(deckActions, dispatch)
+  actions: bindActionCreators(deckActions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckNewContainer);

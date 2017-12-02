@@ -1,23 +1,21 @@
 import React from 'react';
+
+import Button from '../../../components/button';
 import Modal from '../../../components/modal';
 
 export default function DeleteItemModal({ onDismiss, onDelete }) {
   return (
     <Modal title="Delete Item" onDismiss={onDismiss} narrow>
       <p>
-        <span style={{ fontWeight: 'bold' }}>
-          Deleting a item will remove it permanently. This action is irreversible.
-        </span>
+        <strong>Deleting a item will remove it permanently. This action is irreversible.</strong>
         {'  '}
         Are you certain you want to delete it?
       </p>
       <div className="modalActions">
-        <button type="button" onClick={onDismiss} className="button btn-default">
-          Close
-        </button>
-        <button type="button" onClick={onDelete} className="button btn-danger">
+        <Button onClick={onDismiss}>Close</Button>
+        <Button onClick={onDelete} danger>
           Delete
-        </button>
+        </Button>
       </div>
     </Modal>
   );

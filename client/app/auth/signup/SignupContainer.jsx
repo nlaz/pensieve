@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import * as sessionActions from '../authActions';
 
+import Button from '../../../components/button';
 import Footer from '../../../components/footer';
 import PageTemplate from '../../../components/pages/PageTemplate';
 
@@ -82,9 +83,9 @@ class SignupContainer extends React.Component {
                   />
                 </div>
 
-                <button onClick={this.onSave} type="submit" className="btn btn-primary btn-block">
+                <Button onClick={this.onSave} type="submit" primary block>
                   Join
-                </button>
+                </Button>
               </form>
 
               <hr />
@@ -112,11 +113,11 @@ class SignupContainer extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(sessionActions, dispatch)
+  actions: bindActionCreators(sessionActions, dispatch),
 });
 
 const mapStateToProps = state => ({
-  authenticated: state.app.authenticated
+  authenticated: state.app.authenticated,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer);
