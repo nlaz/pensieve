@@ -5,7 +5,7 @@
 
 .newItemCard {
   background-color: $C_white;
-  border: 1px solid $C_lightCardBorder;
+  border: 1px solid $C_lightBorder;
   display: block;
   height: auto;
   overflow: hidden;
@@ -25,7 +25,7 @@
 
 .newItemCard .form-control {
   background: $C_darkWhite;
-  border-color: $C_lightCardBorder;
+  border-color: $C_lightBorder;
   box-shadow: none;
 
   &::placeholder {

@@ -4,11 +4,11 @@ export default function DeckPageNavigation({
   numPages,
   onDecrementPage,
   onIncrementPage,
-  onChangePage
+  onChangePage,
 }) {
   return (
     <nav aria-label="Page navigation" style={{ textAlign: 'center' }}>
-      <ul className="pagination margin-top">
+      <ul className="pagination">
         <li>
           <a onClick={onDecrementPage} href="#" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>

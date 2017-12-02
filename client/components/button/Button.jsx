@@ -2,11 +2,12 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
-function Button({ children, className, type, block, danger, primary, onClick, ...other }) {
+function Button({ children, className, type, block, danger, primary, reset, onClick, ...other }) {
   const classNames = cx(className, 'Button btn', {
     'btn-primary': primary,
     'btn-block': block,
     'btn-danger': danger,
+    'btn-reset': reset,
   });
 
   return (
@@ -23,6 +24,7 @@ Button.propTypes = {
   block: PropTypes.bool,
   danger: PropTypes.bool,
   primary: PropTypes.bool,
+  reset: PropTypes.bool,
   onClick: PropTypes.func,
 };
 

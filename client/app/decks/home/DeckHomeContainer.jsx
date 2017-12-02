@@ -100,7 +100,7 @@ class DeckHomeContainer extends React.Component {
     const { items = [] } = deck;
 
     return (
-      <PageTemplate className="DeckHomeContainer deck-page" footer={<Footer />}>
+      <PageTemplate className="DeckHomeContainer mt-5" footer={<Footer />}>
         {showModalType === MODAL_TYPES.ADD_ITEM && (
           <AddItemModal onSave={data => this.onAddItem(data)} onDismiss={this.onDismissModal} />
         )}
@@ -117,46 +117,54 @@ class DeckHomeContainer extends React.Component {
         {showModalType === MODAL_TYPES.RESET_DECK && (
           <ResetDeckModal onReset={this.onResetDeck} onDismiss={this.onDismissModal} />
         )}
-        <div className="container mt-3 margin-bottom">
-          <div className="row margin-top">
-            <div className="deckHeader col-md-10 offset-md-1">
-              <h5 className="deckSubtitle">DECK</h5>
-              <h1 className="deckTitle">{deck.title}</h1>
-              <p className="deckDescription">{deck.description}</p>
-              <span className="deckDetails">
+        <div className="container mt-3">
+          <div className="row">
+            <div className="position-relative col-md-10 offset-md-1">
+              <h6 className="text-secondary text-uppercase m-0">DECK</h6>
+              <h1 className="text-dark font-weight-bold h2 mb-0">{deck.title}</h1>
+              <p className="text-dark h5 mb-1">{deck.description}</p>
+              <span className="text-secondary">
                 {moment(deck.createdAt).format('MMMM D, YYYY')} &middot;{' '}
                 {pluralize('item', items.length, true)}
               </span>
-              <div className="deckActions">
+              <div className="mt-2">
                 <Button onClick={this.onStudyDeck} primary>
-                  Study Now
+                  Study now
                 </Button>
                 <Button
-                  className="btn-outline-secondary"
+                  className="btn-outline-secondary ml-2"
                   onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}
                 >
-                  Add Item +
+                  Add item +
                 </Button>
               </div>
               <Popover
                 align="right"
                 ref={c => (this.overflow = c)}
-                className="deckActions--overflow"
+                className="DeckHomeContainer__overflow position-absolute"
                 trigger={
-                  <span className="glyphicon glyphicon-option-vertical" aria-hidden="true" />
+                  <Button reset>
+                    <i className="fa fa-ellipsis-v fa-lg" aria-hidden="true" />
+                  </Button>
                 }
               >
-                <div className="popoverActions">
-                  <div onClick={() => this.onShowModal(MODAL_TYPES.EDIT_DECK)} className="action">
+                <div className="popover-actions">
+                  <div
+                    className="action-item"
+                    onClick={() => this.onShowModal(MODAL_TYPES.EDIT_DECK)}
+                  >
                     Edit Deck
                   </div>
                   <div
+                    className="action-item border-top"
                     onClick={() => this.onShowModal(MODAL_TYPES.RESET_DECK)}
-                    className="action border-top"
                   >
                     Reset Deck
                   </div>
-                  <div onClick={() => this.onShowModal(MODAL_TYPES.DELETE_DECK)} className="action">
+                  <div
+                    className="action-item"
+                    onClick={() => this.onShowModal(MODAL_TYPES.DELETE_DECK)}
+                  >
                     Delete Deck
                   </div>
                 </div>
@@ -164,7 +172,7 @@ class DeckHomeContainer extends React.Component {
               <hr />
             </div>
             <div className="col-md-10 offset-md-1">
-              <div className="deckHome-items">
+              <div className="border rounded">
                 {items.length > 0 &&
                   items.map((item, key) => (
                     <DeckListItem key={key} item={item} actions={this.props.actions} />

@@ -94,7 +94,7 @@ class DecksContainer extends React.Component {
 
     return (
       <PageTemplate footer={<Footer />}>
-        <div className="decks-page container margin-top">
+        <div className="decks-page container">
           <div className="row">
             <PageHeader count={decks.length} onSearchChange={this.onSearchChange} />
           </div>
@@ -133,11 +133,11 @@ class DecksContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  decks: state.data.decks
+  decks: state.data.decks,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(deckActions, dispatch)
+  actions: bindActionCreators(deckActions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DecksContainer);

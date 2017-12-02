@@ -9,7 +9,7 @@ import ResetItemModal from '../../items/modals/ResetItemModal';
 
 const MODAL_TYPES = {
   RESET_ITEM: 'resetItem',
-  DELETE_ITEM: 'deleteItem'
+  DELETE_ITEM: 'deleteItem',
 };
 
 export function TimeLeft({ date }) {
@@ -94,15 +94,18 @@ export default class DeckListItem extends React.Component {
                 </div>
               }
             >
-              <div className="popoverActions">
+              <div className="popover-actions">
                 {item.nextReviewDate && (
-                  <div onClick={() => this.onShowModal(MODAL_TYPES.RESET_ITEM)} className="action">
+                  <div
+                    className="action-item"
+                    onClick={() => this.onShowModal(MODAL_TYPES.RESET_ITEM)}
+                  >
                     Reset Item
                   </div>
                 )}
                 <div
+                  className="action-item border-top"
                   onClick={() => this.onShowModal(MODAL_TYPES.DELETE_ITEM)}
-                  className="action border-top"
                 >
                   Delete Item
                 </div>

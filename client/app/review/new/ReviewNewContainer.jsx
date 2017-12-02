@@ -25,7 +25,7 @@ class ReviewNewContainer extends React.Component {
   render() {
     return (
       <PageTemplate>
-        <div className="col-md-8 offset-md-2 text-center margin-top">
+        <div className="col-md-8 offset-md-2 text-center">
           <h3>Creating your study session...</h3>
         </div>
       </PageTemplate>
@@ -34,11 +34,11 @@ class ReviewNewContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.errors.value
+  error: state.errors.value,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(reviewActions, dispatch)
+  actions: bindActionCreators(reviewActions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewNewContainer);

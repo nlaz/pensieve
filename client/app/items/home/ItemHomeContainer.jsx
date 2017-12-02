@@ -17,7 +17,7 @@ import ResetItemModal from '../modals/ResetItemModal';
 const MODAL_TYPES = {
   RESET_ITEM: 'resetItem',
   DELETE_ITEM: 'deleteItem',
-  EDIT_ITEM: 'editItem'
+  EDIT_ITEM: 'editItem',
 };
 
 export function TimeLeft({ date }) {
@@ -105,7 +105,7 @@ class ItemContainer extends React.Component {
     if (!item || Object.keys(item).length === 0) {
       return (
         <PageTemplate className="item-page" footer={<Footer />}>
-          <div className="col-md-8 offset-md-2 text-center margin-top">
+          <div className="col-md-8 offset-md-2 text-center">
             <span style={{ fontSize: '80px', fontWeight: 'bold' }}>😅</span>
             <h3 style={{ marginBottom: '40px' }}>Oops, that item does not seem to exist.</h3>
             <Link to="/" className="button btn-primary">
@@ -119,7 +119,7 @@ class ItemContainer extends React.Component {
     const itemContent = showAnswer ? item.description : item.title;
 
     return (
-      <PageTemplate className="item-page margin-top" footer={<Footer />}>
+      <PageTemplate className="item-page" footer={<Footer />}>
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDeleteClick} onDismiss={this.onDismissModal} />
         )}
@@ -133,7 +133,7 @@ class ItemContainer extends React.Component {
         {showModalType === MODAL_TYPES.RESET_ITEM && (
           <ResetItemModal onReset={this.onResetClick} onDismiss={this.onDismissModal} />
         )}
-        <div className="container margin-top">
+        <div className="container">
           <div className="row">
             <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
               <div className="item-header">
@@ -195,11 +195,11 @@ class ItemContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  item: state.data.item
+  item: state.data.item,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(itemActions, dispatch)
+  actions: bindActionCreators(itemActions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemContainer);

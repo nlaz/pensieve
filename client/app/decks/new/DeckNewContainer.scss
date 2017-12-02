@@ -7,7 +7,7 @@ $itemCardHeight: 200px;
 $deckCardHeight: 200px;
 
 .newDeck-info {
-  border-color: $C_lightCardBorder;
+  border-color: $C_lightBorder;
 }
 
 .newDeck-info label {
@@ -22,7 +22,7 @@ $deckCardHeight: 200px;
 
 .newDeck-info .form-control {
   background: $C_white;
-  border-color: $C_lightCardBorder;
+  border-color: $C_lightBorder;
   box-shadow: none;
 
   &::placeholder {

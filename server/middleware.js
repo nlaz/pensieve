@@ -24,6 +24,7 @@ const renderFullPage = (appHtml, preloadedState) => `
     <div id='root'>${appHtml}</div>
     <script>window.INITIAL_STATE=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}</script>
     <script src='${BUNDLE_URL}' type='text/javascript'></script>
+    <script src="https://use.fontawesome.com/fd3d7dfdb0.js"></script>
   </body>
   </html>
 `;
@@ -40,7 +41,7 @@ export default (req, res) => {
       const html = renderToString(
         <Provider store={store}>
           <RouterContext {...props} />
-        </Provider>
+        </Provider>,
       );
 
       const preloadedState = store.getState();

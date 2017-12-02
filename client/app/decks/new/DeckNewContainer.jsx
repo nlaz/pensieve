@@ -68,7 +68,7 @@ class DeckNewContainer extends React.Component {
     const { title, description, items } = this.state;
     return (
       <Header className="newDeck-page">
-        <div className="container margin-top">
+        <div className="container">
           <div className="row">
             <form className="form-saveDeck col-md-8 offset-md-2" onSubmit={e => e.preventDefault()}>
               <div className="newDeck-infoWrapper">
@@ -98,7 +98,7 @@ class DeckNewContainer extends React.Component {
                 </div>
                 <hr />
               </div>
-              <div className="margin-top">
+              <div className="mt-2">
                 {items &&
                   items.length > 0 &&
                   items.map((item, key) => (
@@ -114,7 +114,7 @@ class DeckNewContainer extends React.Component {
               <Button className="button-addItem" onClick={this.onAddCard} block>
                 Add item +
               </Button>
-              <div className="margin-top" style={{ display: 'flex' }}>
+              <div style={{ display: 'flex' }}>
                 <Button className="col-xs-6" onClick={this.onCreateDeck}>
                   Cancel
                 </Button>

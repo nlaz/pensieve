@@ -65,8 +65,8 @@ const SessionResultItem = ({ item }) => (
 );
 
 const SessionResults = ({ items }) => (
-  <PageTemplate className="review-page margin-top" footer={<Footer />}>
-    <div className="container margin-top">
+  <PageTemplate className="review-page" footer={<Footer />}>
+    <div className="container">
       <div className="row">
         <div className="col-md-8 offset-md-2">
           <div className="review-header">
@@ -146,7 +146,7 @@ class ReviewContainer extends React.Component {
     if (!Object.keys(items).length > 0) {
       return (
         <PageTemplate className="review-page" footer={<Footer />}>
-          <div className="col-md-8 offset-md-2 text-center margin-top">
+          <div className="col-md-8 offset-md-2 text-center">
             <span style={{ fontSize: '80px', fontWeight: 'bold' }}>😅</span>
             <h3 style={{ marginBottom: '40px' }}>Oops, something seems to have gone wrong.</h3>
             <Link to="/" className="btn btn-primary">
@@ -166,8 +166,8 @@ class ReviewContainer extends React.Component {
     const intervals = getIntervals(selectedItem);
 
     return (
-      <PageTemplate className="review-page margin-top" footer={<Footer />}>
-        <div className="container margin-top">
+      <PageTemplate className="review-page" footer={<Footer />}>
+        <div className="container">
           <div className="row">
             <div className="col-md-8 offset-md-2">
               <div className="review-header">

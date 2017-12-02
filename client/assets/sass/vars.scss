@@ -12,9 +12,13 @@ $C_darkGray: #4b4b4b;
 $C_mediumGray: #777a82;
 $C_lightGray: #cbcbcb;
 $C_cardBorder: #dddddd;
-$C_lightCardBorder: #ececec;
+$C_lightBorder: #e9e9e9;
 $C_errorRed: #e35a5a;
 $C_errorDarkRed: #d25353;
 $C_darkBorder: #d5d5d5;
 
 $space: 12px;
+
+.text-dark {
+  color: $C_darkGray !important;
+}

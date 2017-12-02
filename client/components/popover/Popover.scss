@@ -1,7 +1,7 @@
 $popoverWidth: 200px;
 
 .popover {
-  border: 1px solid $C_lightCardBorder;
+  border: 1px solid $C_lightBorder;
   box-shadow: 0 2px 4px $C_lightShadow;
   top: $space / 3;
   width: $popoverWidth;
@@ -13,4 +13,22 @@ $popoverWidth: 200px;
 .popover--right {
   left: auto;
   right: 0;
+}
+
+.popover-actions .action-item {
+  padding: $space;
+  color: $C_darkGray;
+
+  &:first-child {
+    border-radius: 4px 4px 0 0;
+  }
+  &:last-child {
+    border-radius: 0 0 4px 4px;
+  }
+  &:hover {
+    background: #f0f0f0;
+  }
+  &.border-top {
+    border-top: 1px solid $C_lightBorder;
+  }
 }
