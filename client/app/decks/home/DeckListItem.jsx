@@ -7,7 +7,7 @@ import Popover from '../../../components/popover';
 import DeleteItemModal from '../../items/modals/DeleteItemModal';
 import ResetItemModal from '../../items/modals/ResetItemModal';
 
-import TimeLeft from './TimeLeft';
+import TimeLeft from '../../items/home/TimeLeft';
 
 const MODAL_TYPES = {
   RESET_ITEM: 'resetItem',

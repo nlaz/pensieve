@@ -1,11 +1,11 @@
 import React from 'react';
-import moment from 'moment';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as itemActions from '../itemActions';
 
+import Button from '../../../components/button';
 import Footer from '../../../components/footer';
 import PageTemplate from '../../../components/pages/PageTemplate';
 import Popover from '../../../components/popover';
@@ -14,33 +14,13 @@ import DeleteItemModal from '../modals/DeleteItemModal';
 import EditItemModal from '../modals/EditItemModal';
 import ResetItemModal from '../modals/ResetItemModal';
 
+import TimeLeft from './TimeLeft';
+
 const MODAL_TYPES = {
   RESET_ITEM: 'resetItem',
   DELETE_ITEM: 'deleteItem',
   EDIT_ITEM: 'editItem',
 };
-
-export function TimeLeft({ date }) {
-  if (!date) {
-    return false;
-  }
-
-  if (moment(date).isBefore(moment())) {
-    return (
-      <div className="item-timeLeft item-timeLeft--due">
-        <span>due</span>
-        <img className="icon-alarm" src={require('../../../assets/img/icons/alarm_red.svg')} />
-      </div>
-    );
-  }
-
-  return (
-    <div className="item-timeLeft">
-      <span>{moment().to(date, true)}</span>
-      <img className="icon-alarm" src={require('../../../assets/img/icons/alarm.svg')} />
-    </div>
-  );
-}
 
 class ItemContainer extends React.Component {
   constructor(props) {
@@ -100,15 +80,16 @@ class ItemContainer extends React.Component {
 
   render() {
     const { item } = this.props;
+    const { deck } = item;
     const { showAnswer, showModalType } = this.state;
 
     if (!item || Object.keys(item).length === 0) {
       return (
-        <PageTemplate className="item-page" footer={<Footer />}>
+        <PageTemplate className="ItemHomeContainer mt-5" footer={<Footer />}>
           <div className="col-md-8 offset-md-2 text-center">
             <span style={{ fontSize: '80px', fontWeight: 'bold' }}>😅</span>
             <h3 style={{ marginBottom: '40px' }}>Oops, that item does not seem to exist.</h3>
-            <Link to="/" className="button btn-primary">
+            <Link to="/" className="btn btn-primary">
               Go Home
             </Link>
           </div>
@@ -119,7 +100,7 @@ class ItemContainer extends React.Component {
     const itemContent = showAnswer ? item.description : item.title;
 
     return (
-      <PageTemplate className="item-page" footer={<Footer />}>
+      <PageTemplate className="ItemHomeContainer mt-5" footer={<Footer />}>
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDeleteClick} onDismiss={this.onDismissModal} />
         )}
@@ -133,34 +114,42 @@ class ItemContainer extends React.Component {
         {showModalType === MODAL_TYPES.RESET_ITEM && (
           <ResetItemModal onReset={this.onResetClick} onDismiss={this.onDismissModal} />
         )}
-        <div className="container">
+        <div className="container mt-3">
           <div className="row">
             <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-              <div className="item-header">
-                <h5>ITEM</h5>
+              <div className="ItemHomeContainer__header">
+                <div>
+                  <Link to={`/decks/${deck._id}`}>{deck.title}</Link>
+                  <span className="m-2">{'>'}</span>
+                  <span className="m-0">Item</span>
+                </div>
                 <Popover
                   align="right"
                   ref={c => (this.overflow = c)}
-                  className="itemPage-overflow"
                   trigger={
-                    <span className="glyphicon glyphicon-option-vertical" aria-hidden="true" />
+                    <Button reset>
+                      <i className="fa fa-ellipsis-v fa-lg" aria-hidden="true" />
+                    </Button>
                   }
                 >
-                  <div className="popoverActions">
-                    <div onClick={() => this.onShowModal(MODAL_TYPES.EDIT_ITEM)} className="action">
+                  <div className="popover-actions">
+                    <div
+                      className="action-item"
+                      onClick={() => this.onShowModal(MODAL_TYPES.EDIT_ITEM)}
+                    >
                       Edit Card
                     </div>
                     {item.nextReviewDate && (
                       <div
+                        className="action-item border-top"
                         onClick={() => this.onShowModal(MODAL_TYPES.RESET_ITEM)}
-                        className="action border-top"
                       >
                         Reset Card
                       </div>
                     )}
                     <div
+                      className="action-item"
                       onClick={() => this.onShowModal(MODAL_TYPES.DELETE_ITEM)}
-                      className="action"
                     >
                       Delete Card
                     </div>
@@ -168,23 +157,17 @@ class ItemContainer extends React.Component {
                 </Popover>
               </div>
               <hr />
-              <div className="panel panel-default">
-                <div className="panel-body" onClick={this.onItemClick}>
-                  <div className="panel-face">
-                    {!showAnswer ? <span>Front</span> : <span>Back</span>}
-                  </div>
-                  <TimeLeft date={item.nextReviewDate} />
-                  <h3 className="text-center" style={{ margin: '0' }}>
-                    {itemContent}
-                  </h3>
+              <div
+                className="ItemHomeContainer__panel bg-white border rounded mb-2"
+                onClick={this.onItemClick}
+              >
+                <div className="panel-face font-italic text-secondary">
+                  {!showAnswer ? <span>Front</span> : <span>Back</span>}
                 </div>
-              </div>
-              <div className="item-info">
-                {item.deck && (
-                  <p className="item-deckInfo">
-                    Part of <span className="item-deckTitle">{item.deck.title}</span>
-                  </p>
-                )}
+                <TimeLeft date={item.nextReviewDate} />
+                <h3 className="text-center" style={{ margin: '0' }}>
+                  {itemContent}
+                </h3>
               </div>
             </div>
           </div>
