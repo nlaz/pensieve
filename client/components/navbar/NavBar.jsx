@@ -20,9 +20,12 @@ class NavBar extends React.Component {
     const { self, authenticated } = this.props;
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light">
+      <nav
+        className="navbar navbar-expand-lg navbar-light"
+        style={{ background: '#fff', boxShadow: '0 1px 2px rgba(178, 178, 178, 0.5)' }}
+      >
         <div className="container">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand text-primary" to="/">
             Pensieve
           </Link>
           <button
