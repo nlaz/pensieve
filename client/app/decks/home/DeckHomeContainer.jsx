@@ -121,12 +121,12 @@ class DeckHomeContainer extends React.Component {
           <div className="row">
             <div className="position-relative col-md-10 offset-md-1">
               <h6 className="text-secondary text-uppercase m-0">DECK</h6>
-              <h1 className="text-dark font-weight-bold h2 mb-0">{deck.title}</h1>
-              <p className="text-dark h5 mb-1">{deck.description}</p>
-              <span className="text-secondary">
+              <h1 className="text-dark font-weight-bold h3 mb-0">{deck.title}</h1>
+              <p className="text-secondary h5 mb-1">{deck.description}</p>
+              <small className="text-secondary">
                 {moment(deck.createdAt).format('MMMM D, YYYY')} &middot;{' '}
                 {pluralize('item', items.length, true)}
-              </span>
+              </small>
               <div className="mt-2">
                 <Button onClick={this.onStudyDeck} primary>
                   Study now

@@ -2,8 +2,8 @@
  * List item stylesheet
  */
 
-.itemList-itemWrapper {
-  background: $C_white;
+.DeckListItem-wrapper {
+  border-bottom: 1px solid $C_lightBorder;
 
   &:first-child {
     border-radius: 4px 4px 0 0;
@@ -14,67 +14,22 @@
   }
 }
 
-.itemList-item {
+.DeckListItem {
   align-items: center;
-  border-bottom: 1px solid #e9e9e9;
   color: $C_darkGray;
   display: flex;
-  font-size: 16px;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: $space $space * 1.25;
 
-  .title {
-    padding: 6px 0;
-  }
   &:focus,
   &:hover {
     background: #f6f6f6 !important;
     color: $C_black;
     text-decoration: none;
   }
-  &--hidden {
-    background: rgba(256, 256, 256, 0.6);
-  }
-  &--hidden .title {
-    opacity: 0.6;
-  }
-  &--hidden .itemAction-hideItem {
-    color: $C_darkGray;
-  }
-  .itemActions {
-    align-items: center;
-    color: $C_mediumGray;
-    display: flex;
-  }
-  .itemAction-hideItem {
-    margin-left: 18px;
-  }
-  .itemAction-overflow {
-    padding: 24px 12px;
-
-    &:hover {
-      background: $C_primaryBlue;
-    }
-  }
 }
-
-.item-timeLeft {
+.DeckListItem__actions {
   align-items: center;
-  background: #f2f2f2;
-  border-radius: 999px;
-  color: #a29f9f;
+  color: $C_mediumGray;
   display: flex;
-  font-size: 15px;
-  font-weight: normal;
-  padding: 4px 12px;
-
-  &--due {
-    background: #ffdede;
-    color: #ff5a5a;
-  }
-
-  .icon-alarm {
-    margin-left: 6px;
-    width: 18px;
-  }
 }

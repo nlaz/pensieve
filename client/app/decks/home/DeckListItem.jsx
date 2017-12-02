@@ -1,38 +1,18 @@
 import React from 'react';
-import moment from 'moment';
 import { Link } from 'react-router';
 
+import Button from '../../../components/button';
 import Popover from '../../../components/popover';
 
 import DeleteItemModal from '../../items/modals/DeleteItemModal';
 import ResetItemModal from '../../items/modals/ResetItemModal';
 
+import TimeLeft from './TimeLeft';
+
 const MODAL_TYPES = {
   RESET_ITEM: 'resetItem',
   DELETE_ITEM: 'deleteItem',
 };
-
-export function TimeLeft({ date }) {
-  if (!date) {
-    return false;
-  }
-
-  if (moment(date).isBefore(moment())) {
-    return (
-      <div className="item-timeLeft item-timeLeft--due">
-        <span>due</span>
-        <img className="icon-alarm" src={require('../../../assets/img/icons/alarm_red.svg')} />
-      </div>
-    );
-  }
-
-  return (
-    <div className="item-timeLeft">
-      <span>{moment().to(date, true)}</span>
-      <img className="icon-alarm" src={require('../../../assets/img/icons/alarm.svg')} />
-    </div>
-  );
-}
 
 export default class DeckListItem extends React.Component {
   constructor(props) {
@@ -71,27 +51,24 @@ export default class DeckListItem extends React.Component {
     const { showModalType } = this.state;
 
     return (
-      <div className="itemList-itemWrapper">
+      <div className="DeckListItem-wrapper bg-white">
         {showModalType === MODAL_TYPES.RESET_ITEM && (
           <ResetItemModal onReset={this.onReset} onDismiss={this.onDismissModal} />
         )}
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDelete} onDismiss={this.onDismissModal} />
         )}
-        <Link className="itemList-item" to={`/items/${item._id}`}>
-          <span className="title">{item.title}</span>
-          <div className="itemActions">
+        <Link className="DeckListItem" to={`/items/${item._id}`}>
+          <span>{item.title}</span>
+          <div className="DeckListItem__actions">
             <TimeLeft date={item.nextReviewDate} />
             <Popover
               align="right"
               ref={c => (this.overflow = c)}
               trigger={
-                <div onClick={this.onTogglePopover} className="itemAction-overflow">
-                  <img
-                    className="icon-overflow"
-                    src={require('../../../assets/img/icons/overflow.svg')}
-                  />
-                </div>
+                <Button className="ml-2" reset>
+                  <i className="fa fa-ellipsis-h text-secondary" aria-hidden="true" />
+                </Button>
               }
             >
               <div className="popover-actions">
