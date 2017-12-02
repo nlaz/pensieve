@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 
 function Button({ children, className, type, block, danger, primary, onClick, ...other }) {
   const classNames = cx(className, 'Button btn', {

@@ -12,6 +12,7 @@ import PageTemplate from '../../../components/pages/PageTemplate';
 class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = { email: '', password: '' };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
