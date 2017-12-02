@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as emailActions from './emailActions';
-import { EmailSignupForm } from './EmailSignupForm';
-import PageTemplate from '../../components/PageTemplate';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+
+import Footer from '../../components/footer';
+import Header from '../../components/header';
+import PageTemplate from '../../components/pages/PageTemplate';
+
+import EmailSignupForm from './EmailSignupForm';
 
 export class LandingContainer extends React.Component {
   constructor(props) {

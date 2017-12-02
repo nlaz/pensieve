@@ -1,17 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router';
 import moment from 'moment';
-import { bindActionCreators } from 'redux';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import Footer from '../../../components/Footer';
-import Popover from '../../../components/Popover';
-import PageTemplate from '../../../components/PageTemplate';
 import * as itemActions from '../itemActions';
 
-import ResetItemModal from '../modals/ResetItemModal';
+import Footer from '../../../components/footer';
+import PageTemplate from '../../../components/pages/PageTemplate';
+import Popover from '../../../components/popover';
+
 import DeleteItemModal from '../modals/DeleteItemModal';
 import EditItemModal from '../modals/EditItemModal';
+import ResetItemModal from '../modals/ResetItemModal';
 
 const MODAL_TYPES = {
   RESET_ITEM: 'resetItem',
@@ -28,7 +29,7 @@ export function TimeLeft({ date }) {
     return (
       <div className="item-timeLeft item-timeLeft--due">
         <span>due</span>
-        <img className="icon-alarm" src={require('../../../assets/images/icons/alarm_red.svg')} />
+        <img className="icon-alarm" src={require('../../../assets/img/icons/alarm_red.svg')} />
       </div>
     );
   }
@@ -36,7 +37,7 @@ export function TimeLeft({ date }) {
   return (
     <div className="item-timeLeft">
       <span>{moment().to(date, true)}</span>
-      <img className="icon-alarm" src={require('../../../assets/images/icons/alarm.svg')} />
+      <img className="icon-alarm" src={require('../../../assets/img/icons/alarm.svg')} />
     </div>
   );
 }
@@ -104,10 +105,10 @@ class ItemContainer extends React.Component {
     if (!item || Object.keys(item).length === 0) {
       return (
         <PageTemplate className="item-page" footer={<Footer />}>
-          <div className="col-md-8 col-md-offset-2 text-center margin-top">
+          <div className="col-md-8 offset-md-2 text-center margin-top">
             <span style={{ fontSize: '80px', fontWeight: 'bold' }}>😅</span>
             <h3 style={{ marginBottom: '40px' }}>Oops, that item does not seem to exist.</h3>
-            <Link to="/" className="button button--primary">
+            <Link to="/" className="button btn-primary">
               Go Home
             </Link>
           </div>
@@ -134,7 +135,7 @@ class ItemContainer extends React.Component {
         )}
         <div className="container margin-top">
           <div className="row">
-            <div className="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
               <div className="item-header">
                 <h5>ITEM</h5>
                 <Popover

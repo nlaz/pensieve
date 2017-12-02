@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../../../components/Modal';
+import Modal from '../../../components/modal/Modal';
 
 export default function DeleteDeckModal({ onDismiss, onDelete }) {
   return (
@@ -12,10 +12,10 @@ export default function DeleteDeckModal({ onDismiss, onDelete }) {
         Are you certain you want to delete them?
       </p>
       <div className="modalActions">
-        <button type="button" onClick={onDismiss} className="button button--default">
+        <button type="button" onClick={onDismiss} className="button btn-default">
           Close
         </button>
-        <button type="button" onClick={onDelete} className="button button--alert">
+        <button type="button" onClick={onDelete} className="button btn-danger">
           Delete
         </button>
       </div>

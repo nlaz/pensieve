@@ -2,14 +2,14 @@ import React from 'react';
 
 export default function ReviewProgressBar({ progress }) {
   return (
-    <div className="progress" style={{ height: '10px' }}>
+    <div className="ReviewProgressBar progress">
       <div
-        className="progress-bar"
+        className="ReviewProgressBar__progress-bar progress-bar"
         role="progressbar"
         aria-valuenow={progress}
         aria-valuemin="0"
         aria-valuemax="100"
-        style={{ width: `${progress}%`, backgroundColor: '#1574fb' }}
+        style={{ width: `${progress}%` }}
       >
         <span className="sr-only">{progress}% Complete</span>
       </div>

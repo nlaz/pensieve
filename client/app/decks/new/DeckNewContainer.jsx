@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Header from '../../../components/Header';
 import * as deckActions from '../deckActions';
+
+import Header from '../../../components/header';
+
 import NewItemCard from './NewItemCard';
 
 class DeckNewContainer extends React.Component {
@@ -11,6 +13,7 @@ class DeckNewContainer extends React.Component {
     super(props);
 
     this.state = { title: '', description: '', items: [{}, {}] };
+
     this.onAddCard = this.onAddCard.bind(this);
     this.onRemoveCard = this.onRemoveCard.bind(this);
     this.onCreateDeck = this.onCreateDeck.bind(this);
@@ -66,10 +69,7 @@ class DeckNewContainer extends React.Component {
       <Header className="newDeck-page">
         <div className="container margin-top">
           <div className="row">
-            <form
-              className="form-saveDeck col-md-8 col-md-offset-2"
-              onSubmit={e => e.preventDefault()}
-            >
+            <form className="form-saveDeck col-md-8 offset-md-2" onSubmit={e => e.preventDefault()}>
               <div className="newDeck-infoWrapper">
                 <div className="newDeck-info">
                   <div className="form-group">
@@ -118,13 +118,13 @@ class DeckNewContainer extends React.Component {
                 Add item +
               </button>
               <div className="margin-top" style={{ display: 'flex' }}>
-                <button onClick={this.onCreateDeck} className="btn button--default col-xs-6">
+                <button onClick={this.onCreateDeck} className="btn btn-default col-xs-6">
                   Cancel
                 </button>
                 <button
                   onClick={this.onCreateDeck}
                   type="submit"
-                  className="button button-saveDeck button--primary col-xs-6"
+                  className="button button-saveDeck btn-primary col-xs-6"
                 >
                   Create Deck
                 </button>

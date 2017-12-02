@@ -4,18 +4,19 @@ import pluralize from 'pluralize';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Footer from '../../../components/Footer';
-import PageTemplate from '../../../components/PageTemplate';
-import Popover from '../../../components/Popover';
-
-import DeckListItem from './DeckListItem';
-import DeleteDeckModal from '../modals/DeleteDeckModal';
-import ResetDeckModal from '../modals/ResetDeckModal';
-import EditDeckModal from '../modals/EditDeckModal';
-import AddItemModal from '../modals/AddItemModal';
-
 import * as deckActions from '../deckActions';
 import * as itemActions from '../../items/itemActions';
+
+import Footer from '../../../components/footer';
+import PageTemplate from '../../../components/pages/PageTemplate';
+import Popover from '../../../components/popover';
+
+import AddItemModal from '../modals/AddItemModal';
+import DeleteDeckModal from '../modals/DeleteDeckModal';
+import EditDeckModal from '../modals/EditDeckModal';
+import ResetDeckModal from '../modals/ResetDeckModal';
+
+import DeckListItem from './DeckListItem';
 
 const MODAL_TYPES = {
   ADD_ITEM: 'addItem',
@@ -114,9 +115,9 @@ class DeckHomeContainer extends React.Component {
         {showModalType === MODAL_TYPES.RESET_DECK && (
           <ResetDeckModal onReset={this.onResetDeck} onDismiss={this.onDismissModal} />
         )}
-        <div className="container margin-top margin-bottom">
+        <div className="container mt-3 margin-bottom">
           <div className="row margin-top">
-            <div className="deckHeader col-xs-12 col-md-10 col-md-offset-1">
+            <div className="deckHeader col-md-10 offset-md-1">
               <h5 className="deckSubtitle">DECK</h5>
               <h1 className="deckTitle">{deck.title}</h1>
               <p className="deckDescription">{deck.description}</p>
@@ -125,12 +126,12 @@ class DeckHomeContainer extends React.Component {
                 {pluralize('item', items.length, true)}
               </span>
               <div className="deckActions">
-                <button onClick={this.onStudyDeck} className="button button--primary">
+                <button onClick={this.onStudyDeck} className="btn btn-primary">
                   Study Now
                 </button>
                 <button
                   onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}
-                  className="button button--default"
+                  className="btn btn-default"
                 >
                   Add Item +
                 </button>
@@ -160,7 +161,7 @@ class DeckHomeContainer extends React.Component {
               </Popover>
               <hr />
             </div>
-            <div className="col-xs-12 col-md-10 col-md-offset-1">
+            <div className="col-md-10 offset-md-1">
               <div className="deckHome-items">
                 {items.length > 0 &&
                   items.map((item, key) => (

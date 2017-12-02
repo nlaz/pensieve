@@ -4,17 +4,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as deckActions from './deckActions';
-import PageTemplate from '../../components/PageTemplate';
-import Footer from '../../components/Footer';
-import PageNavigation from '../../components/PageNavigation';
+
+import Footer from '../../components/footer';
+import PageTemplate from '../../components/pages/PageTemplate';
 
 import DeckCard from './DeckCard';
+import DeckPageNavigation from './DeckPageNavigation';
 
 export const PAGE_SIZE = 16;
 
 export const PageHeader = ({ count, onSearchChange }) => {
   return (
-    <div className="col-md-10 col-md-offset-1">
+    <div className="col-md-10 offset-md-1">
       <div className="page-header">
         <div className="info">
           <h4 className="title">Decks</h4>
@@ -34,7 +35,7 @@ export const PageHeader = ({ count, onSearchChange }) => {
             </div>
           )}
           <div className="create">
-            <Link to="decks/new" className="button button--primary button-newDeck">
+            <Link to="decks/new" className="btn btn-primary button-newDeck">
               Create Deck +
             </Link>
           </div>
@@ -97,7 +98,7 @@ class DecksContainer extends React.Component {
           <div className="row">
             <PageHeader count={decks.length} onSearchChange={this.onSearchChange} />
           </div>
-          <div className="col-md-10 col-md-offset-1">
+          <div className="col-md-10 offset-md-1">
             {pageDecks.length > 0 ? (
               <div className="row">
                 {pageDecks.map((deck, key) => (
@@ -117,7 +118,7 @@ class DecksContainer extends React.Component {
               </div>
             )}
             {numPages > 1 && (
-              <PageNavigation
+              <DeckPageNavigation
                 numPages={numPages}
                 onIncrementPage={this.onIncrementPage}
                 onDecrementPage={this.onDecrementPage}

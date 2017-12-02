@@ -9,11 +9,12 @@ import DeckNew from './app/decks/new/DeckNewContainer';
 import Review from './app/review/ReviewContainer';
 import ReviewNew from './app/review/new/ReviewNewContainer';
 import SwitchContainer from './components/SwitchContainer';
-import NotFoundPage from './components/NotFoundPage';
 
 import Login from './app/auth/login/LoginContainer';
 import Logout from './app/auth/logout/LogoutContainer';
 import Signup from './app/auth/signup/SignupContainer';
+
+import NotFoundPage from './components/pages/NotFoundPage';
 
 const routes = (
   <Route path="/">

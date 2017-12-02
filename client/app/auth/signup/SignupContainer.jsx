@@ -3,13 +3,15 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import PageTemplate from '../../../components/PageTemplate';
-import Footer from '../../../components/Footer';
 import * as sessionActions from '../authActions';
+
+import Footer from '../../../components/footer';
+import PageTemplate from '../../../components/pages/PageTemplate';
 
 class SignupContainer extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = { email: '', password: '', name: '' };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -43,8 +45,8 @@ class SignupContainer extends React.Component {
       <PageTemplate className="signup-page" footer={<Footer />}>
         <div className="signup-form container">
           <div className="row">
-            <div className="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-              <h3 className="text-bold">Join Pensieve Today</h3>
+            <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+              <h3>Join Pensieve Today</h3>
               <form action="/signup" method="post">
                 <div className="form-group">
                   <label htmlFor="nameInput">Name</label>
@@ -80,11 +82,7 @@ class SignupContainer extends React.Component {
                   />
                 </div>
 
-                <button
-                  onClick={this.onSave}
-                  type="submit"
-                  className="button button--primary button--full"
-                >
+                <button onClick={this.onSave} type="submit" className="btn btn-primary btn-block">
                   Join
                 </button>
               </form>

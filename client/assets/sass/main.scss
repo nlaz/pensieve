@@ -1,0 +1,39 @@
+/**
+ * Pensieve Stylesheet
+ */
+
+/* Style utils */
+@import './colors.scss';
+@import './spacing.scss';
+@import './breakpoints.scss';
+@import './buttons.scss';
+@import './fonts.scss';
+
+html,
+body {
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: $C_darkWhite;
+}
+
+/* Component styles */
+@import '../../components/footer/Footer.scss';
+@import '../../components/flashMessage/FlashMessage.scss';
+@import '../../components/modal/Modal.scss';
+@import '../../components/navbar/NavBar.scss';
+@import '../../components/popover/Popover.scss';
+
+/* Page-specific styles */
+@import '../../app/auth/login/LoginContainer.scss';
+@import '../../app/decks/home/DeckHomeContainer.scss';
+@import '../../app/decks/home/DeckListItem.scss';
+@import '../../app/decks/new/DeckNewContainer.scss';
+@import '../../app/decks/new/NewItemCard.scss';
+@import '../../app/decks/DecksContainer.scss';
+@import '../../app/items/home/ItemHomeContainer.scss';
+@import '../../app/landing/LandingContainer.scss';
+@import '../../app/review/ReviewContainer.scss';
+@import '../../app/review/ReviewProgressBar.scss';

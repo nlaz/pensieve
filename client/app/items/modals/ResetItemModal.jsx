@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../../../components/Modal';
+import Modal from '../../../components/modal';
 
 export default function ResetItemModal({ onReset, onDismiss }) {
   return (
@@ -12,10 +12,10 @@ export default function ResetItemModal({ onReset, onDismiss }) {
         Are you sure you want to reset it?
       </p>
       <div className="modalActions">
-        <button type="button" onClick={onDismiss} className="button button--default">
+        <button type="button" onClick={onDismiss} className="button btn-default">
           Close
         </button>
-        <button type="button" onClick={onReset} className="button button--alert">
+        <button type="button" onClick={onReset} className="button btn-danger">
           Reset
         </button>
       </div>

@@ -1,15 +1,17 @@
 import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { getNextInterval, getEF } from '../../../server/controllers/utils';
 
 import * as reviewActions from './reviewActions';
 import * as itemActions from '../items/itemActions';
-import { getNextInterval, getEF } from '../../../server/controllers/utils';
 
-import Footer from '../../components/Footer';
-import PageTemplate from '../../components/PageTemplate';
+import Footer from '../../components/footer';
+import PageTemplate from '../../components/pages/PageTemplate';
+
 import ProgressBar from './ReviewProgressBar';
 
 export const REVIEW_TYPE = {
@@ -65,7 +67,7 @@ const SessionResults = ({ items }) => (
   <PageTemplate className="review-page margin-top" footer={<Footer />}>
     <div className="container margin-top">
       <div className="row">
-        <div className="col-md-8 col-md-offset-2">
+        <div className="col-md-8 offset-md-2">
           <div className="review-header">
             <h5>RESULTS</h5>
           </div>
@@ -73,7 +75,7 @@ const SessionResults = ({ items }) => (
             {items.map((item, key) => <SessionResultItem key={key} item={item} />)}
           </ul>
           <div className="text-right">
-            <Link to="/" className="button button--primary">
+            <Link to="/" className="button btn-primary">
               Back
             </Link>
           </div>
@@ -143,10 +145,10 @@ class ReviewContainer extends React.Component {
     if (!Object.keys(items).length > 0) {
       return (
         <PageTemplate className="review-page" footer={<Footer />}>
-          <div className="col-md-8 col-md-offset-2 text-center margin-top">
+          <div className="col-md-8 offset-md-2 text-center margin-top">
             <span style={{ fontSize: '80px', fontWeight: 'bold' }}>😅</span>
             <h3 style={{ marginBottom: '40px' }}>Oops, something seems to have gone wrong.</h3>
-            <Link to="/" className="button button--primary">
+            <Link to="/" className="button btn-primary">
               Go Home
             </Link>
           </div>
@@ -166,7 +168,7 @@ class ReviewContainer extends React.Component {
       <PageTemplate className="review-page margin-top" footer={<Footer />}>
         <div className="container margin-top">
           <div className="row">
-            <div className="col-md-8 col-md-offset-2">
+            <div className="col-md-8 offset-md-2">
               <div className="review-header">
                 <h5>REVIEW</h5>
                 <p className="review-count">
@@ -188,7 +190,7 @@ class ReviewContainer extends React.Component {
                       <button
                         onClick={() => this.onNextAction(REVIEW_TYPE.HARD)}
                         type="button"
-                        className="button button--primary button--full"
+                        className="button btn-primary btn-block"
                       >
                         Again{' '}
                         {intervals && <span className="interval">{` < ${intervals[0]}`}</span>}
@@ -198,7 +200,7 @@ class ReviewContainer extends React.Component {
                       <button
                         onClick={() => this.onNextAction(REVIEW_TYPE.GOOD)}
                         type="button"
-                        className="button button--primary button--full"
+                        className="button btn-primary btn-block"
                       >
                         Good {intervals && <span className="interval">{` < ${intervals[1]}`}</span>}
                       </button>
@@ -207,7 +209,7 @@ class ReviewContainer extends React.Component {
                       <button
                         onClick={() => this.onNextAction(REVIEW_TYPE.EASY)}
                         type="button"
-                        className="button button--primary button--full"
+                        className="button btn-primary btn-block"
                       >
                         Easy {intervals && <span className="interval">{` < ${intervals[2]}`}</span>}
                       </button>
@@ -219,7 +221,7 @@ class ReviewContainer extends React.Component {
                       <button
                         onClick={this.onItemClick}
                         type="button"
-                        className="button button--primary button--full"
+                        className="button btn-primary btn-block"
                       >
                         Show Answer
                       </button>

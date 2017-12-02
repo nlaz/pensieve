@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export class EmailSignupForm extends React.Component {
+export default class EmailSignupForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -40,7 +40,7 @@ export class EmailSignupForm extends React.Component {
       return (
         <form className={formClasses}>
           <div className="success-checkmark">
-            <img src={require('../../assets/images/check.png')} />
+            <img src={require('../../assets/img/icons/check.svg')} />
           </div>
           <div className="info-success">
             <strong>WOO!</strong> Thanks for signing up. Our people will reach out to your people
@@ -62,7 +62,7 @@ export class EmailSignupForm extends React.Component {
               placeholder="Email Address"
               value={email}
             />
-            <button onClick={this.onSubmit} type="submit" className="button button--primary">
+            <button onClick={this.onSubmit} type="submit" className="button btn-primary">
               Subscribe
             </button>
           </div>

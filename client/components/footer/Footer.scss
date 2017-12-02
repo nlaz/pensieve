@@ -1,0 +1,13 @@
+.footer {
+  color: $C_lightGray;
+  margin: 25px 0;
+
+  .footer-item {
+    display: inline;
+    padding: 10px 20px;
+
+    a {
+      color: $C_lightGray;
+    }
+  }
+}

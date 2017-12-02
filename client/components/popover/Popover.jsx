@@ -5,9 +5,9 @@ export default class Popover extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { showPopover: false };
-    this.onToggle = this.onToggle.bind(this);
+    this.state = { isActive: false };
     this.onClickOutside = this.onClickOutside.bind(this);
+    this.onToggle = this.onToggle.bind(this);
   }
 
   componentDidMount() {
@@ -20,22 +20,23 @@ export default class Popover extends React.Component {
 
   onClickOutside(e) {
     if (this.popover && !this.popover.contains(e.target)) {
-      this.setState(() => ({ showPopover: false }));
+      this.setState(() => ({ isActive: false }));
     }
   }
 
   toggle() {
-    this.setState(state => ({ showPopover: !state.showPopover }));
+    this.setState(state => ({ isActive: !state.isActive }));
   }
 
   onToggle(e) {
     e.preventDefault();
-    this.setState(state => ({ showPopover: !state.showPopover }));
+    this.setState(state => ({ isActive: !state.isActive }));
   }
 
   render() {
+    const { isActive } = this.state;
     const { trigger, align, children, className } = this.props;
-    const { showPopover } = this.state;
+
     const classNames = cx('popover', {
       'popover--right': align === 'right',
       'popover--left': align === 'left'
@@ -46,7 +47,7 @@ export default class Popover extends React.Component {
         <div className="popver-trigger" onClick={this.onToggle}>
           {trigger}
         </div>
-        {showPopover && (
+        {isActive && (
           <div style={{ position: 'absolute', width: '100%' }}>
             <div style={{ display: 'block', opacity: 1 }} className={classNames}>
               <div className="popover-content" onClick={e => e.preventDefault()}>

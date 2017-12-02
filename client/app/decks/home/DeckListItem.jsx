@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router';
 
-import Popover from '../../../components/Popover';
+import Popover from '../../../components/popover';
 
 import DeleteItemModal from '../../items/modals/DeleteItemModal';
 import ResetItemModal from '../../items/modals/ResetItemModal';
@@ -21,7 +21,7 @@ export function TimeLeft({ date }) {
     return (
       <div className="item-timeLeft item-timeLeft--due">
         <span>due</span>
-        <img className="icon-alarm" src={require('../../../assets/images/icons/alarm_red.svg')} />
+        <img className="icon-alarm" src={require('../../../assets/img/icons/alarm_red.svg')} />
       </div>
     );
   }
@@ -29,7 +29,7 @@ export function TimeLeft({ date }) {
   return (
     <div className="item-timeLeft">
       <span>{moment().to(date, true)}</span>
-      <img className="icon-alarm" src={require('../../../assets/images/icons/alarm.svg')} />
+      <img className="icon-alarm" src={require('../../../assets/img/icons/alarm.svg')} />
     </div>
   );
 }
@@ -89,7 +89,7 @@ export default class DeckListItem extends React.Component {
                 <div onClick={this.onTogglePopover} className="itemAction-overflow">
                   <img
                     className="icon-overflow"
-                    src={require('../../../assets/images/icons/overflow.svg')}
+                    src={require('../../../assets/img/icons/overflow.svg')}
                   />
                 </div>
               }

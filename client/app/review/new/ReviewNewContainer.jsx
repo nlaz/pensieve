@@ -1,11 +1,13 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import * as reviewActions from '../reviewActions';
-import PageTemplate from '../../../components/PageTemplate';
 import { NO_ITEMS_ERROR } from '../../../../server/controllers/errors';
 import { SESSION_TYPES } from '../../../../server/controllers/constants';
+
+import * as reviewActions from '../reviewActions';
+
+import PageTemplate from '../../../components/pages/PageTemplate';
 
 class ReviewNewContainer extends React.Component {
   componentWillMount() {
@@ -23,7 +25,7 @@ class ReviewNewContainer extends React.Component {
   render() {
     return (
       <PageTemplate>
-        <div className="col-md-8 col-md-offset-2 text-center margin-top">
+        <div className="col-md-8 offset-md-2 text-center margin-top">
           <h3>Creating your study session...</h3>
         </div>
       </PageTemplate>

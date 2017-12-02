@@ -3,9 +3,10 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import PageTemplate from '../../../components/PageTemplate';
-import Footer from '../../../components/Footer';
 import * as sessionActions from '../authActions';
+
+import PageTemplate from '../../../components/pages/PageTemplate';
+import Footer from '../../../components/footer';
 
 class LoginContainer extends React.Component {
   constructor(props) {
@@ -43,8 +44,8 @@ class LoginContainer extends React.Component {
       <PageTemplate className="login-page" footer={<Footer />}>
         <div className="login-form container">
           <div className="row">
-            <div className="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-              <h3 className="text-bold">Login</h3>
+            <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+              <h3>Login</h3>
               <form onSubmit={e => e.preventDefault()}>
                 <div className="form-group">
                   <label htmlFor="emailInput">Email</label>
@@ -69,11 +70,7 @@ class LoginContainer extends React.Component {
                   />
                 </div>
 
-                <button
-                  onClick={this.onSave}
-                  type="submit"
-                  className="button button--primary button--full"
-                >
+                <button onClick={this.onSave} type="submit" className="btn btn-primary btn-block">
                   Login
                 </button>
               </form>

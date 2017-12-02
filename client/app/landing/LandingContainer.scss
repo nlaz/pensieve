@@ -124,7 +124,7 @@
 }
 
 .landing-image {
-  background-image: url('../assets/images/splash_hero2.png');
+  background-image: url('../../assets/img/splash_hero2.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -137,7 +137,7 @@
   top: -20px;
 
   @include atMediumUp {
-    background-image: url('../assets/images/splash_hero.png');
+    background-image: url('../../assets/img/splash_hero.png');
     background-position: center;
     display: inline;
     max-width: 50%;
@@ -257,19 +257,6 @@
   left: 0;
   right: 0;
   bottom: 25px;
-}
-.footer {
-  color: $C_lightGray;
-  margin: 25px 0;
-
-  .footer-item {
-    display: inline;
-    padding: 10px 20px;
-
-    a {
-      color: $C_lightGray;
-    }
-  }
 }
 
 @keyframes dropIn {

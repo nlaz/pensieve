@@ -25,3 +25,21 @@
   color: #073a83;
   margin-left: 2px;
 }
+
+.panel-body {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  min-height: 360px;
+  white-space: pre-wrap;
+  position: relative;
+}
+
+.panel-body h3 {
+  margin: 0;
+}
+
+.green-check {
+  color: $C_primaryGreen;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PageNavigation({
+export default function DeckPageNavigation({
   numPages,
   onDecrementPage,
   onIncrementPage,

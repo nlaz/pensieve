@@ -8,7 +8,7 @@ export default function DeckCard({ deck, className }) {
       <Link to={`/decks/${deck._id}`} className="deckCard">
         <span className="deckCard-itemCount">
           {deck.items.length}
-          <img className="deckCard-cardIcon" src={require('../../assets/images/icons/cards.svg')} />
+          <img className="deckCard-cardIcon" src={require('../../assets/img/icons/cards.svg')} />
         </span>
         <h4 className="deckCard-title">{deck.title}</h4>
       </Link>

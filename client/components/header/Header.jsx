@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { NavBar } from './NavBar';
-import { FlashMessage } from './FlashMessage';
-import * as appActions from '../app/appActions';
+import * as appActions from '../../app/appActions';
+
+import { NavBar } from '../navbar/NavBar';
+import { FlashMessage } from '../flashMessage/FlashMessage';
 
 class Header extends React.Component {
   constructor(props) {

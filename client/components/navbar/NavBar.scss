@@ -2,12 +2,11 @@
  * Navbar styles
  * http://bit.ly/1ywfhq7
  */
-@import './vars';
 
 .navbar {
   background: $C_white;
   border-radius: 0;
-  border: none;
+  border: 0;
   box-shadow: 0 2px 2px $C_transparentGray;
   color: $C_primaryBlue;
   margin-bottom: 0;
