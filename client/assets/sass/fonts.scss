@@ -1,6 +1,7 @@
 /* Google fonts */
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
 
-body {
+body,
+body .popover {
   font-family: 'Lato', sans-serif;
 }

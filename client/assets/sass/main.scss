@@ -7,13 +7,8 @@
 @import './breakpoints.scss';
 @import './fonts.scss';
 
-html,
 body {
   min-height: 100vh;
-}
-
-body {
-  font-family: 'Lato', sans-serif;
   background: $C_darkWhite;
 }
 

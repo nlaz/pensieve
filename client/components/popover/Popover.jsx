@@ -37,20 +37,20 @@ export default class Popover extends React.Component {
     const { isActive } = this.state;
     const { trigger, align, children, className } = this.props;
 
-    const classNames = cx('popover', {
+    const classNames = cx('popover p-0', {
       'popover--right': align === 'right',
-      'popover--left': align === 'left'
+      'popover--left': align === 'left',
     });
 
     return (
-      <div ref={c => (this.popover = c)} className={cx(className, 'popover-wrapper')}>
+      <div ref={c => (this.popover = c)} className={cx(className, 'position-relative')}>
         <div className="popver-trigger" onClick={this.onToggle}>
           {trigger}
         </div>
         {isActive && (
-          <div style={{ position: 'absolute', width: '100%' }}>
+          <div className="position-absolute" style={{ width: '100%' }}>
             <div style={{ display: 'block', opacity: 1 }} className={classNames}>
-              <div className="popover-content" onClick={e => e.preventDefault()}>
+              <div className="popover-content p-0" onClick={e => e.preventDefault()}>
                 {children}
               </div>
             </div>
