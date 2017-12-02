@@ -131,7 +131,12 @@ class DeckHomeContainer extends React.Component {
                 <Button onClick={this.onStudyDeck} primary>
                   Study Now
                 </Button>
-                <Button onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}>Add Item +</Button>
+                <Button
+                  className="btn-outline-secondary"
+                  onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}
+                >
+                  Add Item +
+                </Button>
               </div>
               <Popover
                 align="right"
