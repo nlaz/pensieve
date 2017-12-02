@@ -10,9 +10,8 @@ const Wrapper = ({ children, ...props }) => {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh',
         boxSizing: 'border-box',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
       }}
     >
       {children}
@@ -27,7 +26,7 @@ const HeaderWrapper = ({ children }) => {
         position: 'fixed',
         top: 0,
         width: '100%',
-        zIndex: 999
+        zIndex: 999,
       }}
     >
       {children}
@@ -43,7 +42,7 @@ const ContentWrapper = ({ children }) => {
         width: '100%',
         boxSizing: 'border-box',
         margin: '2rem auto',
-        marginTop: '60px'
+        marginTop: '60px',
       }}
     >
       {children}
@@ -68,12 +67,12 @@ const PageTemplate = ({ header, children, footer, ...props }) => {
 PageTemplate.propTypes = {
   header: PropTypes.node,
   footer: PropTypes.node,
-  children: PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
 };
 
 PageTemplate.defaultProps = {
   header: <Header />,
-  footer: <div />
+  footer: <div />,
 };
 
 export default PageTemplate;

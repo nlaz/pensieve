@@ -43,11 +43,11 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
-      <PageTemplate className="login-page" footer={<Footer />}>
-        <div className="login-form container">
+      <PageTemplate className="LoginContainer mt-5" footer={<Footer />}>
+        <div className="container mt-5">
           <div className="row">
             <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
-              <h3>Login</h3>
+              <h1 className="h4 mb-3 text-center">Login to your account</h1>
               <form onSubmit={e => e.preventDefault()}>
                 <div className="form-group">
                   <label htmlFor="emailInput">Email</label>
@@ -79,29 +79,12 @@ class LoginContainer extends React.Component {
 
               <hr />
 
-              {/* Disable for Prelaunch */}
-              <div className="row">
-                {false && (
-                  <p className="text-center">
-                    Need an account?{' '}
-                    <Link className="link" to="/signup">
-                      Signup
-                    </Link>
-                  </p>
-                )}
-                <p className="text-center">
-                  Forgot your password?{' '}
-                  <a className="link" href="mailto:hello@pensieve.space">
-                    Send us a message
-                  </a>
-                </p>
-                <p className="text-center">
-                  Or go{' '}
-                  <Link className="link" to="/">
-                    home
-                  </Link>.
-                </p>
-              </div>
+              <p className="text-center mb-1">
+                Forgot your password? <a href="mailto:hello@pensieve.space">Send us a message</a>
+              </p>
+              <p className="text-center mb-3">
+                Need an account? <Link to="/signup">Sign up</Link>
+              </p>
             </div>
           </div>
         </div>

@@ -3,14 +3,21 @@ import cx from 'classnames';
 
 export default function Footer({ className }) {
   return (
-    <div className={cx('footer', 'text-center', className)}>
-      <div className="footer-item">
+    <div className={cx('footer', 'text-center text-secondary mt-4', className)}>
+      <small className="footer-item d-inline m-2">
         <span>Pensieve &copy; 2017</span>
-      </div>
-      {'|'}
-      <div className="footer-item">
-        <a href="mailto:hello@pensieve.space">Contact</a>
-      </div>
+      </small>
+      &middot;
+      <small className="footer-item d-inline m-2">
+        <span>Feedback?</span>
+        <a className="ml-2" href="mailto:hello@pensieve.space">
+          Send me an email
+        </a>
+      </small>
+      &middot;
+      <small className="footer-item d-inline m-2">
+        <a href="https://github.com/nlaz/pensieve">Contribute</a>
+      </small>
     </div>
   );
 }

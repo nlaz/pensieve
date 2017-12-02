@@ -43,11 +43,11 @@ class SignupContainer extends React.Component {
 
   render() {
     return (
-      <PageTemplate className="signup-page" footer={<Footer />}>
-        <div className="signup-form container">
+      <PageTemplate className="SignupContainer mt-5" footer={<Footer />}>
+        <div className="container mt-5">
           <div className="row">
             <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
-              <h3>Join Pensieve Today</h3>
+              <h1 className="h4 mb-3 text-center">Create an account</h1>
               <form action="/signup" method="post">
                 <div className="form-group">
                   <label htmlFor="nameInput">Name</label>
@@ -83,27 +83,19 @@ class SignupContainer extends React.Component {
                   />
                 </div>
 
-                <Button onClick={this.onSave} type="submit" primary block>
+                <Button className="mt-4" onClick={this.onSave} type="submit" primary block>
                   Join
                 </Button>
               </form>
 
               <hr />
 
-              <div className="row">
-                <p className="text-center">
-                  Already have an account?{' '}
-                  <Link className="link" to="/login">
-                    Login
-                  </Link>
-                </p>
-                <p className="text-center">
-                  Or go{' '}
-                  <Link className="link" to="/">
-                    home
-                  </Link>.
-                </p>
-              </div>
+              <p className="text-center mb-1">
+                Already have an account? <Link to="/login">Login</Link>
+              </p>
+              <p className="text-center mb-3">
+                Or go <Link to="/">home</Link>.
+              </p>
             </div>
           </div>
         </div>

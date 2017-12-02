@@ -20,14 +20,12 @@ body {
 }
 
 /* Component styles */
-@import '../../components/footer/Footer.scss';
 @import '../../components/flashMessage/FlashMessage.scss';
 @import '../../components/modal/Modal.scss';
 @import '../../components/navbar/NavBar.scss';
 @import '../../components/popover/Popover.scss';
 
 /* Page-specific styles */
-@import '../../app/auth/login/LoginContainer.scss';
 @import '../../app/decks/home/DeckHomeContainer.scss';
 @import '../../app/decks/home/DeckListItem.scss';
 @import '../../app/decks/new/DeckNewContainer.scss';
