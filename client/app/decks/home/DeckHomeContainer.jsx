@@ -1,29 +1,29 @@
-import React from 'react';
-import moment from 'moment';
-import pluralize from 'pluralize';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import moment from "moment";
+import pluralize from "pluralize";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import * as deckActions from '../deckActions';
-import * as itemActions from '../../items/itemActions';
+import * as deckActions from "../deckActions";
+import * as itemActions from "../../items/itemActions";
 
-import Button from '../../../components/button';
-import Footer from '../../../components/footer';
-import PageTemplate from '../../../components/pages/PageTemplate';
-import Popover from '../../../components/popover';
+import Button from "../../../components/button";
+import Footer from "../../../components/footer";
+import PageTemplate from "../../../components/pages/PageTemplate";
+import Popover from "../../../components/popover";
 
-import AddItemModal from '../modals/AddItemModal';
-import DeleteDeckModal from '../modals/DeleteDeckModal';
-import EditDeckModal from '../modals/EditDeckModal';
-import ResetDeckModal from '../modals/ResetDeckModal';
+import AddItemModal from "../modals/AddItemModal";
+import DeleteDeckModal from "../modals/DeleteDeckModal";
+import EditDeckModal from "../modals/EditDeckModal";
+import ResetDeckModal from "../modals/ResetDeckModal";
 
-import DeckListItem from './DeckListItem';
+import DeckListItem from "./DeckListItem";
 
 const MODAL_TYPES = {
-  ADD_ITEM: 'addItem',
-  DELETE_DECK: 'deleteDeck',
-  EDIT_DECK: 'editDeck',
-  RESET_DECK: 'resetDeck',
+  ADD_ITEM: "addItem",
+  DELETE_DECK: "deleteDeck",
+  EDIT_DECK: "editDeck",
+  RESET_DECK: "resetDeck",
 };
 
 class DeckHomeContainer extends React.Component {
@@ -48,7 +48,7 @@ class DeckHomeContainer extends React.Component {
 
   componentDidUpdate() {
     if (Object.keys(this.props.deck).length === 0) {
-      this.props.router.push('/decks');
+      this.props.router.push("/decks");
     }
   }
 
@@ -119,13 +119,13 @@ class DeckHomeContainer extends React.Component {
         )}
         <div className="container mt-3">
           <div className="row">
-            <div className="position-relative col-md-10 offset-md-1">
+            <div className="position-relative col-md-10 offset-md-1 mb-2">
               <h6 className="text-secondary text-uppercase m-0">DECK</h6>
               <h1 className="text-dark font-weight-bold h3 mb-0">{deck.title}</h1>
               <p className="text-secondary h5 mb-1">{deck.description}</p>
               <small className="text-secondary">
-                {moment(deck.createdAt).format('MMMM D, YYYY')} &middot;{' '}
-                {pluralize('item', items.length, true)}
+                {moment(deck.createdAt).format("MMMM D, YYYY")} &middot;{" "}
+                {pluralize("item", items.length, true)}
               </small>
               <div className="mt-2">
                 <Button onClick={this.onStudyDeck} primary>

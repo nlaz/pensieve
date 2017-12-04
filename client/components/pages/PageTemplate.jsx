@@ -10,6 +10,8 @@ const Wrapper = ({ children, ...props }) => (
       display: "flex",
       flexDirection: "column",
       boxSizing: "border-box",
+      position: "relative",
+      minHeight: "100vh",
       justifyContent: "space-between",
     }}
   >
