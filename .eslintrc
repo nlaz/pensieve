@@ -6,11 +6,12 @@
     },
     extends: [
       "airbnb",
-      "prettier"
+      "prettier",
+      "prettier/react",
     ],
     "plugins": [
         "babel",
-        "react"
+        "react",
     ],
     "rules": {
       "no-underscore-dangle": 0,
