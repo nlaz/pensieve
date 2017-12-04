@@ -85,7 +85,7 @@ class ItemContainer extends React.Component {
 
     if (!item || Object.keys(item).length === 0) {
       return (
-        <PageTemplate className="ItemHomeContainer mt-5" footer={<Footer />}>
+        <PageTemplate className="ItemHomeContainer pt-5" footer={<Footer anchor />}>
           <div className="col-md-8 offset-md-2 text-center">
             <span style={{ fontSize: '80px', fontWeight: 'bold' }}>😅</span>
             <h3 style={{ marginBottom: '40px' }}>Oops, that item does not seem to exist.</h3>
@@ -100,7 +100,7 @@ class ItemContainer extends React.Component {
     const itemContent = showAnswer ? item.description : item.title;
 
     return (
-      <PageTemplate className="ItemHomeContainer mt-5" footer={<Footer />}>
+      <PageTemplate className="ItemHomeContainer pt-5" footer={<Footer anchor />}>
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDeleteClick} onDismiss={this.onDismissModal} />
         )}

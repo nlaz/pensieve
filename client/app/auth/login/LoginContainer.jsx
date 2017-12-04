@@ -43,7 +43,7 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
-      <PageTemplate className="LoginContainer mt-5" footer={<Footer />}>
+      <PageTemplate className="LoginContainer pt-5" footer={<Footer anchor />}>
         <div className="container mt-5">
           <div className="row">
             <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3">

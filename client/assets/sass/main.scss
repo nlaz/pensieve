@@ -15,16 +15,16 @@ body {
 /* Component styles */
 @import '../../components/button/Button.scss';
 @import '../../components/flashMessage/FlashMessage.scss';
+@import '../../components/footer/Footer.scss';
 @import '../../components/modal/Modal.scss';
 @import '../../components/popover/Popover.scss';
 
 /* Page-specific styles */
 @import '../../app/decks/home/DeckHomeContainer.scss';
 @import '../../app/decks/home/DeckListItem.scss';
-@import '../../app/decks/new/DeckNewContainer.scss';
-@import '../../app/decks/new/NewItemCard.scss';
 @import '../../app/decks/DecksContainer.scss';
 @import '../../app/decks/DeckCard.scss';
+@import '../../app/decks/EmptyView.scss';
 @import '../../app/items/home/ItemHomeContainer.scss';
 @import '../../app/landing/LandingContainer.scss';
 @import '../../app/review/ReviewContainer.scss';

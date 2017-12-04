@@ -100,7 +100,7 @@ class DeckHomeContainer extends React.Component {
     const { items = [] } = deck;
 
     return (
-      <PageTemplate className="DeckHomeContainer mt-5" footer={<Footer />}>
+      <PageTemplate className="DeckHomeContainer pt-5" footer={<Footer anchor />}>
         {showModalType === MODAL_TYPES.ADD_ITEM && (
           <AddItemModal onSave={data => this.onAddItem(data)} onDismiss={this.onDismissModal} />
         )}

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 function Button({ children, className, type, block, danger, primary, reset, onClick, ...other }) {
   const classNames = cx(className, 'Button btn', {
+    'btn-default': !primary && !danger && !reset,
     'btn-primary': primary,
     'btn-block': block,
     'btn-danger': danger,

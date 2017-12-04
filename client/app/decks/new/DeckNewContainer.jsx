@@ -5,21 +5,18 @@ import { bindActionCreators } from 'redux';
 import * as deckActions from '../deckActions';
 
 import Button from '../../../components/button';
-import Header from '../../../components/header';
-
-import NewItemCard from './NewItemCard';
+import Footer from '../../../components/footer';
+import PageTemplate from '../../../components/pages/PageTemplate';
 
 class DeckNewContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { title: '', description: '', items: [{}, {}] };
+    this.state = { title: '', description: '' };
 
-    this.onAddCard = this.onAddCard.bind(this);
-    this.onRemoveCard = this.onRemoveCard.bind(this);
+    this.onCancel = this.onCancel.bind(this);
     this.onCreateDeck = this.onCreateDeck.bind(this);
-    this.onItemInputChange = this.onItemInputChange.bind(this);
-    this.onDeckInputChange = this.onDeckInputChange.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   componentWillMount() {
@@ -34,103 +31,68 @@ class DeckNewContainer extends React.Component {
     }
   }
 
-  onAddCard() {
-    const { items } = this.state;
-    this.setState(() => ({ items: [...items, { title: '', description: '' }] }));
-  }
-
-  onRemoveCard(index) {
-    const { items } = this.state;
-    items.splice(index, 1);
-    this.setState(() => ({ items: items }));
-  }
-
-  onItemInputChange(e, key) {
-    const { items } = this.state;
-    items[key] = { ...items[key], [e.target.name]: e.target.value };
-    this.setState(() => ({ items: items }));
-  }
-
-  onDeckInputChange(name, value) {
-    this.setState(() => ({ [name]: value }));
+  onCancel() {
+    this.props.router.push('/decks');
   }
 
   onCreateDeck() {
-    const { title, description, items } = this.state;
+    const { title, description } = this.state;
     this.props.actions.createDeck({
       title: title,
       description: description,
-      items: items,
     });
   }
 
+  onInputChange(e) {
+    const { name, value } = e.target;
+    this.setState(() => ({ [name]: value }));
+  }
+
   render() {
-    const { title, description, items } = this.state;
+    const { title, description } = this.state;
+
     return (
-      <Header className="newDeck-page">
-        <div className="container">
+      <PageTemplate className="DeckNewContainer pt-5" footer={<Footer anchor />}>
+        <div className="container mt-5">
           <div className="row">
-            <form className="form-saveDeck col-md-8 offset-md-2" onSubmit={e => e.preventDefault()}>
-              <div className="newDeck-infoWrapper">
-                <div className="newDeck-info">
-                  <div className="form-group">
-                    <label htmlFor="title">Deck title</label>
-                    <input
-                      onChange={e => this.onDeckInputChange(e.target.name, e.target.value)}
-                      value={title}
-                      name="title"
-                      className="form-control"
-                      type="text"
-                      placeholder="Add a deck title..."
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="description">Deck description</label>
-                    <textarea
-                      onChange={e => this.onDeckInputChange(e.target.name, e.target.value)}
-                      value={description}
-                      name="description"
-                      className="form-control"
-                      type="textarea"
-                      placeholder="Add a deck description..."
-                    />
-                  </div>
+            <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+              <h1 className="h4 mb-3 text-center">Create a new study deck</h1>
+              <form>
+                <div className="form-group">
+                  <label htmlFor="title">Deck title</label>
+                  <input
+                    onChange={this.onInputChange}
+                    value={title}
+                    name="title"
+                    className="form-control"
+                    type="text"
+                    placeholder="Add a deck title..."
+                  />
                 </div>
-                <hr />
-              </div>
-              <div className="mt-2">
-                {items &&
-                  items.length > 0 &&
-                  items.map((item, key) => (
-                    <NewItemCard
-                      item={item}
-                      onInputChange={e => this.onItemInputChange(e, key)}
-                      onRemove={() => this.onRemoveCard(key)}
-                      key={key}
-                      index={key}
-                    />
-                  ))}
-              </div>
-              <Button className="button-addItem" onClick={this.onAddCard} block>
-                Add item +
-              </Button>
-              <div style={{ display: 'flex' }}>
-                <Button className="col-xs-6" onClick={this.onCreateDeck}>
-                  Cancel
-                </Button>
-                <Button
-                  className="button-saveDeck col-xs-6"
-                  onClick={this.onCreateDeck}
-                  type="submit"
-                  primary
-                >
-                  Create Deck
-                </Button>
-              </div>
-            </form>
+                <div className="form-group">
+                  <label htmlFor="description">Deck description</label>
+                  <textarea
+                    onChange={this.onInputChange}
+                    value={description}
+                    name="description"
+                    className="form-control"
+                    type="textarea"
+                    placeholder="Add a deck description..."
+                  />
+                </div>
+                <div className="mt-4">
+                  <Button onClick={this.onCreateDeck} type="submit" primary block>
+                    Create Deck
+                  </Button>
+                  <Button onClick={this.onCancel} block>
+                    Cancel
+                  </Button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </Header>
+      </PageTemplate>
     );
   }
 }

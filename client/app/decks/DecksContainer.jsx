@@ -10,23 +10,9 @@ import PageTemplate from '../../components/pages/PageTemplate';
 
 import DeckCard from './DeckCard';
 import DeckPageNavigation from './DeckPageNavigation';
+import EmptyView from './EmptyView';
 
 export const PAGE_SIZE = 16;
-
-function EmptyDeckView() {
-  return (
-    <div className="emptyView-wrapper">
-      <div className="text-center emptyView">
-        <span style={{ fontSize: '60px' }}>✌️</span>
-        <h2 className="title">No decks in your collection yet</h2>
-        <p className="description">
-          Decks are groups of related items for organizing your notes. Haven’t created an deck yet?
-          No problem. You can click 'Create Deck +' to get started.
-        </p>
-      </div>
-    </div>
-  );
-}
 
 class DecksContainer extends React.Component {
   constructor(props) {
@@ -76,7 +62,7 @@ class DecksContainer extends React.Component {
     const pageDecks = filteredDecks.slice(pageStart, pageEnd);
 
     return (
-      <PageTemplate className="DecksContainer decks-page mt-5" footer={<Footer />}>
+      <PageTemplate className="DecksContainer decks-page pt-5" footer={<Footer anchor />}>
         <div className="container mt-3">
           <div className="row">
             <div className="col-md-10 offset-md-1">
@@ -107,7 +93,7 @@ class DecksContainer extends React.Component {
                   ))}
                 </div>
               ) : (
-                <EmptyDeckView />
+                <EmptyView />
               )}
               {numPages > 1 && (
                 <DeckPageNavigation
