@@ -5,13 +5,13 @@
         "node": true
     },
     extends: [
-      "airbnb",
       "prettier",
       "prettier/react",
     ],
     "plugins": [
         "babel",
         "react",
+        "import",
     ],
     "rules": {
       "no-underscore-dangle": 0,

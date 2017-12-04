@@ -1,7 +1,7 @@
-import React from 'react';
-import cx from 'classnames';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import React from "react";
+import cx from "classnames";
+import PropTypes from "prop-types";
+import { Link } from "react-router";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class NavBar extends React.Component {
     return (
       <nav
         className="navbar navbar-expand-lg navbar-light"
-        style={{ background: '#fff', boxShadow: '0 1px 2px rgba(178, 178, 178, 0.5)' }}
+        style={{ background: "#fff", boxShadow: "0 1px 2px rgba(178, 178, 178, 0.5)" }}
       >
         <div className="container">
           <Link className="navbar-brand text-primary" to="/">
@@ -37,7 +37,7 @@ class NavBar extends React.Component {
             <span className="navbar-toggler-icon" />
           </button>
 
-          <div className={cx('navbar-collapse', { collapse: !isCollapsed })}>
+          <div className={cx("navbar-collapse", { collapse: !isCollapsed })}>
             {self &&
             authenticated && (
               <ul className="navbar-nav mr-auto">
@@ -45,7 +45,7 @@ class NavBar extends React.Component {
                   <Link
                     to="/decks"
                     className="nav-link"
-                    activeClassName={'active-nav-link'}
+                    activeClassName="active-nav-link"
                     onClick={this.onToggleCollapse}
                   >
                     Decks
@@ -78,8 +78,8 @@ class NavBar extends React.Component {
 }
 
 NavBar.propTypes = {
-  self: PropTypes.object,
-  authenticated: PropTypes.bool,
+  self: PropTypes.object.isRequired,
+  authenticated: PropTypes.bool.isRequired,
 };
 
 export default NavBar;
