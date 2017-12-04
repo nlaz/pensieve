@@ -5,22 +5,22 @@
   "main": "src/server.js",
   "scripts": {
     "test": "mocha --colors --require babel-register './config/mocha.js' './client/**/*.spec.jsx' ",
-    "start": "cross-env NODE_ENV=development yarn build && yarn serve",
-    "prod": "cross-env NODE_ENV=production yarn build && yarn serve",
+    "start": "yarn build && yarn serve",
+    "prod": "NODE_ENV=production yarn build && yarn serve",
     "build": "yarn build:client && yarn build:server",
     "serve": "node ./build/bundle.server.js",
-    "build:client": "webpack --config config/webpack.config.prod.js",
+    "build:client": "webpack --config config/webpack.client.config.js",
     "build:server": "webpack --config config/webpack.server.config.js",
     "forever": "yarn start:prod",
     "start:prod": "forever start -c 'yarn prod' ./",
-    "stop": "forever stopall"
+    "stop": "forever stopall",
+    "lint": "eslint ./client"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nlaz/pensieve.git"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/nlaz/pensieve/issues"
   },
@@ -47,12 +47,7 @@
     "classnames": "^2.2.5",
     "cookie-session": "^2.0.0-beta.1",
     "cron": "^1.2.1",
-    "cross-env": "^4.0.0",
     "css-loader": "^0.28.2",
-    "eslint": "^3.19.0",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-babel": "^4.1.1",
-    "eslint-plugin-react": "^6.10.3",
     "express": "^4.14.0",
     "file-loader": "^0.11.2",
     "forever": "^0.15.3",
@@ -61,8 +56,6 @@
     "mongoose": "4.9.9",
     "morgan": "^1.7.0",
     "node-sass": "^4.5.3",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
     "pluralize": "^7.0.0",
     "postcss": "^5.2.17",
     "postcss-loader": "^2.0.5",
@@ -89,6 +82,14 @@
   "devDependencies": {
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-15": "^1.0.5",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
     "expect": "^21.2.1",
     "mocha": "^4.0.1",
     "react-test-renderer": "^15.0.0"

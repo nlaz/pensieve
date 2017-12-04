@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactGA from 'react-ga';
 import { browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
@@ -11,7 +11,7 @@ import { Router } from 'react-router';
 import appReducer from './appReducer';
 import { AUTH_USER } from './auth/authActions';
 
-import '../assets/main.scss';
+import '../assets/sass/main.scss';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 ReactGA.initialize('UA-101760335-1');
@@ -45,12 +45,10 @@ if (process.env.NODE_ENV == 'development' && module.hot) {
   });
 }
 
-export default class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router routes={routes} history={browserHistory} onUpdate={logPageView} />
-      </Provider>
-    );
-  }
+export default function App() {
+  return (
+    <Provider store={store}>
+      <Router routes={routes} history={browserHistory} onUpdate={logPageView} />
+    </Provider>
+  );
 }

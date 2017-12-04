@@ -1,0 +1,26 @@
+$panelHeight: 400px;
+
+.ItemHomeContainer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ItemHomeContainer__panel {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: $panelHeight;
+  position: relative;
+  white-space: pre-wrap;
+  padding: $space;
+}
+.ItemHomeContainer__panel .TimeLeft {
+  position: absolute;
+  top: $space;
+  right: $space * 1.5;
+}
+.ItemHomeContainer__panel .panel-face {
+  left: $space * 1.5;
+  top: $space;
+  position: absolute;
+}

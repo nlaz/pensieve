@@ -1,9 +1,11 @@
 import React from 'react';
 import cx from 'classnames';
 
+import Button from '../../components/button';
+
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export class EmailSignupForm extends React.Component {
+export default class EmailSignupForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -31,16 +33,17 @@ export class EmailSignupForm extends React.Component {
     const { email, isInvalidEmail } = this.state;
     const { isSuccess, hasErrored } = this.props;
     const showError = hasErrored || isInvalidEmail;
+
     const formClasses = cx('landing-form', {
       success: isSuccess,
-      error: showError
+      error: showError,
     });
 
     if (isSuccess) {
       return (
         <form className={formClasses}>
           <div className="success-checkmark">
-            <img src={require('../../assets/images/check.png')} />
+            <img src={require('../../assets/img/icons/check.svg')} />
           </div>
           <div className="info-success">
             <strong>WOO!</strong> Thanks for signing up. Our people will reach out to your people
@@ -62,9 +65,9 @@ export class EmailSignupForm extends React.Component {
               placeholder="Email Address"
               value={email}
             />
-            <button onClick={this.onSubmit} type="submit" className="btn btn-primary">
+            <Button onClick={this.onSubmit} type="submit" primary>
               Subscribe
-            </button>
+            </Button>
           </div>
           {showError && (
             <div className="input-errorWrapper">

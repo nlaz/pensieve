@@ -1,0 +1,35 @@
+/*
+ * List item stylesheet
+ */
+
+.DeckListItem-wrapper {
+  border-bottom: 1px solid $light-border;
+
+  &:first-child {
+    border-radius: 4px 4px 0 0;
+  }
+  &:last-child {
+    border-radius: 0 0 4px 4px;
+    border-bottom: none;
+  }
+}
+
+.DeckListItem {
+  align-items: center;
+  color: $dark-gray;
+  display: flex;
+  justify-content: space-between;
+  padding: $space $space * 1.25;
+
+  &:focus,
+  &:hover {
+    background: $hover-gray !important;
+    color: $black;
+    text-decoration: none;
+  }
+}
+.DeckListItem__actions {
+  align-items: center;
+  color: $medium-gray;
+  display: flex;
+}

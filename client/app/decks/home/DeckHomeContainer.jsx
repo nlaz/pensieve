@@ -4,22 +4,26 @@ import pluralize from 'pluralize';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Footer from '../../../components/Footer';
-import PageTemplate from '../../../components/PageTemplate';
-import Popover from '../../../components/Popover';
-import DeleteDeckModal from './modals/DeleteDeckModal';
-import ResetDeckModal from './modals/ResetDeckModal';
-import EditDeckModal from './modals/EditDeckModal';
-import AddItemModal from './modals/AddItemModal';
-import DeckListItem from './DeckListItem';
 import * as deckActions from '../deckActions';
 import * as itemActions from '../../items/itemActions';
+
+import Button from '../../../components/button';
+import Footer from '../../../components/footer';
+import PageTemplate from '../../../components/pages/PageTemplate';
+import Popover from '../../../components/popover';
+
+import AddItemModal from '../modals/AddItemModal';
+import DeleteDeckModal from '../modals/DeleteDeckModal';
+import EditDeckModal from '../modals/EditDeckModal';
+import ResetDeckModal from '../modals/ResetDeckModal';
+
+import DeckListItem from './DeckListItem';
 
 const MODAL_TYPES = {
   ADD_ITEM: 'addItem',
   DELETE_DECK: 'deleteDeck',
   EDIT_DECK: 'editDeck',
-  RESET_DECK: 'resetDeck'
+  RESET_DECK: 'resetDeck',
 };
 
 class DeckHomeContainer extends React.Component {
@@ -34,6 +38,7 @@ class DeckHomeContainer extends React.Component {
     this.onShowModal = this.onShowModal.bind(this);
     this.onDismissModal = this.onDismissModal.bind(this);
   }
+
   componentWillMount() {
     const { deck, params } = this.props;
     if (!deck || deck._id !== params.deckId) {
@@ -61,10 +66,11 @@ class DeckHomeContainer extends React.Component {
     this.props.actions.createItem({
       deck_id: deckId,
       title: data.title,
-      description: data.description
+      description: data.description,
     });
     this.onDismissModal();
   }
+
   onEditDeck(data) {
     const deckId = this.props.deck._id;
     this.props.actions.editDeck({ deckId, ...data });
@@ -94,7 +100,7 @@ class DeckHomeContainer extends React.Component {
     const { items = [] } = deck;
 
     return (
-      <PageTemplate className="DeckHomeContainer deck-page" footer={<Footer />}>
+      <PageTemplate className="DeckHomeContainer pt-5" footer={<Footer anchor />}>
         {showModalType === MODAL_TYPES.ADD_ITEM && (
           <AddItemModal onSave={data => this.onAddItem(data)} onDismiss={this.onDismissModal} />
         )}
@@ -111,54 +117,62 @@ class DeckHomeContainer extends React.Component {
         {showModalType === MODAL_TYPES.RESET_DECK && (
           <ResetDeckModal onReset={this.onResetDeck} onDismiss={this.onDismissModal} />
         )}
-        <div className="container margin-top margin-bottom">
-          <div className="row margin-top">
-            <div className="deckHeader col-xs-12 col-md-10 col-md-offset-1">
-              <h5 className="deckSubtitle">DECK</h5>
-              <h1 className="deckTitle">{deck.title}</h1>
-              <p className="deckDescription">{deck.description}</p>
-              <span className="deckDetails">
+        <div className="container mt-3">
+          <div className="row">
+            <div className="position-relative col-md-10 offset-md-1">
+              <h6 className="text-secondary text-uppercase m-0">DECK</h6>
+              <h1 className="text-dark font-weight-bold h3 mb-0">{deck.title}</h1>
+              <p className="text-secondary h5 mb-1">{deck.description}</p>
+              <small className="text-secondary">
                 {moment(deck.createdAt).format('MMMM D, YYYY')} &middot;{' '}
                 {pluralize('item', items.length, true)}
-              </span>
-              <div className="deckActions">
-                <button onClick={this.onStudyDeck} className="button button--primary">
-                  Study Now
-                </button>
-                <button
+              </small>
+              <div className="mt-2">
+                <Button onClick={this.onStudyDeck} primary>
+                  Study now
+                </Button>
+                <Button
+                  className="btn-outline-secondary ml-2"
                   onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}
-                  className="button button--default"
                 >
-                  Add Item +
-                </button>
+                  Add item +
+                </Button>
               </div>
               <Popover
                 align="right"
                 ref={c => (this.overflow = c)}
-                className="deckActions--overflow"
+                className="DeckHomeContainer__overflow position-absolute"
                 trigger={
-                  <span className="glyphicon glyphicon-option-vertical" aria-hidden="true" />
+                  <Button reset>
+                    <i className="fa fa-ellipsis-v fa-lg" aria-hidden="true" />
+                  </Button>
                 }
               >
-                <div className="popoverActions">
-                  <div onClick={() => this.onShowModal(MODAL_TYPES.EDIT_DECK)} className="action">
+                <div className="popover-actions">
+                  <div
+                    className="action-item"
+                    onClick={() => this.onShowModal(MODAL_TYPES.EDIT_DECK)}
+                  >
                     Edit Deck
                   </div>
                   <div
+                    className="action-item border-top"
                     onClick={() => this.onShowModal(MODAL_TYPES.RESET_DECK)}
-                    className="action border-top"
                   >
                     Reset Deck
                   </div>
-                  <div onClick={() => this.onShowModal(MODAL_TYPES.DELETE_DECK)} className="action">
+                  <div
+                    className="action-item"
+                    onClick={() => this.onShowModal(MODAL_TYPES.DELETE_DECK)}
+                  >
                     Delete Deck
                   </div>
                 </div>
               </Popover>
               <hr />
             </div>
-            <div className="col-xs-12 col-md-10 col-md-offset-1">
-              <div className="deckHome-items">
+            <div className="col-md-10 offset-md-1">
+              <div className="border rounded">
                 {items.length > 0 &&
                   items.map((item, key) => (
                     <DeckListItem key={key} item={item} actions={this.props.actions} />
@@ -173,11 +187,11 @@ class DeckHomeContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  deck: state.data.deck
+  deck: state.data.deck,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...deckActions, ...itemActions }, dispatch)
+  actions: bindActionCreators({ ...deckActions, ...itemActions }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckHomeContainer);

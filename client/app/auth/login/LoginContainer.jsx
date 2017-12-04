@@ -3,13 +3,16 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import PageTemplate from '../../../components/PageTemplate';
-import Footer from '../../../components/Footer';
 import * as sessionActions from '../authActions';
+
+import Button from '../../../components/button';
+import Footer from '../../../components/footer';
+import PageTemplate from '../../../components/pages/PageTemplate';
 
 class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = { email: '', password: '' };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -40,11 +43,11 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
-      <PageTemplate className="login-page" footer={<Footer />}>
-        <div className="login-form container">
+      <PageTemplate className="LoginContainer pt-5" footer={<Footer anchor />}>
+        <div className="container mt-5">
           <div className="row">
-            <div className="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-              <h3 className="text-bold">Login</h3>
+            <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+              <h1 className="h4 mb-3 text-center">Login to your account</h1>
               <form onSubmit={e => e.preventDefault()}>
                 <div className="form-group">
                   <label htmlFor="emailInput">Email</label>
@@ -69,36 +72,19 @@ class LoginContainer extends React.Component {
                   />
                 </div>
 
-                <button onClick={this.onSave} type="submit" className="btn btn-primary btn-block">
+                <Button onClick={this.onSave} type="submit" primary block>
                   Login
-                </button>
+                </Button>
               </form>
 
               <hr />
 
-              {/* Disable for Prelaunch */}
-              <div className="row">
-                {false && (
-                  <p className="text-center">
-                    Need an account?{' '}
-                    <Link className="link" to="/signup">
-                      Signup
-                    </Link>
-                  </p>
-                )}
-                <p className="text-center">
-                  Forgot your password?{' '}
-                  <a className="link" href="mailto:hello@pensieve.space">
-                    Send us a message
-                  </a>
-                </p>
-                <p className="text-center">
-                  Or go{' '}
-                  <Link className="link" to="/">
-                    home
-                  </Link>.
-                </p>
-              </div>
+              <p className="text-center mb-1">
+                Forgot your password? <a href="mailto:hello@pensieve.space">Send us a message</a>
+              </p>
+              <p className="text-center mb-3">
+                Need an account? <Link to="/signup">Sign up</Link>
+              </p>
             </div>
           </div>
         </div>
@@ -108,11 +94,11 @@ class LoginContainer extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(sessionActions, dispatch)
+  actions: bindActionCreators(sessionActions, dispatch),
 });
 
 const mapStateToProps = state => ({
-  authenticated: state.app.authenticated
+  authenticated: state.app.authenticated,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

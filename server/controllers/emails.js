@@ -7,14 +7,7 @@ import { REVIEW_SESSION_SIZE } from './sessions';
 const sendgrid = sg(process.env.SENDGRID_API_KEY);
 
 const domain = process.env.HOST_URL;
-const sourceEmail = new helper.Email('hello@pensieve.space', 'Albus');
-const subjects = [
-  'Start your morning with some knowledge - Pensieve',
-  'Well, Check This Out - Pensi',
-  'Some fresh baked notes for you to review - Pensieve',
-  'Hey Good Looking - Pensieve',
-  '>>>>CLICK HERE<<<<< (Or Don\'t) - Pensieve'
-];
+const sourceEmail = new helper.Email('hello@pensieve.space', 'Pensieve');
 
 const template = (name, items) => {
   const url = `${domain}/sessions/new`;
@@ -22,21 +15,21 @@ const template = (name, items) => {
     'background-color:#2e78ba;border-radius:3px;color:#ffffff;line-height:30px;height:30px;text-align:center;text-decoration:none;width:100px;';
 
   return `<div style='color:#000000;'>
-		<p>You have <span style='font-weight:bold;'>${items.length} items</span> that need review. Review them now before you forget.</p>
+  <p>You have <span style='font-weight:bold;'>${items.length} items</span> that need review. Review them now before you forget.</p>
 
-		<div style='${buttonStyle}'>
-			<a href='${url}' style='color:#ffffff;text-decoration:none;'>Review Now</a>
-		</div>
+  <div style='${buttonStyle}'>
+  <a href='${url}' style='color:#ffffff;text-decoration:none;'>Review Now</a>
+  </div>
 
-		<p>Anyways that was fun. See you later!</p>
+  <p>Anyways that was fun. See you later!</p>
 
-		<p>Your friend,</p>
-		<p>Pensieve</p>
-	</div>`;
+  <p>Your friend,</p>
+  <p>Pensieve</p>
+  </div>`;
 };
 
 const constructEmailRequest = (targetName, targetEmail, items) => {
-  const subject = subjects[Math.floor(Math.random() * subjects.length)];
+  const subject = 'You have notes to review - Pensieve';
   const content = new helper.Content('text/html', template(targetName, items));
   const mail = new helper.Mail(sourceEmail, subject, new helper.Email(targetEmail), content);
   return sendgrid.emptyRequest({
@@ -97,6 +90,7 @@ export const addEmailToPrelaunchList = (req, res) => {
     path: '/v3/contactdb/recipients',
     body: [{ email: email }]
   });
+
   return sendgrid
     .API(createRecipientRequest)
     .then(response => {

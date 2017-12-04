@@ -1,0 +1,40 @@
+$deckCardHeight: 200px;
+
+.DeckCard {
+  border: 1px solid $light-border;
+  border-radius: 12px;
+  box-shadow: inset 0 -8px 0 0 #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  height: 180px;
+  hyphens: auto;
+  justify-content: center;
+  padding: $space;
+  text-align: center;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  @include atSmallUp {
+    height: $deckCardHeight;
+  }
+}
+
+.DeckCard::before {
+  border-radius: 12px;
+  bottom: 0px;
+  box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.06);
+  content: '';
+  right: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.DeckCard__count {
+  font-size: 14px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}

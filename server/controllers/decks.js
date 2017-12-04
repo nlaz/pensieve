@@ -31,28 +31,16 @@ export async function getDeck(req, res) {
  * Constructs item objects after building a deck.
  */
 export async function createDeck(req, res) {
-  if (req.body.items && req.body.items.length === 0) {
-    return res.status(500).json({ error: 'Decks must have at least one item' });
-  }
+  const userId = req.user._id;
+
+  const deck = new Deck({
+    user_id: userId,
+    title: req.body.title,
+    description: req.body.description,
+  });
 
   try {
-    const deck = await new Deck({
-      user_id: req.user._id,
-      title: req.body.title,
-      description: req.body.description
-    }).save();
-
-    const itemObjs = req.body.items.map(item => ({
-      ...item,
-      user_id: req.user._id,
-      deck_id: deck._id
-    }));
-
-    const items = await Item.create(itemObjs);
-
-    const newDeck = await Deck.findOneAndUpdate({ _id: deck._id }, { items: items }, { new: true });
-
-    return res.status(200).json({ deck: newDeck });
+    return res.status(200).json({ deck: await deck.save() });
   } catch (error) {
     return res.status(500).json({ error });
   }
@@ -69,7 +57,7 @@ export async function editDeck(req, res) {
     let deck = await Deck.findOneAndUpdate(
       { _id: deckId, user_id: userId },
       { title: req.body.title, description: req.body.description },
-      { new: true }
+      { new: true },
     );
 
     deck.items = await Item.find()
@@ -111,15 +99,15 @@ export async function resetDeck(req, res) {
       {
         $set: {
           repetitions: 0,
-          EF: 2.5
+          EF: 2.5,
         },
         $unset: {
           nextReviewDate: 1,
           interval: 1,
-          reviewedAt: 1
-        }
+          reviewedAt: 1,
+        },
       },
-      { multi: true, new: true }
+      { multi: true, new: true },
     );
 
     items = await Item.find({ deck_id: deckId, user_id: userId });

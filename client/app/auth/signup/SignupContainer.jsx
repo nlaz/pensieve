@@ -3,13 +3,16 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import PageTemplate from '../../../components/PageTemplate';
-import Footer from '../../../components/Footer';
 import * as sessionActions from '../authActions';
+
+import Button from '../../../components/button';
+import Footer from '../../../components/footer';
+import PageTemplate from '../../../components/pages/PageTemplate';
 
 class SignupContainer extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = { email: '', password: '', name: '' };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -40,11 +43,11 @@ class SignupContainer extends React.Component {
 
   render() {
     return (
-      <PageTemplate className="signup-page" footer={<Footer />}>
-        <div className="signup-form container">
+      <PageTemplate className="SignupContainer pt-5" footer={<Footer anchor />}>
+        <div className="container mt-5">
           <div className="row">
-            <div className="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-              <h3 className="text-bold">Join Pensieve Today</h3>
+            <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+              <h1 className="h4 mb-3 text-center">Create an account</h1>
               <form action="/signup" method="post">
                 <div className="form-group">
                   <label htmlFor="nameInput">Name</label>
@@ -80,27 +83,19 @@ class SignupContainer extends React.Component {
                   />
                 </div>
 
-                <button onClick={this.onSave} type="submit" className="btn btn-primary btn-block">
+                <Button className="mt-4" onClick={this.onSave} type="submit" primary block>
                   Join
-                </button>
+                </Button>
               </form>
 
               <hr />
 
-              <div className="row">
-                <p className="text-center">
-                  Already have an account?{' '}
-                  <Link className="link" to="/login">
-                    Login
-                  </Link>
-                </p>
-                <p className="text-center">
-                  Or go{' '}
-                  <Link className="link" to="/">
-                    home
-                  </Link>.
-                </p>
-              </div>
+              <p className="text-center mb-1">
+                Already have an account? <Link to="/login">Login</Link>
+              </p>
+              <p className="text-center mb-3">
+                Or go <Link to="/">home</Link>.
+              </p>
             </div>
           </div>
         </div>
@@ -110,11 +105,11 @@ class SignupContainer extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(sessionActions, dispatch)
+  actions: bindActionCreators(sessionActions, dispatch),
 });
 
 const mapStateToProps = state => ({
-  authenticated: state.app.authenticated
+  authenticated: state.app.authenticated,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer);

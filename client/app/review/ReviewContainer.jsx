@@ -1,47 +1,31 @@
 import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { getNextInterval, getEF } from '../../../server/controllers/utils';
 
 import * as reviewActions from './reviewActions';
 import * as itemActions from '../items/itemActions';
-import { getNextInterval, getEF } from '../../../server/controllers/utils';
 
-import Footer from '../../components/Footer';
-import PageTemplate from '../../components/PageTemplate';
+import Button from '../../components/button';
+import Footer from '../../components/footer';
+import PageTemplate from '../../components/pages/PageTemplate';
+
 import ProgressBar from './ReviewProgressBar';
 
 export const REVIEW_TYPE = {
   EASY: 'easy',
   GOOD: 'good',
-  HARD: 'hard'
+  HARD: 'hard',
 };
 
 export const REVIEW_GRADES = {
   EASY: 0,
   GOOD: 3,
-  HARD: 5
+  HARD: 5,
 };
-
-moment.locale('shortened', {
-  relativeTime: {
-    future: 'in %s',
-    past: '%s ago',
-    s: '1 s',
-    ss: '%d s',
-    m: '1 m',
-    mm: '%d m',
-    h: '1 h',
-    hh: '%d h',
-    d: '1 d',
-    dd: '%d d',
-    M: '1 mo',
-    MM: '%d mo',
-    y: '1 yr',
-    yy: '%d yr'
-  }
-});
 
 const getIntervals = item => {
   return Object.values(REVIEW_GRADES).map(grade => {
@@ -62,18 +46,18 @@ const SessionResultItem = ({ item }) => (
 );
 
 const SessionResults = ({ items }) => (
-  <PageTemplate className="session-page margin-top" footer={<Footer />}>
-    <div className="container margin-top">
+  <PageTemplate className="review-page" footer={<Footer />}>
+    <div className="container">
       <div className="row">
-        <div className="col-md-8 col-md-offset-2">
-          <div className="session-header">
+        <div className="col-md-8 offset-md-2">
+          <div className="review-header">
             <h5>RESULTS</h5>
           </div>
           <ul className="list-group">
             {items.map((item, key) => <SessionResultItem key={key} item={item} />)}
           </ul>
           <div className="text-right">
-            <Link to="/" className="button button--primary">
+            <Link to="/" className="btn btn-primary">
               Back
             </Link>
           </div>
@@ -86,7 +70,6 @@ const SessionResults = ({ items }) => (
 class ReviewContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.onToggleHideItem = this.onToggleHideItem.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
     this.onNextAction = this.onNextAction.bind(this);
     this.state = { index: 0, showAnswer: false, showNextOptions: false, items: props.items };
@@ -126,21 +109,15 @@ class ReviewContainer extends React.Component {
       index: index + 1,
       showNextOptions: false,
       showAnswer: false,
-      items: updatedItems
+      items: updatedItems,
     });
   }
 
   onItemClick() {
     this.setState({
       showNextOptions: true,
-      showAnswer: !this.state.showAnswer
+      showAnswer: !this.state.showAnswer,
     });
-  }
-
-  onToggleHideItem(e, item) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.props.actions.toggleHideItem(item);
   }
 
   render() {
@@ -149,11 +126,11 @@ class ReviewContainer extends React.Component {
 
     if (!Object.keys(items).length > 0) {
       return (
-        <PageTemplate className="session-page" footer={<Footer />}>
-          <div className="col-md-8 col-md-offset-2 text-center margin-top">
+        <PageTemplate className="review-page" footer={<Footer />}>
+          <div className="col-md-8 offset-md-2 text-center">
             <span style={{ fontSize: '80px', fontWeight: 'bold' }}>😅</span>
             <h3 style={{ marginBottom: '40px' }}>Oops, something seems to have gone wrong.</h3>
-            <Link to="/" className="button button--primary">
+            <Link to="/" className="btn btn-primary">
               Go Home
             </Link>
           </div>
@@ -170,13 +147,13 @@ class ReviewContainer extends React.Component {
     const intervals = getIntervals(selectedItem);
 
     return (
-      <PageTemplate className="session-page margin-top" footer={<Footer />}>
-        <div className="container margin-top">
+      <PageTemplate className="review-page" footer={<Footer />}>
+        <div className="container">
           <div className="row">
-            <div className="col-md-8 col-md-offset-2">
-              <div className="session-header">
+            <div className="col-md-8 offset-md-2">
+              <div className="review-header">
                 <h5>REVIEW</h5>
-                <p className="session-count">
+                <p className="review-count">
                   <span style={{ fontWeight: 'bold' }}>{index + 1}</span> out of {items.length}
                 </p>
               </div>
@@ -192,40 +169,28 @@ class ReviewContainer extends React.Component {
                 {showNextOptions ? (
                   <div className="row">
                     <div className="col-xs-4 text-center">
-                      <button
-                        onClick={() => this.onNextAction(REVIEW_TYPE.HARD)}
-                        type="button"
-                        className="btn btn-primary"
-                      >
+                      <Button onClick={() => this.onNextAction(REVIEW_TYPE.HARD)} primary block>
                         Again{' '}
                         {intervals && <span className="interval">{` < ${intervals[0]}`}</span>}
-                      </button>
+                      </Button>
                     </div>
                     <div className="col-xs-4 text-center">
-                      <button
-                        onClick={() => this.onNextAction(REVIEW_TYPE.GOOD)}
-                        type="button"
-                        className="btn btn-primary"
-                      >
+                      <Button onClick={() => this.onNextAction(REVIEW_TYPE.GOOD)} primary block>
                         Good {intervals && <span className="interval">{` < ${intervals[1]}`}</span>}
-                      </button>
+                      </Button>
                     </div>
                     <div className="col-xs-4 text-center">
-                      <button
-                        onClick={() => this.onNextAction(REVIEW_TYPE.EASY)}
-                        type="button"
-                        className="btn btn-primary"
-                      >
+                      <Button onClick={() => this.onNextAction(REVIEW_TYPE.EASY)} primary block>
                         Easy {intervals && <span className="interval">{` < ${intervals[2]}`}</span>}
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 ) : (
                   <div className="row">
                     <div className="col-xs-12 text-center">
-                      <button onClick={this.onItemClick} type="button" className="btn btn-primary">
+                      <Button onClick={this.onItemClick} primary block>
                         Show Answer
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 )}
@@ -240,11 +205,11 @@ class ReviewContainer extends React.Component {
 
 const mapStateToProps = state => ({
   session: state.data.session,
-  items: state.data.session.items
+  items: state.data.session.items,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...reviewActions, ...itemActions }, dispatch)
+  actions: bindActionCreators({ ...reviewActions, ...itemActions }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewContainer);

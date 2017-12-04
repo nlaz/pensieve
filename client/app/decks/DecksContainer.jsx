@@ -4,45 +4,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as deckActions from './deckActions';
-import PageTemplate from '../../components/PageTemplate';
-import Footer from '../../components/Footer';
-import PageNavigation from '../../components/PageNavigation';
+
+import Footer from '../../components/footer';
+import PageTemplate from '../../components/pages/PageTemplate';
 
 import DeckCard from './DeckCard';
+import DeckPageNavigation from './DeckPageNavigation';
+import EmptyView from './EmptyView';
 
 export const PAGE_SIZE = 16;
-
-export const PageHeader = ({ count, onSearchChange }) => {
-  return (
-    <div className="col-md-10 col-md-offset-1">
-      <div className="page-header">
-        <div className="info">
-          <h4 className="title">Decks</h4>
-          <p className="subtitle">{count} decks in your collection</p>
-        </div>
-        <div className="actions">
-          {count > 0 && (
-            <div className="search">
-              <span className="glyphicon glyphicon-search" aria-hidden="true" />
-              <input
-                onChange={onSearchChange}
-                type="text"
-                id="search"
-                className="form-control"
-                placeholder="Search for decks..."
-              />
-            </div>
-          )}
-          <div className="create">
-            <Link to="decks/new" className="btn-newDeck btn btn-primary">
-              Create Deck +
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 class DecksContainer extends React.Component {
   constructor(props) {
@@ -81,8 +51,8 @@ class DecksContainer extends React.Component {
   }
 
   render() {
-    const { filter, activePage } = this.state;
     const { decks = [] } = this.props;
+    const { filter, activePage } = this.state;
 
     const filteredDecks =
       filter.length > 0 ? decks.filter(deck => deck.title.indexOf(filter) !== -1) : decks;
@@ -92,38 +62,48 @@ class DecksContainer extends React.Component {
     const pageDecks = filteredDecks.slice(pageStart, pageEnd);
 
     return (
-      <PageTemplate footer={<Footer />}>
-        <div className="decks-page container margin-top">
+      <PageTemplate className="DecksContainer decks-page pt-5" footer={<Footer anchor />}>
+        <div className="container mt-3">
           <div className="row">
-            <PageHeader count={decks.length} onSearchChange={this.onSearchChange} />
-          </div>
-          <div className="col-md-10 col-md-offset-1">
-            {pageDecks.length > 0 ? (
-              <div className="row">
-                {pageDecks.map((deck, key) => (
-                  <DeckCard className="col-xs-6 col-sm-4 col-md-3" deck={deck} key={key} />
-                ))}
-              </div>
-            ) : (
-              <div className="emptyView-wrapper">
-                <div className="text-center emptyView">
-                  <span style={{ fontSize: '60px' }}>✌️</span>
-                  <h2 className="title">No decks in your collection yet</h2>
-                  <p className="description">
-                    Decks are groups of related items for organizing your notes. Haven’t created an
-                    deck yet? No problem. You can click ‘Create Deck’ to build your first deck.
-                  </p>
+            <div className="col-md-10 offset-md-1">
+              <div className="DecksContainer__header">
+                <div>
+                  <h1 className="h5 m-0">Decks</h1>
+                  <p className="text-secondary m-0">{decks.length} decks in your collection</p>
+                </div>
+                <div className="DecksContainer__actions">
+                  {decks.length > 0 && (
+                    <input
+                      onChange={this.onSearchChange}
+                      type="text"
+                      className="DecksContainer__search form-control"
+                      placeholder="Search for decks..."
+                    />
+                  )}
+                  <Link to="decks/new" className="btn btn-primary">
+                    Create Deck +
+                  </Link>
                 </div>
               </div>
-            )}
-            {numPages > 1 && (
-              <PageNavigation
-                numPages={numPages}
-                onIncrementPage={this.onIncrementPage}
-                onDecrementPage={this.onDecrementPage}
-                onChangePage={this.onChangePage}
-              />
-            )}
+              <hr className="mt-2 mb-2" />
+              {pageDecks.length > 0 ? (
+                <div className="row">
+                  {pageDecks.map((deck, key) => (
+                    <DeckCard className="col-xs-6 col-sm-4 col-md-3" deck={deck} key={key} />
+                  ))}
+                </div>
+              ) : (
+                <EmptyView />
+              )}
+              {numPages > 1 && (
+                <DeckPageNavigation
+                  numPages={numPages}
+                  onIncrementPage={this.onIncrementPage}
+                  onDecrementPage={this.onDecrementPage}
+                  onChangePage={this.onChangePage}
+                />
+              )}
+            </div>
           </div>
         </div>
       </PageTemplate>
@@ -132,11 +112,11 @@ class DecksContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  decks: state.data.decks
+  decks: state.data.decks,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(deckActions, dispatch)
+  actions: bindActionCreators(deckActions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DecksContainer);
