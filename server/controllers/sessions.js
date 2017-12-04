@@ -107,12 +107,11 @@ export async function createSession(req, res) {
 
     return res.status(200).json({ session });
   } catch (error) {
-    console.log("💢 error", error);
     return res.status(500).json({ error });
   }
 }
 
-export async function getSessionTypes(req, res) {
+export async function getStudyTypes(req, res) {
   const userId = req.user._id;
 
   try {

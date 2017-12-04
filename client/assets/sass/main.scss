@@ -3,9 +3,9 @@
  */
 
 /* Style utils */
-@import './vars.scss';
-@import './breakpoints.scss';
-@import './fonts.scss';
+@import "./vars.scss";
+@import "./breakpoints.scss";
+@import "./fonts.scss";
 
 body {
   min-height: 100vh;
@@ -13,19 +13,20 @@ body {
 }
 
 /* Component styles */
-@import '../../components/button/Button';
-@import '../../components/flashMessage/FlashMessage';
-@import '../../components/footer/Footer';
-@import '../../components/modal/Modal';
-@import '../../components/popover/Popover';
+@import "../../components/button/Button";
+@import "../../components/flashMessage/FlashMessage";
+@import "../../components/footer/Footer";
+@import "../../components/modal/Modal";
+@import "../../components/popover/Popover";
 
 /* Page-specific styles */
-@import '../../app/decks/home/DeckHomeContainer';
-@import '../../app/decks/home/DeckListItem';
-@import '../../app/decks/DecksContainer';
-@import '../../app/decks/DeckCard';
-@import '../../app/decks/EmptyView';
-@import '../../app/items/home/ItemHomeContainer';
-@import '../../app/landing/LandingContainer';
-@import '../../app/review/ReviewContainer';
-@import '../../app/review/ReviewProgressBar';
+@import "../../app/decks/home/DeckHomeContainer";
+@import "../../app/decks/home/DeckListItem";
+@import "../../app/decks/DecksContainer";
+@import "../../app/decks/DeckCard";
+@import "../../app/decks/EmptyView";
+@import "../../app/items/home/ItemHomeContainer";
+@import "../../app/landing/LandingContainer";
+@import "../../app/review/ReviewContainer";
+@import "../../app/review/ReviewProgressBar";
+@import "../../app/study/StudyContainer";
