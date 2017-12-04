@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -6,10 +6,10 @@ const SessionSchema = new Schema(
   {
     user_id: { type: String, required: true },
     items: { type: Array, required: true },
-    type: { type: Number },
-    finishedAt: { type: Date }
+    type: { type: String },
+    finishedAt: { type: Date },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export default mongoose.model('ReviewSession', SessionSchema);
+export default mongoose.model("ReviewSession", SessionSchema);
