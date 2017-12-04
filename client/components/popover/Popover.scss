@@ -1,10 +1,10 @@
-$popoverWidth: 200px;
+$popover-width: 200px;
 
 .popover {
-  border: 1px solid $C_lightBorder;
-  box-shadow: 0 2px 4px $C_lightShadow;
+  border: 1px solid $light-border;
+  box-shadow: 0 2px 4px $light-shadow;
   top: $space / 3;
-  width: $popoverWidth;
+  width: $popover-width;
 }
 .popover--left {
   left: 0;
@@ -17,7 +17,7 @@ $popoverWidth: 200px;
 
 .popover-actions .action-item {
   padding: $space;
-  color: $C_darkGray;
+  color: $dark-gray;
 
   &:first-child {
     border-radius: 4px 4px 0 0;
@@ -29,6 +29,6 @@ $popoverWidth: 200px;
     background: #f0f0f0;
   }
   &.border-top {
-    border-top: 1px solid $C_lightBorder;
+    border-top: 1px solid $light-border;
   }
 }

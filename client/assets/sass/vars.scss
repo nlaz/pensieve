@@ -1,24 +1,18 @@
-$C_primaryBlue: #1574fb;
-$C_primaryDarkBlue: #0f65df;
-$C_primaryGreen: #41d0a5;
+$primary-blue: #1574fb;
+$primary-dark-blue: #0f65df;
+$primary-green: #41d0a5;
 
-$C_white: #ffffff;
-$C_black: #222b2d;
-$C_lightShadow: rgba(0, 0, 0, 0.3);
-$C_transparentGray: rgba(178, 178, 178, 0.5);
-$C_darkWhite: #f8f8f8;
-$C_blue: #3b85bf;
-$C_darkGray: #4b4b4b;
-$C_mediumGray: #777a82;
-$C_lightGray: #cbcbcb;
-$C_cardBorder: #dddddd;
-$C_lightBorder: #e9e9e9;
-$C_errorRed: #e35a5a;
-$C_errorDarkRed: #d25353;
-$C_darkBorder: #d5d5d5;
+$white: #ffffff;
+$black: #222b2d;
+$light-shadow: rgba(0, 0, 0, 0.3);
+$dark-white: #f8f8f8;
+$dark-gray: #4b4b4b;
+$medium-gray: #777a82;
+$light-border: #e9e9e9;
+$error-red: #e35a5a;
 
 $space: 12px;
 
 .text-dark {
-  color: $C_darkGray !important;
+  color: $dark-gray !important;
 }

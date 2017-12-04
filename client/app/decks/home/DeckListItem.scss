@@ -3,7 +3,7 @@
  */
 
 .DeckListItem-wrapper {
-  border-bottom: 1px solid $C_lightBorder;
+  border-bottom: 1px solid $light-border;
 
   &:first-child {
     border-radius: 4px 4px 0 0;
@@ -16,7 +16,7 @@
 
 .DeckListItem {
   align-items: center;
-  color: $C_darkGray;
+  color: $dark-gray;
   display: flex;
   justify-content: space-between;
   padding: $space $space * 1.25;
@@ -24,12 +24,12 @@
   &:focus,
   &:hover {
     background: #f6f6f6 !important;
-    color: $C_black;
+    color: $black;
     text-decoration: none;
   }
 }
 .DeckListItem__actions {
   align-items: center;
-  color: $C_mediumGray;
+  color: $medium-gray;
   display: flex;
 }

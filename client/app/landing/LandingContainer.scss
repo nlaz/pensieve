@@ -4,7 +4,7 @@
  */
 
 .landing-page {
-  background: $C_white;
+  background: $white;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,7 @@
   }
 
   .title {
-    color: $C_primaryBlue;
+    color: $primary-blue;
     font-weight: 600;
     font-size: 48px;
     line-height: 48px;
@@ -59,14 +59,14 @@
   }
 
   .subtitle {
-    color: $C_darkGray;
+    color: $dark-gray;
     margin-top: 0;
     font-weight: 300;
     font-size: 18px;
     line-height: 22px;
   }
   .coming-soon {
-    color: $C_mediumGray;
+    color: $medium-gray;
     font-weight: 600;
     margin: 0;
     text-transform: uppercase;
@@ -110,14 +110,14 @@
   }
 
   label {
-    color: $C_mediumGray;
+    color: $medium-gray;
     font-style: italic;
     font-weight: 400;
   }
 
   input {
     background: transparent;
-    border: 2px solid $C_primaryBlue;
+    border: 2px solid $primary-blue;
     border-radius: 3px;
     padding: 10px 15px;
     width: 100%;
@@ -128,8 +128,8 @@
   }
 
   .btn {
-    background: $C_primaryBlue;
-    border: 2px solid $C_primaryBlue;
+    background: $primary-blue;
+    border: 2px solid $primary-blue;
     border-radius: 3px;
     font-weight: 400;
     padding: 10px 20px;
@@ -144,8 +144,8 @@
     &:hover,
     &:focus,
     &:active {
-      border: 2px solid $C_primaryDarkBlue;
-      background: $C_primaryDarkBlue;
+      border: 2px solid $primary-dark-blue;
+      background: $primary-dark-blue;
     }
   }
 }
@@ -167,7 +167,7 @@
 }
 
 .landing-form .input-error {
-  color: $C_errorRed;
+  color: $error-red;
   margin-top: 5px;
   position: absolute;
   top: 0;
@@ -182,7 +182,7 @@
 
   .success-checkmark {
     align-items: center;
-    background: $C_primaryGreen;
+    background: $primary-green;
     border-radius: 100%;
     display: flex;
     height: 40px;
