@@ -23,7 +23,7 @@
 
   &:focus,
   &:hover {
-    background: #f6f6f6 !important;
+    background: $hover-gray !important;
     color: $black;
     text-decoration: none;
   }
