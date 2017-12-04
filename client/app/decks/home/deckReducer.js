@@ -4,9 +4,9 @@ import {
   DELETE_DECK,
   FETCH_DECK,
   CLEAR_DECK,
-  RESET_DECK
-} from '../deckActions';
-import { DELETE_ITEM, EDIT_ITEM, CREATE_ITEM, RESET_ITEM } from '../../items/itemActions';
+  RESET_DECK,
+} from "../deckActions";
+import { DELETE_ITEM, EDIT_ITEM, CREATE_ITEM, RESET_ITEM } from "../../items/itemActions";
 
 const INITIAL_STATE = {};
 
@@ -43,6 +43,7 @@ export default function deckReducer(state = INITIAL_STATE, action) {
     case DELETE_DECK: {
       return INITIAL_STATE;
     }
+    default:
+      return state;
   }
-  return state;
 }

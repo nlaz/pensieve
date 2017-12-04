@@ -1,4 +1,4 @@
-import { CREATE_SESSION, FETCH_SESSION, FINISH_SESSION } from './reviewActions';
+import { CREATE_SESSION, FETCH_SESSION, FINISH_SESSION } from "./reviewActions";
 
 const INITIAL_STATE = {};
 
@@ -10,7 +10,7 @@ export default function(state = INITIAL_STATE, action) {
       return action.payload.session;
     case CREATE_SESSION:
       return action.payload.session;
+    default:
+      return state;
   }
-
-  return state;
 }

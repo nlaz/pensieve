@@ -1,4 +1,4 @@
-import { EMAIL_SIGN_UP_PRELAUNCH, EMAIL_SIGN_UP_PRELAUNCH_ERROR } from './emailActions';
+import { EMAIL_SIGN_UP_PRELAUNCH, EMAIL_SIGN_UP_PRELAUNCH_ERROR } from "./emailActions";
 
 const INITIAL_STATE = {};
 
@@ -8,7 +8,7 @@ export default function(state = INITIAL_STATE, action) {
       return { isSuccess: true };
     case EMAIL_SIGN_UP_PRELAUNCH_ERROR:
       return { hasErrored: true };
+    default:
+      return state;
   }
-
-  return state;
 }
