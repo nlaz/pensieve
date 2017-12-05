@@ -23,13 +23,16 @@ class StudyContainer extends React.Component {
     const { study = {}, learn = {}, review = {} } = types;
 
     return (
-      <PageTemplate className="StudyContainer pt-5 pb-5" footer={<Footer anchor />}>
+      <PageTemplate className="study-container pt-5 pb-5" footer={<Footer anchor />}>
         <div className="container mt-5">
           <div className="row">
             <div className="col-sm-8 offset-sm-2">
               <h5 className="mb-3">Choose your study type:</h5>
               <div className="list-group">
-                <Link to="/sessions/new" className="list-group-item list-group-action text-dark">
+                <Link
+                  to="/sessions/new"
+                  className="study-group-item list-group-item list-group-action text-dark"
+                >
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">
                       Daily study{" "}
@@ -53,7 +56,7 @@ class StudyContainer extends React.Component {
                 </Link>
                 <Link
                   to={`/sessions/new/${SESSION_TYPES.LEARN}`}
-                  className="list-group-item list-group-action text-dark"
+                  className="study-group-item list-group-item list-group-action text-dark"
                 >
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">Learn new cards</h5>
@@ -75,7 +78,7 @@ class StudyContainer extends React.Component {
                 </Link>
                 <Link
                   to={`/sessions/new/${SESSION_TYPES.REVIEW}`}
-                  className="list-group-item list-group-action text-dark"
+                  className="study-group-item list-group-item list-group-action text-dark"
                 >
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">Review previous cards</h5>

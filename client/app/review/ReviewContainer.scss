@@ -1,30 +1,26 @@
-/**
- * Session page stylesheet
- */
-
-.ReviewContainer__panel {
+.review-container-panel {
   align-items: center;
   cursor: pointer;
   display: flex;
   justify-content: center;
   min-height: 360px;
-  white-space: pre-wrap;
   position: relative;
+  white-space: pre-wrap;
+
+  .panel-face {
+    left: $space * 1.5;
+    position: absolute;
+    top: $space;
+  }
 }
 
-.ReviewContainer__panel .panel-face {
-  left: $space * 1.5;
-  top: $space;
-  position: absolute;
-}
-
-.ReviewContainer__count {
+.review-container-count {
   color: $medium-gray;
   font-style: italic;
   font-size: 16px;
 }
 
-.ReviewContainer .interval {
+.review-container .interval {
   color: #073a83;
   margin-left: 2px;
 }
