@@ -1,32 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React from "react";
+import { Link } from "react-router";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-import * as sessionActions from '../authActions';
+import * as sessionActions from "../authActions";
 
-import Button from '../../../components/button';
-import Footer from '../../../components/footer';
-import PageTemplate from '../../../components/pages/PageTemplate';
+import Button from "../../../components/button";
+import Footer from "../../../components/footer";
+import PageTemplate from "../../../components/pages/PageTemplate";
 
 class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { email: '', password: '' };
+    this.state = { email: "", password: "" };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
   }
 
   componentWillMount() {
     if (this.props.authenticated) {
-      this.props.router.push('/');
+      this.props.router.push("/");
     }
   }
 
   componentWillUpdate(nextProps) {
     if (nextProps.authenticated) {
-      nextProps.router.push('/');
+      nextProps.router.push("/");
     }
   }
 
@@ -43,7 +43,7 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
-      <PageTemplate className="LoginContainer pt-5" footer={<Footer anchor />}>
+      <PageTemplate className="LoginContainer pt-5 pb-5" footer={<Footer anchor />}>
         <div className="container mt-5">
           <div className="row">
             <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3">

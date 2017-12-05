@@ -1,18 +1,18 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import * as deckActions from '../deckActions';
+import * as deckActions from "../deckActions";
 
-import Button from '../../../components/button';
-import Footer from '../../../components/footer';
-import PageTemplate from '../../../components/pages/PageTemplate';
+import Button from "../../../components/button";
+import Footer from "../../../components/footer";
+import PageTemplate from "../../../components/pages/PageTemplate";
 
 class DeckNewContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { title: '', description: '' };
+    this.state = { title: "", description: "" };
 
     this.onCancel = this.onCancel.bind(this);
     this.onCreateDeck = this.onCreateDeck.bind(this);
@@ -32,7 +32,7 @@ class DeckNewContainer extends React.Component {
   }
 
   onCancel() {
-    this.props.router.push('/decks');
+    this.props.router.push("/decks");
   }
 
   onCreateDeck() {
@@ -52,7 +52,7 @@ class DeckNewContainer extends React.Component {
     const { title, description } = this.state;
 
     return (
-      <PageTemplate className="DeckNewContainer pt-5" footer={<Footer anchor />}>
+      <PageTemplate className="DeckNewContainer pt-5 pb-5" footer={<Footer anchor />}>
         <div className="container mt-5">
           <div className="row">
             <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3">

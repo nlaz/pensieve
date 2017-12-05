@@ -1,16 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import { Link } from "react-router";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import * as deckActions from './deckActions';
+import * as deckActions from "./deckActions";
 
-import Footer from '../../components/footer';
-import PageTemplate from '../../components/pages/PageTemplate';
+import Footer from "../../components/footer";
+import PageTemplate from "../../components/pages/PageTemplate";
 
-import DeckCard from './DeckCard';
-import DeckPageNavigation from './DeckPageNavigation';
-import EmptyView from './EmptyView';
+import DeckCard from "./DeckCard";
+import DeckPageNavigation from "./DeckPageNavigation";
+import EmptyView from "./EmptyView";
 
 export const PAGE_SIZE = 16;
 
@@ -18,7 +18,7 @@ class DecksContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { activePage: 0, filter: '' };
+    this.state = { activePage: 0, filter: "" };
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onIncrementPage = this.onIncrementPage.bind(this);
     this.onDecrementPage = this.onDecrementPage.bind(this);
@@ -62,7 +62,7 @@ class DecksContainer extends React.Component {
     const pageDecks = filteredDecks.slice(pageStart, pageEnd);
 
     return (
-      <PageTemplate className="DecksContainer decks-page pt-5" footer={<Footer anchor />}>
+      <PageTemplate className="DecksContainer decks-page pt-5 pb-5" footer={<Footer anchor />}>
         <div className="container mt-3">
           <div className="row">
             <div className="col-md-10 offset-md-1">

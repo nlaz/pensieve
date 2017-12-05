@@ -23,7 +23,7 @@ class StudyContainer extends React.Component {
     const { study = {}, learn = {}, review = {} } = types;
 
     return (
-      <PageTemplate className="StudyContainer pt-5" footer={<Footer anchor />}>
+      <PageTemplate className="StudyContainer pt-5 pb-5" footer={<Footer anchor />}>
         <div className="container mt-5">
           <div className="row">
             <div className="col-sm-8 offset-sm-2">
@@ -32,7 +32,7 @@ class StudyContainer extends React.Component {
                 <Link to="/sessions/new" className="list-group-item list-group-action text-dark">
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">
-                      Daily Study{" "}
+                      Daily study{" "}
                       <span className="font-weight-normal text-dark">(Recommended)</span>
                     </h5>
                     <div className="badge badge-info badge-pill">
@@ -46,9 +46,9 @@ class StudyContainer extends React.Component {
                     </div>
                   </div>
                   <p className="text-secondary">
-                    This session will maximize your recall of previous cards and introduce new cards
-                    you have not seen. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Pellentesque malesuada magna vitae orci lacinia, a congue lacus iaculis.
+                    This session contains a mixture of new cards and previously seen cards. It
+                    focuses on expanding your material while maximizing your recall of cards you
+                    have already studied. This is good for balancing your learning session.
                   </p>
                 </Link>
                 <Link
@@ -56,7 +56,7 @@ class StudyContainer extends React.Component {
                   className="list-group-item list-group-action text-dark"
                 >
                   <div className="d-flex justify-content-between align-items-center">
-                    <h5 className="font-weight-bold mb-1">Learn</h5>
+                    <h5 className="font-weight-bold mb-1">Learn new cards</h5>
                     <div className="badge badge-info badge-pill">
                       {learn.size === learn.total ? (
                         <span>{pluralize("card", learn.size, true)}</span>
@@ -68,9 +68,9 @@ class StudyContainer extends React.Component {
                     </div>
                   </div>
                   <p className="text-secondary">
-                    This session will maximize your recall of previous cards and introduce new cards
-                    you have not seen. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Pellentesque malesuada magna vitae orci lacinia, a congue lacus iaculis.
+                    This session only contains cards you have not seen yet. It focuses on
+                    introducing you to new material and expanding your knowledge base. This is good
+                    if you are trying to learn a lot of material in a short time.
                   </p>
                 </Link>
                 <Link
@@ -78,7 +78,7 @@ class StudyContainer extends React.Component {
                   className="list-group-item list-group-action text-dark"
                 >
                   <div className="d-flex justify-content-between align-items-center">
-                    <h5 className="font-weight-bold mb-1">Review</h5>
+                    <h5 className="font-weight-bold mb-1">Review previous cards</h5>
                     <div className="badge badge-info badge-pill">
                       {review.size === review.total ? (
                         <span>{pluralize("card", review.size, true)}</span>
@@ -90,9 +90,10 @@ class StudyContainer extends React.Component {
                     </div>
                   </div>
                   <p className="text-secondary">
-                    This session will maximize your recall of previous cards and introduce new cards
-                    you have not seen. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Pellentesque malesuada magna vitae orci lacinia, a congue lacus iaculis.
+                    This session only contains cards you have already seen and need to review again.
+                    It focuses on improving your recall of material you have already learned. These
+                    items are due to be reviewed again and will not contain items you have just
+                    learned.
                   </p>
                 </Link>
               </div>
