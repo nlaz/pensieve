@@ -1,45 +1,26 @@
-/**
- * Session page stylesheet
- */
-
-.review-page .review-header {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: $space;
-}
-
-.review-page .review-header h5 {
-  color: $medium-gray;
-  font-size: 16px;
-  margin: 0;
-}
-
-.review-page .review-count {
-  color: $medium-gray;
-  font-style: italic;
-  font-size: 16px;
-}
-
-.review-page .interval {
-  color: #073a83;
-  margin-left: 2px;
-}
-
-.panel-body {
+.review-container-panel {
   align-items: center;
   cursor: pointer;
   display: flex;
   justify-content: center;
   min-height: 360px;
-  white-space: pre-wrap;
   position: relative;
+  white-space: pre-wrap;
+
+  .panel-face {
+    left: $space * 1.5;
+    position: absolute;
+    top: $space;
+  }
 }
 
-.panel-body h3 {
-  margin: 0;
+.review-container-count {
+  color: $medium-gray;
+  font-style: italic;
+  font-size: 16px;
 }
 
-.green-check {
-  color: $primary-green;
+.review-container .interval {
+  color: #073a83;
+  margin-left: 2px;
 }

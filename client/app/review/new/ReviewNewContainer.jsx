@@ -1,17 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import { NO_ITEMS_ERROR } from '../../../../server/controllers/errors';
-import { SESSION_TYPES } from '../../../../server/controllers/constants';
+import { NO_ITEMS_ERROR } from "../../../../server/controllers/errors";
+import { SESSION_TYPES } from "../../../../server/controllers/constants";
 
-import * as reviewActions from '../reviewActions';
+import * as reviewActions from "../reviewActions";
 
-import PageTemplate from '../../../components/pages/PageTemplate';
+import PageTemplate from "../../../components/pages/PageTemplate";
 
 class ReviewNewContainer extends React.Component {
   componentWillMount() {
-    const sessionType = parseInt(this.props.params.sessionType, 10) || SESSION_TYPES.STUDY;
+    const sessionType = this.props.params.sessionType;
     const { deckId } = this.props.location.query;
     this.props.actions.createSession({ sessionType, deckId });
   }

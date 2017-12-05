@@ -1,25 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import { Link } from "react-router";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import * as itemActions from '../itemActions';
+import * as itemActions from "../itemActions";
 
-import Button from '../../../components/button';
-import Footer from '../../../components/footer';
-import PageTemplate from '../../../components/pages/PageTemplate';
-import Popover from '../../../components/popover';
+import Button from "../../../components/button";
+import Footer from "../../../components/footer";
+import PageTemplate from "../../../components/pages/PageTemplate";
+import Popover from "../../../components/popover";
 
-import DeleteItemModal from '../modals/DeleteItemModal';
-import EditItemModal from '../modals/EditItemModal';
-import ResetItemModal from '../modals/ResetItemModal';
+import DeleteItemModal from "../modals/DeleteItemModal";
+import EditItemModal from "../modals/EditItemModal";
+import ResetItemModal from "../modals/ResetItemModal";
 
-import TimeLeft from './TimeLeft';
+import TimeLeft from "./TimeLeft";
 
 const MODAL_TYPES = {
-  RESET_ITEM: 'resetItem',
-  DELETE_ITEM: 'deleteItem',
-  EDIT_ITEM: 'editItem',
+  RESET_ITEM: "resetItem",
+  DELETE_ITEM: "deleteItem",
+  EDIT_ITEM: "editItem",
 };
 
 class ItemContainer extends React.Component {
@@ -38,7 +38,7 @@ class ItemContainer extends React.Component {
   componentWillMount() {
     const { item } = this.props;
     if (item._id !== this.props.params.itemId) {
-      this.props.actions.fetchItem({ itemId: this.props.params.itemId, fields: 'deck' });
+      this.props.actions.fetchItem({ itemId: this.props.params.itemId, fields: "deck" });
     }
   }
 
@@ -85,10 +85,10 @@ class ItemContainer extends React.Component {
 
     if (!item || Object.keys(item).length === 0) {
       return (
-        <PageTemplate className="ItemHomeContainer pt-5" footer={<Footer anchor />}>
+        <PageTemplate className="ItemHomeContainer pt-5 pb-5" footer={<Footer anchor />}>
           <div className="col-md-8 offset-md-2 text-center">
-            <span style={{ fontSize: '80px', fontWeight: 'bold' }}>😅</span>
-            <h3 style={{ marginBottom: '40px' }}>Oops, that item does not seem to exist.</h3>
+            <span style={{ fontSize: "80px", fontWeight: "bold" }}>😅</span>
+            <h3 style={{ marginBottom: "40px" }}>Oops, that item does not seem to exist.</h3>
             <Link to="/" className="btn btn-primary">
               Go Home
             </Link>
@@ -100,7 +100,7 @@ class ItemContainer extends React.Component {
     const itemContent = showAnswer ? item.description : item.title;
 
     return (
-      <PageTemplate className="ItemHomeContainer pt-5" footer={<Footer anchor />}>
+      <PageTemplate className="ItemHomeContainer pt-5 pb-5" footer={<Footer anchor />}>
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDeleteClick} onDismiss={this.onDismissModal} />
         )}
@@ -120,7 +120,7 @@ class ItemContainer extends React.Component {
               <div className="ItemHomeContainer__header">
                 <div>
                   <Link to={`/decks/${deck._id}`}>{deck.title}</Link>
-                  <span className="m-2">{'>'}</span>
+                  <span className="m-2">{">"}</span>
                   <span className="m-0">Item</span>
                 </div>
                 <Popover
@@ -165,7 +165,7 @@ class ItemContainer extends React.Component {
                   {!showAnswer ? <span>Front</span> : <span>Back</span>}
                 </div>
                 <TimeLeft date={item.nextReviewDate} />
-                <h3 className="text-center" style={{ margin: '0' }}>
+                <h3 className="text-center" style={{ margin: "0" }}>
                   {itemContent}
                 </h3>
               </div>

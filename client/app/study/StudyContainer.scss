@@ -1,0 +1,14 @@
+.study-group-item:hover {
+  background: $primary-blue;
+  color: $white !important; // scss-lint:disable ImportantRule
+
+  .text-dark,
+  .text-secondary {
+    color: $white !important; // scss-lint:disable ImportantRule
+  }
+
+  .badge-pill {
+    background: $white;
+    color: $primary-blue;
+  }
+}

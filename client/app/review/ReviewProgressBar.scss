@@ -4,4 +4,5 @@
 
 .ReviewProgressBar__progress-bar {
   background-color: $primary-blue;
+  transition: all 0.2s ease-in-out;
 }

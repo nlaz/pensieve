@@ -1,14 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import * as emailActions from './emailActions';
+import * as emailActions from "./emailActions";
 
-import Footer from '../../components/footer';
-import Header from '../../components/header';
-import PageTemplate from '../../components/pages/PageTemplate';
+import Footer from "../../components/footer";
+import Header from "../../components/header";
+import PageTemplate from "../../components/pages/PageTemplate";
 
-import EmailSignupForm from './EmailSignupForm';
+import EmailSignupForm from "./EmailSignupForm";
 
 export class LandingContainer extends React.Component {
   constructor(props) {
@@ -29,8 +29,8 @@ export class LandingContainer extends React.Component {
         header={<Header />}
         footer={<Footer className="landing-footer" />}
       >
-        <div className="container" style={{ display: 'flex' }}>
-          <div className="landing-copy col-sm-8 col-md-6" style={{ margin: 'auto' }}>
+        <div className="container d-flex">
+          <div className="landing-copy col-sm-8 col-md-6 m-auto">
             <h4 className="coming-soon">COMING SOON</h4>
             <h1 className="title">Cut your study time in half</h1>
             <h4 className="subtitle">
@@ -51,12 +51,12 @@ export class LandingContainer extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(emailActions, dispatch)
+  actions: bindActionCreators(emailActions, dispatch),
 });
 
 const mapStateToProps = state => ({
   isSuccess: state.prelaunch.isSuccess,
-  hasErrored: state.prelaunch.hasErrored
+  hasErrored: state.prelaunch.hasErrored,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);

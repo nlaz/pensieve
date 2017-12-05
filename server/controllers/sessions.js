@@ -1,9 +1,9 @@
-import Item from '../models/item';
-import Session from '../models/session';
-import * as ItemController from './items';
+import Item from "../models/item";
+import Session from "../models/session";
+import * as ItemController from "./items";
 
-import { NO_ITEMS_ERROR } from './errors';
-import { SESSION_TYPES } from './constants';
+import { NO_ITEMS_ERROR } from "./errors";
+import { SESSION_TYPES } from "./constants";
 
 export const REVIEW_SESSION_SIZE = 15;
 export const REVIEW_SESSION_MAX = 30;
@@ -46,14 +46,14 @@ export const getSession = (req, res) => {
       if (_session.user_id !== userId) {
         return res.status(500).json({
           error: true,
-          type: 'invalid_user',
-          message: 'Session not available. Are you signed in correctly?'
+          type: "invalid_user",
+          message: "Session not available. Are you signed in correctly?",
         });
       }
 
       session = _session;
       return Item.find()
-        .where('_id')
+        .where("_id")
         .in(session.items);
     })
     .then(items => {
@@ -71,23 +71,27 @@ export async function createSession(req, res) {
   try {
     let sessionItems;
     if (deckId) {
+      // Deck-only review
       sessionItems = await Item.find({ user_id: userId, deck_id: deckId, hidden: false });
-    } else if (sessionType === SESSION_TYPES.STUDY) {
+    } else if (sessionType === SESSION_TYPES.LEARN) {
+      // Learn session type
+      sessionItems = await ItemController.getNewItemsHelper(userId);
+    } else if (sessionType === SESSION_TYPES.REVIEW) {
+      // Review session type
+      sessionItems = await ItemController.getDueItemsHelper(userId);
+    } else {
+      // Study session type
       const dueItems = await ItemController.getDueItemsHelper(userId);
       const newItems = await ItemController.getNewItemsHelper(userId);
 
       sessionItems = [...dueItems, ...newItems];
-    } else if (sessionType === SESSION_TYPES.LEARN) {
-      sessionItems = await ItemController.getNewItemsHelper(userId);
-    } else if (sessionType === SESSION_TYPES.REVIEW) {
-      sessionItems = await ItemController.getDueItemsHelper(userId);
     }
 
     if (sessionItems.length === 0) {
       return res.status(400).json({
         error: NO_ITEMS_ERROR,
         message:
-          'No available items to create session. You need to create a couple items to get started.'
+          "No available items to create session. You need to create a couple items to get started.",
       });
     }
 
@@ -107,7 +111,7 @@ export async function createSession(req, res) {
   }
 }
 
-export async function getSessionTypes(req, res) {
+export async function getStudyTypes(req, res) {
   const userId = req.user._id;
 
   try {
@@ -120,16 +124,16 @@ export async function getSessionTypes(req, res) {
     return res.status(200).json({
       study: {
         size: Math.min(numDueItems + numNewItems, REVIEW_SESSION_MAX),
-        total: numDueItems + numNewItems
+        total: numDueItems + numNewItems,
       },
       learn: {
         size: Math.min(numNewItems, REVIEW_SESSION_MAX),
-        total: numNewItems
+        total: numNewItems,
       },
       review: {
         size: Math.min(numDueItems, REVIEW_SESSION_MAX),
-        total: numDueItems
-      }
+        total: numDueItems,
+      },
     });
   } catch (error) {
     return res.status(500).json({ error });
@@ -150,7 +154,7 @@ export const finishSession = (req, res) => {
     .then(_session => {
       session = _session;
       return Item.find()
-        .where('_id')
+        .where("_id")
         .in(session.items);
     })
     .then(items => {
