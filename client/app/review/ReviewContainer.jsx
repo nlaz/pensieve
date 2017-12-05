@@ -41,7 +41,7 @@ const getIntervals = item => {
 const SessionResultItem = ({ item }) => <li className="list-group-item">{item.title}</li>;
 
 const SessionResults = ({ items }) => (
-  <PageTemplate className="SessionResults review-page p-5" footer={<Footer anchor />}>
+  <PageTemplate className="SessionResults review-page pt-5 pb-5" footer={<Footer anchor />}>
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-8 offset-md-2">
@@ -119,7 +119,7 @@ class ReviewContainer extends React.Component {
 
     if (!Object.keys(items).length > 0) {
       return (
-        <PageTemplate className="ReviewContainer review-page p-5" footer={<Footer anchor />}>
+        <PageTemplate className="ReviewContainer review-page pt-5 pb-5" footer={<Footer anchor />}>
           <div className="col-md-8 offset-md-2 text-center">
             <span style={{ fontSize: "80px", fontWeight: "bold" }}>😅</span>
             <h3 style={{ marginBottom: "40px" }}>Oops, something seems to have gone wrong.</h3>
@@ -140,7 +140,7 @@ class ReviewContainer extends React.Component {
     const intervals = getIntervals(selectedItem);
 
     return (
-      <PageTemplate className="ReviewContainer review-page p-5" footer={<Footer anchor />}>
+      <PageTemplate className="ReviewContainer review-page pt-5 pb-5  " footer={<Footer anchor />}>
         <div className="container mt-3">
           <div className="row">
             <div className="col-md-8 offset-md-2">
