@@ -14,7 +14,8 @@
     "forever": "yarn start:prod",
     "start:prod": "forever start -c 'yarn prod' ./",
     "stop": "forever stopall",
-    "lint": "eslint ./client"
+    "lint": "eslint ./client",
+    "script": "babel-node"
   },
   "repository": {
     "type": "git",
