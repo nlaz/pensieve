@@ -3,7 +3,6 @@ import authReducer from "./auth/authReducer";
 import deckReducer from "./decks/home/deckReducer";
 import decksReducer from "./decks/decksReducer";
 import itemReducer from "./items/home/itemReducer";
-import prelaunchReducer from "./landing/prelaunchReducer";
 import reviewReducer from "./review/reviewReducer";
 import studyReducer from "./study/studyReducer";
 
@@ -36,7 +35,6 @@ const appReducer = combineReducers({
   app: authReducer,
   errors: errorReducer,
   data: dataReducer,
-  prelaunch: prelaunchReducer,
 });
 
 export default appReducer;
