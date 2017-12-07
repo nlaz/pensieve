@@ -47,7 +47,7 @@ const ContentWrapper = ({ children }) => (
       width: "100%",
       boxSizing: "border-box",
       margin: "2rem auto",
-      marginTop: "60px",
+      marginTop: "55px",
     }}
   >
     {children}

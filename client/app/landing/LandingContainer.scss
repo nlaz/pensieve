@@ -1,3 +1,6 @@
+$hero-margin: 240px;
+$navbar-height: 56px;
+
 // Landing nav section
 .landing-page .navbar {
   box-shadow: none !important;
@@ -14,62 +17,31 @@
 
 // Landing hero section
 .landing-hero {
-  min-height: 60vh;
   background: $primary-blue;
   color: $white;
+}
+
+.landing-hero .btn-light {
+  color: $primary-blue;
+  padding: 10px 15px;
 }
 
 .landing-copy {
   text-align: center;
   max-width: 440px;
-  margin: 40px 0;
+  margin-top: $hero-margin;
+  margin-bottom: $hero-margin + $navbar-height;
 
   @include atMediumUp {
     text-align: left;
     margin-right: 30px;
   }
-
-  .title {
-    color: $primary-blue;
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 48px;
-    margin: 0;
-    margin-bottom: 5px;
-  }
-
-  .subtitle {
-    color: $dark-gray;
-    margin-top: 0;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 22px;
-  }
-  .coming-soon {
-    color: $medium-gray;
-    font-weight: 600;
-    margin: 0;
-    text-transform: uppercase;
-  }
 }
 
-.landing-image {
-  background-image: url("../../assets/img/splash_hero2.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  max-width: 260px;
-  z-index: 0;
-  opacity: 0.9;
-  position: absolute;
-  top: -20px;
+.landing-box .border {
+  border-color: $dark-gray !important;
+}
 
-  @include atMediumUp {
-    background-image: url("../../assets/img/splash_hero.png");
-    background-position: center;
-    display: inline;
-    max-width: 50%;
-    position: static;
-    opacity: 1;
-  }
+.landing-info .btn-primary {
+  padding: 10px 15px;
 }
