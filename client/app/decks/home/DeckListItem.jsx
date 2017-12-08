@@ -1,17 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from "react";
+import { Link } from "react-router";
 
-import Button from '../../../components/button';
-import Popover from '../../../components/popover';
+import Button from "../../../components/button";
+import Popover from "../../../components/popover";
 
-import DeleteItemModal from '../../items/modals/DeleteItemModal';
-import ResetItemModal from '../../items/modals/ResetItemModal';
+import DeleteItemModal from "../../items/modals/DeleteItemModal";
+import ResetItemModal from "../../items/modals/ResetItemModal";
 
-import TimeLeft from '../../items/home/TimeLeft';
+import TimeLeft from "../../items/home/TimeLeft";
 
 const MODAL_TYPES = {
-  RESET_ITEM: 'resetItem',
-  DELETE_ITEM: 'deleteItem',
+  RESET_ITEM: "resetItem",
+  DELETE_ITEM: "deleteItem",
 };
 
 export default class DeckListItem extends React.Component {
@@ -51,19 +51,27 @@ export default class DeckListItem extends React.Component {
     const { showModalType } = this.state;
 
     return (
-      <div className="DeckListItem-wrapper bg-white">
+      <div className="list-item-wrapper bg-white">
         {showModalType === MODAL_TYPES.RESET_ITEM && (
           <ResetItemModal onReset={this.onReset} onDismiss={this.onDismissModal} />
         )}
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDelete} onDismiss={this.onDismissModal} />
         )}
-        <Link className="DeckListItem" to={`/items/${item._id}`}>
-          <span>{item.title}</span>
-          <div className="DeckListItem__actions">
+        <Link className="list-item row" to={`/items/${item._id}`}>
+          <div className="col-9 col-sm-10">
+            <div className="d-flex flex-column flex-md-row">
+              <span className="col-md-5">{item.title}</span>
+              <span className="d-none d-sm-block font-weight-bold col-md-7 mt-2 mt-md-0">
+                {item.description}
+              </span>
+            </div>
+          </div>
+          <div className="d-flex justify-content-end align-items-start col-3 col-sm-2">
             <TimeLeft date={item.nextReviewDate} />
             <Popover
               align="right"
+              className="text-secondary"
               ref={c => (this.overflow = c)}
               trigger={
                 <Button className="ml-2" reset>

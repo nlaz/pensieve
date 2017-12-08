@@ -65,7 +65,7 @@ class DecksContainer extends React.Component {
       <PageTemplate className="DecksContainer decks-page pt-5 pb-5" footer={<Footer anchor />}>
         <div className="container mt-3">
           <div className="row">
-            <div className="col-md-10 offset-md-1">
+            <div className="col-lg-10 offset-lg-1">
               <div className="DecksContainer__header">
                 <div>
                   <h1 className="h5 m-0">Decks</h1>

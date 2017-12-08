@@ -123,25 +123,24 @@ class DeckHomeContainer extends React.Component {
         )}
         <div className="container mt-3">
           <div className="row">
-            <div className="position-relative col-md-10 offset-md-1 mb-2">
+            <div className="position-relative col-lg-10 offset-lg-1 mb-2">
               <h6 className="text-secondary text-uppercase m-0">DECK</h6>
               <h1 className="font-weight-bold h3 mb-0">{deck.title}</h1>
               {deck.description && <p className="text-dark h5 mb-1">{deck.description}</p>}
-              {numDueCards > 0 ||
-                (numNewCards > 0 && (
-                  <div className="mt-3">
-                    {numNewCards > 0 && (
-                      <span className="badge badge-info mr-2" style={{ padding: "6px" }}>
-                        {pluralize("new card", numNewCards, true)}
-                      </span>
-                    )}
-                    {numDueCards > 0 && (
-                      <span className="badge badge-warning" style={{ padding: "6px" }}>
-                        {pluralize("due card", numDueCards, true)}
-                      </span>
-                    )}
-                  </div>
-                ))}
+              {(numDueCards > 0 || numNewCards > 0) && (
+                <div className="mt-3">
+                  {numNewCards > 0 && (
+                    <span className="badge badge-info mr-2" style={{ padding: "6px" }}>
+                      {pluralize("new card", numNewCards, true)}
+                    </span>
+                  )}
+                  {numDueCards > 0 && (
+                    <span className="badge badge-warning" style={{ padding: "6px" }}>
+                      {pluralize("due card", numDueCards, true)}
+                    </span>
+                  )}
+                </div>
+              )}
               <div className="mt-1 mb-3">
                 <small className="text-secondary">
                   {moment(deck.createdAt).format("MMMM D, YYYY")} &middot;{" "}
@@ -192,7 +191,7 @@ class DeckHomeContainer extends React.Component {
               </Popover>
               <hr />
             </div>
-            <div className="col-md-10 offset-md-1">
+            <div className="col-lg-10 offset-lg-1">
               {items.length > 0 ? (
                 <div className="border rounded">
                   {items.map((item, key) => (
