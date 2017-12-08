@@ -1,17 +1,28 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { browserHistory } from "react-router";
 
-import * as appActions from '../../app/appActions';
+import * as appActions from "../../app/appActions";
 
-import NavBar from '../navbar/NavBar';
-import { FlashMessage } from '../flashMessage/FlashMessage';
+import NavBar from "../navbar/NavBar";
+import { FlashMessage } from "../flashMessage/FlashMessage";
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
 
     this.onClose = this.onClose.bind(this);
+  }
+
+  componentDidMount() {
+    this.unlisten = browserHistory.listen(() => {
+      this.props.appActions.dismissError();
+    });
+  }
+
+  componentWillUnmount() {
+    this.unlisten();
   }
 
   onClose(e) {

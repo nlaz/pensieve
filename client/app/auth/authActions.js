@@ -26,7 +26,7 @@ export const loginUser = params => dispatch => {
         type: SHOW_ERROR,
         payload: {
           error: error.response.data.error,
-          message: "Unable to log in. Are you even using the right email?",
+          message: "Unable to log in. Make sure you are using the right email and password.",
         },
       });
     });
