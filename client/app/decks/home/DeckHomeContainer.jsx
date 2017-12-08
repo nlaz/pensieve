@@ -149,7 +149,7 @@ class DeckHomeContainer extends React.Component {
                 </small>
               </div>
               <div className="mt-2">
-                <Button onClick={this.onStudyDeck} primary>
+                <Button onClick={this.onStudyDeck} primary disabled={items.length === 0}>
                   Study now
                 </Button>
                 <Button
@@ -201,7 +201,7 @@ class DeckHomeContainer extends React.Component {
                 </div>
               ) : (
                 <EmptyView
-                  title="Add cards in your deck"
+                  title="Add cards to your deck"
                   description="Decks are made of related notes. Start adding cards to your deck by clicking 'Add Item +'"
                 />
               )}
