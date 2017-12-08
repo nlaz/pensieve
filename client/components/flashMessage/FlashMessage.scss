@@ -1,11 +1,11 @@
 .flash-message {
   position: relative;
   z-index: 100;
-}
 
-.flash-message .alert {
-  left: 0;
-  right: 0;
-  position: absolute;
-  top: 0;
+  .alert {
+    left: 0;
+    right: 0;
+    position: absolute;
+    top: 0;
+  }
 }
