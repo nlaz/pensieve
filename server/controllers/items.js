@@ -1,8 +1,8 @@
-import Item from '../models/item';
-import Deck from '../models/deck';
-import Review from '../models/review';
+import Item from "../models/item";
+import Deck from "../models/deck";
+import Review from "../models/review";
 
-import { getGrade, getNextInterval, getNewCounter, getNextReviewDate, getEF } from './utils';
+import { getGrade, getNextInterval, getNewCounter, getNextReviewDate, getEF } from "./utils";
 
 export async function getItems(req, res) {
   try {
@@ -14,15 +14,15 @@ export async function getItems(req, res) {
 }
 
 export async function getItem(req, res) {
+  let deck;
   const itemId = req.params.item_id;
   const userId = req.user._id;
   const { fields } = req.query;
 
   try {
     const item = await Item.findOne({ _id: itemId, user_id: userId });
-    let deck;
 
-    if (fields && fields.includes('deck')) {
+    if (fields && fields.includes("deck")) {
       deck = await Deck.findOne({ _id: item.deck_id, user_id: userId });
     }
 
@@ -40,16 +40,10 @@ export async function createItem(req, res) {
     user_id: userId,
     title: req.body.title,
     description: req.body.description,
-    deck_id: deckId
+    deck_id: deckId,
   });
 
   try {
-    if (deckId) {
-      let deck = await Deck.findOne({ _id: deckId, user_id: userId });
-
-      deck.items = [...deck.items, item._id];
-      deck = await deck.save();
-    }
     return res.status(200).json({ item: await item.save() });
   } catch (error) {
     return res.status(500).json({ error });
@@ -57,9 +51,10 @@ export async function createItem(req, res) {
 }
 
 export const editItem = (req, res) => {
-  const { title, description, hidden } = req.body;
+  const { title, description } = req.body;
   const query = { _id: req.params.item_id };
-  const update = { title, description, hidden };
+  const update = { title, description };
+
   Object.keys(update).forEach(key => update[key] === undefined && delete update[key]);
 
   Item.findOneAndUpdate(query, update, { new: true })
@@ -83,7 +78,7 @@ export async function reviewSM2Item(req, res) {
   const review = new Review({
     item_id: req.params.item_id,
     user_id: req.user._id,
-    value: req.params.value
+    value: req.params.value,
   });
 
   try {
@@ -117,7 +112,7 @@ export async function reviewItem(req, res) {
   const review = new Review({
     item_id: req.params.item_id,
     user_id: req.user._id,
-    value: req.params.value
+    value: req.params.value,
   });
 
   try {
@@ -158,8 +153,8 @@ export async function resetItem(req, res) {
 // Helper method for email generation
 export const getDueItemsHelper = userId => {
   const currentTime = new Date();
-  return Item.find({ user_id: userId, hidden: false })
-    .where('nextReviewDate')
+  return Item.find({ user_id: userId })
+    .where("nextReviewDate")
     .lt(currentTime)
     .then(items => {
       return items;
@@ -170,7 +165,7 @@ export const getDueItemsHelper = userId => {
 };
 
 export const getNewItemsHelper = userId => {
-  return Item.find({ user_id: userId, hidden: false, repetitions: 0 });
+  return Item.find({ user_id: userId, repetitions: 0 });
 };
 
 export const getDueItems = (req, res) => {

@@ -1,3 +1,5 @@
+$dark-blue: #073a83;
+
 .review-container-panel {
   align-items: center;
   cursor: pointer;
@@ -21,6 +23,5 @@
 }
 
 .review-container .interval {
-  color: #073a83;
-  margin-left: 2px;
+  color: $dark-blue;
 }

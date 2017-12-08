@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -13,9 +13,8 @@ const ItemSchema = new Schema(
     EF: { type: Number, default: 2.5 }, // SM-2 easiness factor
     nextReviewDate: { type: Date },
     repetitions: { type: Number, default: 0 }, // number of review repetitions
-    hidden: { type: Boolean, default: false }
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export default mongoose.model('Item', ItemSchema);
+export default mongoose.model("Item", ItemSchema);

@@ -1,5 +1,5 @@
-import Deck from '../models/deck';
-import Item from '../models/item';
+import Deck from "../models/deck";
+import Item from "../models/item";
 
 export async function getDecks(req, res) {
   try {
@@ -16,9 +16,7 @@ export async function getDeck(req, res) {
 
   try {
     const deck = await Deck.findOne({ _id: deckId, user_id: userId });
-    deck.items = await Item.find()
-      .where('_id')
-      .in(deck.items);
+    deck.items = await Item.find({ user_id: userId, deck_id: deckId });
 
     return res.status(200).json({ deck });
   } catch (error) {
@@ -60,9 +58,7 @@ export async function editDeck(req, res) {
       { new: true },
     );
 
-    deck.items = await Item.find()
-      .where('_id')
-      .in(deck.items);
+    deck.items = await Item.find({ user_id: userId, deck_id: deckId });
 
     return res.status(200).json({ deck });
   } catch (error) {

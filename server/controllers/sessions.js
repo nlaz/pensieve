@@ -65,14 +65,15 @@ export const getSession = (req, res) => {
 
 export async function createSession(req, res) {
   const userId = req.user._id;
-  const sessionType = req.body.sessionType;
   const deckId = req.body.deckId;
+  let sessionType = req.body.sessionType;
 
   try {
     let sessionItems;
     if (deckId) {
       // Deck-only review
-      sessionItems = await Item.find({ user_id: userId, deck_id: deckId, hidden: false });
+      sessionItems = await Item.find({ user_id: userId, deck_id: deckId });
+      sessionType = SESSION_TYPES.DECK;
     } else if (sessionType === SESSION_TYPES.LEARN) {
       // Learn session type
       sessionItems = await ItemController.getNewItemsHelper(userId);
@@ -85,6 +86,7 @@ export async function createSession(req, res) {
       const newItems = await ItemController.getNewItemsHelper(userId);
 
       sessionItems = [...dueItems, ...newItems];
+      sessionType = SESSION_TYPES.STUDY;
     }
 
     if (sessionItems.length === 0) {
