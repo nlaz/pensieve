@@ -85,7 +85,7 @@ class ItemContainer extends React.Component {
 
     if (!item || Object.keys(item).length === 0) {
       return (
-        <PageTemplate className="ItemHomeContainer pt-5 pb-5" footer={<Footer anchor />}>
+        <PageTemplate className="item-home pt-5 pb-5" footer={<Footer anchor />}>
           <div className="col-md-8 offset-md-2 text-center">
             <span style={{ fontSize: "80px", fontWeight: "bold" }}>😅</span>
             <h3 style={{ marginBottom: "40px" }}>Oops, that item does not seem to exist.</h3>
@@ -100,7 +100,7 @@ class ItemContainer extends React.Component {
     const itemContent = showAnswer ? item.description : item.title;
 
     return (
-      <PageTemplate className="ItemHomeContainer pt-5 pb-5" footer={<Footer anchor />}>
+      <PageTemplate className="item-home pt-5 pb-5" footer={<Footer anchor />}>
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDeleteClick} onDismiss={this.onDismissModal} />
         )}
@@ -117,7 +117,7 @@ class ItemContainer extends React.Component {
         <div className="container mt-3">
           <div className="row">
             <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-              <div className="ItemHomeContainer__header">
+              <div className="item-home-header">
                 <div>
                   <Link to={`/decks/${deck._id}`}>{deck.title}</Link>
                   <span className="m-2">{">"}</span>
@@ -158,7 +158,7 @@ class ItemContainer extends React.Component {
               </div>
               <hr />
               <div
-                className="ItemHomeContainer__panel bg-white border rounded mb-2"
+                className="item-home-panel bg-white border rounded mb-2"
                 onClick={this.onItemClick}
               >
                 <div className="panel-face font-italic text-secondary">

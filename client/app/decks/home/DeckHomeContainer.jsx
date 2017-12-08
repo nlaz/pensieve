@@ -17,6 +17,7 @@ import DeleteDeckModal from "../modals/DeleteDeckModal";
 import EditDeckModal from "../modals/EditDeckModal";
 import ResetDeckModal from "../modals/ResetDeckModal";
 
+import EmptyView from "../EmptyView";
 import DeckListItem from "./DeckListItem";
 
 const MODAL_TYPES = {
@@ -99,6 +100,10 @@ class DeckHomeContainer extends React.Component {
     const { deck = {} } = this.props;
     const { items = [] } = deck;
 
+    const numNewCards = items.filter(item => !item.nextReviewDate).length;
+    const numDueCards = items.filter(item => moment(item.nextReviewDate).isBefore(moment())).length;
+    const numInProgress = items.length - numNewCards - numDueCards;
+
     return (
       <PageTemplate className="DeckHomeContainer pt-5 pb-5" footer={<Footer anchor />}>
         {showModalType === MODAL_TYPES.ADD_ITEM && (
@@ -119,20 +124,22 @@ class DeckHomeContainer extends React.Component {
         )}
         <div className="container mt-3">
           <div className="row">
-            <div className="position-relative col-md-10 offset-md-1 mb-2">
+            <div className="position-relative col-lg-10 offset-lg-1">
               <h6 className="text-secondary text-uppercase m-0">DECK</h6>
-              <h1 className="text-dark font-weight-bold h3 mb-0">{deck.title}</h1>
-              <p className="text-secondary h5 mb-1">{deck.description}</p>
-              <small className="text-secondary">
-                {moment(deck.createdAt).format("MMMM D, YYYY")} &middot;{" "}
-                {pluralize("item", items.length, true)}
-              </small>
+              <h1 className="font-weight-bold h3 mb-0">{deck.title}</h1>
+              {deck.description && <p className="text-dark h5 mb-1">{deck.description}</p>}
+              <div className="mt-1 mb-3">
+                <small className="text-secondary">
+                  {moment(deck.createdAt).format("MMMM D, YYYY")} &middot;{" "}
+                  {pluralize("card", items.length, true)}
+                </small>
+              </div>
               <div className="mt-2">
-                <Button onClick={this.onStudyDeck} primary>
+                <Button onClick={this.onStudyDeck} primary disabled={items.length === 0}>
                   Study now
                 </Button>
                 <Button
-                  className="btn-outline-secondary ml-2"
+                  className="btn-default ml-2"
                   onClick={() => this.onShowModal(MODAL_TYPES.ADD_ITEM)}
                 >
                   Add item +
@@ -171,13 +178,40 @@ class DeckHomeContainer extends React.Component {
               </Popover>
               <hr />
             </div>
-            <div className="col-md-10 offset-md-1">
-              <div className="border rounded">
-                {items.length > 0 &&
-                  items.map((item, key) => (
-                    <DeckListItem key={key} item={item} actions={this.props.actions} />
-                  ))}
-              </div>
+            <div className="col-lg-10 offset-lg-1">
+              {items.length > 0 ? (
+                <div>
+                  {(numDueCards > 0 || numNewCards > 0) && (
+                    <div className="mb-2 text-right">
+                      {numNewCards > 0 && (
+                        <span className="badge badge-info" style={{ padding: "6px" }}>
+                          {pluralize("new card", numNewCards, true)}
+                        </span>
+                      )}
+                      {numDueCards > 0 && (
+                        <span className="badge badge-warning ml-2" style={{ padding: "6px" }}>
+                          {pluralize("due card", numDueCards, true)}
+                        </span>
+                      )}
+                      {numInProgress > 0 && (
+                        <span className="badge badge-secondary ml-2" style={{ padding: "6px" }}>
+                          {pluralize("later cards", numInProgress, true)}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  <div className="border rounded">
+                    {items.map((item, key) => (
+                      <DeckListItem key={key} item={item} actions={this.props.actions} />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <EmptyView
+                  title="Add cards to your deck"
+                  description="Decks are made of related notes. Start adding cards to your deck by clicking 'Add Item +'"
+                />
+              )}
             </div>
           </div>
         </div>

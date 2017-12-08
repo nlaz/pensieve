@@ -65,7 +65,7 @@ class DecksContainer extends React.Component {
       <PageTemplate className="DecksContainer decks-page pt-5 pb-5" footer={<Footer anchor />}>
         <div className="container mt-3">
           <div className="row">
-            <div className="col-md-10 offset-md-1">
+            <div className="col-lg-10 offset-lg-1">
               <div className="DecksContainer__header">
                 <div>
                   <h1 className="h5 m-0">Decks</h1>
@@ -93,7 +93,10 @@ class DecksContainer extends React.Component {
                   ))}
                 </div>
               ) : (
-                <EmptyView />
+                <EmptyView
+                  title="No decks in your collection yet"
+                  description="Decks are groups of related items for organizing your notes. Haven't created a deck yet? No problem. Click 'Create Deck +' to get started."
+                />
               )}
               {numPages > 1 && (
                 <DeckPageNavigation

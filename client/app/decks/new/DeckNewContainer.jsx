@@ -35,7 +35,8 @@ class DeckNewContainer extends React.Component {
     this.props.router.push("/decks");
   }
 
-  onCreateDeck() {
+  onCreateDeck(e) {
+    e.preventDefault();
     const { title, description } = this.state;
     this.props.actions.createDeck({
       title: title,
@@ -81,7 +82,13 @@ class DeckNewContainer extends React.Component {
                   />
                 </div>
                 <div className="mt-4">
-                  <Button onClick={this.onCreateDeck} type="submit" primary block>
+                  <Button
+                    onClick={this.onCreateDeck}
+                    type="submit"
+                    primary
+                    block
+                    disabled={title.length === 0}
+                  >
                     Create Deck
                   </Button>
                   <Button onClick={this.onCancel} block>

@@ -1,11 +1,11 @@
 $panelHeight: 400px;
 
-.ItemHomeContainer__header {
+.item-home-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.ItemHomeContainer__panel {
+.item-home-panel {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -13,14 +13,16 @@ $panelHeight: 400px;
   position: relative;
   white-space: pre-wrap;
   padding: $space;
-}
-.ItemHomeContainer__panel .TimeLeft {
-  position: absolute;
-  top: $space;
-  right: $space * 1.5;
-}
-.ItemHomeContainer__panel .panel-face {
-  left: $space * 1.5;
-  top: $space;
-  position: absolute;
+
+  .time-left {
+    position: absolute;
+    right: $space * 1.5;
+    top: $space;
+  }
+
+  .panel-face {
+    left: $space * 1.5;
+    position: absolute;
+    top: $space;
+  }
 }

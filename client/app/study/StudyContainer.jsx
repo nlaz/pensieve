@@ -1,5 +1,6 @@
 import React from "react";
 import pluralize from "pluralize";
+import cx from "classnames";
 import { Link } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -60,7 +61,12 @@ class StudyContainer extends React.Component {
                 >
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">Learn new cards</h5>
-                    <div className="badge badge-secondary">
+                    <div
+                      className={cx("badge", {
+                        "badge-secondary": learn.size === 0,
+                        "badge-info": learn.size > 0,
+                      })}
+                    >
                       {learn.size === learn.total ? (
                         <span>{pluralize("card", learn.size, true)}</span>
                       ) : (
@@ -82,7 +88,12 @@ class StudyContainer extends React.Component {
                 >
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">Review previous cards</h5>
-                    <div className="badge badge-warning">
+                    <div
+                      className={cx("badge", {
+                        "badge-secondary": review.size === 0,
+                        "badge-warning": review.size > 0,
+                      })}
+                    >
                       {review.size === review.total ? (
                         <span>{pluralize("card", review.size, true)}</span>
                       ) : (

@@ -1,24 +1,26 @@
-import React from 'react';
-import moment from 'moment';
+import React from "react";
+import moment from "moment";
 
 export default function TimeLeft({ date }) {
   if (!date) {
-    return false;
+    return (
+      <div className="time-left badge badge-info" style={{ padding: "6px" }}>
+        <span>new card</span>
+      </div>
+    );
   }
 
   if (moment(date).isBefore(moment())) {
     return (
-      <div className="TimeLeft badge badge-warning" style={{ padding: '6px' }}>
-        <span>study due</span>
-        <i className="fa fa-clock-o ml-1 fa-lg" aria-hidden="true" />
+      <div className="time-left badge badge-warning" style={{ padding: "6px" }}>
+        <span>review due</span>
       </div>
     );
   }
 
   return (
-    <div className="TimeLeft badge badge-secondary" style={{ padding: '6px' }}>
-      <span>study in {moment().to(date, true)}</span>
-      <i className="fa fa-clock-o ml-1 fa-lg" aria-hidden="true" />
+    <div className="time-left badge badge-secondary" style={{ padding: "6px" }}>
+      <span>review later</span>
     </div>
   );
 }
