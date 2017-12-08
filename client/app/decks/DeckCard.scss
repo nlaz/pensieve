@@ -1,4 +1,4 @@
-$deckCardHeight: 200px;
+$deck-card-height: 200px;
 
 .DeckCard {
   border: 1px solid $light-border;
@@ -13,7 +13,7 @@ $deckCardHeight: 200px;
   text-align: center;
 
   @include at-small-up {
-    height: $deckCardHeight;
+    height: $deck-card-height;
   }
 
   &:hover {
