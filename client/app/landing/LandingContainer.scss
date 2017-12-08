@@ -1,7 +1,7 @@
-$hero-margin: 240px;
+$hero-margin: 180px;
 $navbar-height: 56px;
+$hero-text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 
-// Landing nav section
 .landing-page .navbar {
   box-shadow: none !important;
   background: $primary-blue !important;
@@ -9,13 +9,14 @@ $navbar-height: 56px;
 
 .landing-page .navbar-brand {
   color: $white !important;
+  text-shadow: $hero-text-shadow;
 }
 
 .landing-page .nav-link {
   color: $white !important;
+  text-shadow: $hero-text-shadow;
 }
 
-// Landing hero section
 .landing-hero {
   background: $primary-blue;
   color: $white;
@@ -26,15 +27,20 @@ $navbar-height: 56px;
   padding: 10px 15px;
 }
 
+.landing-hero h1,
+.landing-hero h2 {
+  text-shadow: $hero-text-shadow;
+}
+
 .landing-copy {
   text-align: center;
   max-width: 440px;
-  margin-top: $hero-margin;
-  margin-bottom: $hero-margin + $navbar-height;
 
   @include atMediumUp {
     text-align: left;
     margin-right: 30px;
+    margin-top: $hero-margin;
+    margin-bottom: $hero-margin + $navbar-height;
   }
 }
 
@@ -42,6 +48,32 @@ $navbar-height: 56px;
   border-color: $dark-gray !important;
 }
 
+.landing-box .lead {
+  text-align: center;
+
+  @include atMediumUp {
+    text-align: left;
+  }
+}
+
 .landing-info .btn-primary {
   padding: 10px 15px;
+}
+
+.landing-info .lead {
+  line-height: 1.8em;
+}
+
+.landing-footer {
+  background: $primary-blue;
+  color: $white !important;
+}
+
+.landing-footer a {
+  color: $white;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
 }

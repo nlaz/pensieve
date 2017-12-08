@@ -1,21 +1,21 @@
 /* Breakpoint mixins */
 @mixin atSmallUp {
-  @media (min-width: 600px) {
+  @media (min-width: 576px) {
     @content;
   }
 }
 @mixin atMediumUp {
-  @media (min-width: 900px) {
+  @media (min-width: 768px) {
     @content;
   }
 }
 @mixin atLargeUp {
-  @media (min-width: 1200px) {
+  @media (min-width: 992px) {
     @content;
   }
 }
 @mixin atExtraLargeUp {
-  @media (min-width: 1800px) {
+  @media (min-width: 1200px) {
     @content;
   }
 }
