@@ -14,7 +14,7 @@ function Button({
   onClick,
   ...other
 }) {
-  const classNames = cx(className, "Button btn", {
+  const classNames = cx(className, "button btn", {
     "btn-default": !primary && !danger && !reset,
     "btn-primary": primary,
     "btn-block": block,
