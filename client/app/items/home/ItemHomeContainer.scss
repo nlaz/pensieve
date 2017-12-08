@@ -16,13 +16,13 @@ $panelHeight: 400px;
 
   .time-left {
     position: absolute;
-    top: $space;
     right: $space * 1.5;
+    top: $space;
   }
 
   .panel-face {
     left: $space * 1.5;
-    top: $space;
     position: absolute;
+    top: $space;
   }
 }
