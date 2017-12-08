@@ -43,9 +43,19 @@ class NavBar extends React.Component {
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
                   <Link
+                    to="/study"
+                    className="nav-link"
+                    activeClassName="active"
+                    onClick={this.onToggleCollapse}
+                  >
+                    Study
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
                     to="/decks"
                     className="nav-link"
-                    activeClassName="active-nav-link"
+                    activeClassName="active"
                     onClick={this.onToggleCollapse}
                   >
                     Decks
