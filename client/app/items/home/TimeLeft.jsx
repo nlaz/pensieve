@@ -5,7 +5,7 @@ export default function TimeLeft({ date }) {
   if (!date) {
     return (
       <div className="time-left badge badge-info" style={{ padding: "6px" }}>
-        <span>new</span>
+        <span>new card</span>
       </div>
     );
   }
@@ -20,7 +20,7 @@ export default function TimeLeft({ date }) {
 
   return (
     <div className="time-left badge badge-secondary" style={{ padding: "6px" }}>
-      <span>studying</span>
+      <span>review later</span>
     </div>
   );
 }
