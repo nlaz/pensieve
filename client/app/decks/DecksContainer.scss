@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  @include atSmallUp {
+  @include at-small-up {
     align-items: center;
     flex-direction: row;
   }
@@ -19,7 +19,7 @@
   width: 100%;
   margin-top: 15px;
 
-  @include atSmallUp {
+  @include at-small-up {
     margin: 0;
     width: auto;
     display: flex;
@@ -31,7 +31,7 @@
 .DecksContainer__actions .btn {
   width: 100%;
 
-  @include atSmallUp {
+  @include at-small-up {
     width: auto;
   }
 }
@@ -42,7 +42,7 @@
   position: relative;
   background: none;
 
-  @include atSmallUp {
+  @include at-small-up {
     flex-grow: none;
     margin-right: 24px;
     margin-bottom: 0;

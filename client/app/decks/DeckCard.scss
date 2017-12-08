@@ -1,4 +1,4 @@
-$deckCardHeight: 200px;
+$deck-card-height: 200px;
 
 .DeckCard {
   border: 1px solid $light-border;
@@ -12,12 +12,12 @@ $deckCardHeight: 200px;
   padding: $space;
   text-align: center;
 
-  &:hover {
-    text-decoration: none;
+  @include at-small-up {
+    height: $deck-card-height;
   }
 
-  @include atSmallUp {
-    height: $deckCardHeight;
+  &:hover {
+    text-decoration: none;
   }
 }
 
@@ -25,7 +25,7 @@ $deckCardHeight: 200px;
   border-radius: 12px;
   bottom: 0px;
   box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.06);
-  content: '';
+  content: "";
   right: 0;
   left: 0;
   position: absolute;

@@ -38,7 +38,7 @@ class StudyContainer extends React.Component {
                       Daily study{" "}
                       <span className="font-weight-normal text-dark">(Recommended)</span>
                     </h5>
-                    <div className="badge badge-info badge-pill">
+                    <div className="badge badge-secondary">
                       {study.size === study.total ? (
                         <span>{pluralize("card", study.size, true)}</span>
                       ) : (
@@ -60,7 +60,7 @@ class StudyContainer extends React.Component {
                 >
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">Learn new cards</h5>
-                    <div className="badge badge-info badge-pill">
+                    <div className="badge badge-secondary">
                       {learn.size === learn.total ? (
                         <span>{pluralize("card", learn.size, true)}</span>
                       ) : (
@@ -82,7 +82,7 @@ class StudyContainer extends React.Component {
                 >
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">Review previous cards</h5>
-                    <div className="badge badge-info badge-pill">
+                    <div className="badge badge-warning">
                       {review.size === review.total ? (
                         <span>{pluralize("card", review.size, true)}</span>
                       ) : (
