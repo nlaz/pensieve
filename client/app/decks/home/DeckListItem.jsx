@@ -58,44 +58,46 @@ export default class DeckListItem extends React.Component {
         {showModalType === MODAL_TYPES.DELETE_ITEM && (
           <DeleteItemModal onDelete={this.onDelete} onDismiss={this.onDismissModal} />
         )}
-        <Link className="list-item row" to={`/items/${item._id}`}>
-          <div className="col-9 col-sm-10">
-            <div className="d-flex flex-column flex-md-row">
-              <span className="col-md-5">{item.title}</span>
-              <span className="d-none d-sm-block font-weight-bold col-md-7 mt-2 mt-md-0">
-                {item.description}
-              </span>
-            </div>
-          </div>
-          <div className="d-flex justify-content-end align-items-start col-3 col-sm-2">
-            <TimeLeft date={item.nextReviewDate} />
-            <Popover
-              align="right"
-              className="text-secondary"
-              ref={c => (this.overflow = c)}
-              trigger={
-                <Button className="ml-2" reset>
-                  <i className="fa fa-ellipsis-h text-secondary" aria-hidden="true" />
-                </Button>
-              }
-            >
-              <div className="popover-actions">
-                {item.nextReviewDate && (
-                  <div
-                    className="action-item"
-                    onClick={() => this.onShowModal(MODAL_TYPES.RESET_ITEM)}
-                  >
-                    Reset Item
-                  </div>
-                )}
-                <div
-                  className="action-item border-top"
-                  onClick={() => this.onShowModal(MODAL_TYPES.DELETE_ITEM)}
-                >
-                  Delete Item
-                </div>
+        <Link className="list-item" to={`/items/${item._id}`}>
+          <div className="row">
+            <div className="col-9 col-sm-10">
+              <div className="d-flex flex-column flex-md-row">
+                <span className="col-md-5">{item.title}</span>
+                <span className="d-none d-sm-block font-weight-bold col-md-7 mt-2 mt-md-0">
+                  {item.description}
+                </span>
               </div>
-            </Popover>
+            </div>
+            <div className="d-flex justify-content-end align-items-start col-3 col-sm-2">
+              <TimeLeft date={item.nextReviewDate} />
+              <Popover
+                align="right"
+                className="text-secondary"
+                ref={c => (this.overflow = c)}
+                trigger={
+                  <Button className="ml-2" reset>
+                    <i className="fa fa-ellipsis-h text-secondary" aria-hidden="true" />
+                  </Button>
+                }
+              >
+                <div className="popover-actions">
+                  {item.nextReviewDate && (
+                    <div
+                      className="action-item"
+                      onClick={() => this.onShowModal(MODAL_TYPES.RESET_ITEM)}
+                    >
+                      Reset Item
+                    </div>
+                  )}
+                  <div
+                    className="action-item border-top"
+                    onClick={() => this.onShowModal(MODAL_TYPES.DELETE_ITEM)}
+                  >
+                    Delete Item
+                  </div>
+                </div>
+              </Popover>
+            </div>
           </div>
         </Link>
       </div>

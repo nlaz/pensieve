@@ -105,7 +105,7 @@ class DeckHomeContainer extends React.Component {
     const numInProgress = items.length - numNewCards - numDueCards;
 
     return (
-      <PageTemplate className="DeckHomeContainer pt-5 pb-5" footer={<Footer anchor />}>
+      <PageTemplate className="deck-home pt-5 pb-5" footer={<Footer anchor />}>
         {showModalType === MODAL_TYPES.ADD_ITEM && (
           <AddItemModal onSave={data => this.onAddItem(data)} onDismiss={this.onDismissModal} />
         )}
@@ -134,7 +134,7 @@ class DeckHomeContainer extends React.Component {
                   {pluralize("card", items.length, true)}
                 </small>
               </div>
-              <div className="mt-2">
+              <div className="my-3">
                 <Button onClick={this.onStudyDeck} primary disabled={items.length === 0}>
                   Study now
                 </Button>
@@ -148,7 +148,7 @@ class DeckHomeContainer extends React.Component {
               <Popover
                 align="right"
                 ref={c => (this.overflow = c)}
-                className="DeckHomeContainer__overflow position-absolute"
+                className="deck-home-overflow position-absolute"
                 trigger={
                   <Button reset>
                     <i className="fa fa-ellipsis-v fa-lg" aria-hidden="true" />
