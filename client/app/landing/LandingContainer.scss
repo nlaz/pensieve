@@ -3,8 +3,8 @@ $navbar-height: 56px;
 $hero-text-shadow: rgba(0, 0, 0, 0.15);
 
 .landing-page .navbar {
-  box-shadow: none !important; // scss-lint:disable ImportantRule
   background: $primary-blue !important; // scss-lint:disable ImportantRule
+  box-shadow: none !important; // scss-lint:disable ImportantRule
 }
 
 .landing-page .navbar-brand {
@@ -20,11 +20,11 @@ $hero-text-shadow: rgba(0, 0, 0, 0.15);
 .landing-hero {
   background: $primary-blue;
   color: $white;
-}
 
-.landing-hero .btn-light {
-  color: $primary-blue;
-  padding: 10px 15px;
+  .btn-light {
+    color: $primary-blue;
+    padding: 10px 15px;
+  }
 }
 
 .landing-hero h1,

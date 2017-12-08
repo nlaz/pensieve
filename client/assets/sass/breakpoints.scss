@@ -9,12 +9,12 @@
     @content;
   }
 }
-@mixin atLargeUp {
+@mixin at-large-up {
   @media (min-width: 992px) {
     @content;
   }
 }
-@mixin atExtraLargeUp {
+@mixin at-extra-large-up {
   @media (min-width: 1200px) {
     @content;
   }
