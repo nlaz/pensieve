@@ -61,7 +61,12 @@ class StudyContainer extends React.Component {
                 >
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">Learn new cards</h5>
-                    <div className="badge badge-secondary">
+                    <div
+                      className={cx("badge", {
+                        "badge-secondary": learn.size === 0,
+                        "badge-info": learn.size > 0,
+                      })}
+                    >
                       {learn.size === learn.total ? (
                         <span>{pluralize("card", learn.size, true)}</span>
                       ) : (
@@ -85,7 +90,7 @@ class StudyContainer extends React.Component {
                     <h5 className="font-weight-bold mb-1">Review previous cards</h5>
                     <div
                       className={cx("badge", {
-                        "badge-info": review.size === 0,
+                        "badge-secondary": review.size === 0,
                         "badge-warning": review.size > 0,
                       })}
                     >

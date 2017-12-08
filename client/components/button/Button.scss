@@ -1,6 +1,18 @@
+.btn {
+  cursor: pointer;
+}
+
 .btn-default {
   border: 1px solid $light-border;
+  background: $white;
+
+  &:hover {
+    background: $medium-gray;
+    border: 1px solid $medium-gray;
+    color: $white;
+  }
 }
+
 .btn-reset {
   background: none;
   border: 0;

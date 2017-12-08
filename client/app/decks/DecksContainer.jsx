@@ -93,7 +93,10 @@ class DecksContainer extends React.Component {
                   ))}
                 </div>
               ) : (
-                <EmptyView />
+                <EmptyView
+                  title="No decks in your collection yet"
+                  description="Decks are groups of related items for organizing your notes. Haven't created a deck yet? No problem. Click 'Create Deck +' to get started."
+                />
               )}
               {numPages > 1 && (
                 <DeckPageNavigation
