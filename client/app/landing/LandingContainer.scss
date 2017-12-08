@@ -1,20 +1,20 @@
 $hero-margin: 180px;
 $navbar-height: 56px;
-$hero-text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+$hero-text-shadow: rgba(0, 0, 0, 0.15);
 
 .landing-page .navbar {
-  box-shadow: none !important;
-  background: $primary-blue !important;
+  box-shadow: none !important; // scss-lint:disable ImportantRule
+  background: $primary-blue !important; // scss-lint:disable ImportantRule
 }
 
 .landing-page .navbar-brand {
-  color: $white !important;
-  text-shadow: $hero-text-shadow;
+  color: $white !important; // scss-lint:disable ImportantRule
+  text-shadow: 0 1px 0 $hero-text-shadow;
 }
 
 .landing-page .nav-link {
-  color: $white !important;
-  text-shadow: $hero-text-shadow;
+  color: $white !important; // scss-lint:disable ImportantRule
+  text-shadow: 0 1px 0 $hero-text-shadow;
 }
 
 .landing-hero {
@@ -29,14 +29,14 @@ $hero-text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 
 .landing-hero h1,
 .landing-hero h2 {
-  text-shadow: $hero-text-shadow;
+  text-shadow: 0 1px 0 $hero-text-shadow;
 }
 
 .landing-copy {
   text-align: center;
   max-width: 440px;
 
-  @include atMediumUp {
+  @include at-medium-up {
     text-align: left;
     margin-right: 30px;
     margin-top: $hero-margin;
@@ -45,13 +45,13 @@ $hero-text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 }
 
 .landing-box .border {
-  border-color: $dark-gray !important;
+  border-color: $dark-gray !important; // scss-lint:disable ImportantRule
 }
 
 .landing-box .lead {
   text-align: center;
 
-  @include atMediumUp {
+  @include at-medium-up {
     text-align: left;
   }
 }
@@ -66,14 +66,14 @@ $hero-text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 
 .landing-footer {
   background: $primary-blue;
-  color: $white !important;
-}
+  color: $white !important; // scss-lint:disable ImportantRule
 
-.landing-footer a {
-  color: $white;
-  text-decoration: underline;
+  a {
+    color: $white;
+    text-decoration: underline;
 
-  &:hover {
-    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }

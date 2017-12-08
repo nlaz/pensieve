@@ -1,10 +1,10 @@
 /* Breakpoint mixins */
-@mixin atSmallUp {
+@mixin at-small-up {
   @media (min-width: 576px) {
     @content;
   }
 }
-@mixin atMediumUp {
+@mixin at-medium-up {
   @media (min-width: 768px) {
     @content;
   }

@@ -16,7 +16,7 @@ $deckCardHeight: 200px;
     text-decoration: none;
   }
 
-  @include atSmallUp {
+  @include at-small-up {
     height: $deckCardHeight;
   }
 }
