@@ -33,7 +33,7 @@ export function shuffle(array) {
 }
 
 export const getSessions = (req, res) => {
-  Session.find({ user_id: req.user._id })
+  Session.find({ user: req.user._id })
     .then(sessions => res.status(200).json({ sessions }))
     .catch(error => res.status(500).json({ error }));
 };
@@ -45,7 +45,7 @@ export const getSession = (req, res) => {
 
   Session.findOne({ _id: sessionId })
     .then(_session => {
-      if (_session.user_id !== userId) {
+      if (_session.user !== userId) {
         return res.status(500).json({
           error: true,
           type: "invalid_user",
@@ -74,7 +74,7 @@ export async function createSession(req, res) {
     let sessionItems;
     if (deckId) {
       // Deck-only review
-      sessionItems = await Item.find({ user_id: userId, deck: deckId }).populate("deck");
+      sessionItems = await Item.find({ user: userId, deck: deckId }).populate("deck");
       sessionType = SESSION_TYPES.DECK;
     } else if (sessionType === SESSION_TYPES.LEARN) {
       // Learn session type
@@ -103,7 +103,7 @@ export async function createSession(req, res) {
 
     const itemIds = sortedSessionItems.map(item => item._id);
 
-    let session = new Session({ user_id: userId, type: sessionType, items: itemIds });
+    let session = new Session({ user: userId, type: sessionType, items: itemIds });
 
     session = await session.save();
 
@@ -149,7 +149,7 @@ export const finishSession = (req, res) => {
   const sessionId = req.params.session_id;
   const userId = req.user._id;
 
-  Session.findOne({ _id: sessionId, user_id: userId })
+  Session.findOne({ _id: sessionId, user: userId })
     .then(_session => {
       session = _session;
       session.finishedAt = new Date();

@@ -4,8 +4,10 @@ const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema(
   {
-    user_id: { type: String, required: true },
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     deck: { type: Schema.Types.ObjectId, ref: "Deck" },
+    deck_id: { type: String }, // deprecated
+    user_id: { type: String }, // deprecated
     title: { type: String, required: true },
     description: { type: String },
     reviewedAt: { type: Date }, // last review timestamp

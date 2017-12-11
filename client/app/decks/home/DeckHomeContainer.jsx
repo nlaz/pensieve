@@ -181,7 +181,7 @@ class DeckHomeContainer extends React.Component {
             <div className="col-lg-10 offset-lg-1">
               {items.length > 0 ? (
                 <div>
-                  {(numDueCards > 0 || numNewCards > 0) && (
+                  {(numDueCards > 0 || numNewCards > 0 || numInProgress > 0) && (
                     <div className="mb-2 text-right">
                       {numNewCards > 0 && (
                         <span className="badge badge-info" style={{ padding: "6px" }}>

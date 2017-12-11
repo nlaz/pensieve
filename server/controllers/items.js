@@ -6,7 +6,7 @@ import { getGrade, getNextInterval, getNewCounter, getNextReviewDate, getEF } fr
 
 export async function getItems(req, res) {
   try {
-    const items = await Item.find({ user_id: req.user._id });
+    const items = await Item.find({ user: req.user._id });
     return res.status(200).json({ items });
   } catch (error) {
     return res.status(500).json({ error });
@@ -19,7 +19,7 @@ export async function getItem(req, res) {
   const { fields } = req.query;
 
   try {
-    const item = await Item.findOne({ _id: itemId, user_id: userId }).populate("deck");
+    const item = await Item.findOne({ _id: itemId, user: userId }).populate("deck");
 
     return res.status(200).json({ item });
   } catch (error) {
@@ -32,7 +32,7 @@ export async function createItem(req, res) {
   const userId = req.user._id;
 
   const item = new Item({
-    user_id: userId,
+    user: userId,
     title: req.body.title,
     description: req.body.description,
     deck: deckId,
@@ -72,7 +72,7 @@ export async function reviewSM2Item(req, res) {
 
   const review = new Review({
     item_id: req.params.item_id,
-    user_id: req.user._id,
+    user: req.user._id,
     value: req.params.value,
   });
 
@@ -106,7 +106,7 @@ export async function reviewItem(req, res) {
 
   const review = new Review({
     item_id: req.params.item_id,
-    user_id: req.user._id,
+    user: req.user._id,
     value: req.params.value,
   });
 
@@ -129,7 +129,7 @@ export async function resetItem(req, res) {
   const itemId = req.params.item_id;
 
   try {
-    let item = await Item.findOne({ _id: itemId, user_id: userId }).populate("deck");
+    let item = await Item.findOne({ _id: itemId, user: userId }).populate("deck");
 
     item.repetitions = 0;
     item.EF = 2.5;
@@ -148,7 +148,7 @@ export async function resetItem(req, res) {
 // Helper method for email generation
 export const getDueItemsHelper = userId => {
   const currentTime = new Date();
-  return Item.find({ user_id: userId })
+  return Item.find({ user: userId })
     .populate("deck")
     .where("nextReviewDate")
     .lt(currentTime)
@@ -161,7 +161,7 @@ export const getDueItemsHelper = userId => {
 };
 
 export const getNewItemsHelper = userId => {
-  return Item.find({ user_id: userId, repetitions: 0 }).populate("deck");
+  return Item.find({ user: userId, repetitions: 0 }).populate("deck");
 };
 
 export const getDueItems = (req, res) => {

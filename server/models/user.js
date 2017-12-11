@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt-nodejs';
-import jwt from 'jsonwebtoken';
+import mongoose from "mongoose";
+import bcrypt from "bcrypt-nodejs";
+import jwt from "jsonwebtoken";
 
 const Schema = mongoose.Schema;
 
@@ -9,9 +9,9 @@ const UserSchema = new Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true },
-    is_email_on: { type: Boolean, default: false }
+    is_email_on: { type: Boolean, default: false },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 UserSchema.methods.generateHash = function(password) {
@@ -22,22 +22,27 @@ UserSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-UserSchema.methods.getCleanUser = user => ({
-  id: user._id,
-  name: user.name,
-  email: user.email,
-  is_email_on: user.is_email_on
-});
-
-UserSchema.methods.generateToken = user => {
-  const data = {
-    _id: user._id.toString(),
+UserSchema.methods.getCleanUser = function(user) {
+  return {
+    id: user._id,
     name: user.name,
-    email: user.email
+    email: user.email,
+    is_email_on: user.is_email_on,
   };
-  return jwt.sign(data, process.env.JWT_SECRET, {
-    expiresIn: 60 * 60 * 48 // expires in 48 hours
-  });
 };
 
-export default mongoose.model('User', UserSchema);
+UserSchema.methods.generateToken = function(user) {
+  return jwt.sign(
+    {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: 60 * 60 * 48, // expires in 48 hours
+    },
+  );
+};
+
+export default mongoose.model("User", UserSchema);
