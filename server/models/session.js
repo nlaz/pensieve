@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 
 const SessionSchema = new Schema(
   {
-    user_id: { type: String, required: true },
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    user_id: { type: String }, // deprecated
     items: { type: Array, required: true },
     type: { type: String },
     finishedAt: { type: Date },

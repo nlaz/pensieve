@@ -144,8 +144,12 @@ class ReviewContainer extends React.Component {
         <div className="container mt-3">
           <div className="row">
             <div className="col-md-8 offset-md-2">
-              <div className="review-header">
-                <h5>REVIEW</h5>
+              <div className="review-header d-flex justify-content-between">
+                <div>
+                  <span className="text-uppercase">{session.type}</span>
+                  <span className="m-2">{">"}</span>
+                  <Link to={`/decks/${selectedItem.deck._id}`}>{selectedItem.deck.title}</Link>
+                </div>
                 <p className="review-container-count">
                   <span style={{ fontWeight: "bold" }}>{index + 1}</span> out of {items.length}
                 </p>
@@ -158,9 +162,7 @@ class ReviewContainer extends React.Component {
                 <div className="panel-face font-italic text-secondary">
                   {!showAnswer ? <span>Front</span> : <span>Back</span>}
                 </div>
-                <h3 className="text-center m-0" style={{ margin: "0" }}>
-                  {itemContent}
-                </h3>
+                <h3 className="text-center my-5">{itemContent}</h3>
               </div>
               <div className="review-actions">
                 {showNextOptions ? (
@@ -170,21 +172,24 @@ class ReviewContainer extends React.Component {
                       onClick={() => this.onNextAction(REVIEW_TYPE.HARD)}
                       primary
                     >
-                      Again {intervals && <span className="interval">{` < ${intervals[0]}`}</span>}
+                      Again
+                      {intervals && <span className="interval ml-1">{` < ${intervals[0]}`}</span>}
                     </Button>
                     <Button
                       className="w-100 ml-3"
                       onClick={() => this.onNextAction(REVIEW_TYPE.GOOD)}
                       primary
                     >
-                      Good {intervals && <span className="interval">{` < ${intervals[1]}`}</span>}
+                      Good
+                      {intervals && <span className="interval ml-1">{` < ${intervals[1]}`}</span>}
                     </Button>
                     <Button
                       className="w-100 ml-3"
                       onClick={() => this.onNextAction(REVIEW_TYPE.EASY)}
                       primary
                     >
-                      Easy {intervals && <span className="interval">{` < ${intervals[2]}`}</span>}
+                      Easy
+                      {intervals && <span className="interval ml-1">{` < ${intervals[2]}`}</span>}
                     </Button>
                   </div>
                 ) : (

@@ -27,7 +27,7 @@ class StudyContainer extends React.Component {
       <PageTemplate className="study-container pt-5 pb-5" footer={<Footer anchor />}>
         <div className="container mt-5">
           <div className="row">
-            <div className="col-sm-8 offset-sm-2">
+            <div className="col-sm-10 offset-sm-1 col-md-8 offset-md-2">
               <h5 className="mb-3">Choose your study type:</h5>
               <div className="list-group">
                 <Link

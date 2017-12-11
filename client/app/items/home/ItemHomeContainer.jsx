@@ -22,7 +22,7 @@ const MODAL_TYPES = {
   EDIT_ITEM: "editItem",
 };
 
-class ItemContainer extends React.Component {
+class ItemHomeContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -165,9 +165,7 @@ class ItemContainer extends React.Component {
                   {!showAnswer ? <span>Front</span> : <span>Back</span>}
                 </div>
                 <TimeLeft date={item.nextReviewDate} />
-                <h3 className="text-center" style={{ margin: "0" }}>
-                  {itemContent}
-                </h3>
+                <h3 className="text-center my-5">{itemContent}</h3>
               </div>
             </div>
           </div>
@@ -185,4 +183,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(itemActions, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemHomeContainer);

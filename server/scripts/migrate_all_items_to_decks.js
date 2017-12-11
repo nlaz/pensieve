@@ -14,14 +14,14 @@ configDB();
 User.find()
   .then(users => {
     users.forEach(user => {
-      Item.find({ deck_id: null, user_id: user._id })
+      Item.find({ deck: null, user: user._id })
         .then(items => {
           const itemIds = items.map(item => item._id);
 
           if (items.length > 0) {
             Deck.create(
               {
-                user_id: user._id,
+                user: user._id,
                 title: "Items",
                 description:
                   "Your items have been moved to this deck as individual items are no longer supported. All items are now organized under decks.",
@@ -34,7 +34,7 @@ User.find()
                 }
 
                 items.forEach(item => {
-                  item.deck_id = deck._id;
+                  item.deck = deck._id;
                   item.save();
                 });
               },

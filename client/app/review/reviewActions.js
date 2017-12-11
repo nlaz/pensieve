@@ -24,7 +24,7 @@ export const fetchSession = sessionId => dispatch => {
     .catch(error => {
       dispatch({
         type: SHOW_ERROR,
-        payload: error.response.data,
+        payload: { error: error.response },
       });
     });
 };
@@ -44,7 +44,7 @@ export const createSession = params => dispatch => {
     .catch(error => {
       dispatch({
         type: SHOW_ERROR,
-        payload: error.response.data,
+        payload: { error: error.response },
       });
     });
 };
@@ -64,7 +64,7 @@ export const finishSession = sessionId => dispatch => {
     .catch(error => {
       dispatch({
         type: SHOW_ERROR,
-        payload: error.response.data,
+        payload: { error: error.response },
       });
     });
 };

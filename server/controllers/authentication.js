@@ -1,5 +1,5 @@
-import User from '../models/user';
-import jwt from 'jsonwebtoken';
+import User from "../models/user";
+import jwt from "jsonwebtoken";
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -16,8 +16,8 @@ export const signupUser = (req, res) => {
   if (!isValidEmail(email)) {
     return res.status(400).json({
       error: true,
-      type: 'invalid_email',
-      message: 'Invalid email'
+      type: "invalid_email",
+      message: "Invalid email",
     });
   }
 
@@ -29,8 +29,8 @@ export const signupUser = (req, res) => {
     if (user) {
       return res.status(400).json({
         error: true,
-        type: 'email_taken',
-        message: 'Email is already taken'
+        type: "email_taken",
+        message: "Email is already taken",
       });
     }
 
@@ -46,7 +46,7 @@ export const signupUser = (req, res) => {
 
       res.status(200).json({
         user: user.getCleanUser(user),
-        token: user.generateToken(user)
+        token: user.generateToken(user),
       });
     });
   });
@@ -62,22 +62,22 @@ export const loginUser = (req, res) => {
     if (!user) {
       return res.status(404).json({
         error: true,
-        type: 'user_not_found',
-        message: 'No user found with that email and password'
+        type: "user_not_found",
+        message: "No user found with that email and password",
       });
     }
 
     if (!user.validPassword(req.body.password.trim())) {
       return res.status(400).json({
         error: true,
-        type: 'invalid_password',
-        message: 'No user found with that email and password'
+        type: "invalid_password",
+        message: "No user found with that email and password",
       });
     }
 
     res.json({
       user: user.getCleanUser(user),
-      token: user.generateToken(user)
+      token: user.generateToken(user),
     });
   });
 };
@@ -88,8 +88,8 @@ export const getSelf = (req, res) => {
   if (!token) {
     return res.status(401).json({
       error: true,
-      type: 'invalid_token',
-      message: 'Must include token'
+      type: "invalid_token",
+      message: "Must include token",
     });
   }
 
@@ -100,29 +100,30 @@ export const getSelf = (req, res) => {
 
     res.json({
       user: user.getCleanUser(user),
-      token: token // could renew token here
+      token: token, // could renew token here
     });
   });
 };
 
 export default function authenticateUser(req, res, next) {
   let token = req.headers.authorization;
+
   if (!token) {
     return res.status(400).json({
       error: true,
-      type: 'invalid_token',
-      message: 'Invalid authentication. Please include a JWT token'
+      type: "invalid_token",
+      message: "Invalid authentication. Please include a JWT token",
     });
   }
 
-  token = token.replace('Bearer ', '');
+  token = token.replace("Bearer ", "");
 
   jwt.verify(token, jwtSecret, (err, user) => {
     if (err) {
       return res.status(401).json({
         error: true,
-        type: 'invalid_token',
-        message: 'Invalid authentication. Please log in to make requests'
+        type: "invalid_token",
+        message: "Invalid authentication. Please log in to make requests",
       });
     }
 

@@ -1,8 +1,4 @@
-/**
- * Stylesheet for the decks page
-*/
-
-.DecksContainer__header {
+.decks-container-header {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -14,7 +10,7 @@
   }
 }
 
-.DecksContainer__actions {
+.decks-container-actions {
   display: inline-block;
   width: 100%;
   margin-top: 15px;
@@ -26,17 +22,17 @@
     align-items: center;
     justify-content: space-between;
   }
-}
 
-.DecksContainer__actions .btn {
-  width: 100%;
+  .btn {
+    width: 100%;
 
-  @include at-small-up {
-    width: auto;
+    @include at-small-up {
+      width: auto;
+    }
   }
 }
 
-.DecksContainer__search {
+.decks-container-search {
   flex-grow: 1;
   margin-bottom: $space / 2;
   position: relative;

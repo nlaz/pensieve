@@ -8,11 +8,13 @@ $panelHeight: 400px;
 .item-home-panel {
   align-items: center;
   display: flex;
+  hyphens: auto;
   justify-content: center;
   min-height: $panelHeight;
+  padding: $space;
   position: relative;
   white-space: pre-wrap;
-  padding: $space;
+  word-wrap: break-word;
 
   .time-left {
     position: absolute;

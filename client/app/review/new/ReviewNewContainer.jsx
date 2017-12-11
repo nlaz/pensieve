@@ -24,8 +24,8 @@ class ReviewNewContainer extends React.Component {
 
   render() {
     return (
-      <PageTemplate>
-        <div className="col-md-8 offset-md-2 text-center">
+      <PageTemplate className="pt-5">
+        <div className="col-md-8 offset-md-2 text-center pt-5">
           <h3>Creating your study session...</h3>
         </div>
       </PageTemplate>
