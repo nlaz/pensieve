@@ -32,38 +32,30 @@ export function shuffle(array) {
   return array;
 }
 
-export const getSessions = (req, res) => {
-  Session.find({ user: req.user._id })
-    .then(sessions => res.status(200).json({ sessions }))
-    .catch(error => res.status(500).json({ error }));
-};
-
-export const getSession = (req, res) => {
-  let session;
+export async function getSession(req, res) {
   const userId = req.user._id;
   const sessionId = req.params.session_id;
 
-  Session.findOne({ _id: sessionId })
-    .then(_session => {
-      if (_session.user !== userId) {
-        return res.status(500).json({
-          error: true,
-          type: "invalid_user",
-          message: "Session not available. Are you signed in correctly?",
-        });
-      }
+  try {
+    const session = await Session.findOne({ _id: sessionId }).populate({
+      path: "items",
+      model: "Item",
+      populate: { path: "deck", modal: "Deck" },
+    });
 
-      session = _session;
-      return Item.find()
-        .where("_id")
-        .in(session.items);
-    })
-    .then(items => {
-      session.items = items;
-      res.status(200).json({ session });
-    })
-    .catch(error => res.status(500).json({ error }));
-};
+    if (session.user.toString() !== userId) {
+      return res.status(400).json({
+        error: true,
+        type: "invalid_user",
+        message: "Session not available. Are you signed in correctly?",
+      });
+    }
+
+    return res.status(200).json({ session });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
 
 export async function createSession(req, res) {
   const userId = req.user._id;
