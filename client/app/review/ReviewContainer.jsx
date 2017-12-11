@@ -162,9 +162,7 @@ class ReviewContainer extends React.Component {
                 <div className="panel-face font-italic text-secondary">
                   {!showAnswer ? <span>Front</span> : <span>Back</span>}
                 </div>
-                <h3 className="text-center m-0" style={{ margin: "0" }}>
-                  {itemContent}
-                </h3>
+                <h3 className="text-center my-5">{itemContent}</h3>
               </div>
               <div className="review-actions">
                 {showNextOptions ? (

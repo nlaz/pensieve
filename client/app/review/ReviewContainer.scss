@@ -4,10 +4,12 @@ $dark-blue: #073a83;
   align-items: center;
   cursor: pointer;
   display: flex;
+  hyphens: auto;
   justify-content: center;
   min-height: 360px;
   position: relative;
   white-space: pre-wrap;
+  word-wrap: break-word;
 
   .panel-face {
     left: $space * 1.5;
