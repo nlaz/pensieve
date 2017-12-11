@@ -26,7 +26,7 @@ export default function(app) {
 
   app.post("/api/items", authenticateUser, ItemController.createItem);
 
-  app.post("/api/items/:item_id/review", authenticateUser, ItemController.reviewSM2Item);
+  app.post("/api/items/:item_id/review", authenticateUser, ItemController.reviewItem);
 
   app.post("/api/items/:item_id/reset", authenticateUser, ItemController.resetItem);
 
