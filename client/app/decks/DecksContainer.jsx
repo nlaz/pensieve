@@ -100,6 +100,7 @@ class DecksContainer extends React.Component {
               )}
               {numPages > 1 && (
                 <DeckPageNavigation
+                  className="d-flex justify-content-center mt-5 mb-3"
                   numPages={numPages}
                   onIncrementPage={this.onIncrementPage}
                   onDecrementPage={this.onDecrementPage}
