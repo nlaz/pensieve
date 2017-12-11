@@ -1,28 +1,31 @@
-import React from 'react';
+import React from "react";
 
 export default function DeckPageNavigation({
   numPages,
   onDecrementPage,
   onIncrementPage,
   onChangePage,
+  className,
 }) {
   return (
-    <nav aria-label="Page navigation" style={{ textAlign: 'center' }}>
+    <nav className={className} aria-label="Page navigation">
       <ul className="pagination">
-        <li>
-          <a onClick={onDecrementPage} href="#" aria-label="Previous">
+        <li className="page-item">
+          <a className="page-link" onClick={onDecrementPage} href="#" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
 
         {new Array(numPages).fill(1).map((obj, key) => (
-          <li key={key} onClick={() => onChangePage(key)}>
-            <a href="#">{key}</a>
+          <li className="page-item" key={key} onClick={() => onChangePage(key)}>
+            <a className="page-link" href="#">
+              {key}
+            </a>
           </li>
         ))}
 
-        <li>
-          <a onClick={onIncrementPage} href="#" aria-label="Next">
+        <li className="page-item">
+          <a className="page-link" onClick={onIncrementPage} href="#" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
