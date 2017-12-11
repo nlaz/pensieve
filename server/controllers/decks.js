@@ -16,9 +16,9 @@ export async function getDeck(req, res) {
 
   try {
     const deck = await Deck.findOne({ _id: deckId, user_id: userId });
-    deck.items = await Item.find({ user_id: userId, deck_id: deckId });
+    const items = await Item.find({ user_id: userId, deck: deckId });
 
-    return res.status(200).json({ deck });
+    return res.status(200).json({ deck: { ...deck.toObject(), items } });
   } catch (error) {
     return res.status(500).json({ error });
   }
@@ -58,7 +58,7 @@ export async function editDeck(req, res) {
       { new: true },
     );
 
-    deck.items = await Item.find({ user_id: userId, deck_id: deckId });
+    deck.items = await Item.find({ user_id: userId, deck: deckId });
 
     return res.status(200).json({ deck });
   } catch (error) {
@@ -75,8 +75,9 @@ export async function deleteDeck(req, res) {
   const userId = req.user._id;
 
   try {
-    const items = await Item.remove({ deck_id: deckId, user_id: userId });
+    const items = await Item.remove({ deck: deckId, user_id: userId });
     const deck = await Deck.remove({ _id: deckId, user_id: userId });
+
     return res.status(200).json({ deck, items });
   } catch (error) {
     return res.status(500).json({ error });
@@ -91,7 +92,7 @@ export async function resetDeck(req, res) {
     const deck = await Deck.findOne({ _id: deckId, user_id: userId });
 
     let items = await Item.update(
-      { deck_id: deckId, user_id: userId },
+      { deck: deckId, user_id: userId },
       {
         $set: {
           repetitions: 0,

@@ -145,7 +145,11 @@ class ReviewContainer extends React.Component {
           <div className="row">
             <div className="col-md-8 offset-md-2">
               <div className="review-header d-flex justify-content-between">
-                <h5 className="text-uppercase">{session.type}</h5>
+                <div>
+                  <span className="text-uppercase">{session.type}</span>
+                  <span className="m-2">{">"}</span>
+                  <Link to={`/decks/${selectedItem.deck._id}`}>{selectedItem.deck.title}</Link>
+                </div>
                 <p className="review-container-count">
                   <span style={{ fontWeight: "bold" }}>{index + 1}</span> out of {items.length}
                 </p>

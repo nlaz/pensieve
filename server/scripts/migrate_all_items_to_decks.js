@@ -14,7 +14,7 @@ configDB();
 User.find()
   .then(users => {
     users.forEach(user => {
-      Item.find({ deck_id: null, user_id: user._id })
+      Item.find({ deck: null, user_id: user._id })
         .then(items => {
           const itemIds = items.map(item => item._id);
 
@@ -34,7 +34,7 @@ User.find()
                 }
 
                 items.forEach(item => {
-                  item.deck_id = deck._id;
+                  item.deck = deck._id;
                   item.save();
                 });
               },

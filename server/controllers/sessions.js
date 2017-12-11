@@ -1,6 +1,8 @@
 import Item from "../models/item";
 import Session from "../models/session";
 import * as ItemController from "./items";
+import mongoose from "mongoose";
+const Schema = mongoose.Schema;
 
 import { NO_ITEMS_ERROR } from "./errors";
 import { SESSION_TYPES } from "./constants";
@@ -72,7 +74,7 @@ export async function createSession(req, res) {
     let sessionItems;
     if (deckId) {
       // Deck-only review
-      sessionItems = await Item.find({ user_id: userId, deck_id: deckId });
+      sessionItems = await Item.find({ user_id: userId, deck: deckId }).populate("deck");
       sessionType = SESSION_TYPES.DECK;
     } else if (sessionType === SESSION_TYPES.LEARN) {
       // Learn session type

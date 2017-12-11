@@ -14,19 +14,14 @@ export async function getItems(req, res) {
 }
 
 export async function getItem(req, res) {
-  let deck;
   const itemId = req.params.item_id;
   const userId = req.user._id;
   const { fields } = req.query;
 
   try {
-    const item = await Item.findOne({ _id: itemId, user_id: userId });
+    const item = await Item.findOne({ _id: itemId, user_id: userId }).populate("deck");
 
-    if (fields && fields.includes("deck")) {
-      deck = await Deck.findOne({ _id: item.deck_id, user_id: userId });
-    }
-
-    return res.status(200).json({ item, deck });
+    return res.status(200).json({ item });
   } catch (error) {
     return res.status(500).json({ error });
   }
@@ -40,7 +35,7 @@ export async function createItem(req, res) {
     user_id: userId,
     title: req.body.title,
     description: req.body.description,
-    deck_id: deckId,
+    deck: deckId,
   });
 
   try {
@@ -134,7 +129,7 @@ export async function resetItem(req, res) {
   const itemId = req.params.item_id;
 
   try {
-    let item = await Item.findOne({ _id: itemId, user_id: userId });
+    let item = await Item.findOne({ _id: itemId, user_id: userId }).populate("deck");
 
     item.repetitions = 0;
     item.EF = 2.5;
@@ -154,6 +149,7 @@ export async function resetItem(req, res) {
 export const getDueItemsHelper = userId => {
   const currentTime = new Date();
   return Item.find({ user_id: userId })
+    .populate("deck")
     .where("nextReviewDate")
     .lt(currentTime)
     .then(items => {
@@ -165,7 +161,7 @@ export const getDueItemsHelper = userId => {
 };
 
 export const getNewItemsHelper = userId => {
-  return Item.find({ user_id: userId, repetitions: 0 });
+  return Item.find({ user_id: userId, repetitions: 0 }).populate("deck");
 };
 
 export const getDueItems = (req, res) => {

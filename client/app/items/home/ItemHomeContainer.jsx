@@ -22,7 +22,7 @@ const MODAL_TYPES = {
   EDIT_ITEM: "editItem",
 };
 
-class ItemContainer extends React.Component {
+class ItemHomeContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -185,4 +185,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(itemActions, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemHomeContainer);
