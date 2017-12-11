@@ -62,21 +62,21 @@ class DecksContainer extends React.Component {
     const pageDecks = filteredDecks.slice(pageStart, pageEnd);
 
     return (
-      <PageTemplate className="DecksContainer decks-page pt-5 pb-5" footer={<Footer anchor />}>
+      <PageTemplate className="decks-container decks-page pt-5 pb-5" footer={<Footer anchor />}>
         <div className="container mt-3">
           <div className="row">
             <div className="col-lg-10 offset-lg-1">
-              <div className="DecksContainer__header">
+              <div className="decks-container-header">
                 <div>
                   <h1 className="h5 m-0">Decks</h1>
                   <p className="text-secondary m-0">{decks.length} decks in your collection</p>
                 </div>
-                <div className="DecksContainer__actions">
+                <div className="decks-container-actions">
                   {decks.length > 0 && (
                     <input
                       onChange={this.onSearchChange}
                       type="text"
-                      className="DecksContainer__search form-control"
+                      className="decks-container-search form-control"
                       placeholder="Search for decks..."
                     />
                   )}
