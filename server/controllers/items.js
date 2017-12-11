@@ -33,8 +33,8 @@ export async function createItem(req, res) {
 
   const item = new Item({
     user: userId,
-    title: req.body.title,
-    description: req.body.description,
+    front: req.body.front,
+    back: req.body.back,
     deck: deckId,
   });
 
@@ -46,9 +46,9 @@ export async function createItem(req, res) {
 }
 
 export const editItem = (req, res) => {
-  const { title, description } = req.body;
+  const { front, back } = req.body;
   const query = { _id: req.params.item_id };
-  const update = { title, description };
+  const update = { front, back };
 
   Object.keys(update).forEach(key => update[key] === undefined && delete update[key]);
 
@@ -67,18 +67,18 @@ export const deleteItem = (req, res) => {
 
 // Implements the SM2 algorithm created by Peter Wozniak
 // @see https://www.supermemo.com/english/ol/sm2.html
-export async function reviewSM2Item(req, res) {
+export async function reviewItem(req, res) {
   const value = req.body.value;
 
   const review = new Review({
-    item_id: req.params.item_id,
+    item: req.params.item_id,
     user: req.user._id,
     value: req.params.value,
   });
 
   try {
     const newReview = await review.save();
-    const item = await Item.findById(newReview.item_id);
+    const item = await Item.findById(newReview.item);
     const grade = getGrade(value);
 
     item.reviewedAt = new Date();
@@ -93,29 +93,6 @@ export async function reviewSM2Item(req, res) {
     const nextReviewDate = new Date();
     nextReviewDate.setDate(nextReviewDate.getDate() + item.interval);
     item.nextReviewDate = nextReviewDate;
-
-    const newItem = await item.save();
-    return res.status(200).json({ item: newItem });
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-}
-
-export async function reviewItem(req, res) {
-  const value = req.params.value;
-
-  const review = new Review({
-    item_id: req.params.item_id,
-    user: req.user._id,
-    value: req.params.value,
-  });
-
-  try {
-    const newReview = await review.save();
-    const item = await Item.findById(newReview.item_id);
-
-    item.counter = getNewCounter(value, item.counter);
-    item.nextReviewDate = getNextReviewDate(item.counter);
 
     const newItem = await item.save();
     return res.status(200).json({ item: newItem });

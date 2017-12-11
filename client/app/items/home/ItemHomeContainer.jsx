@@ -97,7 +97,7 @@ class ItemHomeContainer extends React.Component {
       );
     }
 
-    const itemContent = showAnswer ? item.description : item.title;
+    const itemContent = showAnswer ? item.back : item.front;
 
     return (
       <PageTemplate className="item-home pt-5 pb-5" footer={<Footer anchor />}>

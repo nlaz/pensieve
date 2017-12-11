@@ -8,13 +8,11 @@ export const FETCH_SESSION = "fetchSession";
 export const CREATE_SESSION = "createSession";
 export const FINISH_SESSION = "finishSession";
 
-const SESSIONS_API_URL = `/api/sessions`;
-
 export const fetchSession = sessionId => dispatch => {
   const config = { headers: { Authorization: cookie.load("token") } };
 
   axios
-    .get(`${SESSIONS_API_URL}/${sessionId}`, config)
+    .get(`/api/sessions/${sessionId}`, config)
     .then(response => {
       dispatch({
         type: FETCH_SESSION,

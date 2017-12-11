@@ -19,13 +19,13 @@ testUser.email = seedAddress;
 testUser.password = testUser.generateHash("password");
 
 const testItem1 = new ItemEntity({
-  title: "Test Title 1",
-  description: "Test Description 1",
+  front: "Test Title 1",
+  back: "Test Description 1",
 });
 
 const testItem2 = new ItemEntity({
-  title: "Test Title 2",
-  description: "Test Description 2",
+  front: "Test Title 2",
+  back: "Test Description 2",
 });
 
 testUser.save((err, res) => {

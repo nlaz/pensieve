@@ -6,7 +6,7 @@ import Deck from "../models/deck";
 import Item from "../models/item";
 import Email from "../models/email";
 import Session from "../models/session";
-import Review from "../models/Review";
+import Review from "../models/review";
 import configDB from "../../config/db";
 import mongoose from "mongoose";
 
