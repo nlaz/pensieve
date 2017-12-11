@@ -38,7 +38,7 @@ const getIntervals = item => {
   });
 };
 
-const SessionResultItem = ({ item }) => <li className="list-group-item">{item.title}</li>;
+const SessionResultItem = ({ item }) => <li className="list-group-item">{item.front}</li>;
 
 const SessionResults = ({ items }) => (
   <PageTemplate className="session-results review-page pt-5 pb-5" footer={<Footer anchor />}>
@@ -136,7 +136,7 @@ class ReviewContainer extends React.Component {
     }
 
     const selectedItem = items[index];
-    const itemContent = showAnswer ? selectedItem.description : selectedItem.title;
+    const itemContent = showAnswer ? selectedItem.back : selectedItem.front;
     const intervals = getIntervals(selectedItem);
 
     return (

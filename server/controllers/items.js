@@ -33,8 +33,8 @@ export async function createItem(req, res) {
 
   const item = new Item({
     user: userId,
-    title: req.body.title,
-    description: req.body.description,
+    front: req.body.front,
+    back: req.body.back,
     deck: deckId,
   });
 
@@ -46,9 +46,9 @@ export async function createItem(req, res) {
 }
 
 export const editItem = (req, res) => {
-  const { title, description } = req.body;
+  const { front, back } = req.body;
   const query = { _id: req.params.item_id };
-  const update = { title, description };
+  const update = { front, back };
 
   Object.keys(update).forEach(key => update[key] === undefined && delete update[key]);
 

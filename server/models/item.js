@@ -6,8 +6,10 @@ const ItemSchema = new Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     deck: { type: Schema.Types.ObjectId, ref: "Deck" },
-    title: { type: String, required: true },
-    description: { type: String },
+    front: { type: String, required: true },
+    back: { type: String },
+    title: { type: String }, // deprecated
+    description: { type: String }, // deprecated
     reviewedAt: { type: Date }, // last review timestamp
     interval: { type: Number }, // review interval (in days)
     EF: { type: Number, default: 2.5 }, // SM-2 easiness factor

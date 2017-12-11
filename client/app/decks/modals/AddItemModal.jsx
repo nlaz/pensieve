@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import Button from '../../../components/button';
-import Modal from '../../../components/modal';
+import Button from "../../../components/button";
+import Modal from "../../../components/modal";
 
 export default class AddItemModal extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { title: '', description: '' };
+    this.state = { front: "", back: "" };
     this.onInputChange = this.onInputChange.bind(this);
   }
 
@@ -18,29 +18,29 @@ export default class AddItemModal extends React.Component {
 
   render() {
     const { onDismiss, onSave } = this.props;
-    const { title, description } = this.state;
+    const { front, back } = this.state;
     return (
       <Modal title="Add Item" onDismiss={onDismiss}>
         <form className="form-editItem">
           <div className="form-group">
             <label htmlFor="title">Front</label>
             <textarea
-              name="title"
+              name="front"
               className="form-control"
               type="text"
-              value={title}
-              placeholder="Add a item title..."
+              value={front}
+              placeholder="Add to the card front..."
               onChange={this.onInputChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="description">Back</label>
+            <label htmlFor="back">Back</label>
             <textarea
-              name="description"
+              name="back"
               className="form-control"
               type="text"
-              value={description}
-              placeholder="Add a item description..."
+              value={back}
+              placeholder="Add to the card back..."
               onChange={this.onInputChange}
             />
           </div>

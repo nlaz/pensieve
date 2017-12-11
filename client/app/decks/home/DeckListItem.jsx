@@ -62,9 +62,9 @@ export default class DeckListItem extends React.Component {
           <div className="row">
             <div className="col-9 col-sm-10">
               <div className="d-flex flex-column flex-md-row">
-                <span className="col-md-5">{item.title}</span>
+                <span className="col-md-5">{item.front}</span>
                 <span className="d-none d-sm-block font-weight-bold col-md-7 mt-2 mt-md-0">
-                  {item.description}
+                  {item.back}
                 </span>
               </div>
             </div>
