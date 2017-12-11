@@ -22,13 +22,13 @@
     align-items: center;
     justify-content: space-between;
   }
-}
 
-.decks-container-actions .btn {
-  width: 100%;
+  .btn {
+    width: 100%;
 
-  @include at-small-up {
-    width: auto;
+    @include at-small-up {
+      width: auto;
+    }
   }
 }
 

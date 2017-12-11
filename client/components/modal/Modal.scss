@@ -39,8 +39,8 @@ $modal-box-shadow: rgba(50, 50, 50, 0.2);
 }
 
 .modalActions {
-  margin-top: $space * 2;
   display: flex;
+  margin-top: $space * 2;
 
   .button {
     margin-left: 12px;

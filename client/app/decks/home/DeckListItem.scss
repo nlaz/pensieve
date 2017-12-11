@@ -14,7 +14,7 @@
 
   &:focus,
   &:hover {
-    background: $hover-gray !important;
+    background: $hover-gray !important; // scss-lint:disable ImportantRule
   }
 }
 
@@ -24,7 +24,6 @@
 
   &:focus,
   &:hover {
-    text-decoration: none;
     color: $black;
     text-decoration: none;
   }
