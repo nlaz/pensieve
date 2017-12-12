@@ -1,18 +1,16 @@
-import { FETCH_ITEM, EDIT_ITEM, DELETE_ITEM, CREATE_ITEM, RESET_ITEM } from "../itemActions";
-
 const INITIAL_STATE = {};
 
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case FETCH_ITEM:
+    case "FETCH_ITEM_SUCCESS":
       return action.payload.item;
-    case CREATE_ITEM:
+    case "CREATE_ITEM_SUCCESS":
       return action.payload.item;
-    case EDIT_ITEM:
+    case "EDIT_ITEM_SUCCESS":
       return action.payload.item;
-    case RESET_ITEM:
+    case "RESET_ITEM_SUCCESS":
       return action.payload.item;
-    case DELETE_ITEM:
+    case "DELETE_ITEM_SUCCESS":
       return INITIAL_STATE;
     default:
       return state;

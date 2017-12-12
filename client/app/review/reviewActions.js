@@ -2,67 +2,51 @@ import axios from "axios";
 import cookie from "react-cookie";
 import { browserHistory } from "react-router";
 
-import { SHOW_ERROR } from "../appActions";
-
-export const FETCH_SESSION = "fetchSession";
-export const CREATE_SESSION = "createSession";
-export const FINISH_SESSION = "finishSession";
-
 export const fetchSession = sessionId => dispatch => {
   const config = { headers: { Authorization: cookie.load("token") } };
 
-  axios
-    .get(`/api/sessions/${sessionId}`, config)
-    .then(response => {
+  dispatch({
+    type: "FETCH_SESSION_REQUEST",
+    session: sessionId,
+  });
+
+  return axios.get(`/api/sessions/${sessionId}`, config).then(
+    response => {
       dispatch({
-        type: FETCH_SESSION,
+        type: "FETCH_SESSION_SUCCESS",
         payload: response.data,
       });
-    })
-    .catch(error => {
+    },
+    error => {
       dispatch({
-        type: SHOW_ERROR,
-        payload: { error: error.response },
+        type: "FETCH_SESSION_FAILURE",
+        message: error.response || "Something went wrong.",
       });
-    });
+    },
+  );
 };
 
 export const createSession = params => dispatch => {
   const config = { headers: { Authorization: cookie.load("token") } };
 
-  axios
-    .post("/api/sessions", params, config)
-    .then(response => {
+  dispatch({
+    type: "CREATE_SESSION_REQUEST",
+    params,
+  });
+
+  return axios.post("/api/sessions", params, config).then(
+    response => {
       dispatch({
-        type: CREATE_SESSION,
+        type: "CREATE_SESSION_SUCCESS",
         payload: response.data,
       });
       browserHistory.push(`/sessions/${response.data.session._id}`);
-    })
-    .catch(error => {
+    },
+    error => {
       dispatch({
-        type: SHOW_ERROR,
-        payload: { error: error.response },
+        type: "CREATE_SESSION_FAILURE",
+        message: error.response || "Something went wrong.",
       });
-    });
-};
-
-export const finishSession = sessionId => dispatch => {
-  const config = { headers: { Authorization: cookie.load("token") } };
-  const sessionUrl = `/api/sessions/${sessionId}/finish`;
-
-  axios
-    .post(sessionUrl, {}, config)
-    .then(response => {
-      dispatch({
-        type: FINISH_SESSION,
-        payload: response.data,
-      });
-    })
-    .catch(error => {
-      dispatch({
-        type: SHOW_ERROR,
-        payload: { error: error.response },
-      });
-    });
+    },
+  );
 };
