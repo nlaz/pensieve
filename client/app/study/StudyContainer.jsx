@@ -27,7 +27,7 @@ class StudyContainer extends React.Component {
       <PageTemplate className="study-container pt-5 pb-5" footer={<Footer anchor />}>
         <div className="container mt-5">
           <div className="row">
-            <div className="col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+            <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
               <h5 className="mb-3">Choose your study type:</h5>
               <div className="list-group">
                 <Link
@@ -39,15 +39,17 @@ class StudyContainer extends React.Component {
                       Daily study{" "}
                       <span className="font-weight-normal text-dark">(Recommended)</span>
                     </h5>
-                    <div className="badge badge-secondary">
-                      {study.size === study.total ? (
-                        <span>{pluralize("card", study.size, true)}</span>
-                      ) : (
-                        <span>
-                          {study.size} out of {pluralize("card", study.total, true)}
-                        </span>
-                      )}
-                    </div>
+                    {study.size && (
+                      <div className="badge badge-secondary">
+                        {study.size === study.total ? (
+                          <span>{pluralize("card", study.size, true)}</span>
+                        ) : (
+                          <span>
+                            {study.size} out of {pluralize("card", study.total, true)}
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <p className="text-secondary">
                     This session contains a mixture of new cards and previously seen cards. It
@@ -61,20 +63,22 @@ class StudyContainer extends React.Component {
                 >
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">Learn new cards</h5>
-                    <div
-                      className={cx("badge", {
-                        "badge-secondary": learn.size === 0,
-                        "badge-info": learn.size > 0,
-                      })}
-                    >
-                      {learn.size === learn.total ? (
-                        <span>{pluralize("card", learn.size, true)}</span>
-                      ) : (
-                        <span>
-                          {learn.size} out of {pluralize("card", learn.total, true)}
-                        </span>
-                      )}
-                    </div>
+                    {learn.size && (
+                      <div
+                        className={cx("badge", {
+                          "badge-secondary": learn.size === 0,
+                          "badge-info": learn.size > 0,
+                        })}
+                      >
+                        {learn.size === learn.total ? (
+                          <span>{pluralize("card", learn.size, true)}</span>
+                        ) : (
+                          <span>
+                            {learn.size} out of {pluralize("card", learn.total, true)}
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <p className="text-secondary">
                     This session only contains cards you have not seen yet. It focuses on
@@ -88,20 +92,22 @@ class StudyContainer extends React.Component {
                 >
                   <div className="d-flex justify-content-between align-items-center">
                     <h5 className="font-weight-bold mb-1">Review previous cards</h5>
-                    <div
-                      className={cx("badge", {
-                        "badge-secondary": review.size === 0,
-                        "badge-warning": review.size > 0,
-                      })}
-                    >
-                      {review.size === review.total ? (
-                        <span>{pluralize("card", review.size, true)}</span>
-                      ) : (
-                        <span>
-                          {review.size} out of {pluralize("card", review.total, true)}
-                        </span>
-                      )}
-                    </div>
+                    {review.size && (
+                      <div
+                        className={cx("badge", {
+                          "badge-secondary": review.size === 0,
+                          "badge-warning": review.size > 0,
+                        })}
+                      >
+                        {review.size === review.total ? (
+                          <span>{pluralize("card", review.size, true)}</span>
+                        ) : (
+                          <span>
+                            {review.size} out of {pluralize("card", review.total, true)}
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <p className="text-secondary">
                     This session only contains cards you have already seen and need to review again.
