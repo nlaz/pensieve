@@ -49,7 +49,7 @@ export const createSession = params => dispatch => {
 
 export const finishSession = sessionId => dispatch => {
   const config = { headers: { Authorization: cookie.load("token") } };
-  const sessionUrl = `${SESSIONS_API_URL}/${sessionId}/finish`;
+  const sessionUrl = `/api/sessions/${sessionId}/finish`;
 
   axios
     .post(sessionUrl, {}, config)
