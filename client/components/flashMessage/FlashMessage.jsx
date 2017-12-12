@@ -1,22 +1,11 @@
 import React from "react";
-import cx from "classnames";
 
 import Button from "../button";
 
-export const FlashMessage = ({ message, error, onDismiss }) => {
-  if (!message) return false;
-
-  const classNames = cx(
-    "alert alert-dismissable rounded-0",
-    { "alert-info": !Boolean(error) },
-    { "alert-danger": Boolean(error) },
-  );
-
-  const decorator = Boolean(error) ? "Oops!" : "Success!";
-
+export const FlashMessage = ({ message, onDismiss }) => {
   return (
     <div className="flash-message">
-      <div className={classNames} role="alert">
+      <div className="alert alert-danger alert-dismissable rounded-0" role="alert">
         <div className="container">
           <Button
             className="close"
@@ -28,7 +17,7 @@ export const FlashMessage = ({ message, error, onDismiss }) => {
             <span aria-hidden="true">&times;</span>
           </Button>
           <span>
-            <strong>{decorator}</strong> {message}
+            <strong>Oops!</strong> {message}
           </span>
         </div>
       </div>
