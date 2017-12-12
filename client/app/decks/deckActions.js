@@ -1,8 +1,6 @@
 import axios from "axios";
 import cookie from "react-cookie";
 
-import { SHOW_ERROR, UPDATE_MESSAGE } from "../appActions";
-
 export const fetchDecks = () => dispatch => {
   const config = { headers: { Authorization: cookie.load("token") } };
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import cookie from "react-cookie";
+import { browserHistory } from "react-router";
 
 export const loginUser = params => dispatch => {
   dispatch({ type: "AUTH_USER_REQUEST" });
@@ -45,12 +46,11 @@ export const signupUser = params => dispatch => {
   );
 };
 
-export const logoutUser = error => dispatch => {
+export const logoutUser = () => dispatch => {
   cookie.remove("token", { path: "/" });
   cookie.remove("user", { path: "/" });
 
-  dispatch({
-    type: "LOGOUT_USER",
-    payload: error || "",
-  });
+  dispatch({ type: "LOGOUT_USER" });
+
+  browserHistory.push("/");
 };

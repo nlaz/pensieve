@@ -1,5 +1,6 @@
 import axios from "axios";
 import cookie from "react-cookie";
+import { handleError } from "../appActions";
 
 export const fetchItem = ({ itemId, ...params }) => dispatch => {
   const config = { headers: { Authorization: cookie.load("token") }, params };
@@ -16,12 +17,7 @@ export const fetchItem = ({ itemId, ...params }) => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "FETCH_ITEM_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "FETCH_ITEM_FAILURE"),
   );
 };
 
@@ -39,12 +35,7 @@ export const createItem = params => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "CREATE_ITEM_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "CREATE_ITEM_FAILURE", true),
   );
 };
 
@@ -63,12 +54,7 @@ export const reviewItem = params => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "REVIEW_ITEM_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "REVIEW_ITEM_FAILURE", true),
   );
 };
 
@@ -88,12 +74,7 @@ export const resetItem = itemId => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "RESET_ITEM_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "RESET_ITEM_FAILURE", true),
   );
 };
 
@@ -113,13 +94,7 @@ export const editItem = params => dispatch => {
         payload: { item: response.data.item },
       });
     },
-    error => {
-      dispatch({
-        type: "EDIT_ITEM_FAILURE",
-        message: error.response || "Something went wrong.",
-        itemId: params.itemId,
-      });
-    },
+    error => handleError(dispatch, error.response, "EDIT_ITEM_FAILURE", true),
   );
 };
 
@@ -138,12 +113,6 @@ export const deleteItem = itemId => dispatch => {
         payload: { itemId },
       });
     },
-    error => {
-      dispatch({
-        type: "DELETE_ITEM_FAILURE",
-        message: error.response || "Something went wrong.",
-        itemId,
-      });
-    },
+    error => handleError(dispatch, error.response, "DELETE_ITEM_FAILURE", true),
   );
 };

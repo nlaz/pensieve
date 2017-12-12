@@ -1,7 +1,30 @@
-export const DISMISS_ERROR = "dismissError";
-export const UPDATE_MESSAGE = "updateMessage";
-export const SHOW_ERROR = "showError";
+import { logoutUser } from "./auth/authActions";
 
-export const dismissError = () => ({
-  type: DISMISS_ERROR,
+export const DISMISS_FLASH = "DISMISS_FLASH";
+export const SHOW_FLASH = "SHOW_FLASH";
+
+export const dismissFlash = () => ({
+  type: DISMISS_FLASH,
 });
+
+export const handleError = (dispatch, error, type, showFlash = false) => {
+  if (error.status === 401) {
+    dispatch({
+      type: type,
+      message: "You are not authorized to do this. Please login and try again.",
+    });
+    dispatch(logoutUser());
+  } else {
+    dispatch({
+      type: type,
+      error: error.data,
+      message: error.data.message || "Something went wrong.",
+    });
+    if (showFlash) {
+      dispatch({
+        type: SHOW_FLASH,
+        message: error.data.message || "Something went wrong.",
+      });
+    }
+  }
+};
