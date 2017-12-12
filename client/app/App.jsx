@@ -5,7 +5,6 @@ import { Router, browserHistory } from "react-router";
 
 import { logPageView } from "./analytics";
 import configureStore from "./configureStore";
-import { AUTH_USER } from "./auth/authActions";
 import routes from "../routes";
 
 import "../assets/sass/main.scss";
@@ -16,7 +15,7 @@ const store = configureStore();
 
 if (token) {
   store.dispatch({
-    type: AUTH_USER,
+    type: "AUTH_USER_SUCCESS",
     payload: { user: cookie.load("user") },
   });
 }
