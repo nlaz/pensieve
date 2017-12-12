@@ -1,18 +1,19 @@
-import reduxThunk from "redux-thunk";
+import thunk from "redux-thunk";
 import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import appReducer from "./appReducer";
 
 const configureStore = () => {
-  const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+  const middlewares = [thunk];
 
   const preloadedState = window.INITIAL_STATE;
   delete window.INITIAL_STATE;
 
-  return createStoreWithMiddleware(
+  return createStore(
     appReducer,
     preloadedState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    composeWithDevTools(applyMiddleware(...middlewares)),
   );
 };
 

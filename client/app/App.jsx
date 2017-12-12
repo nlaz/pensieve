@@ -12,14 +12,14 @@ import "../assets/sass/main.scss";
 
 const token = cookie.load("token");
 
+const store = configureStore();
+
 if (token) {
   store.dispatch({
     type: AUTH_USER,
     payload: { user: cookie.load("user") },
   });
 }
-
-const store = configureStore();
 
 if (process.env.NODE_ENV == "development" && module.hot) {
   module.hot.accept("./appReducer", () => {

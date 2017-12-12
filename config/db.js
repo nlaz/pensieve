@@ -6,13 +6,15 @@ const configureDB = () => {
   const mongoURI = process.env.MONGODB_HOST;
   const mongoDB = mongoose.connect(mongoURI).connection;
 
-  mongoDB.on("error", err => {
-    console.log(chalk.red("🔺  Connection to database failed"));
-    console.log(err.message);
-  });
-  mongoDB.once("open", () => {
-    console.log(chalk.cyan("✨  Connection to database established"));
-  });
+  if (process.env.NODE_ENV === "development") {
+    mongoDB.on("error", err => {
+      console.log(chalk.red("🔺  Connection to database failed"));
+      console.log(err.message);
+    });
+    mongoDB.once("open", () => {
+      console.log(chalk.cyan("✨  Connection to database established"));
+    });
+  }
 };
 
 export default configureDB;
