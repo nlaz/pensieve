@@ -1,41 +1,41 @@
-var webpack = require('webpack');
-var paths = require('./paths');
+var webpack = require("webpack");
+var paths = require("./paths");
 
-var isDev = process.env.NODE_ENV === 'development';
-var publicPath = '/';
+var isDev = process.env.NODE_ENV === "development";
+var publicPath = "/";
 
 var devPlugins = [
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-    }
-  })
+    "process.env": {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+    },
+  }),
 ];
 
 var prodPlugins = [
   new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-    }
+    "process.env": {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+    },
   }),
   new webpack.optimize.UglifyJsPlugin({
     compressor: {
-      warnings: false
-    }
-  })
+      warnings: false,
+    },
+  }),
 ];
 
 var config = {
   entry: isDev
-    ? ['babel-polyfill', 'webpack-hot-middleware/client', paths.appIndexJs]
+    ? ["babel-polyfill", "webpack-hot-middleware/client", paths.appIndexJs]
     : [paths.appIndexJs],
-  devtool: 'eval',
+  devtool: "eval",
   output: {
     path: paths.appBuild,
-    filename: 'bundle.js',
-    publicPath: publicPath
+    filename: "bundle.js",
+    publicPath: publicPath,
   },
   module: {
     loaders: [
@@ -43,10 +43,10 @@ var config = {
         test: /\.(js|jsx)$/,
         include: paths.appClient,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         query: {
-          cacheDirectory: true
-        }
+          cacheDirectory: true,
+        },
       },
       {
         test: /\.(css|scss)$/,
@@ -54,47 +54,47 @@ var config = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'style-loader'
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
-              importLoaders: 1
-            }
+              importLoaders: 1,
+            },
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               config: {
-                path: paths.postCssConfig
-              }
-            }
+                path: paths.postCssConfig,
+              },
+            },
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
+            loader: "sass-loader",
+          },
+        ],
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|ico)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: "url-loader",
             options: {
-              limit: 8192
-            }
-          }
-        ]
-      }
-    ]
+              limit: 8192,
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: isDev ? devPlugins : prodPlugins,
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: [".js", ".jsx"],
   },
   node: {
-    fs: 'empty'
-  }
+    fs: "empty",
+  },
 };
 
 module.exports = config;
