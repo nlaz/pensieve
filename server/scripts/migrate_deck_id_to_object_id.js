@@ -3,10 +3,10 @@
  */
 
 import Item from "../models/item";
-import configDB from "../../config/db";
+import configureDB from "../../config/db";
 import mongoose from "mongoose";
 
-configDB();
+configureDB();
 
 Item.find()
   .then(items => {

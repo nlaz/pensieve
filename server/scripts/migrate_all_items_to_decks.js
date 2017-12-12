@@ -6,10 +6,10 @@
 import Deck from "../models/deck";
 import Item from "../models/item";
 import User from "../models/user";
-import configDB from "../../config/db";
+import configureDB from "../../config/db";
 
 // Set up DB
-configDB();
+configureDB();
 
 User.find()
   .then(users => {

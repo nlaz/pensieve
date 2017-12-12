@@ -40,7 +40,8 @@ UserSchema.methods.generateToken = function(user) {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: 60 * 60 * 48, // expires in 48 hours
+      // expiresIn: 60 * 60 * 48, // expires in 48 hours
+      expiresIn: 30,
     },
   );
 };

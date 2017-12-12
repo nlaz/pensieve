@@ -7,10 +7,10 @@ import Item from "../models/item";
 import Email from "../models/email";
 import Session from "../models/session";
 import Review from "../models/review";
-import configDB from "../../config/db";
+import configureDB from "../../config/db";
 import mongoose from "mongoose";
 
-configDB();
+configureDB();
 
 Item.find()
   .then(items => {

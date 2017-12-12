@@ -4,10 +4,10 @@
  */
 
 import Session from '../models/session';
-import configDB from '../config/db';
+import configureDB from '../config/db';
 
 // Config DB
-configDB();
+configureDB();
 
 
 Session.find()
