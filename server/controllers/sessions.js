@@ -135,27 +135,3 @@ export async function getStudyTypes(req, res) {
     return res.status(500).json({ error });
   }
 }
-
-export const finishSession = (req, res) => {
-  let session;
-  const sessionId = req.params.session_id;
-  const userId = req.user._id;
-
-  Session.findOne({ _id: sessionId, user: userId })
-    .then(_session => {
-      session = _session;
-      session.finishedAt = new Date();
-      return session.save();
-    })
-    .then(_session => {
-      session = _session;
-      return Item.find()
-        .where("_id")
-        .in(session.items);
-    })
-    .then(items => {
-      session.items = items;
-      res.status(200).json({ session });
-    })
-    .catch(error => res.status(500).json({ error }));
-};
