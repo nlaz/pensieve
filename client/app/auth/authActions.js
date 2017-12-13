@@ -50,7 +50,7 @@ export const logoutUser = () => dispatch => {
   cookie.remove("token", { path: "/" });
   cookie.remove("user", { path: "/" });
 
-  dispatch({ type: "LOGOUT_USER" });
-
   browserHistory.push("/");
+
+  dispatch({ type: "LOGOUT_USER" });
 };

@@ -9,11 +9,11 @@ export const dismissFlash = () => ({
 
 export const handleError = (dispatch, error, type, showFlash = false) => {
   if (error.status === 401) {
-    dispatch({
-      type: type,
-      message: "You are not authorized to do this. Please login and try again.",
-    });
     dispatch(logoutUser());
+    dispatch({
+      type: SHOW_FLASH,
+      message: "Your session expired. Please login and try again.",
+    });
   } else {
     dispatch({
       type: type,
