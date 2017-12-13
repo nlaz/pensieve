@@ -1,83 +1,118 @@
-import axios from 'axios';
-import cookie from 'react-cookie';
-
-import { SHOW_ERROR, UPDATE_MESSAGE } from '../appActions';
-
-export const FETCH_ITEM = 'fetchItem';
-export const CREATE_ITEM = 'createItem';
-export const REVIEW_ITEM = 'reviewItem';
-export const RESET_ITEM = 'resetItem';
-export const EDIT_ITEM = 'editItem';
-export const DELETE_ITEM = 'deleteItem';
-
-const ITEMS_API = '/api/items';
+import axios from "axios";
+import cookie from "react-cookie";
+import { handleError } from "../appActions";
 
 export const fetchItem = ({ itemId, ...params }) => dispatch => {
-  const config = { headers: { Authorization: cookie.load('token') }, params };
+  const config = { headers: { Authorization: cookie.load("token") }, params };
 
-  axios
-    .get(`${ITEMS_API}/${itemId}`, config)
-    .then(resp => dispatch({ type: FETCH_ITEM, payload: resp.data }))
-    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
+  dispatch({
+    type: "FETCH_ITEM_REQUEST",
+    item: itemId,
+  });
+
+  return axios.get(`/api/items/${itemId}`, config).then(
+    response => {
+      dispatch({
+        type: "FETCH_ITEM_SUCCESS",
+        payload: response.data,
+      });
+    },
+    error => handleError(dispatch, error.response, "FETCH_ITEM_FAILURE"),
+  );
 };
 
 export const createItem = params => dispatch => {
-  const config = { headers: { Authorization: cookie.load('token') } };
+  const config = { headers: { Authorization: cookie.load("token") } };
 
-  axios
-    .post(ITEMS_API, params, config)
-    .then(resp => dispatch({ type: CREATE_ITEM, payload: resp.data }))
-    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
+  dispatch({
+    type: "CREATE_ITEM_REQUEST",
+  });
+
+  return axios.post("/api/items", params, config).then(
+    response => {
+      dispatch({
+        type: "CREATE_ITEM_SUCCESS",
+        payload: response.data,
+      });
+    },
+    error => handleError(dispatch, error.response, "CREATE_ITEM_FAILURE", true),
+  );
 };
 
 export const reviewItem = params => dispatch => {
-  const config = { headers: { Authorization: cookie.load('token') } };
+  const config = { headers: { Authorization: cookie.load("token") } };
   const route = `/api/items/${params.itemId}/review`;
 
-  axios
-    .post(route, params, config)
-    .then(resp => dispatch({ type: REVIEW_ITEM, payload: resp.data }))
-    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
+  dispatch({
+    type: "REVIEW_ITEM_REQUEST",
+  });
+
+  return axios.post(route, params, config).then(
+    response => {
+      dispatch({
+        type: "REVIEW_ITEM_SUCCESS",
+        payload: response.data,
+      });
+    },
+    error => handleError(dispatch, error.response, "REVIEW_ITEM_FAILURE", true),
+  );
 };
 
 export const resetItem = itemId => dispatch => {
-  const config = { headers: { Authorization: cookie.load('token') } };
+  const config = { headers: { Authorization: cookie.load("token") } };
   const route = `/api/items/${itemId}/reset`;
 
-  axios
-    .post(route, {}, config)
-    .then(resp => dispatch({ type: RESET_ITEM, payload: resp.data }))
-    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
+  dispatch({
+    type: "RESET_ITEM_REQUEST",
+    itemId: itemId,
+  });
+
+  return axios.post(route, {}, config).then(
+    response => {
+      dispatch({
+        type: "RESET_ITEM_SUCCESS",
+        payload: response.data,
+      });
+    },
+    error => handleError(dispatch, error.response, "RESET_ITEM_FAILURE", true),
+  );
 };
 
 export const editItem = params => dispatch => {
-  const config = { headers: { Authorization: cookie.load('token') } };
-  const route = `${ITEMS_API}/${params.itemId}`;
+  const config = { headers: { Authorization: cookie.load("token") } };
+  const route = `/api/items/${params.itemId}`;
 
-  axios
-    .put(route, params, config)
-    .then(resp => {
-      dispatch({ type: EDIT_ITEM, payload: { item: resp.data.item } });
+  dispatch({
+    type: "EDIT_ITEM_REQUEST",
+    itemId: params.itemId,
+  });
+
+  return axios.put(route, params, config).then(
+    response => {
       dispatch({
-        type: UPDATE_MESSAGE,
-        payload: { message: 'Your well thought out changes were successfully saved!' }
+        type: "EDIT_ITEM_SUCCESS",
+        payload: { item: response.data.item },
       });
-    })
-    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
+    },
+    error => handleError(dispatch, error.response, "EDIT_ITEM_FAILURE", true),
+  );
 };
 
 export const deleteItem = itemId => dispatch => {
-  const config = { headers: { Authorization: cookie.load('token') } };
-  const route = `${ITEMS_API}/${itemId}`;
+  const config = { headers: { Authorization: cookie.load("token") } };
 
-  axios
-    .delete(route, config)
-    .then(() => {
-      dispatch({ type: DELETE_ITEM, payload: { itemId } });
+  dispatch({
+    type: "DELETE_ITEM_REQUEST",
+    itemId: itemId,
+  });
+
+  return axios.delete(`/api/items/${itemId}`, config).then(
+    response => {
       dispatch({
-        type: UPDATE_MESSAGE,
-        payload: { message: 'That item was wiped from memory.' }
+        type: "DELETE_ITEM_SUCCESS",
+        payload: { itemId },
       });
-    })
-    .catch(error => dispatch({ type: SHOW_ERROR, payload: { error: error.response } }));
+    },
+    error => handleError(dispatch, error.response, "DELETE_ITEM_FAILURE", true),
+  );
 };

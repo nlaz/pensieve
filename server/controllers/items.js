@@ -4,15 +4,6 @@ import Review from "../models/review";
 
 import { getGrade, getNextInterval, getNewCounter, getNextReviewDate, getEF } from "./utils";
 
-export async function getItems(req, res) {
-  try {
-    const items = await Item.find({ user: req.user._id });
-    return res.status(200).json({ items });
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-}
-
 export async function getItem(req, res) {
   const itemId = req.params.item_id;
   const userId = req.user._id;
@@ -20,7 +11,6 @@ export async function getItem(req, res) {
 
   try {
     const item = await Item.findOne({ _id: itemId, user: userId }).populate("deck");
-
     return res.status(200).json({ item });
   } catch (error) {
     return res.status(500).json({ error });

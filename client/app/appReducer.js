@@ -6,18 +6,16 @@ import itemReducer from "./items/home/itemReducer";
 import reviewReducer from "./review/reviewReducer";
 import studyReducer from "./study/studyReducer";
 
-import { SHOW_ERROR, DISMISS_ERROR, UPDATE_MESSAGE } from "./appActions";
+import { SHOW_FLASH, DISMISS_FLASH } from "./appActions";
 
-const INITIAL_STATE = { value: "", message: "" };
+const INITIAL_STATE = {};
 
-const errorReducer = (state = INITIAL_STATE, action) => {
+const flashReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SHOW_ERROR:
-      return { ...state, value: action.payload.error, message: action.payload.message };
-    case DISMISS_ERROR:
-      return { ...state, value: "", message: "" };
-    case UPDATE_MESSAGE:
-      return { ...state, value: action.payload.error, message: action.payload.message };
+    case SHOW_FLASH:
+      return { ...state, message: action.message };
+    case DISMISS_FLASH:
+      return INITIAL_STATE;
     default:
       return state;
   }
@@ -33,7 +31,7 @@ const dataReducer = combineReducers({
 
 const appReducer = combineReducers({
   app: authReducer,
-  errors: errorReducer,
+  flash: flashReducer,
   data: dataReducer,
 });
 

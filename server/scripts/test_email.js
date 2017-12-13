@@ -1,8 +1,8 @@
-import configDB from '../../config/db';
+import configureDB from '../../config/db';
 import * as Emailer from '../controllers/emails';
 import User from '../models/user';
 
-configDB();
+configureDB();
 
 const testUserId = '589a72ad50b48b715550680f';
 const emailOne = () => {

@@ -17,7 +17,7 @@ class Header extends React.Component {
 
   componentDidMount() {
     this.unlisten = browserHistory.listen(() => {
-      this.props.appActions.dismissError();
+      this.props.appActions.dismissFlash();
     });
   }
 
@@ -27,17 +27,16 @@ class Header extends React.Component {
 
   onClose(e) {
     e.preventDefault();
-    this.props.appActions.dismissError();
+    this.props.appActions.dismissFlash();
   }
 
   render() {
     const { authenticated, children, error, message, self, className } = this.props;
-    const showMessage = Boolean(message);
 
     return (
       <div className={className}>
         <NavBar self={self} authenticated={authenticated} />
-        {showMessage && <FlashMessage error={error} message={message} onDismiss={this.onClose} />}
+        {message && <FlashMessage message={message} onDismiss={this.onClose} />}
         {children}
       </div>
     );
@@ -51,8 +50,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   self: state.app.self,
   authenticated: state.app.authenticated,
-  message: state.errors.message,
-  error: state.errors.value,
+  message: state.flash.message,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

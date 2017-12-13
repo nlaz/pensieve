@@ -3,12 +3,11 @@
  * nextReviewDate and counter.
  */
 
-import Item from '../models/item';
-import configDB from '../../config/db';
+import Item from "../models/item";
+import configureDB from "../../config/db";
 
 // Config DB
-configDB();
-
+configureDB();
 
 Item.find()
   .then(items => {
@@ -23,4 +22,4 @@ Item.find()
       item.save();
     });
   })
-  .catch(err => console.log('Oops!', err));
+  .catch(err => console.log("Oops!", err));

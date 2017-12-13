@@ -3,10 +3,10 @@
  */
 
 import Review from "../models/review";
-import configDB from "../../config/db";
+import configureDB from "../../config/db";
 import mongoose from "mongoose";
 
-configDB();
+configureDB();
 
 Review.find()
   .then(reviews => {

@@ -66,8 +66,8 @@ class DeckHomeContainer extends React.Component {
     const deckId = this.props.deck._id;
     this.props.actions.createItem({
       deck: deckId,
-      title: data.title,
-      description: data.description,
+      front: data.front,
+      back: data.back,
     });
     this.onDismissModal();
   }

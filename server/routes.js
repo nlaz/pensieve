@@ -16,8 +16,6 @@ export default function(app) {
   app.post("/api/emails/prelaunch", EmailController.addEmailToPrelaunchList);
 
   /* Item Routes */
-  app.get("/api/items", authenticateUser, ItemController.getItems);
-
   app.get("/api/items/:item_id", authenticateUser, ItemController.getItem);
 
   app.put("/api/items/:item_id", authenticateUser, ItemController.editItem);
@@ -52,6 +50,4 @@ export default function(app) {
   app.get("/api/sessions/:session_id", authenticateUser, SessionController.getSession);
 
   app.post("/api/sessions", authenticateUser, SessionController.createSession);
-
-  app.post("/api/sessions/:session_id/finish", authenticateUser, SessionController.finishSession);
 }

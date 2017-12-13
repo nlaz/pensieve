@@ -1,61 +1,56 @@
 import axios from "axios";
 import cookie from "react-cookie";
-
-import { SHOW_ERROR } from "../appActions";
-
-export const AUTH_USER = "authUser";
-export const AUTH_ERROR = "authUserError";
-export const UNAUTH_USER = "unauthUser";
-
-const LOGIN_URL = "/users/login";
-const SIGNUP_URL = "/users/signup";
+import { browserHistory } from "react-router";
 
 export const loginUser = params => dispatch => {
-  axios
-    .post(LOGIN_URL, params)
-    .then(response => {
+  dispatch({ type: "AUTH_USER_REQUEST" });
+
+  return axios.post("/users/login", params).then(
+    response => {
       cookie.save("token", response.data.token, { path: "/" });
       cookie.save("user", response.data.user, { path: "/" });
+
       dispatch({
-        type: AUTH_USER,
+        type: "AUTH_USER_SUCCESS",
         payload: response.data,
       });
-    })
-    .catch(error => {
+    },
+    error => {
       dispatch({
-        type: SHOW_ERROR,
-        payload: {
-          error: error.response.data.error,
-          message: "Unable to log in. Make sure you are using the right email and password.",
-        },
+        type: "AUTH_USER_FAILURE",
+        message: error.response || "Something went wrong.",
       });
-    });
+    },
+  );
 };
 
 export const signupUser = params => dispatch => {
-  axios
-    .post(SIGNUP_URL, params)
-    .then(response => {
+  dispatch({ type: "AUTH_USER_REQUEST" });
+
+  return axios.post("/users/signup", params).then(
+    response => {
       cookie.save("token", response.data.token, { path: "/" });
       cookie.save("user", response.data.user, { path: "/" });
+
       dispatch({
-        type: AUTH_USER,
+        type: "AUTH_USER_SUCCESS",
         payload: response.data,
       });
-    })
-    .catch(error => {
+    },
+    error => {
       dispatch({
-        type: SHOW_ERROR,
-        payload: {
-          error: error.response.data.error,
-          message: "Uh oh! Unable to sign up. What did you do to make this happen?",
-        },
+        type: "AUTH_USER_FAILURE",
+        message: error.response || "Something went wrong.",
       });
-    });
+    },
+  );
 };
 
-export const logoutUser = error => dispatch => {
-  dispatch({ type: UNAUTH_USER, payload: error || "" });
+export const logoutUser = () => dispatch => {
   cookie.remove("token", { path: "/" });
   cookie.remove("user", { path: "/" });
+
+  browserHistory.push("/");
+
+  dispatch({ type: "LOGOUT_USER" });
 };

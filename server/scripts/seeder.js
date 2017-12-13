@@ -3,10 +3,10 @@
  * for testing.
  */
 import { ItemEntity, UserEntity } from "./schema";
-import configDB from "../../config/db";
+import configureDB from "../../config/db";
 
 // Config DB
-configDB();
+configureDB();
 
 if (process.env.TEST_EMAIL_ADDRESS === undefined) {
   console.error("Please specify test email address");

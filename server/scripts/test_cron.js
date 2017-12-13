@@ -1,8 +1,8 @@
-import configDB from '../config/db';
+import configureDB from '../config/db';
 import { CronJob } from 'cron';
 import * as Emailer from '../controllers/emails';
 
-configDB();
+configureDB();
 
 const broadcastJob = new CronJob({
 	cronTime: '00 * 23 * * *',
