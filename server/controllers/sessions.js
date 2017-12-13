@@ -4,7 +4,6 @@ import * as ItemController from "./items";
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-import { NO_ITEMS_ERROR } from "./errors";
 import { SESSION_TYPES } from "./constants";
 
 export const REVIEW_SESSION_SIZE = 15;
@@ -37,19 +36,11 @@ export async function getSession(req, res) {
   const sessionId = req.params.session_id;
 
   try {
-    const session = await Session.findOne({ _id: sessionId }).populate({
+    const session = await Session.findOne({ _id: sessionId, user: userId }).populate({
       path: "items",
       model: "Item",
       populate: { path: "deck", modal: "Deck" },
     });
-
-    if (session.user.toString() !== userId) {
-      return res.status(400).json({
-        error: true,
-        type: "invalid_user",
-        message: "Session not available. Are you signed in correctly?",
-      });
-    }
 
     return res.status(200).json({ session });
   } catch (error) {
@@ -85,7 +76,6 @@ export async function createSession(req, res) {
 
     if (sessionItems.length === 0) {
       return res.status(400).json({
-        error: NO_ITEMS_ERROR,
         message:
           "No available items to create session. You need to create a couple items to get started.",
       });

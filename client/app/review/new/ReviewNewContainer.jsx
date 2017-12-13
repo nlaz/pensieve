@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { NO_ITEMS_ERROR } from "../../../../server/controllers/errors";
 import { SESSION_TYPES } from "../../../../server/controllers/constants";
 
 import * as reviewActions from "../reviewActions";
@@ -16,12 +15,6 @@ class ReviewNewContainer extends React.Component {
     this.props.actions.createSession({ sessionType, deckId });
   }
 
-  componentDidUpdate() {
-    if (this.props.error === NO_ITEMS_ERROR) {
-      this.props.router.push(`/`);
-    }
-  }
-
   render() {
     return (
       <PageTemplate className="pt-5">
@@ -33,12 +26,8 @@ class ReviewNewContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  error: state.errors.value,
-});
-
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(reviewActions, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewNewContainer);
+export default connect(null, mapDispatchToProps)(ReviewNewContainer);
