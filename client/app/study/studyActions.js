@@ -1,5 +1,6 @@
 import axios from "axios";
 import cookie from "react-cookie";
+import { handleError } from "../appActions";
 
 export const FETCH_STUDY_TYPES = "fetchStudyTypes";
 
@@ -17,11 +18,6 @@ export const fetchStudyTypes = () => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "FETCH_STUDY_TYPES_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "FETCH_STUDY_TYPES_FAILURE", true),
   );
 };

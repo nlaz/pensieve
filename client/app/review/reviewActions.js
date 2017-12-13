@@ -1,6 +1,7 @@
 import axios from "axios";
 import cookie from "react-cookie";
 import { browserHistory } from "react-router";
+import { handleError } from "../appActions";
 
 export const fetchSession = sessionId => dispatch => {
   const config = { headers: { Authorization: cookie.load("token") } };
@@ -17,12 +18,7 @@ export const fetchSession = sessionId => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "FETCH_SESSION_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "FETCH_SESSION_FAILURE", true),
   );
 };
 
@@ -42,11 +38,6 @@ export const createSession = params => dispatch => {
       });
       browserHistory.push(`/sessions/${response.data.session._id}`);
     },
-    error => {
-      dispatch({
-        type: "CREATE_SESSION_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "CREATE_SESSION_FAILURE", true),
   );
 };

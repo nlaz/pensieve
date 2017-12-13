@@ -1,5 +1,6 @@
 import axios from "axios";
 import cookie from "react-cookie";
+import { handleError } from "../appActions";
 
 export const fetchDecks = () => dispatch => {
   const config = { headers: { Authorization: cookie.load("token") } };
@@ -15,12 +16,7 @@ export const fetchDecks = () => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "FETCH_DECKS_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "FETCH_DECKS_FAILURE", true),
   );
 };
 
@@ -39,12 +35,7 @@ export const fetchDeck = deckId => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "FETCH_DECK_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "FETCH_DECK_FAILURE"),
   );
 };
 
@@ -63,12 +54,7 @@ export const createDeck = params => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "CREATE_DECK_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "CREATE_DECK_FAILURE", true),
   );
 };
 
@@ -87,12 +73,7 @@ export const editDeck = params => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "EDIT_DECK_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "EDIT_DECK_FAILURE", true),
   );
 };
 
@@ -111,12 +92,7 @@ export const resetDeck = deckId => dispatch => {
         payload: response.data,
       });
     },
-    error => {
-      dispatch({
-        type: "RESET_DECK_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "RESET_DECK_FAILURE", true),
   );
 };
 
@@ -135,12 +111,7 @@ export const deleteDeck = deckId => dispatch => {
         payload: { itemId },
       });
     },
-    error => {
-      dispatch({
-        type: "DELETE_DECK_FAILURE",
-        message: error.response || "Something went wrong.",
-      });
-    },
+    error => handleError(dispatch, error.response, "DELETE_DECK_FAILURE", true),
   );
 };
 
