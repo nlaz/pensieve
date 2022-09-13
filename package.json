@@ -56,7 +56,7 @@
     "moment": "^2.17.1",
     "mongoose": "4.9.9",
     "morgan": "^1.7.0",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.9.0",
     "pluralize": "^7.0.0",
     "postcss": "^5.2.17",
     "postcss-loader": "^2.0.5",
