@@ -1,4 +1,4 @@
-FROM node:8.1.4
+FROM node:14.20.0
 
 WORKDIR /var/www/pensieve
 COPY package.json /var/www/pensieve
